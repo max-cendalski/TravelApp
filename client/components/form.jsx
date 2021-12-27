@@ -5,7 +5,7 @@ export default class SignUpForm extends React.Component {
     super(props);
     this.state = {
       username: '',
-      password: ''
+      password: '',
     };
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -26,6 +26,20 @@ export default class SignUpForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    fetch('/api/auth/sign-up', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newUser)
+    })
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          todos: [...this.state.todos, data]
+        });
+      });
+  }
 
   }
 
