@@ -3,9 +3,9 @@ const pg = require('pg');
 const argon2 = require('argon2'); // eslint-disable-line
 const express = require('express');
 const errorMiddleware = require('./error-middleware');
-const staticMiddleware = require('./static-middleware');
+
 const ClientError = require('./client-error');
-const db = new pg.Pool({ // eslint-disable-line
+const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false
@@ -14,7 +14,8 @@ const db = new pg.Pool({ // eslint-disable-line
 
 const app = express();
 
-app.use(staticMiddleware);
+const jsonMiddleware = express.json();
+app.use(jsonMiddleware);
 app.use(errorMiddleware);
 
 app.post('/api/auth/sign-up', (req, res, next) => {
@@ -36,8 +37,6 @@ app.post('/api/auth/sign-up', (req, res, next) => {
         .then(result => {
           const [updatedUser] = result.rows;
           res.status(201).json({ updatedUser });
-          const { userId, username, createdAt } = result.rows[0];
-          res.status(201).json({ userId, username, createdAt });
         })
         .catch(err => next(err));
     });
