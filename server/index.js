@@ -40,7 +40,6 @@ app.post('/api/auth/sign-up', (req, res, next) => {
         })
         .catch(err => next(err));
     });
-
 });
 
 app.use(errorMiddleware);
