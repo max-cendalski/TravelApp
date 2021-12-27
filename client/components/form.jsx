@@ -6,6 +6,7 @@ export default class SignUpForm extends React.Component {
     this.state = {
       username: '',
       password: '',
+      isLoggedIn: false
     };
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -26,6 +27,11 @@ export default class SignUpForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    const newUser = {
+      username: this.state.username,
+      password: this.state.password
+    };
+
     fetch('/api/auth/sign-up', {
       method: 'POST',
       headers: {
@@ -36,11 +42,11 @@ export default class SignUpForm extends React.Component {
       .then(response => response.json())
       .then(data => {
         this.setState({
-          todos: [...this.state.todos, data]
+          username: '',
+          password: '',
+          isLoggedIn: true
         });
       });
-  }
-
   }
 
   render() {
@@ -49,8 +55,8 @@ export default class SignUpForm extends React.Component {
         <div className='row centered'>
           <form className="form-container" onSubmit={this.handleSubmit}>
           <label className="form-label"> Sign Up </label>
-            <input required className="username-input" type="text" value ={this.state.password} onChange={this.handlePasswordChange} placeholder="username"/>
-            <input required className="password-input" type="password" value={this.state.email} onChange={this.handleUsernameChange} placeholder="password" />
+            <input required className="username-input" type="text" value ={this.state.username} onChange={this.handleUsernameChange} name="username" placeholder="username"/>
+            <input required className="password-input" type="password" value={this.state.password} onChange={this.handlePasswordChange} name="password" placeholder="password" />
             <button className='sign-up-button'>Confirm</button>
           </form>
         </div>
