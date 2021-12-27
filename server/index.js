@@ -28,15 +28,15 @@ app.post('/api/auth/sign-up', (req, res, next) => {
     .hash(password)
     .then(hashedPassword => {
       const sql = `
-        insert into "users" ("username", "hashedPassword")
+        insert into "users" ("username", "password")
         values ($1, $2)
         returning *
     `;
       const params = [username, hashedPassword];
       db.query(sql, params)
         .then(result => {
-          const [updatedUser] = result.rows;
-          res.status(201).json({ updatedUser });
+          const [newUser] = result.rows;
+          res.status(201).json({ newUser });
         })
         .catch(err => next(err));
     });
