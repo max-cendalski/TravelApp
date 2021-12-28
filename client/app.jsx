@@ -9,7 +9,6 @@ export default class App extends React.Component {
       <SignUpForm />
       <SignInForm />
       </div>
-
     );
   }
 }
