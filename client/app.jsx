@@ -1,8 +1,15 @@
 import React from 'react';
-import SignUpForm from './components/form';
+import SignUpForm from './components/signUpForm';
+import SignInForm from './components/signInForm';
 
 export default class App extends React.Component {
   render() {
-    return <SignUpForm />;
+    return (
+      <div>
+      <SignUpForm />
+      <SignInForm />
+      </div>
+
+    );
   }
 }
