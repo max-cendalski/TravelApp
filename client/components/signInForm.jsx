@@ -5,8 +5,7 @@ export default class SignInForm extends React.Component {
     super(props);
     this.state = {
       username: '',
-      password: '',
-      isLoggedIn: false
+      password: ''
     };
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
