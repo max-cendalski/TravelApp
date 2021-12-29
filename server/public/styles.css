@@ -10,6 +10,14 @@ input {
   font-size: 1rem;
 }
 
+.column-width100 {
+  width: 100%;
+}
+
+.top60 {
+  margin-top: 60px;
+}
+
 .container {
   max-width: 1920px;
 }

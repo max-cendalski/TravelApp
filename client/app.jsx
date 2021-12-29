@@ -1,17 +1,19 @@
 import React from 'react';
 import decodeToken from './lib/decode-token.js';
 import parseRoute from './lib/parse-route.jsx';
-import Auth from './pages/auth';
 import Home from './pages/home';
-
-const myToken = React.createContext();
+import AppContext from './lib/app-context.js';
+import SignInForm from './pages/signInForm';
+import SignUpForm from './pages/signUpForm';
+import NotFound from './pages/not-found.jsx';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       user: null,
-      isAuthorizing: true
+      isAuthorizing: true,
+      route: parseRoute(window.location.hash)
     };
     this.handleSignIn = this.handleSignIn.bind(this);
   }
@@ -33,19 +35,17 @@ export default class App extends React.Component {
     this.setState({ user });
   }
 
-  handleSignOut() {
-    window.localStorage.removeItem('TravelApp-token');
-    this.setState({ user: null });
-  }
-
   renderPage() {
     const { path } = this.state.route;
     if (path === '') {
       return <Home />;
     }
-    if (path === 'sign-in' || path === 'sign-up') {
-      return <Auth />;
+    if (path === 'sign-in') {
+      return <SignInForm />;
+    } if (path === 'sign-up') {
+      return <SignUpForm />;
     }
+
     return <NotFound />;
   }
 
@@ -54,7 +54,10 @@ export default class App extends React.Component {
     const { handleSignIn } = this;
     const contextValue = { user, handleSignIn };
     return (
-      <Home />
+      <AppContext.Provider value = {contextValue}>
+        <Home />
+        {this.renderPage()}
+      </AppContext.Provider>
     );
   }
 }
