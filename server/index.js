@@ -75,8 +75,8 @@ app.post('/api/auth/sign-in', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/countries/', (req, res, next) => {
-  const { country } = req.body;
+app.get('/api/countries/:country', (req, res, next) => {
+  const country = req.params.country;
   if (!country) {
     throw new ClientError(401, 'invalid input');
   }
@@ -104,4 +104,8 @@ app.use(errorMiddleware);
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`express server listening on port ${process.env.PORT}`);
+});
+app.delete('/api/grades/:id', (req, res) => {
+  delete grades[req.params.id];
+  res.sendStatus(204);
 });

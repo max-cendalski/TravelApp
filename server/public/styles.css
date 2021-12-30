@@ -2,12 +2,16 @@
   background-color: rgb(0, 0, 0, 0.7);
 }
 
-input {
+.input-form {
   border: none;
   background-color: inherit;
   color: white;
   letter-spacing: 2px;
   font-size: 1rem;
+}
+
+.search-box {
+  box-shadow: 3px;
 }
 
 .column-width100 {
@@ -26,7 +30,6 @@ input {
   width: 100%;
   position: fixed;
   height: 30px;
-  background-color: cadetblue;
 }
 
 ::placeholder {
