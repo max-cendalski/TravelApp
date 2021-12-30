@@ -84,7 +84,8 @@ app.get('/api/countries/:country', (req, res, next) => {
   select "m"."name" as "cityName",
          "c"."name" as "countryName",
          "t"."mainPhotoUrl",
-         "u"."username"
+         "u"."username",
+         "t"."tripId"
     from "cities" as "m"
     join "countries" as "c" using ("countryId")
     join "trips" as "t" using ("cityId")
