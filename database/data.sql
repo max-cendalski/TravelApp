@@ -17,8 +17,6 @@ values
 ('Timaru','1');
 
 
-
-
 insert into "trips" ("userId","cityId","mainPhotoUrl","review","thingsTodoScore","foodScore","peopleScore","transportScore","safetyScore")
 values
 ('1','3','url','It was Amazing trip','9','3','4','3','8'),

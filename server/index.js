@@ -75,6 +75,24 @@ app.post('/api/auth/sign-in', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/countries/', (req, res, next) => {
+  const { country } = req.body;
+  if (!trips) {
+    throw new ClientError(401, 'invalid login');
+  }
+  const sql = `
+  select "mainPhotoUrl",
+         "cityId",
+         "c"."name" as "cityName,
+         "co"."name" as "countryName"
+    from "trips"
+    join "cities" as "c" using ("cityId")
+    join "countries" as "co" using ("countryId")
+   where "co"."name" = '$1
+  `;
+
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
