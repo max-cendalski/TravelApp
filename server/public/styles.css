@@ -10,6 +10,25 @@ input {
   font-size: 1rem;
 }
 
+.column-width100 {
+  width: 100%;
+}
+
+.top60 {
+  margin-top: 60px;
+}
+
+.container {
+  max-width: 1920px;
+}
+
+.navbar-container {
+  width: 100%;
+  position: fixed;
+  height: 30px;
+  background-color: cadetblue;
+}
+
 ::placeholder {
   color: white;
   padding-left: 10px;

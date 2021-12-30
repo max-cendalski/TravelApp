@@ -1,6 +1,7 @@
 import React from 'react';
+import AppContext from '../lib/app-context';
 
-export default class SignUpForm extends React.Component {
+export default class SignInForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,20 +27,22 @@ export default class SignUpForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const newUser = {
+
+    const user = {
       username: this.state.username,
       password: this.state.password
     };
-
-    fetch('/api/auth/sign-up', {
+    fetch('/api/auth/sign-in', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(newUser)
+      body: JSON.stringify(user)
     })
       .then(response => response.json())
-      .then(data => {
+      .then(result => {
+        this.props.handleSignIn(result);
+        window.location.hash = '';
         this.setState({
           username: '',
           password: ''
@@ -51,8 +54,8 @@ export default class SignUpForm extends React.Component {
     return (
       <div className='form-component-container'>
         <div className='row centered'>
-          <form className="form-container" onSubmit={this.handleSubmit}>
-          <label className="form-label"> Sign Up </label>
+          <form className="form-container" onSubmit={this.handleSubmit}name="signInForm">
+          <label className="form-label"> Sign in </label>
             <input required className="username-input" type="text" value ={this.state.username} onChange={this.handleUsernameChange} name="username" placeholder="username"/>
             <input required className="password-input" type="password" value={this.state.password} onChange={this.handlePasswordChange} name="password" placeholder="password" />
             <button className='sign-up-button'>Confirm</button>
@@ -62,3 +65,5 @@ export default class SignUpForm extends React.Component {
     );
   }
 }
+
+SignInForm.contextType = AppContext;
