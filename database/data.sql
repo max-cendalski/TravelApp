@@ -7,7 +7,7 @@ values
 
 insert into "countries" ("name")
 values
-('New Zealand');
+('Japan');
 
 insert into "cities" ("name","countryId")
 values

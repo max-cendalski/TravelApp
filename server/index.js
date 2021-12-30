@@ -77,20 +77,25 @@ app.post('/api/auth/sign-in', (req, res, next) => {
 
 app.get('/api/countries/', (req, res, next) => {
   const { country } = req.body;
-  if (!trips) {
-    throw new ClientError(401, 'invalid login');
+  console.log('country:', country);
+  if (!country) {
+    throw new ClientError(401, 'invalid input');
   }
   const sql = `
-  select "mainPhotoUrl",
-         "cityId",
-         "c"."name" as "cityName,
-         "co"."name" as "countryName"
-    from "trips"
-    join "cities" as "c" using ("cityId")
-    join "countries" as "co" using ("countryId")
-   where "co"."name" = '$1
+  select "m"."name" as "cityName",
+         "countryId",
+         "c"."name" as "countryName"
+    from "cities" as "m"
+    join "countries" as "c" using ("countryId")
+   where "c"."name" = $1
   `;
-
+  const params = [country];
+  db.query(sql, params)
+    .then(result => {
+      console.log('result.rows[0]:', result.rows[0]);
+      res.json(result.rows[0]);
+    })
+    .catch(err => next(err));
 });
 
 app.use(errorMiddleware);
