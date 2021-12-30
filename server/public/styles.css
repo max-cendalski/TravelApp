@@ -1,4 +1,9 @@
+.relative {
+  position: relative;
+}
+
 .form-component-container {
+  position: absolute;
   background-color: rgb(0, 0, 0, 0.7);
 }
 
@@ -81,4 +86,15 @@
   font-size: 1.6rem;
   font-weight: 600;
   letter-spacing: 2px;
+}
+
+.list-flex {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+img {
+  width: 400px;
+  height: 400px;
 }

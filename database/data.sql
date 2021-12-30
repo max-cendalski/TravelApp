@@ -19,7 +19,7 @@ values
 
 insert into "trips" ("userId","cityId","mainPhotoUrl","review","thingsTodoScore","foodScore","peopleScore","transportScore","safetyScore")
 values
-('1','3','../../server/public/images/Japan1.jpg','It was Amazing trip','9','3','4','3','8'),
-('2','2','../../server/public/images/Japan2.jpg','Weather was not good at all','9','3','4','3','8'),
-('2','3','../../server/public/images/Japan3.jpg','It was awesome!','9','3','4','3','8'),
-('3','4','../../server/public/images/Japan1.jpg','It was best trip in my entire life!','9','3','4','3','8');
+('1','3','/images/Japan1.jpg','It was Amazing trip','9','3','4','3','8'),
+('2','2','/images/Japan2.jpg','Weather was not good at all','9','3','4','3','8'),
+('2','3','/images/Japan3.jpg','It was awesome!','9','3','4','3','8'),
+('3','4','/images/Japan1.jpg','It was best trip in my entire life!','9','3','4','3','8');

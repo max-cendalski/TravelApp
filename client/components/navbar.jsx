@@ -33,7 +33,6 @@ export default class Navbar extends React.Component {
           searchBox: '',
           countries: result
         });
-        console.log('this.state.countries', this.state.countries);
       });
   }
 
@@ -44,9 +43,8 @@ export default class Navbar extends React.Component {
           <form onSubmit={this.handleSubmit}>
             <input className="search-box" type="text" value={this.state.searchBox} onChange={this.handleChange} name="searchBox" placeholder="search for a country"/>
             <button>Submit</button>
-            <img src="../../server/public/images/Japan1.jpg"></img>
-            <ul>
-            {this.state.countries.map(item => <li key={item.tripId}><img src={item.mainPhotoUrl}></img></li>)}
+            <ul className='list-flex'>
+            {this.state.countries.map(item => <li className="image-item" key={item.tripId}><img src={item.mainPhotoUrl}></img></li>)}
             </ul>
           </form>
         </div>
