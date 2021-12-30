@@ -77,23 +77,24 @@ app.post('/api/auth/sign-in', (req, res, next) => {
 
 app.get('/api/countries/', (req, res, next) => {
   const { country } = req.body;
-  console.log('country:', country);
   if (!country) {
     throw new ClientError(401, 'invalid input');
   }
   const sql = `
   select "m"."name" as "cityName",
-         "countryId",
-         "c"."name" as "countryName"
+         "c"."name" as "countryName",
+         "t"."mainPhotoUrl",
+         "u"."username"
     from "cities" as "m"
     join "countries" as "c" using ("countryId")
+    join "trips" as "t" using ("cityId")
+    join "users" as "u" using ("userId")
    where "c"."name" = $1
   `;
   const params = [country];
   db.query(sql, params)
     .then(result => {
-      console.log('result.rows[0]:', result.rows[0]);
-      res.json(result.rows[0]);
+      res.json(result.rows);
     })
     .catch(err => next(err));
 });
