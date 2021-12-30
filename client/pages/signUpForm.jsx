@@ -31,7 +31,7 @@ export default class SignUpForm extends React.Component {
       username: this.state.username,
       password: this.state.password
     };
-    fetch('/api/auth/sign-in', {
+    fetch('/api/auth/sign-up', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -39,9 +39,11 @@ export default class SignUpForm extends React.Component {
       body: JSON.stringify(user)
     })
       .then(response => response.json())
-      .then(data => {
+      .then(result => {
+        window.location.hash = '';
         this.setState({
-          isLoggedIn: true
+          username: '',
+          password: ''
         });
       });
   }

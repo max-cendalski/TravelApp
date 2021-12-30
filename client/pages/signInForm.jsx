@@ -27,6 +27,7 @@ export default class SignInForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+
     const user = {
       username: this.state.username,
       password: this.state.password
@@ -39,9 +40,12 @@ export default class SignInForm extends React.Component {
       body: JSON.stringify(user)
     })
       .then(response => response.json())
-      .then(data => {
+      .then(result => {
+        this.props.handleSignIn(result);
+        window.location.hash = '';
         this.setState({
-          isLoggedIn: true
+          username: '',
+          password: ''
         });
       });
   }
@@ -50,7 +54,7 @@ export default class SignInForm extends React.Component {
     return (
       <div className='form-component-container'>
         <div className='row centered'>
-          <form className="form-container" onSubmit={this.handleSubmit}>
+          <form className="form-container" onSubmit={this.handleSubmit}name="signInForm">
           <label className="form-label"> Sign in </label>
             <input required className="username-input" type="text" value ={this.state.username} onChange={this.handleUsernameChange} name="username" placeholder="username"/>
             <input required className="password-input" type="password" value={this.state.password} onChange={this.handlePasswordChange} name="password" placeholder="password" />

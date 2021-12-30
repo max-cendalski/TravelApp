@@ -41,18 +41,17 @@ export default class App extends React.Component {
       return <Home />;
     }
     if (path === 'sign-in') {
-      return <SignInForm />;
+      return <SignInForm handleSignIn={this.handleSignIn}/>;
     } if (path === 'sign-up') {
       return <SignUpForm />;
     }
-
     return <NotFound />;
   }
 
   render() {
-    const { user } = this.state;
+    const { user, route } = this.state;
     const { handleSignIn } = this;
-    const contextValue = { user, handleSignIn };
+    const contextValue = { user, route, handleSignIn };
     return (
       <AppContext.Provider value = {contextValue}>
         <Home />
