@@ -9,6 +9,11 @@ export default class Home extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleOnClickTextContainer = this.handleOnClickTextContainer.bind(this);
+  }
+
+  handleOnClickTextContainer(event) {
+    this.renderPage();
   }
 
   handleChange(event) {
@@ -53,7 +58,7 @@ export default class Home extends React.Component {
         <div className='list-flex'>
           {this.state.countries.map(item =>
             <div className="image-item column-width50" key={item.tripId}>
-              <div className="text-container">
+              <div className="text-container" onClick={this.handleOnClickTextContainer}>
               <p className='country-name'>{item.countryName}-<span className='city-name'>{item.cityName}</span></p>
               <span className='city-name'>@{item.username}</span></div>
               <div className='image-container'><img className="photo" src={item.mainPhotoUrl}></img></div>

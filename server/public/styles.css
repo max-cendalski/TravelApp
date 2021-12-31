@@ -58,7 +58,6 @@
 .image-item {
   position: relative;
   padding: 0.2rem;
-  cursor: pointer;
 }
 
 .image-container {
@@ -76,6 +75,7 @@
   top: 15px;
   left: 15px;
   padding: 5px;
+  cursor: pointer;
 }
 
 .form-component-container {

@@ -15,7 +15,7 @@ export default class SignInForm extends React.Component {
 
   handleUsernameChange(event) {
     this.setState({
-      username: event.target.value
+      username: event.target
     });
   }
 
