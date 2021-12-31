@@ -25,7 +25,7 @@ CREATE TABLE "public"."comments" (
 	"content" TEXT NOT NULL,
 	"userId" int NOT NULL,
 	"tripId" int NOT NULL,
-	"createdAt" timestamptz NOT NULL,
+	"createdAt" timestamptz NOT NULL default now(),
 	CONSTRAINT "comments_pk" PRIMARY KEY ("commentId")
 ) WITH (
   OIDS=FALSE
@@ -37,7 +37,7 @@ CREATE TABLE "public"."additionalPhotos" (
 	"photoId" serial NOT NULL,
 	"url" TEXT NOT NULL,
 	"tripId" int NOT NULL,
-	"createdAt" timestamptz NOT NULL,
+	"createdAt" timestamptz NOT NULL default now(),
 	CONSTRAINT "additionalPhotos_pk" PRIMARY KEY ("photoId")
 ) WITH (
   OIDS=FALSE
@@ -56,7 +56,7 @@ CREATE TABLE "public"."trips" (
 	"peopleScore" int NOT NULL,
 	"transportScore" int NOT NULL,
 	"safetyScore" int NOT NULL,
-	"createdAt" timestamptz NOT NULL,
+	"createdAt" timestamptz NOT NULL default now(),
 	CONSTRAINT "trips_pk" PRIMARY KEY ("tripId")
 ) WITH (
   OIDS=FALSE

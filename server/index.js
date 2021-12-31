@@ -75,9 +75,38 @@ app.post('/api/auth/sign-in', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/countries/:country', (req, res, next) => {
+  const country = req.params.country;
+  if (!country) {
+    throw new ClientError(401, 'invalid input');
+  }
+  const sql = `
+  select "m"."name" as "cityName",
+         "c"."name" as "countryName",
+         "t"."mainPhotoUrl",
+         "u"."username",
+         "t"."tripId"
+    from "cities" as "m"
+    join "countries" as "c" using ("countryId")
+    join "trips" as "t" using ("cityId")
+    join "users" as "u" using ("userId")
+   where "c"."name" = $1
+  `;
+  const params = [country];
+  db.query(sql, params)
+    .then(result => {
+      res.json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`express server listening on port ${process.env.PORT}`);
+});
+app.delete('/api/grades/:id', (req, res) => {
+  delete grades[req.params.id];
+  res.sendStatus(204);
 });

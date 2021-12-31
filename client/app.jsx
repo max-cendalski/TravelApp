@@ -54,7 +54,6 @@ export default class App extends React.Component {
     const contextValue = { user, route, handleSignIn };
     return (
       <AppContext.Provider value = {contextValue}>
-        <Home />
         {this.renderPage()}
       </AppContext.Provider>
     );

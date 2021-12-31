@@ -1,8 +1,89 @@
+.container {
+  max-width: 1920px;
+}
+
+.navbar-container {
+  position: fixed;
+  padding-top: 0.5rem;
+  width: 100%;
+  border-bottom: 1px solid black;
+  background-color: white;
+  z-index: 2;
+  padding-bottom: 0.5rem;
+}
+
+.list-flex {
+  max-width: 1920px;
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 3rem;
+  margin-right: 2rem;
+  margin-left: 2rem;
+}
+
+.column-width100 {
+  width: 100%;
+}
+
+.column-width50 {
+  width: 50%;
+}
+
+.country-name {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.city-name {
+  font-size: 1.1rem;
+}
+
+.login-icon {
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  margin-right: 3rem;
+}
+
+.search-box-container {
+  display: inline-block;
+  margin-left: 2rem;
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+}
+
+.image-item {
+  position: relative;
+  padding: 0.2rem;
+  cursor: pointer;
+}
+
+.image-container {
+  object-fit: contain;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  height: 50vh;
+}
+
+.text-container {
+  position: absolute;
+  background-color: white;
+  top: 15px;
+  left: 15px;
+  padding: 5px;
+}
+
 .form-component-container {
+  position: absolute;
   background-color: rgb(0, 0, 0, 0.7);
 }
 
-input {
+.input-form {
   border: none;
   background-color: inherit;
   color: white;
@@ -10,23 +91,8 @@ input {
   font-size: 1rem;
 }
 
-.column-width100 {
-  width: 100%;
-}
-
 .top60 {
   margin-top: 60px;
-}
-
-.container {
-  max-width: 1920px;
-}
-
-.navbar-container {
-  width: 100%;
-  position: fixed;
-  height: 30px;
-  background-color: cadetblue;
 }
 
 ::placeholder {
@@ -48,6 +114,7 @@ input {
 
 .row {
   display: flex;
+  justify-content: space-between;
 }
 
 .centered {
@@ -55,7 +122,7 @@ input {
   align-items: center;
 }
 
-.sign-up-button {
+.confirm-form-button {
   margin-top: 30px;
   background-color: rgb(240, 131, 52);
   color: white;
