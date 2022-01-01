@@ -56,16 +56,26 @@ export default class Home extends React.Component {
           </div>
         </div>
         <div className='list-flex'>
-          {this.state.countries.map(item =>
-            <div className="image-item column-width50" key={item.tripId}>
-              <div className="text-container" onClick={this.handleOnClickTextContainer}>
-              <p className='country-name'>{item.countryName}-<span className='city-name'>{item.cityName}</span></p>
-              <span className='city-name'>@{item.username}</span></div>
-              <div className='image-container'><img className="photo" src={item.mainPhotoUrl}></img></div>
+          {this.state.countries.map(trip =>
+            <div className="image-item column-width50" key={trip.tripId}>
+            <Trip trip={trip} />
             </div>)
           }
         </div>
       </div>
     );
   }
+}
+
+function Trip(props) {
+  const { tripId, countryName, cityName, username, mainPhotoUrl } = props.trip;
+  return (
+    <a
+      href={`#trips?tripId=${tripId}`}>
+      <div className="text-container">
+      <p className='country-name'>{countryName}-<span className='city-name'>{cityName}</span></p>
+      <span className='city-name'>@{username}</span></div>
+      <div className='image-container'><img className="photo" src={mainPhotoUrl}></img></div>
+    </a>
+  );
 }
