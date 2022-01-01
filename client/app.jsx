@@ -6,6 +6,7 @@ import AppContext from './lib/app-context.js';
 import SignInForm from './pages/signInForm';
 import SignUpForm from './pages/signUpForm';
 import NotFound from './pages/not-found.jsx';
+import TripDetails from './pages/trip-details.jsx';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -36,13 +37,18 @@ export default class App extends React.Component {
   }
 
   renderPage() {
-    const { path } = this.state.route;
-    if (path === '') {
+    const { route } = this.state;
+    if (route.path === '') {
       return <Home />;
     }
-    if (path === 'sign-in') {
+    if (route.path === 'trips') {
+      const tripId = route.params.get('tripId');
+      return <TripDetails tripId={tripId} />;
+    }
+
+    if (route.path === 'sign-in') {
       return <SignInForm handleSignIn={this.handleSignIn}/>;
-    } if (path === 'sign-up') {
+    } if (route.path === 'sign-up') {
       return <SignUpForm />;
     }
     return <NotFound />;
