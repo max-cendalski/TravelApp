@@ -100,6 +100,32 @@ app.get('/api/countries/:country', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/trips/:tripId', (req, res, next) => {
+  const trip = req.params.tripId;
+  if (!trip) {
+    throw new ClientError(401, 'invalid tripId');
+  }
+  const sql = `
+  select "userId",
+         "cityId",
+         "mainPhotoUrl",
+         "t"."name" as "countryName",
+         "c"."name" as "cityName",
+         "u"."username"
+    from "trips"
+    join "cities" as "c" using ("cityId")
+    join "countries" as "t" using ("countryId")
+    join "users" as "u" using ("userId")
+   where "tripId" = $1
+  `;
+  const params = [trip];
+  db.query(sql, params)
+    .then(result => {
+      res.json(result.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {

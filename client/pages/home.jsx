@@ -9,11 +9,6 @@ export default class Home extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleOnClickTextContainer = this.handleOnClickTextContainer.bind(this);
-  }
-
-  handleOnClickTextContainer(event) {
-    this.renderPage();
   }
 
   handleChange(event) {

@@ -45,7 +45,6 @@ export default class App extends React.Component {
       const tripId = route.params.get('tripId');
       return <TripDetails tripId={tripId} />;
     }
-
     if (route.path === 'sign-in') {
       return <SignInForm handleSignIn={this.handleSignIn}/>;
     } if (route.path === 'sign-up') {
