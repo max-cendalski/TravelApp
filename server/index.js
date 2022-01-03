@@ -109,6 +109,12 @@ app.get('/api/trips/:tripId', (req, res, next) => {
   select "userId",
          "cityId",
          "mainPhotoUrl",
+         "review",
+         "thingsTodoScore",
+         "foodScore",
+         "peopleScore",
+         "transportScore",
+         "safetyScore",
          "t"."name" as "countryName",
          "c"."name" as "cityName",
          "u"."username"
@@ -131,8 +137,4 @@ app.use(errorMiddleware);
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`express server listening on port ${process.env.PORT}`);
-});
-app.delete('/api/grades/:id', (req, res) => {
-  delete grades[req.params.id];
-  res.sendStatus(204);
 });
