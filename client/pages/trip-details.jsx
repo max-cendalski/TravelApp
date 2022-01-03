@@ -1,4 +1,5 @@
 import React from 'react';
+import Navbar from '../components/navbar';
 
 export default class TripDetails extends React.Component {
   constructor(props) {
@@ -30,9 +31,16 @@ export default class TripDetails extends React.Component {
       safetyScore
     } = this.state.trip;
     return (
-      <div>
-      <h1>{countryName}</h1>
-      <h3>{cityName}</h3>
+      <div className='container'>
+      <Navbar handleChange={this.handleChange}
+              handleSubmit={this.handleSubmit}/>
+      <div className='row padding-top3'>
+        <div className='image-item column-width50'>
+          <div className='image-container'><img className="photo" src={mainPhotoUrl}></img></div>
+        </div>
+        <div className='column-width50'>
+        </div>
+      </div>
       </div>
 
     );

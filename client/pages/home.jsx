@@ -1,4 +1,5 @@
 import React from 'react';
+import Navbar from '../components/navbar';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -39,17 +40,10 @@ export default class Home extends React.Component {
   render() {
     return (
       <div className='container'>
-        <div className='navbar-container'>
-          <div className='search-box-container'>
-            <form onSubmit={this.handleSubmit}>
-              <input className="search-box" type="text" value={this.state.searchBox} onChange={this.handleChange} name="searchBox" placeholder="search for a country"/>
-              <button>Submit</button>
-            </form>
-          </div>
-          <div className='login-icon'>
-            <i className="fas fa-user"></i>
-          </div>
-        </div>
+      <Navbar handleChange={this.handleChange}
+              handleSubmit={this.handleSubmit}
+              searchBox={this.state.searchBox}
+              />
         <div className='list-flex'>
           {this.state.countries.map(trip =>
             <div className="image-item column-width50" key={trip.tripId}>
