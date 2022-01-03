@@ -120,10 +120,6 @@
   font-size: 1rem;
 }
 
-.top60 {
-  margin-top: 60px;
-}
-
 ::placeholder {
   color: white;
   padding-left: 10px;
@@ -143,6 +139,11 @@
 
 .row {
   display: flex;
+}
+
+.horizontal {
+  display: flex;
+  flex-direction: row;
 }
 
 .review-container {
@@ -178,4 +179,18 @@
   font-size: 1.6rem;
   font-weight: 600;
   letter-spacing: 2px;
+}
+
+@media screen and  (max-width: 660px) {
+  .column-width50 {
+    width: 100%;
+  }
+
+  .column-width25 {
+    width: 50%;
+  }
+
+  .row {
+    flex-direction: column;
+  }
 }
