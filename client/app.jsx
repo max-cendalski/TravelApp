@@ -41,6 +41,10 @@ export default class App extends React.Component {
     if (route.path === '') {
       return <Home />;
     }
+    if (route.path === 'search-results') {
+      const country = route.params.get('country');
+      return <Home country={country}/>;
+    }
     if (route.path === 'trips') {
       const tripId = route.params.get('tripId');
       return <TripDetails tripId={tripId} />;
@@ -54,9 +58,9 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { user, route } = this.state;
+    const { user, route, searchBox, countries } = this.state;
     const { handleSignIn } = this;
-    const contextValue = { user, route, handleSignIn };
+    const contextValue = { user, route, handleSignIn, searchBox, countries };
     return (
       <AppContext.Provider value = {contextValue}>
         {this.renderPage()}

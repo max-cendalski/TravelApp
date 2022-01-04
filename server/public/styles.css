@@ -190,6 +190,15 @@
     width: 50%;
   }
 
+  .image-item {
+    padding: 0;
+    border-bottom: 6px solid rgb(255, 137, 28);
+  }
+
+  .list-flex {
+    margin: 0;
+  }
+
   .row {
     flex-direction: column;
   }

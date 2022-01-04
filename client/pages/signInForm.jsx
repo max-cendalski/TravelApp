@@ -27,7 +27,6 @@ export default class SignInForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
     const user = {
       username: this.state.username,
       password: this.state.password

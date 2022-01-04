@@ -1,26 +1,37 @@
 import React from 'react';
 import Navbar from '../components/navbar';
+import AppContext from '../lib/app-context';
 
 export default class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
+    this.state = ({
       searchBox: '',
       countries: []
-    };
+    });
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({
-      searchBox: event.target.value,
-      countries: []
-    });
+  componentDidMount() {
+    fetch(`/api/countries/${this.props.country}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(result => {
+        this.setState({
+          searchBox: '',
+          countries: result
+        });
+      });
   }
 
   handleSubmit(event) {
     event.preventDefault();
+    window.location.hash = `#search-results?country=${this.state.searchBox}`;
     const country = this.state.searchBox;
     fetch(`/api/countries/${country}`, {
       method: 'GET',
@@ -37,17 +48,28 @@ export default class Home extends React.Component {
       });
   }
 
+  handleChange(event) {
+    event.preventDefault();
+    this.setState({
+      searchBox: event.target.value,
+      countries: []
+    });
+  }
+
   render() {
     return (
       <div className='container'>
       <Navbar handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
               searchBox={this.state.searchBox}
+              countries={this.state.countries}
               />
         <div className='list-flex'>
           {this.state.countries.map(trip =>
             <div className="image-item column-width50" key={trip.tripId}>
-            <Trip trip={trip} />
+            <Trip
+            trip={trip}
+           />
             </div>)
           }
         </div>
@@ -68,3 +90,5 @@ function Trip(props) {
     </a>
   );
 }
+
+Home.contextType = AppContext;
