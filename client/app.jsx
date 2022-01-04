@@ -1,6 +1,7 @@
 import React from 'react';
 import decodeToken from './lib/decode-token.js';
 import parseRoute from './lib/parse-route.jsx';
+import SearchResults from './pages/search-results.jsx';
 import Home from './pages/home';
 import AppContext from './lib/app-context.js';
 import SignInForm from './pages/signInForm';
@@ -43,7 +44,7 @@ export default class App extends React.Component {
     }
     if (route.path === 'search-results') {
       const country = route.params.get('country');
-      return <Home country={country}/>;
+      return <SearchResults country={country}/>;
     }
     if (route.path === 'trips') {
       const tripId = route.params.get('tripId');
@@ -58,9 +59,9 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { user, route, searchBox, countries } = this.state;
+    const { user, route } = this.state;
     const { handleSignIn } = this;
-    const contextValue = { user, route, handleSignIn, searchBox, countries };
+    const contextValue = { user, route, handleSignIn };
     return (
       <AppContext.Provider value = {contextValue}>
         {this.renderPage()}
