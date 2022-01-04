@@ -189,6 +189,10 @@
   text-align: center;
 }
 
+.hidden {
+  display: none;
+}
+
 .drop-down-list {
   width: 10rem;
   list-style-type: none;
