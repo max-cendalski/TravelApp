@@ -36,6 +36,12 @@ export default class Navbar extends React.Component {
         <div className='login-icon'>
           <i className="fas fa-user"></i>
         </div>
+        <div className='drop-down-container'>
+          <ul className='drop-down-list'>
+            <li>Sign Up</li>
+            <li>Sign In</li>
+          </ul>
+        </div>
       </div>
     );
   }

@@ -181,6 +181,34 @@
   letter-spacing: 2px;
 }
 
+.drop-down-container {
+  background-color: rgb(112, 110, 110);
+  position: absolute;
+  right: 0;
+  top: 38px;
+  text-align: center;
+}
+
+.drop-down-list {
+  width: 10rem;
+  list-style-type: none;
+  padding: 0;
+}
+
+.drop-down-list li {
+  cursor: pointer;
+  color: white;
+  border-bottom: 1px solid white;
+  padding: 1rem;
+  transition: 0.18s linear;
+}
+
+li:hover {
+  transform: scale(1.2);
+  background-color: rgb(112, 110, 110);
+  border-top: 1px solid white;
+}
+
 @media screen and  (max-width: 660px) {
   .column-width50 {
     width: 100%;
