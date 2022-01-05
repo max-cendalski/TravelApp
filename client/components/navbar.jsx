@@ -67,8 +67,6 @@ export default class Navbar extends React.Component {
   }
 
   handleSignIn() {
-    console.log(this.context.isAuthorizing);
-
     this.setState({
       modal: 'modal-visible',
       signInForm: !this.state.signInForm
