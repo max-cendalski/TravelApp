@@ -1,6 +1,7 @@
 import React from 'react';
 import SignUpForm from '../components/sign-up-form';
 import SignInForm from '../components/sign-in-form';
+import AppContext from '../lib/app-context';
 
 export default class Navbar extends React.Component {
   constructor(props) {
@@ -11,6 +12,7 @@ export default class Navbar extends React.Component {
       modal: 'hidden',
       signUpForm: false,
       signInForm: false
+
     });
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -65,6 +67,8 @@ export default class Navbar extends React.Component {
   }
 
   handleSignIn() {
+    console.log(this.context.isAuthorizing);
+
     this.setState({
       modal: 'modal-visible',
       signInForm: !this.state.signInForm
@@ -94,6 +98,9 @@ export default class Navbar extends React.Component {
           </form>
         </div>
         <div className='login-icon' onMouseEnter={this.handleOnMouseEnter}>
+        {
+          !this.context.isAuthorizing ? <p className='name-paragraph'>Hello, {this.context.user.username}</p> : <span></span>
+        }
           <i className="fas fa-user"></i>
             <div className={this.state.visible}>
               <ul className='drop-down-list'>
@@ -112,7 +119,8 @@ export default class Navbar extends React.Component {
           {
             this.state.signInForm &&
             <div className='row padding-top20vh'>
-              <SignInForm handleSwitchingModal={this.handleSwitchingModal}/>
+              <SignInForm handleSwitchingModal={this.handleSwitchingModal}
+                          handleIsAuthorizing={this.handleIsAuthorizing}/>
             </div>
           }
           </div>
@@ -120,3 +128,5 @@ export default class Navbar extends React.Component {
     );
   }
 }
+
+Navbar.contextType = AppContext;

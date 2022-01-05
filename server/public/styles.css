@@ -50,6 +50,11 @@
   font-size: 1.1rem;
 }
 
+.name-paragraph {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
 .login-icon {
   cursor: pointer;
   display: inline-block;

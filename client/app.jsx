@@ -59,9 +59,9 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { user, route } = this.state;
+    const { user, route, isAuthorizing } = this.state;
     const { handleSignIn } = this;
-    const contextValue = { user, route, handleSignIn };
+    const contextValue = { user, route, handleSignIn, isAuthorizing };
     return (
       <AppContext.Provider value = {contextValue}>
         {this.renderPage()}
@@ -69,5 +69,3 @@ export default class App extends React.Component {
     );
   }
 }
-
-// handleSignIn={this.handleSignIn}

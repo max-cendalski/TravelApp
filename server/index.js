@@ -4,6 +4,7 @@ const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 const express = require('express');
 const errorMiddleware = require('./error-middleware');
+const authorizationMiddleware = require('./authorization-middleware');
 
 const ClientError = require('./client-error');
 const db = new pg.Pool({
@@ -132,6 +133,7 @@ app.get('/api/trips/:tripId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.use(authorizationMiddleware);
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
