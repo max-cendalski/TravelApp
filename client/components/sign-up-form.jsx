@@ -1,7 +1,6 @@
 import React from 'react';
-import AppContext from '../lib/app-context';
 
-export default class SignInForm extends React.Component {
+export default class SignUpForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,7 +14,7 @@ export default class SignInForm extends React.Component {
 
   handleUsernameChange(event) {
     this.setState({
-      username: event.target
+      username: event.target.value
     });
   }
 
@@ -31,7 +30,7 @@ export default class SignInForm extends React.Component {
       username: this.state.username,
       password: this.state.password
     };
-    fetch('/api/auth/sign-in', {
+    fetch('/api/auth/sign-up', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -40,31 +39,24 @@ export default class SignInForm extends React.Component {
     })
       .then(response => response.json())
       .then(result => {
-        this.props.handleSignIn(result);
         window.location.hash = '';
-        this.setState({
-          username: '',
-          password: ''
-        });
+        this.props.handleSwitchingModal();
       });
   }
 
   render() {
     return (
-      <div className='relative'>
-        <div className='form-component-container'>
+      <div className='form-component-container'>
           <div className='row centered'>
-            <form className="form-container" onSubmit={this.handleSubmit}name="signInForm">
-            <label className="form-label"> Sign in </label>
+            <form onSubmit={this.handleSubmit} name="signInForm">
+            <label className="form-label"> Sign up </label>
               <input required className="username-input input-form" type="text" value={this.state.username} onChange={this.handleUsernameChange} name="username" placeholder="username"/>
               <input required className="password-input input-form" type="password" value={this.state.password} onChange={this.handlePasswordChange} name="password" placeholder="password" />
               <button className='confirm-form-button'>Confirm</button>
+              <button className='cancel-form-button' onClick={this.props.handleSwitchingModal}>Cancel</button>
             </form>
           </div>
         </div>
-      </div>
     );
   }
 }
-
-SignInForm.contextType = AppContext;

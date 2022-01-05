@@ -1,7 +1,7 @@
 import React from 'react';
 import AppContext from '../lib/app-context';
 
-export default class SignUpForm extends React.Component {
+export default class SignInForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -31,7 +31,7 @@ export default class SignUpForm extends React.Component {
       username: this.state.username,
       password: this.state.password
     };
-    fetch('/api/auth/sign-up', {
+    fetch('/api/auth/sign-in', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -40,28 +40,29 @@ export default class SignUpForm extends React.Component {
     })
       .then(response => response.json())
       .then(result => {
+        this.context.handleSignIn(result);
         window.location.hash = '';
-        this.setState({
-          username: '',
-          password: ''
-        });
+        this.props.handleSwitchingModal();
       });
   }
 
   render() {
     return (
-      <div className='form-component-container'>
+      <div className='relative'>
+        <div className='form-component-container'>
           <div className='row centered'>
-            <form className="form-container" onSubmit={this.handleSubmit}name="signInForm">
-            <label className="form-label"> Sign up </label>
+            <form onSubmit={this.handleSubmit}name="signInForm">
+            <label className="form-label"> Sign in </label>
               <input required className="username-input input-form" type="text" value={this.state.username} onChange={this.handleUsernameChange} name="username" placeholder="username"/>
               <input required className="password-input input-form" type="password" value={this.state.password} onChange={this.handlePasswordChange} name="password" placeholder="password" />
               <button className='confirm-form-button'>Confirm</button>
+              <button className='cancel-form-button' onClick={this.props.handleSwitchingModal}>Cancel</button>
             </form>
           </div>
         </div>
+      </div>
     );
   }
 }
 
-SignUpForm.contextType = AppContext;
+SignInForm.contextType = AppContext;
