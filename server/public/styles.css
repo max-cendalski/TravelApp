@@ -37,8 +37,8 @@
   padding-top: 3rem;
 }
 
-.padding-top30vh {
-  padding-top: 30vh;
+.padding-top20vh {
+  padding-top: 20vh;
 }
 
 .country-name {
@@ -113,6 +113,7 @@
 
 .form-component-container {
   position: absolute;
+  left: 45%;
 }
 
 .input-form {
@@ -138,7 +139,6 @@
 
 ::placeholder {
   color: white;
-  padding-left: 10px;
 }
 
 .username-input {
@@ -169,7 +169,6 @@
 
 .centered {
   justify-content: center;
-  align-items: center;
 }
 
 .confirm-form-button {

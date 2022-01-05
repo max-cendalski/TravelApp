@@ -105,13 +105,13 @@ export default class Navbar extends React.Component {
           <div className={this.state.modal}>
           {
             this.state.signUpForm &&
-            <div className='row centered padding-top30vh'>
+            <div className='row padding-top20vh'>
               <SignUpForm handleSwitchingModal={this.handleSwitchingModal}/>
             </div>
           }
           {
             this.state.signInForm &&
-            <div className='row centered padding-top30vh'>
+            <div className='row padding-top20vh'>
               <SignInForm handleSwitchingModal={this.handleSwitchingModal}/>
             </div>
           }

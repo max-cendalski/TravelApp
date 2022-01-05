@@ -51,7 +51,7 @@ export default class SignInForm extends React.Component {
       <div className='relative'>
         <div className='form-component-container'>
           <div className='row centered'>
-            <form className="form-container" onSubmit={this.handleSubmit}name="signInForm">
+            <form onSubmit={this.handleSubmit}name="signInForm">
             <label className="form-label"> Sign in </label>
               <input required className="username-input input-form" type="text" value={this.state.username} onChange={this.handleUsernameChange} name="username" placeholder="username"/>
               <input required className="password-input input-form" type="password" value={this.state.password} onChange={this.handlePasswordChange} name="password" placeholder="password" />
