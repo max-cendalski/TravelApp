@@ -1,11 +1,16 @@
 import React from 'react';
+import SignUpForm from '../components/sign-up-form';
+import SignInForm from '../components/sign-in-form';
 
 export default class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = ({
       searchBox: '',
-      visible: 'hidden'
+      visible: 'hidden',
+      modal: 'hidden',
+      signUpForm: false,
+      signInForm: false
     });
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -13,7 +18,9 @@ export default class Navbar extends React.Component {
     this.handleLoginIcon = this.handleLoginIcon.bind(this);
     this.handleOnMouseEnter = this.handleOnMouseEnter.bind(this);
     this.handleOnMouseLeave = this.handleOnMouseLeave.bind(this);
-
+    this.handleSwitchingModal = this.handleSwitchingModal.bind(this);
+    this.handleModalClick = this.handleModalClick.bind(this);
+    this.handleSignIn = this.handleSignIn.bind(this);
   }
 
   handleChange(event) {
@@ -42,14 +49,38 @@ export default class Navbar extends React.Component {
     });
   }
 
-  handleSignUp(event) {
+  handleSwitchingModal(event) {
+    this.setState({
+      modal: 'hidden',
+      signUpForm: !this.state.signUpForm,
+      visible: 'hidden'
+    });
+  }
 
+  handleSignUp() {
+    this.setState({
+      modal: 'modal-visible',
+      signUpForm: !this.state.signUpForm
+    });
+  }
+
+  handleSignIn() {
+    this.setState({
+      modal: 'modal-visible',
+      signInForm: !this.state.signInForm
+    });
   }
 
   handleLoginIcon() {
     this.setState({
       visible: !this.state.visible,
       list: 'drop-down-container'
+    });
+  }
+
+  handleModalClick() {
+    this.setState({
+      modal: 'hidden'
     });
   }
 
@@ -66,27 +97,26 @@ export default class Navbar extends React.Component {
           <i className="fas fa-user"></i>
             <div className={this.state.visible}>
               <ul className='drop-down-list'>
-                <li onClick={this.handleSignUp}>Sign Up</li>
-                <li>Sign In</li>
+                <li className="sign-up-button" onClick={this.handleSignUp}>Sign Up</li>
+                <li className='sign-in-button' onClick={this.handleSignIn}>Sign In</li>
               </ul>
             </div>
+          </div>
+          <div className={this.state.modal}>
+          {
+            this.state.signUpForm &&
+            <div className='row centered padding-top30vh'>
+              <SignUpForm handleSwitchingModal={this.handleSwitchingModal}/>
+            </div>
+          }
+          {
+            this.state.signInForm &&
+            <div className='row centered padding-top30vh'>
+              <SignInForm handleSwitchingModal={this.handleSwitchingModal}/>
+            </div>
+          }
           </div>
       </div>
     );
   }
 }
-
-/*
-        <div className={this.state.list}>
-          {!this.state.darker
-            ? <i className="fas fa-bars cursor-pointer" onClick={this.handleClick}></i>
-            : <ul>
-                <h4>Choose your game</h4>
-                <li onClick={this.handleClick}>The Legend Of Zelda</li>
-                <li onClick={this.handleClick}>A Link to the Past</li>
-                <li onClick={this.handleClick}>Ocarina of Time</li>
-                <li onClick={this.handleClick}>The Wind Waker</li>
-                <li onClick={this.handleClick}>Breath of the Wild</li>
-            </ul>
-          }
-        </div> */

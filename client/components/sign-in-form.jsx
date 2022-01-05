@@ -15,7 +15,7 @@ export default class SignInForm extends React.Component {
 
   handleUsernameChange(event) {
     this.setState({
-      username: event.target
+      username: event.target.value
     });
   }
 
@@ -40,12 +40,9 @@ export default class SignInForm extends React.Component {
     })
       .then(response => response.json())
       .then(result => {
-        this.props.handleSignIn(result);
+        this.context.handleSignIn(result);
         window.location.hash = '';
-        this.setState({
-          username: '',
-          password: ''
-        });
+        this.props.handleSwitchingModal();
       });
   }
 
@@ -59,6 +56,7 @@ export default class SignInForm extends React.Component {
               <input required className="username-input input-form" type="text" value={this.state.username} onChange={this.handleUsernameChange} name="username" placeholder="username"/>
               <input required className="password-input input-form" type="password" value={this.state.password} onChange={this.handlePasswordChange} name="password" placeholder="password" />
               <button className='confirm-form-button'>Confirm</button>
+              <button className='cancel-form-button' onClick={this.props.handleSwitchingModal}>Cancel</button>
             </form>
           </div>
         </div>

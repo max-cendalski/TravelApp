@@ -1,5 +1,4 @@
 import React from 'react';
-import AppContext from '../lib/app-context';
 
 export default class SignUpForm extends React.Component {
   constructor(props) {
@@ -41,10 +40,7 @@ export default class SignUpForm extends React.Component {
       .then(response => response.json())
       .then(result => {
         window.location.hash = '';
-        this.setState({
-          username: '',
-          password: ''
-        });
+        this.props.handleSwitchingModal();
       });
   }
 
@@ -52,16 +48,15 @@ export default class SignUpForm extends React.Component {
     return (
       <div className='form-component-container'>
           <div className='row centered'>
-            <form className="form-container" onSubmit={this.handleSubmit}name="signInForm">
+            <form className="form-container" onSubmit={this.handleSubmit} name="signInForm">
             <label className="form-label"> Sign up </label>
               <input required className="username-input input-form" type="text" value={this.state.username} onChange={this.handleUsernameChange} name="username" placeholder="username"/>
               <input required className="password-input input-form" type="password" value={this.state.password} onChange={this.handlePasswordChange} name="password" placeholder="password" />
               <button className='confirm-form-button'>Confirm</button>
+              <button className='cancel-form-button' onClick={this.props.handleSwitchingModal}>Cancel</button>
             </form>
           </div>
         </div>
     );
   }
 }
-
-SignUpForm.contextType = AppContext;

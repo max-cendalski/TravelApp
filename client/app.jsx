@@ -4,8 +4,8 @@ import parseRoute from './lib/parse-route.jsx';
 import SearchResults from './pages/search-results.jsx';
 import Home from './pages/home';
 import AppContext from './lib/app-context.js';
-import SignInForm from './pages/signInForm';
-import SignUpForm from './pages/signUpForm';
+import SignInForm from './components/sign-in-form';
+import SignUpForm from './components/sign-up-form';
 import NotFound from './pages/not-found.jsx';
 import TripDetails from './pages/trip-details.jsx';
 
@@ -51,7 +51,7 @@ export default class App extends React.Component {
       return <TripDetails tripId={tripId} />;
     }
     if (route.path === 'sign-in') {
-      return <SignInForm handleSignIn={this.handleSignIn}/>;
+      return <SignInForm />;
     } if (route.path === 'sign-up') {
       return <SignUpForm />;
     }
@@ -69,3 +69,5 @@ export default class App extends React.Component {
     );
   }
 }
+
+// handleSignIn={this.handleSignIn}
