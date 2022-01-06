@@ -8,7 +8,16 @@ values
 insert into "countries" ("name")
 values
 ('Japan'),
-('Tahiti');
+('Tahiti'),
+('Iceland'),
+('Singapore'),
+('Australia'),
+('Italy'),
+('Greece'),
+('Nigeria'),
+('Madagascar'),
+('Cuba');
+
 
 insert into "cities" ("name","countryId")
 values
