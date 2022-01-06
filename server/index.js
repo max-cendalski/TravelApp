@@ -83,27 +83,16 @@ app.get('/api/countries/:country', (req, res, next) => {
   }
 
   const sql = `
-  select "name",
-         "t"."mainPhotoUrl",
-         "t"."cityName",
-         "u"."username"
-    from "countries"
-    join "trips" as "t" using ("countryId")
-    join "users" as "u" using ("userId")
-   where "name" = $1
-  `;
-
-  /* const sql = `
   select "cityName",
-         "mainPhotoUrl",
          "tripId",
+         "mainPhotoUrl",
          "u"."username",
          "c"."name" as "countryName"
     from "trips"
     join "countries" as "c" using ("countryId")
     join "users" as "u" using ("userId")
    where "c"."name" = $1
-  `; */
+  `;
   const params = [country];
   db.query(sql, params)
     .then(result => {
@@ -119,7 +108,7 @@ app.get('/api/trips/:tripId', (req, res, next) => {
   }
   const sql = `
   select "userId",
-         "cityId",
+         "cityName",
          "mainPhotoUrl",
          "review",
          "thingsTodoScore",
@@ -127,12 +116,10 @@ app.get('/api/trips/:tripId', (req, res, next) => {
          "peopleScore",
          "transportScore",
          "safetyScore",
-         "t"."name" as "countryName",
-         "c"."name" as "cityName",
+         "c"."name",
          "u"."username"
     from "trips"
-    join "cities" as "c" using ("cityId")
-    join "countries" as "t" using ("countryId")
+    join "countries" as "c" using ("countryId")
     join "users" as "u" using ("userId")
    where "tripId" = $1
   `;
