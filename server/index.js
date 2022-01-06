@@ -134,6 +134,48 @@ app.get('/api/trips/:tripId', (req, res, next) => {
 });
 
 app.use(authorizationMiddleware);
+
+app.post('/api/trips', (req, res, next) => {
+  const { country, city, review } = req.body;
+  const sql = `
+  insert into "countries" ("name")
+      values ($1)
+      returning "countryId"
+  `;
+  const params = [country];
+  db.query(sql, params)
+    .then(result => {
+      const countryId = result.rows[0].countryId;
+      const sql1 = `
+                insert into "cities" ("name","countryId")
+                values ($1,$2)
+                returning "cityId"
+              `;
+      const params1 = [city, countryId];
+      return db.query(sql1, params1)
+        .then(result => {
+          const cityId = result.rows[0].cityId;
+          const sql2 = `
+          insert into "trips" ("userId","cityId","review")
+              values ($1,$2,$3)
+              returning *
+          `;
+          const params2 = [req.user.userId, cityId, review];
+          return db.query(sql2, params2)
+            .then(result => {
+              const [review] = result.rows;
+
+              res.status(201).json({ review });
+            })
+            .catch(err => {
+              console.error(err);
+              res.status(500).json({
+                error: 'an unexpected error occurred'
+              });
+            });
+        });
+    });
+});
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
