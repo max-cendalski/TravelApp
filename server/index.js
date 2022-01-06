@@ -81,18 +81,29 @@ app.get('/api/countries/:country', (req, res, next) => {
   if (!country) {
     throw new ClientError(401, 'invalid input');
   }
+
   const sql = `
-  select "m"."name" as "cityName",
-         "c"."name" as "countryName",
+  select "name",
          "t"."mainPhotoUrl",
+         "t"."cityName",
+         "u"."username"
+    from "countries"
+    join "trips" as "t" using ("countryId")
+    join "users" as "u" using ("userId")
+   where "name" = $1
+  `;
+
+  /* const sql = `
+  select "cityName",
+         "mainPhotoUrl",
+         "tripId",
          "u"."username",
-         "t"."tripId"
-    from "cities" as "m"
+         "c"."name" as "countryName"
+    from "trips"
     join "countries" as "c" using ("countryId")
-    join "trips" as "t" using ("cityId")
     join "users" as "u" using ("userId")
    where "c"."name" = $1
-  `;
+  `; */
   const params = [country];
   db.query(sql, params)
     .then(result => {

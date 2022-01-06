@@ -19,7 +19,6 @@ CREATE TABLE "public"."users" (
 
 
 
-
 CREATE TABLE "public"."comments" (
 	"commentId" serial NOT NULL,
 	"content" TEXT NOT NULL,
@@ -47,8 +46,9 @@ CREATE TABLE "public"."additionalPhotos" (
 
 CREATE TABLE "public"."trips" (
 	"tripId" serial NOT NULL,
+  "countryId" int NOT NULL,
 	"userId" int NOT NULL,
-	"cityId" int NOT NULL,
+	"cityName" TEXT NOT NULL,
 	"mainPhotoUrl" TEXT NOT NULL default 'url',
 	"review" TEXT NOT NULL,
 	"thingsTodoScore" int NOT NULL default 0,
@@ -74,16 +74,6 @@ CREATE TABLE "public"."countries" (
 
 
 
-CREATE TABLE "public"."cities" (
-	"cityId" serial NOT NULL,
-	"name" TEXT NOT NULL,
-	"countryId" int NOT NULL,
-	CONSTRAINT "cities_pk" PRIMARY KEY ("cityId")
-) WITH (
-  OIDS=FALSE
-);
-
-
 
 CREATE TABLE "public"."tripScores" (
 	"userId" int NOT NULL,
@@ -102,10 +92,7 @@ ALTER TABLE "comments" ADD CONSTRAINT "comments_fk1" FOREIGN KEY ("tripId") REFE
 ALTER TABLE "additionalPhotos" ADD CONSTRAINT "additionalPhotos_fk0" FOREIGN KEY ("tripId") REFERENCES "trips"("tripId");
 
 ALTER TABLE "trips" ADD CONSTRAINT "trips_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
-ALTER TABLE "trips" ADD CONSTRAINT "trips_fk1" FOREIGN KEY ("cityId") REFERENCES "cities"("cityId");
 
-
-ALTER TABLE "cities" ADD CONSTRAINT "cities_fk0" FOREIGN KEY ("countryId") REFERENCES "countries"("countryId");
 
 ALTER TABLE "tripScores" ADD CONSTRAINT "tripScores_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
 ALTER TABLE "tripScores" ADD CONSTRAINT "tripScores_fk1" FOREIGN KEY ("tripId") REFERENCES "trips"("tripId");
