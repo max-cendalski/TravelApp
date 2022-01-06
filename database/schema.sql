@@ -65,7 +65,7 @@ CREATE TABLE "public"."trips" (
 
 
 CREATE TABLE "public"."countries" (
-	"countryId" serial NOT NULL,
+	"countryId" serial NOT NULL UNIQUE,
 	"name" TEXT NOT NULL,
 	CONSTRAINT "countries_pk" PRIMARY KEY ("countryId")
 ) WITH (
