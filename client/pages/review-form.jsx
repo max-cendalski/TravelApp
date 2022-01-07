@@ -5,11 +5,16 @@ export default class ReviewForm extends React.Component {
     super(props);
     this.state = {
       countryId: '',
-      countries: []
+      countries: [],
+      city: '',
+      review: '',
+      country: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCancelTripReview = this.handleCancelTripReview.bind(this);
+    this.handleCityInput = this.handleCityInput.bind(this);
+    this.handleTextarea = this.handleTextarea.bind(this);
   }
 
   componentDidMount() {
@@ -32,9 +37,8 @@ export default class ReviewForm extends React.Component {
     const token = window.localStorage.getItem('TravelApp-token');
     const review = {
       countryId: this.state.countryId,
-      country: this.state.country,
-      city: event.target.city.value,
-      review: event.target.review.value
+      city: this.state.city,
+      review: this.state.review
     };
     fetch('/api/trips', {
       method: 'POST',
@@ -56,6 +60,18 @@ export default class ReviewForm extends React.Component {
     });
   }
 
+  handleCityInput(event) {
+    this.setState({
+      city: event.target.value
+    });
+  }
+
+  handleTextarea(event) {
+    this.setState({
+      review: event.target.value
+    });
+  }
+
   handleCancelTripReview() {
     event.preventDefault();
     window.location.hash = '#';
@@ -69,7 +85,7 @@ export default class ReviewForm extends React.Component {
           <form className ="review-form" onSubmit={this.handleSubmit} name="reviewForm">
             <label className="review-form-label">Country</label>
             <br />
-              <select className="select-element" value={this.state.value} onChange={this.handleChange} required>
+              <select className="select-element" value={this.state.countryId} onChange={this.handleChange} required>
                 <option></option>
                 {
                   this.state.countries.map(country =>
@@ -79,10 +95,10 @@ export default class ReviewForm extends React.Component {
               <br />
               <label className="review-form-label">City</label>
               <br />
-              <input className="form-input-element column-width100" type="text" placeholder='city' name='city' required></input>
+              <input className="form-input-element column-width100" onChange={this.handleCityInput} type="text" placeholder='city' name='city' required></input>
               <br />
               <label className='review-form-label'>Review</label>
-              <textarea className='column-width100' rows="20" name="review" required></textarea>
+              <textarea className='column-width100' onChange={this.handleTextarea}rows="20" name="review" required></textarea>
               <button className='confirm-form-button height-2rem'>Confirm</button>
               <button className='cancel-form-button' onClick={this.handleCancelTripReview}>Cancel</button>
         </form>

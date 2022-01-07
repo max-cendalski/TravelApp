@@ -267,6 +267,12 @@ li:hover {
   font-size: 1.2rem;
 }
 
+.write-review-link {
+  color: white;
+  text-decoration: none;
+  padding: 1rem;
+}
+
 @media screen and  (max-width: 660px) {
   .column-width50 {
     width: 100%;
