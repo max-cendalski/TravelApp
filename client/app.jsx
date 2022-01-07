@@ -8,6 +8,7 @@ import SignInForm from './components/sign-in-form';
 import SignUpForm from './components/sign-up-form';
 import NotFound from './pages/not-found.jsx';
 import TripDetails from './pages/trip-details.jsx';
+import ReviewForm from './pages/review-form.jsx';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -54,6 +55,8 @@ export default class App extends React.Component {
       return <SignInForm />;
     } if (route.path === 'sign-up') {
       return <SignUpForm />;
+    } if (route.path === 'review-form') {
+      return <ReviewForm />;
     }
     return <NotFound />;
   }

@@ -101,6 +101,17 @@ app.get('/api/countries/:country', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/countries', (req, res, next) => {
+  const sql = `
+    select *
+    from "countries"
+  `;
+  db.query(sql)
+    .then(result => {
+      res.json(result.rows);
+    });
+});
+
 app.get('/api/trips/:tripId', (req, res, next) => {
   const trip = req.params.tripId;
   if (!trip) {
