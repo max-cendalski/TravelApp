@@ -12,8 +12,8 @@ export default class Navbar extends React.Component {
       modal: 'hidden',
       signUpForm: false,
       signInForm: false
-
     });
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSignUp = this.handleSignUp.bind(this);
@@ -104,6 +104,7 @@ export default class Navbar extends React.Component {
               <ul className='drop-down-list'>
                 <li className="sign-up-button" onClick={this.handleSignUp}>Sign Up</li>
                 <li className='sign-in-button' onClick={this.handleSignIn}>Sign In</li>
+                <li className='write-review-button'><a className="write-review-link" href="#review-form">Write Review</a></li>
               </ul>
             </div>
           </div>

@@ -81,15 +81,15 @@ app.get('/api/countries/:country', (req, res, next) => {
   if (!country) {
     throw new ClientError(401, 'invalid input');
   }
+
   const sql = `
-  select "m"."name" as "cityName",
-         "c"."name" as "countryName",
-         "t"."mainPhotoUrl",
+  select "cityName",
+         "tripId",
+         "mainPhotoUrl",
          "u"."username",
-         "t"."tripId"
-    from "cities" as "m"
+         "c"."name" as "countryName"
+    from "trips"
     join "countries" as "c" using ("countryId")
-    join "trips" as "t" using ("cityId")
     join "users" as "u" using ("userId")
    where "c"."name" = $1
   `;
@@ -101,6 +101,17 @@ app.get('/api/countries/:country', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/countries', (req, res, next) => {
+  const sql = `
+    select *
+    from "countries"
+  `;
+  db.query(sql)
+    .then(result => {
+      res.json(result.rows);
+    });
+});
+
 app.get('/api/trips/:tripId', (req, res, next) => {
   const trip = req.params.tripId;
   if (!trip) {
@@ -108,7 +119,7 @@ app.get('/api/trips/:tripId', (req, res, next) => {
   }
   const sql = `
   select "userId",
-         "cityId",
+         "cityName",
          "mainPhotoUrl",
          "review",
          "thingsTodoScore",
@@ -116,12 +127,10 @@ app.get('/api/trips/:tripId', (req, res, next) => {
          "peopleScore",
          "transportScore",
          "safetyScore",
-         "t"."name" as "countryName",
-         "c"."name" as "cityName",
+         "c"."name",
          "u"."username"
     from "trips"
-    join "cities" as "c" using ("cityId")
-    join "countries" as "t" using ("countryId")
+    join "countries" as "c" using ("countryId")
     join "users" as "u" using ("userId")
    where "tripId" = $1
   `;
@@ -134,6 +143,28 @@ app.get('/api/trips/:tripId', (req, res, next) => {
 });
 
 app.use(authorizationMiddleware);
+
+app.post('/api/trips', (req, res, next) => {
+  const { countryId, city, review } = req.body;
+  const sql = `
+              insert into "trips" ("countryId","userId","cityName","review")
+              values ($1,$2,$3,$4)
+              returning *
+              `;
+  const params = [countryId, req.user.userId, city, review];
+  return db.query(sql, params)
+    .then(result => {
+      const [review] = result.rows;
+      res.status(201).json({ review });
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'an unexpected error occurred'
+      });
+    });
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {

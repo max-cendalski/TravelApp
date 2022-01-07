@@ -41,6 +41,10 @@
   padding-top: 20vh;
 }
 
+.height-2rem {
+  height: 3rem;
+}
+
 .country-name {
   font-weight: 700;
   font-size: 1.2rem;
@@ -137,7 +141,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.78);
+  background-color: rgba(0, 0, 0, 0.8);
   width: 100%;
   height: 100vh;
 }
@@ -150,12 +154,14 @@
   height: 3rem;
   display: block;
   border-bottom: 1px solid white;
+  outline: none;
 }
 
 .password-input {
   height: 3rem;
   display: block;
   border-bottom: 1px solid white;
+  outline: none;
 }
 
 .row {
@@ -165,11 +171,6 @@
 .horizontal {
   display: flex;
   flex-direction: row;
-}
-
-.review-container {
-  padding: 1rem;
-  font-size: 1.2rem;
 }
 
 .centered {
@@ -249,6 +250,29 @@ li:hover {
   border-radius: 5px;
 }
 
+.review-container {
+  padding: 1rem;
+  font-size: 1.2rem;
+}
+
+.review-form {
+  width: 50%;
+}
+
+.review-form-label {
+  color: rgb(128, 128, 128);
+  display: inline-block;
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+  font-size: 1.2rem;
+}
+
+.write-review-link {
+  color: white;
+  text-decoration: none;
+  padding: 1rem;
+}
+
 @media screen and  (max-width: 660px) {
   .column-width50 {
     width: 100%;
@@ -269,5 +293,22 @@ li:hover {
 
   .row {
     flex-direction: column;
+    width: 100%;
+  }
+
+  .name-paragraph {
+    display: none;
+  }
+
+  .review-form {
+    width: 95%;
+  }
+
+  .search-box-container {
+    margin-left: 0.5rem;
+  }
+
+  .padding-top20vh {
+    padding-top: 4rem;
   }
 }
