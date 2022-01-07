@@ -7,8 +7,7 @@ export default class ReviewForm extends React.Component {
       countryId: '',
       countries: [],
       city: '',
-      review: '',
-      country: ''
+      review: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
