@@ -86,11 +86,6 @@ export default class Navbar extends React.Component {
     });
   }
 
-  handleWriteReview(event) {
-    event.preventDefault();
-    window.location.hash = '#review-form';
-  }
-
   render() {
     return (
       <div className='navbar-container' onMouseLeave={this.handleOnMouseLeave}>
