@@ -4,7 +4,7 @@ export default class ReviewForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      country: '',
+      countryId: '',
       countries: []
     };
     this.handleChange = this.handleChange.bind(this);
@@ -30,10 +30,8 @@ export default class ReviewForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const token = window.localStorage.getItem('TravelApp-token');
-    let countryId = this.state.countries.findIndex(country => country.name === this.state.country);
-    countryId += 1;
     const review = {
-      countryId,
+      countryId: this.state.countryId,
       country: this.state.country,
       city: event.target.city.value,
       review: event.target.review.value
@@ -52,9 +50,9 @@ export default class ReviewForm extends React.Component {
       });
   }
 
-  handleChange() {
+  handleChange(event) {
     this.setState({
-      country: event.target.value
+      countryId: event.target.value
     });
   }
 
@@ -71,11 +69,11 @@ export default class ReviewForm extends React.Component {
           <form className ="review-form" onSubmit={this.handleSubmit} name="reviewForm">
             <label className="review-form-label">Country</label>
             <br />
-              <select className="select-element" value={this.state.country.countryId} onChange={this.handleChange}>
+              <select className="select-element" value={this.state.value} onChange={this.handleChange}>
                 <option></option>
                 {
                   this.state.countries.map(country =>
-                  <option key={country.countryId}>{country.name}</option>)
+                  <option key={country.countryId} value={country.countryId}>{country.name}</option>)
                 }
               </select>
               <br />
