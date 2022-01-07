@@ -69,7 +69,7 @@ export default class ReviewForm extends React.Component {
           <form className ="review-form" onSubmit={this.handleSubmit} name="reviewForm">
             <label className="review-form-label">Country</label>
             <br />
-              <select className="select-element" value={this.state.value} onChange={this.handleChange}>
+              <select className="select-element" value={this.state.value} onChange={this.handleChange} required>
                 <option></option>
                 {
                   this.state.countries.map(country =>
@@ -79,12 +79,12 @@ export default class ReviewForm extends React.Component {
               <br />
               <label className="review-form-label">City</label>
               <br />
-              <input className="form-input-element column-width100" type="text" placeholder='city' name='city'></input>
+              <input className="form-input-element column-width100" type="text" placeholder='city' name='city' required></input>
               <br />
               <label className='review-form-label'>Review</label>
-              <textarea className='column-width100' rows="20" name="review"></textarea>
-          <button className='confirm-form-button height-2rem'>Confirm</button>
-           <button className='cancel-form-button' onClick={this.handleCancelTripReview}>Cancel</button>
+              <textarea className='column-width100' rows="20" name="review" required></textarea>
+              <button className='confirm-form-button height-2rem'>Confirm</button>
+              <button className='cancel-form-button' onClick={this.handleCancelTripReview}>Cancel</button>
         </form>
         </div>
         </div>
