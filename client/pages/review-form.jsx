@@ -7,13 +7,23 @@ export default class ReviewForm extends React.Component {
       countryId: '',
       countries: [],
       city: '',
-      review: ''
+      review: '',
+      thingsTodoScore: 0,
+      foodScore: 0,
+      peopleScore: 0,
+      transportScore: 0,
+      safetyScore: 0
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCancelTripReview = this.handleCancelTripReview.bind(this);
     this.handleCityInput = this.handleCityInput.bind(this);
     this.handleTextarea = this.handleTextarea.bind(this);
+    this.handleThingsToDoInput = this.handleThingsToDoInput.bind(this);
+    this.handleFoodInput = this.handleFoodInput.bind(this);
+    this.handlePeopleInput = this.handlePeopleInput.bind(this);
+    this.handleTransportInput = this.handleTransportInput.bind(this);
+    this.handleSafetyInput = this.handleSafetyInput.bind(this);
   }
 
   componentDidMount() {
@@ -37,7 +47,12 @@ export default class ReviewForm extends React.Component {
     const review = {
       countryId: this.state.countryId,
       city: this.state.city,
-      review: this.state.review
+      review: this.state.review,
+      thingsTodoScore: this.state.thingsTodoScore,
+      foodScore: this.state.foodScore,
+      peopleScore: this.state.peopleScore,
+      transportScore: this.state.transportScore,
+      safetyScore: this.state.safetyScore
     };
     fetch('/api/trips', {
       method: 'POST',
@@ -76,6 +91,41 @@ export default class ReviewForm extends React.Component {
     window.location.hash = '#';
   }
 
+  handleThingsToDoInput(event) {
+    event.preventDefault();
+    this.setState({
+      thingsTodoScore: event.target.value
+    });
+  }
+
+  handleFoodInput(event) {
+    event.preventDefault();
+    this.setState({
+      foodScore: event.target.value
+    });
+  }
+
+  handlePeopleInput(event) {
+    event.preventDefault();
+    this.setState({
+      peopleScore: event.target.value
+    });
+  }
+
+  handleTransportInput(event) {
+    event.preventDefault();
+    this.setState({
+      transportScore: event.target.value
+    });
+  }
+
+  handleSafetyInput(event) {
+    event.preventDefault();
+    this.setState({
+      safetyScore: event.target.value
+    });
+  }
+
   render() {
     return (
       <div className='container'>
@@ -101,19 +151,19 @@ export default class ReviewForm extends React.Component {
                 </div>
                 <div className='review-form-right column-width50'>
                   <h3>Your score from 0 to 100</h3>
-                  <input className="review-score-input" max="100" type="number" required></input>
+                  <input className="review-score-input" onChange={this.handleThingsToDoInput} max="100" type="number" required></input>
                   <label className="review-score-label">Things To Do</label>
                   <br />
-                  <input className="review-score-input" max="100" type="number" required></input>
+                  <input className="review-score-input" onChange={this.handleFoodInput} max="100" type="number" required></input>
                   <label className="review-score-label">Food</label>
                   <br />
-                  <input className="review-score-input" max="100" type="number" required></input>
+                  <input className="review-score-input" onChange={this.handlePeopleInput} max="100" type="number" required></input>
                   <label className="review-score-label">People</label>
                   <br />
-                  <input className="review-score-input" max="100" type="number" required></input>
+                  <input className="review-score-input" onChange={this.handleTransportInput} max="100" type="number" required></input>
                   <label className="review-score-label">Transport</label>
                   <br />
-                  <input className="review-score-input" max="100" type="number" required></input>
+                  <input className="review-score-input" onChange={this.handleSafetyInput} max="100" type="number" required></input>
                   <label className="review-score-label">Safety</label>
                 </div>
               </div>
