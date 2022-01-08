@@ -145,13 +145,22 @@ app.get('/api/trips/:tripId', (req, res, next) => {
 app.use(authorizationMiddleware);
 
 app.post('/api/trips', (req, res, next) => {
-  const { countryId, city, review } = req.body;
+  const {
+    countryId,
+    city,
+    review,
+    thingsTodoScore,
+    foodScore,
+    peopleScore,
+    transportScore,
+    safetyScore
+  } = req.body;
   const sql = `
-              insert into "trips" ("countryId","userId","cityName","review")
-              values ($1,$2,$3,$4)
+              insert into "trips" ("countryId","userId","cityName","review","thingsTodoScore","foodScore","peopleScore","transportScore","safetyScore")
+              values ($1,$2,$3,$4,$5,$6,$7,$8,$9)
               returning *
               `;
-  const params = [countryId, req.user.userId, city, review];
+  const params = [countryId, req.user.userId, city, review, thingsTodoScore, foodScore, peopleScore, transportScore, safetyScore];
   return db.query(sql, params)
     .then(result => {
       const [review] = result.rows;

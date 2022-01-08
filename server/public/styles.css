@@ -37,8 +37,8 @@
   padding-top: 3rem;
 }
 
-.padding-top20vh {
-  padding-top: 20vh;
+.padding-top15vh {
+  padding-top: 15vh;
 }
 
 .height-2rem {
@@ -259,10 +259,30 @@ li:hover {
   width: 50%;
 }
 
+.review-form-right h3 {
+  padding-bottom: 1rem;
+}
+
+.review-score-input {
+  width: 3rem;
+  margin-right: 1rem;
+  appearance: none;
+}
+
+.review-score-label {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
 .review-form-label {
   color: rgb(128, 128, 128);
   display: inline-block;
-  margin-top: 0.3rem;
   margin-bottom: 0.3rem;
   font-size: 1.2rem;
 }
@@ -271,6 +291,10 @@ li:hover {
   color: white;
   text-decoration: none;
   padding: 1rem;
+}
+
+.select-element {
+  margin-bottom: 1rem;
 }
 
 @media screen and  (max-width: 660px) {
@@ -308,7 +332,12 @@ li:hover {
     margin-left: 0.5rem;
   }
 
-  .padding-top20vh {
+  .padding-top15vh {
     padding-top: 4rem;
+  }
+
+  .review-form-right h3 {
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
   }
 }
