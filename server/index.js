@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const express = require('express');
 const errorMiddleware = require('./error-middleware');
 const authorizationMiddleware = require('./authorization-middleware');
-
+const uploadsMiddleware = require('./uploads-middleware');
 const ClientError = require('./client-error');
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -172,6 +172,26 @@ app.post('/api/trips', (req, res, next) => {
         error: 'an unexpected error occurred'
       });
     });
+});
+
+app.post('/api/uploads', uploadsMiddleware, (req, res, next) => {
+  const { caption } = req.body;
+  if (!caption) {
+    throw new ClientError(400, 'caption is a required field');
+  }
+  const url = '/images' + req.file.filename;
+  const sql = `
+    insert into "images" ("caption", "url")
+    values ($1, $2)
+    returning *
+  `;
+  const params = [caption, url];
+  db.query(sql, params)
+    .then(result => {
+      const [image] = result.rows;
+      res.status(201).json(image);
+    })
+    .catch(err => console.error(err));
 });
 
 app.use(errorMiddleware);
