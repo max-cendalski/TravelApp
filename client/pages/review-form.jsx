@@ -14,6 +14,7 @@ export default class ReviewForm extends React.Component {
       transportScore: 0,
       safetyScore: 0
     };
+    this.fileInputRef = React.createRef();
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCancelTripReview = this.handleCancelTripReview.bind(this);
@@ -165,6 +166,15 @@ export default class ReviewForm extends React.Component {
                   <br />
                   <input className="review-score-input" onChange={this.handleSafetyInput} max="100" type="number" required></input>
                   <label className="review-score-label">Safety</label>
+                </div>
+                <div>
+                <h3>Upload File</h3>
+                <input className='file-upload'
+                  required
+                  type="file"
+                  name="image"
+                  ref={this.fileInputRef}
+                  accept=".png, .jpg, .jpeg, .gif" />
                 </div>
               </div>
               <label className='review-form-label'>Review</label>
