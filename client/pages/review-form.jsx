@@ -192,30 +192,3 @@ export default class ReviewForm extends React.Component {
     );
   }
 }
-
-/* handleSubmit(event) {
-    event.preventDefault();
-    const token = window.localStorage.getItem('TravelApp-token');
-    const review = {
-      countryId: this.state.countryId,
-      city: this.state.city,
-      review: this.state.review,
-      thingsTodoScore: this.state.thingsTodoScore,
-      foodScore: this.state.foodScore,
-      peopleScore: this.state.peopleScore,
-      transportScore: this.state.transportScore,
-      safetyScore: this.state.safetyScore
-    };
-    fetch('/api/trips', {
-      method: 'POST',
-      headers: {
-        'x-access-token': token,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(review)
-    })
-      .then(response => response.json())
-      .then(result => {
-        window.location.hash = '#';
-      });
-  } */
