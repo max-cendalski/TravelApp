@@ -15,7 +15,6 @@ const db = new pg.Pool({
 });
 
 const app = express();
-
 const jsonMiddleware = express.json();
 app.use(jsonMiddleware);
 
@@ -127,7 +126,7 @@ app.get('/api/trips/:tripId', (req, res, next) => {
          "peopleScore",
          "transportScore",
          "safetyScore",
-         "c"."name",
+         "c"."name" as "countryName",
          "u"."username"
     from "trips"
     join "countries" as "c" using ("countryId")
