@@ -155,12 +155,13 @@ app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
     transportScore,
     safetyScore
   } = req.body;
+  const url = '/images/' + req.file.filename;
   const sql = `
               insert into "trips" ("countryId","userId","cityName","mainPhotoUrl","review","thingsTodoScore","foodScore","peopleScore","transportScore","safetyScore")
               values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
               returning *
               `;
-  const params = [countryId, req.user.userId, city, req.file.filename, review, thingsTodoScore, foodScore, peopleScore, transportScore, safetyScore];
+  const params = [countryId, req.user.userId, city, url, review, thingsTodoScore, foodScore, peopleScore, transportScore, safetyScore];
   return db.query(sql, params)
     .then(result => {
       const [review] = result.rows;
@@ -172,26 +173,6 @@ app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
         error: 'an unexpected error occurred'
       });
     });
-});
-
-app.post('/api/uploads', uploadsMiddleware, (req, res, next) => {
-  const { caption } = req.body;
-  if (!caption) {
-    throw new ClientError(400, 'caption is a required field');
-  }
-  const url = '/images' + req.file.filename;
-  const sql = `
-    insert into "trips" ("caption", "mainPhotoUrl")
-    values ($1, $2)
-    returning *
-  `;
-  const params = [caption, url];
-  db.query(sql, params)
-    .then(result => {
-      const [image] = result.rows;
-      res.status(201).json(image);
-    })
-    .catch(err => console.error(err));
 });
 
 app.use(errorMiddleware);
