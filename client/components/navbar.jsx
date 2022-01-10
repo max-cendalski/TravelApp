@@ -88,23 +88,37 @@ export default class Navbar extends React.Component {
 
   render() {
     return (
-      <div className='navbar-container' onMouseLeave={this.handleOnMouseLeave}>
+      <div className='navbar-container row' onMouseLeave={this.handleOnMouseLeave}>
         <div className='search-box-container'>
           <form onSubmit={this.handleSubmit}>
             <input className="search-box" type="text" value={this.state.searchBox} onChange={this.handleChange} name="searchBox" placeholder="search for a country"/>
             <button>Submit</button>
           </form>
         </div>
+        <div className='travel-app-home'>
+          <h1><a href="#">TravelApp</a></h1>
+        </div>
         <div className='login-icon' onMouseEnter={this.handleOnMouseEnter}>
         {
-          !this.context.isAuthorizing ? <p className='name-paragraph'>Hello, {this.context.user.username}</p> : <span></span>
+          this.context.user && <p className='name-paragraph'>Hello, {this.context.user.username}</p>
         }
-          <i className="fas fa-user"></i>
+          <i className="fas fa-user user-icon"></i>
             <div className={this.state.visible}>
               <ul className='drop-down-list'>
-                <li className="sign-up-button" onClick={this.handleSignUp}>Sign Up</li>
-                <li className='sign-in-button' onClick={this.handleSignIn}>Sign In</li>
-                <li className='write-review-button'><a className="write-review-link" href="#review-form">Write Review</a></li>
+               {
+                  this.context.user && <li>My Reviews</li>
+                }
+                {
+                  !this.context.user && <li className="sign-up-button" onClick={this.handleSignUp}>Sign Up</li>
+                }
+
+                {
+                 this.context.user && <li className='write-review-button'><a className="write-review-link" href="#review-form">Write Review</a></li>
+                }
+                 {
+                this.context.user ? <li>Logut</li> : <li className='sign-in-button' onClick={this.handleSignIn}>Sign In</li>
+                }
+
               </ul>
             </div>
           </div>

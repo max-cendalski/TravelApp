@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from '../components/navbar';
+
 export default class ReviewForm extends React.Component {
   constructor(props) {
     super(props);
@@ -14,6 +15,7 @@ export default class ReviewForm extends React.Component {
       transportScore: 0,
       safetyScore: 0
     };
+    this.fileInputRef = React.createRef();
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCancelTripReview = this.handleCancelTripReview.bind(this);
@@ -43,28 +45,32 @@ export default class ReviewForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    const formData = new FormData();
     const token = window.localStorage.getItem('TravelApp-token');
-    const review = {
-      countryId: this.state.countryId,
-      city: this.state.city,
-      review: this.state.review,
-      thingsTodoScore: this.state.thingsTodoScore,
-      foodScore: this.state.foodScore,
-      peopleScore: this.state.peopleScore,
-      transportScore: this.state.transportScore,
-      safetyScore: this.state.safetyScore
-    };
+    formData.append('countryId', this.state.countryId);
+    formData.append('city', this.state.city);
+    formData.append('image', this.fileInputRef.current.files[0]);
+    formData.append('review', this.state.review);
+    formData.append('thingsTodoScore', this.state.thingsTodoScore);
+    formData.append('foodScore', this.state.foodScore);
+    formData.append('peopleScore', this.state.peopleScore);
+    formData.append('transportScore', this.state.transportScore);
+    formData.append('safetyScore', this.state.safetyScore);
+
     fetch('/api/trips', {
       method: 'POST',
       headers: {
-        'x-access-token': token,
-        'Content-Type': 'application/json'
+        'x-access-token': token
       },
-      body: JSON.stringify(review)
+      body: formData
     })
       .then(response => response.json())
       .then(result => {
         window.location.hash = '#';
+        this.fileInputRef.current.value = null;
+      })
+      .catch(error => {
+        console.error('Error:', error);
       });
   }
 
@@ -165,6 +171,15 @@ export default class ReviewForm extends React.Component {
                   <br />
                   <input className="review-score-input" onChange={this.handleSafetyInput} max="100" type="number" required></input>
                   <label className="review-score-label">Safety</label>
+                </div>
+                <div>
+                <h3>Upload File</h3>
+                <input className='file-upload'
+                  required
+                  type="file"
+                  name="image"
+                  ref={this.fileInputRef}
+                  accept=".png, .jpg, .jpeg, .gif" />
                 </div>
               </div>
               <label className='review-form-label'>Review</label>
