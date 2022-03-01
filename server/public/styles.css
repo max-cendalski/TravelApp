@@ -27,6 +27,10 @@
   border: 2px solid rgb(28, 134, 28);
 }
 
+.submit-search-button:active {
+  transform: scale(1.1);
+}
+
 .column-width100 {
   width: 100%;
 }
