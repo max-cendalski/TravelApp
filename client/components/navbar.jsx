@@ -86,6 +86,11 @@ export default class Navbar extends React.Component {
     });
   }
 
+  handleLogout() {
+    // eslint-disable-next-line no-console
+    console.log('try to logout');
+  }
+
   render() {
     return (
       <div className='navbar-container row' onMouseLeave={this.handleOnMouseLeave}>
