@@ -121,7 +121,7 @@ export default class Navbar extends React.Component {
                  this.context.user && <li className='write-review-button'><a className="write-review-link" href="#review-form">Write Review</a></li>
                 }
                  {
-                this.context.user ? <li>Logut</li> : <li className='sign-in-button' onClick={this.handleSignIn}>Sign In</li>
+                this.context.user ? <li>Logout</li> : <li className='sign-in-button' onClick={this.handleSignIn}>Sign In</li>
                 }
 
               </ul>
