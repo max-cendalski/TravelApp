@@ -97,7 +97,7 @@ export default class Navbar extends React.Component {
         <div className='search-box-container'>
           <form onSubmit={this.handleSubmit}>
             <input className="search-box" type="text" value={this.state.searchBox} onChange={this.handleChange} name="searchBox" placeholder="search for a country"/>
-            <button>Submit</button>
+            <button className='submit-search-button'>Submit</button>
           </form>
         </div>
         <div className='travel-app-home'>
