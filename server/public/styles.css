@@ -25,6 +25,7 @@
   background-color: rgb(28, 134, 28);
   color: white;
   border: 2px solid rgb(28, 134, 28);
+  border-radius: 0 10% 10% 0;
 }
 
 .submit-search-button:active {
