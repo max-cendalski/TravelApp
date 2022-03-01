@@ -21,6 +21,12 @@
   margin-left: 2rem;
 }
 
+.submit-search-button {
+  background-color: rgb(28, 134, 28);
+  color: white;
+  border: 2px solid rgb(28, 134, 28);
+}
+
 .column-width100 {
   width: 100%;
 }
