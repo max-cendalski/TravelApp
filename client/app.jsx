@@ -19,6 +19,7 @@ export default class App extends React.Component {
       route: parseRoute(window.location.hash)
     };
     this.handleSignIn = this.handleSignIn.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   componentDidMount() {
@@ -36,6 +37,14 @@ export default class App extends React.Component {
     const { user, token } = result;
     window.localStorage.setItem('TravelApp-token', token);
     this.setState({ user });
+  }
+
+  handleLogout() {
+    window.localStorage.removeItem('TravelApp-token');
+    this.setState({
+      user: null,
+      isAuthorizing: false
+    });
   }
 
   renderPage() {

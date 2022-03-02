@@ -86,11 +86,6 @@ export default class Navbar extends React.Component {
     });
   }
 
-  handleLogout() {
-    // eslint-disable-next-line no-console
-    console.log('try to logout');
-  }
-
   render() {
     return (
       <div className='navbar-container row' onMouseLeave={this.handleOnMouseLeave}>
@@ -121,7 +116,7 @@ export default class Navbar extends React.Component {
                  this.context.user && <li className='write-review-button'><a className="write-review-link" href="#review-form">Write Review</a></li>
                 }
                  {
-                this.context.user ? <li className='logoutButton' onClick={this.handleLogout}>Logout</li> : <li className='sign-in-button' onClick={this.handleSignIn}>Sign In</li>
+                this.context.user ? <li className='logoutButton' onClick={this.context.handleLogout}>Logout</li> : <li className='sign-in-button' onClick={this.handleSignIn}>Sign In</li>
                 }
 
               </ul>
