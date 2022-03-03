@@ -319,6 +319,13 @@ input::-webkit-inner-spin-button {
   margin-top: 1rem;
 }
 
+.logout-info {
+  position: absolute;
+  top: 10vh;
+  left: 55vh;
+  color: red;
+}
+
 .hidden {
   display: none;
 }

@@ -137,6 +137,9 @@ export default class Navbar extends React.Component {
             </div>
           }
           </div>
+          <div className='hidden logout-info'>
+            <h1>You have logged out!</h1>
+          </div>
       </div>
     );
   }

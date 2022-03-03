@@ -9,7 +9,7 @@ export default class Home extends React.Component {
         <Navbar />
         <div className='container'>
           <div className='row'>
-            <img className="photo" src='images/Tahiti1.jpg'></img>
+            <img className="photo" src='images/Tahiti1.jpg' />
           </div>
         </div>
         <div className='list-flex'></div>
