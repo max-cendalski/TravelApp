@@ -116,7 +116,7 @@ export default class Navbar extends React.Component {
                  this.context.user && <li className='write-review-button'><a className="write-review-link" href="#review-form">Write Review</a></li>
                 }
                  {
-                this.context.user ? <li className='logoutButton' onClick={this.context.handleLogout}>Logout</li> : <li className='sign-in-button' onClick={this.handleSignIn}>Sign In</li>
+                this.context.user ? <li className='logoutButton' onClick={this.context.handleLogoutWindow}>Logout</li> : <li className='sign-in-button' onClick={this.handleSignIn}>Sign In</li>
                 }
 
               </ul>
@@ -137,8 +137,10 @@ export default class Navbar extends React.Component {
             </div>
           }
           </div>
-          <div className='hidden logout-info'>
-            <h1>You have logged out!</h1>
+          <div className={this.context.logoutInfo}>
+            <h1>Are you sure want to log out?</h1>
+            <button onClick={this.context.handleConfirmLogout} className='button-confirm-logout'>Confirm</button>
+            <button className='button-cancel-logout'>Cancel</button>
           </div>
       </div>
     );

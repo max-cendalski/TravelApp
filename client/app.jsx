@@ -16,10 +16,12 @@ export default class App extends React.Component {
     this.state = {
       user: null,
       isAuthorizing: true,
-      route: parseRoute(window.location.hash)
+      route: parseRoute(window.location.hash),
+      logoutInfo: 'hidden'
     };
     this.handleSignIn = this.handleSignIn.bind(this);
-    this.handleLogout = this.handleLogout.bind(this);
+    this.handleLogoutWindow = this.handleLogoutWindow.bind(this);
+    this.handleConfirmLogout = this.handleConfirmLogout.bind(this);
   }
 
   componentDidMount() {
@@ -39,11 +41,19 @@ export default class App extends React.Component {
     this.setState({ user });
   }
 
-  handleLogout() {
+  handleLogoutWindow() {
+    this.setState({
+      logoutInfo: 'logout-info'
+    });
+  }
+
+  handleConfirmLogout() {
     window.localStorage.removeItem('TravelApp-token');
+
     this.setState({
       user: null,
-      isAuthorizing: false
+      isAuthorizing: false,
+      logoutInfo: 'hidden'
     });
   }
 
@@ -71,9 +81,9 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { user, route, isAuthorizing } = this.state;
-    const { handleSignIn, handleLogout } = this;
-    const contextValue = { user, route, handleLogout, handleSignIn, isAuthorizing };
+    const { user, route, isAuthorizing, logoutInfo } = this.state;
+    const { handleSignIn, handleLogoutWindow, handleConfirmLogout } = this;
+    const contextValue = { user, route, handleLogoutWindow, handleSignIn, isAuthorizing, logoutInfo, handleConfirmLogout };
     return (
       <AppContext.Provider value = {contextValue}>
         {this.renderPage()}

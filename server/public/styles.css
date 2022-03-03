@@ -321,6 +321,9 @@ input::-webkit-inner-spin-button {
 
 .logout-info {
   position: absolute;
+  background-color: white;
+  width: 300px;
+  height: 300px;
   top: 10vh;
   left: 55vh;
   color: red;
