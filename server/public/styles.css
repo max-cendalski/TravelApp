@@ -320,9 +320,10 @@ input::-webkit-inner-spin-button {
 }
 
 .logout-info {
+  border-radius: 5px;
   position: absolute;
   background-color: white;
-  width: 350px;
+  width: 380px;
   height: 100px;
   top: 20vh;
   left: 40%;
@@ -332,7 +333,35 @@ input::-webkit-inner-spin-button {
 .logout-info h2 {
   text-align: center;
   width: 100%;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  font-size: 1.6rem;
+}
+
+.button-confirm-logout {
+  border-radius: 5px;
+  background-color: rgb(240, 131, 52);
+  border: none;
+  color: white;
+  letter-spacing: 2px;
+  height: 2rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1.1rem;
+  margin-left: 20px;
+}
+
+.button-cancel-logout {
+  border-radius: 5px;
+  border: none;
+  background-color: rgb(163, 39, 23);
+  color: white;
+  letter-spacing: 2px;
+  height: 2rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1.1rem;
+  float: right;
+  margin-right: 20px;
 }
 
 .hidden {
@@ -391,6 +420,6 @@ input::-webkit-inner-spin-button {
   }
 
   .logout-info {
-    left: 20%;
+    left: 12%;
   }
 }
