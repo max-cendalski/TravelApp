@@ -40,11 +40,6 @@ export default class App extends React.Component {
     const { user, token } = result;
     window.localStorage.setItem('TravelApp-token', token);
     this.setState({ user });
-    // console.log('this.state.user.fromsignIn', this.state.user);
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // console.log('prevStateFromComponentDidUpdate', prevState.user);
   }
 
   handleLogoutWindow() {
@@ -54,6 +49,7 @@ export default class App extends React.Component {
   }
 
   handleConfirmLogout() {
+    // debugger;
     window.localStorage.removeItem('TravelApp-token');
     this.setState({
       user: null,
