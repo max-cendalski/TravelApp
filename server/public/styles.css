@@ -322,11 +322,17 @@ input::-webkit-inner-spin-button {
 .logout-info {
   position: absolute;
   background-color: white;
-  width: 300px;
-  height: 300px;
-  top: 10vh;
-  left: 55vh;
+  width: 350px;
+  height: 100px;
+  top: 20vh;
+  left: 40%;
   color: red;
+}
+
+.logout-info h2 {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 15px;
 }
 
 .hidden {
@@ -382,5 +388,9 @@ input::-webkit-inner-spin-button {
 
   .form-input-element {
     width: 90%;
+  }
+
+  .logout-info {
+    left: 20%;
   }
 }
