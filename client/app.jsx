@@ -15,7 +15,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       user: null,
-      isAuthorizing: true,
+      isAuthorizing: false,
       route: parseRoute(window.location.hash),
       logoutInfo: 'hidden'
     };
@@ -33,7 +33,7 @@ export default class App extends React.Component {
     });
     const token = window.localStorage.getItem('TravelApp-token');
     const user = token ? decodeToken(token) : null;
-    this.setState({ user, isAuthorizing: false });
+    this.setState({ user, isAuthorizing: true });
   }
 
   handleSignIn(result) {
@@ -49,14 +49,12 @@ export default class App extends React.Component {
   }
 
   handleConfirmLogout() {
-    // debugger;
     window.localStorage.removeItem('TravelApp-token');
     this.setState({
       user: null,
-      isAuthorizing: true,
+      isAuthorizing: false,
       logoutInfo: 'hidden'
     });
-    // console.log('user from handleConfirmLogout', this.state.user);
   }
 
   handleCancelLogout() {
