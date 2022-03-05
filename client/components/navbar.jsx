@@ -54,7 +54,8 @@ export default class Navbar extends React.Component {
   handleSwitchingModal() {
     this.setState({
       modal: 'hidden',
-      signUpForm: !this.state.signUpForm,
+      signUpForm: false,
+      signInForm: false,
       visible: 'hidden'
     });
   }
