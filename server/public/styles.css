@@ -21,6 +21,17 @@
   margin-left: 2rem;
 }
 
+.submit-search-button {
+  background-color: rgb(28, 134, 28);
+  color: white;
+  border: 2px solid rgb(28, 134, 28);
+  border-radius: 0 10% 10% 0;
+}
+
+.submit-search-button:active {
+  transform: scale(1.1);
+}
+
 .column-width100 {
   width: 100%;
 }
@@ -234,10 +245,6 @@
   text-align: center;
 }
 
-.hidden {
-  display: none;
-}
-
 .drop-down-list {
   width: 10rem;
   list-style-type: none;
@@ -312,6 +319,58 @@ input::-webkit-inner-spin-button {
   margin-top: 1rem;
 }
 
+.logout-info {
+  border-radius: 5px;
+  position: absolute;
+  background-color: white;
+  width: 380px;
+  height: 120px;
+  top: 20vh;
+  left: 40%;
+  color: red;
+}
+
+.logout-info h2 {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 30px;
+  margin-top: 10px;
+  font-size: 1.6rem;
+}
+
+.button-confirm-logout {
+  border-radius: 5px;
+  background-color: rgb(240, 131, 52);
+  border: none;
+  color: white;
+  letter-spacing: 2px;
+  height: 2rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 1.1rem;
+  margin-left: 20px;
+  width: 30%;
+}
+
+.button-cancel-logout {
+  border-radius: 5px;
+  border: none;
+  background-color: rgb(163, 39, 23);
+  color: white;
+  letter-spacing: 2px;
+  height: 2rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1.1rem;
+  float: right;
+  margin-right: 20px;
+  width: 30%;
+}
+
+.hidden {
+  display: none;
+}
+
 @media screen and  (max-width: 660px) {
   .column-width50 {
     width: 100%;
@@ -361,5 +420,9 @@ input::-webkit-inner-spin-button {
 
   .form-input-element {
     width: 90%;
+  }
+
+  .logout-info {
+    left: 12%;
   }
 }

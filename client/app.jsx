@@ -15,10 +15,14 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       user: null,
-      isAuthorizing: true,
-      route: parseRoute(window.location.hash)
+      isAuthorizing: false,
+      route: parseRoute(window.location.hash),
+      logoutInfo: 'hidden'
     };
     this.handleSignIn = this.handleSignIn.bind(this);
+    this.handleLogoutWindow = this.handleLogoutWindow.bind(this);
+    this.handleConfirmLogout = this.handleConfirmLogout.bind(this);
+    this.handleCancelLogout = this.handleCancelLogout.bind(this);
   }
 
   componentDidMount() {
@@ -29,13 +33,34 @@ export default class App extends React.Component {
     });
     const token = window.localStorage.getItem('TravelApp-token');
     const user = token ? decodeToken(token) : null;
-    this.setState({ user, isAuthorizing: false });
+    this.setState({ user, isAuthorizing: true });
   }
 
   handleSignIn(result) {
     const { user, token } = result;
     window.localStorage.setItem('TravelApp-token', token);
     this.setState({ user });
+  }
+
+  handleLogoutWindow() {
+    this.setState({
+      logoutInfo: 'logout-info'
+    });
+  }
+
+  handleConfirmLogout() {
+    window.localStorage.removeItem('TravelApp-token');
+    this.setState({
+      user: null,
+      isAuthorizing: false,
+      logoutInfo: 'hidden'
+    });
+  }
+
+  handleCancelLogout() {
+    this.setState({
+      logoutInfo: 'hidden'
+    });
   }
 
   renderPage() {
@@ -62,9 +87,9 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { user, route, isAuthorizing } = this.state;
-    const { handleSignIn, handleLogout } = this;
-    const contextValue = { user, route, handleLogout, handleSignIn, isAuthorizing };
+    const { user, route, isAuthorizing, logoutInfo } = this.state;
+    const { handleSignIn, handleLogoutWindow, handleConfirmLogout, handleCancelLogout } = this;
+    const contextValue = { user, route, handleLogoutWindow, handleSignIn, isAuthorizing, logoutInfo, handleConfirmLogout, handleCancelLogout };
     return (
       <AppContext.Provider value = {contextValue}>
         {this.renderPage()}
