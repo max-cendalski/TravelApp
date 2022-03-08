@@ -174,9 +174,43 @@ app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
     });
 });
 
+app.get('/api/reviews/:userId', (req, res) => {
+  const user = req.params.tripId;
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`express server listening on port ${process.env.PORT}`);
 });
+
+/* app.get('/api/trips/:tripId', (req, res, next) => {
+  const trip = req.params.tripId;
+  if (!trip) {
+    throw new ClientError(401, 'invalid tripId');
+  }
+  const sql = `
+  select "userId",
+         "cityName",
+         "mainPhotoUrl",
+         "review",
+         "thingsTodoScore",
+         "foodScore",
+         "peopleScore",
+         "transportScore",
+         "safetyScore",
+         "c"."name" as "countryName",
+         "u"."username"
+    from "trips"
+    join "countries" as "c" using ("countryId")
+    join "users" as "u" using ("userId")
+   where "tripId" = $1
+  `;
+  const params = [trip];
+  db.query(sql, params)
+    .then(result => {
+      res.json(result.rows[0]);
+    })
+    .catch(err => next(err));
+}); */
