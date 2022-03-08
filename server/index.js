@@ -174,7 +174,7 @@ app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
     });
 });
 
-app.get('/api/reviews/:userId', (req, res) => {
+app.get('/api/reviews/:userId', (req, res, next) => {
   const user = req.params.tripId;
   if (!user) {
     throw new ClientError(401, 'invalid userId');
@@ -197,6 +197,12 @@ app.get('/api/reviews/:userId', (req, res) => {
       join "users" as "u" using ("userId")
     where "userId" = $1
   `;
+  const params = [user];
+  db.query(sql, params)
+    .then(result => {
+      res.json(result.rows[0]);
+    })
+    .catch(err => next(err));
 });
 
 app.use(errorMiddleware);
