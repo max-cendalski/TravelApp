@@ -18,29 +18,33 @@ const app = express();
 const jsonMiddleware = express.json();
 app.use(jsonMiddleware);
 
+/*  select  "tripId",
+            "cityName",
+            "mainPhotoUrl",
+            "review",
+            "thingsTodoScore",
+            "foodScore",
+            "peopleScore",
+            "transportScore",
+            "safetyScore",
+            "c"."name" as "countryName",
+            "u"."username"
+        from "trips"
+        join "countries" as "c" using ("countryId")
+        join "users" as "u" using ("userId")
+       where "userId" = $1
+  `; */
 app.get('/api/reviews/:userId', (req, res, next) => {
   const user = req.params.userId;
   if (!user) {
     throw new ClientError(401, 'invalid userId');
   }
-
   const sql = `
-  select  "tripId",
-          "cityName",
-          "mainPhotoUrl",
-          "review",
-          "thingsTodoScore",
-          "foodScore",
-          "peopleScore",
-          "transportScore",
-          "safetyScore",
-          "c"."name" as "countryName",
-          "u"."username"
+    select *
       from "trips"
-      join "countries" as "c" using ("countryId")
-      join "users" as "u" using ("userId")
     where "userId" = $1
   `;
+
   const params = [user];
   db.query(sql, params)
     .then(result => {
