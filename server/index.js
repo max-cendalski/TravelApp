@@ -176,6 +176,27 @@ app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
 
 app.get('/api/reviews/:userId', (req, res) => {
   const user = req.params.tripId;
+  if (!user) {
+    throw new ClientError(401, 'invalid userId');
+  }
+
+  const sql = `
+  select  "tripId",
+          "cityName",
+          "mainPhotoUrl",
+          "review",
+          "thingsTodoScore",
+          "foodScore",
+          "peopleScore",
+          "transportScore",
+          "safetyScore",
+          "c"."name" as "countryName",
+          "u"."username"
+      from "trips"
+      join "countries" as "c" using ("countryId")
+      join "users" as "u" using ("userId")
+    where "userId" = $1
+  `;
 });
 
 app.use(errorMiddleware);
