@@ -48,7 +48,7 @@ app.get('/api/reviews/:userId', (req, res, next) => {
   const params = [user];
   db.query(sql, params)
     .then(result => {
-      res.json(result.rows[0]);
+      res.json(result.rows);
     })
     .catch(err => next(err));
 });
