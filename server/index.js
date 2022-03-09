@@ -18,43 +18,6 @@ const app = express();
 const jsonMiddleware = express.json();
 app.use(jsonMiddleware);
 
-/*  select  "tripId",
-            "cityName",
-            "mainPhotoUrl",
-            "review",
-            "thingsTodoScore",
-            "foodScore",
-            "peopleScore",
-            "transportScore",
-            "safetyScore",
-            "c"."name" as "countryName",
-            "u"."username"
-        from "trips"
-        join "countries" as "c" using ("countryId")
-        join "users" as "u" using ("userId")
-       where "userId" = $1
-  `; */
-app.get('/api/reviews/:userId', (req, res, next) => {
-  const user = req.params.userId;
-  if (!user) {
-    throw new ClientError(401, 'invalid userId');
-  }
-  const sql = `
-    select *
-      from "trips"
-    where "userId" = $1
-  `;
-
-  const params = [user];
-  db.query(sql, params)
-    .then(result => {
-      res.json(result.rows);
-    })
-    .catch(err => next(err));
-});
-
-app.use(errorMiddleware);
-
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`express server listening on port ${process.env.PORT}`);
@@ -216,32 +179,22 @@ app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
     });
 });
 
-/* app.get('/api/trips/:tripId', (req, res, next) => {
-  const trip = req.params.tripId;
-  if (!trip) {
-    throw new ClientError(401, 'invalid tripId');
+app.get('/api/reviews', (req, res, next) => {
+  const { userId } = req.user;
+  if (!userId) {
+    throw new ClientError(401, 'invalid userId');
   }
   const sql = `
-  select "userId",
-         "cityName",
-         "mainPhotoUrl",
-         "review",
-         "thingsTodoScore",
-         "foodScore",
-         "peopleScore",
-         "transportScore",
-         "safetyScore",
-         "c"."name" as "countryName",
-         "u"."username"
-    from "trips"
-    join "countries" as "c" using ("countryId")
-    join "users" as "u" using ("userId")
-   where "tripId" = $1
+    select *
+      from "trips"
+    where "userId" = $1
   `;
-  const params = [trip];
+  const params = [userId];
   db.query(sql, params)
     .then(result => {
-      res.json(result.rows[0]);
+      res.json(result.rows);
     })
     .catch(err => next(err));
-}); */
+});
+
+app.use(errorMiddleware);

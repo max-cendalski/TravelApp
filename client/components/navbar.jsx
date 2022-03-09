@@ -23,6 +23,7 @@ export default class Navbar extends React.Component {
     this.handleSwitchingModal = this.handleSwitchingModal.bind(this);
     this.handleModalClick = this.handleModalClick.bind(this);
     this.handleSignInButton = this.handleSignInButton.bind(this);
+    this.handleMyReviewsButton = this.handleMyReviewsButton.bind(this);
   }
 
   handleChange(event) {
@@ -87,6 +88,10 @@ export default class Navbar extends React.Component {
     });
   }
 
+  handleMyReviewsButton() {
+    window.location.hash = 'my-reviews';
+  }
+
   render() {
     return (
       <div className='navbar-container row' onMouseLeave={this.handleOnMouseLeave}>
@@ -113,7 +118,7 @@ export default class Navbar extends React.Component {
                 !this.context.user && <li className='sign-in-button' onClick={this.handleSignInButton}>Sign In</li>
               }
               {
-                this.context.user && <li>My Reviews</li>
+                this.context.user && <li className='my-reviews-link' onClick={this.handleMyReviewsButton}>My Reviews</li>
               }
               {
                 this.context.user && <li className='write-review-button'><a className="write-review-link" href="#review-form">Write Review</a></li>
