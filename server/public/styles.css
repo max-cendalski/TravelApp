@@ -377,7 +377,7 @@ input::-webkit-inner-spin-button {
   }
 
   .column-width25 {
-    width: 50%;
+    width: 100%;
   }
 
   .image-item {
@@ -424,5 +424,27 @@ input::-webkit-inner-spin-button {
 
   .logout-info {
     left: 12%;
+  }
+
+  .image-container {
+    padding-top: 2rem;
+    height: 200px;
+  }
+
+  .horizontal {
+    flex-direction: column;
+  }
+
+  .detailed-text-container {
+    margin-left: 1rem;
+    margin-top: 20px;
+  }
+
+  .padding-top3 {
+    padding-top: 1rem;
+  }
+
+  .review-container {
+    padding: 1rem 0;
   }
 }
