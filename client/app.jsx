@@ -51,6 +51,7 @@ export default class App extends React.Component {
 
   handleConfirmLogout() {
     window.localStorage.removeItem('TravelApp-token');
+    window.location.hash = '';
     this.setState({
       user: null,
       isAuthorizing: false,
