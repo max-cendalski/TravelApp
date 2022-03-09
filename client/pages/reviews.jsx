@@ -10,10 +10,11 @@ export default class Reviews extends React.Component {
   }
 
   componentDidMount() {
-    // console.log('whee');
-    fetch('/api/reviews/1', {
+    const token = localStorage.getItem('TravelApp-token');
+    fetch('/api/reviews', {
       method: 'GET',
       headers: {
+        'X-Access-Token': token,
         'Content-Type': 'application/json'
       }
     })
@@ -23,7 +24,6 @@ export default class Reviews extends React.Component {
           myReviews: result
         });
       });
-    // console.log(this.state.myReviews);
   }
 
   render() {
