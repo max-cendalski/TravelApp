@@ -185,7 +185,8 @@ app.get('/api/reviews', (req, res, next) => {
     throw new ClientError(401, 'invalid userId');
   }
   const sql = `
-    select  "cityName",
+    select  "tripId",
+            "cityName",
             "mainPhotoUrl",
             "review",
             "thingsTodoScore",
