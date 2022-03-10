@@ -179,6 +179,52 @@ app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
     });
 });
 
+app.put('/api/reviews/:tripId', (req, res) => {
+  const tripId = Number(req.params.tripId);
+  if (!Number.isInteger(tripId) || tripId < 1) {
+    res.status(400).json({
+      error: 'grade must be a positive integer'
+    });
+    return;
+  }
+  const { review, thingsTodoScore, foodScore, peopleScore, transportScore, safetyScore } = req.body;
+  if (!review || !thingsTodoScore || !foodScore || !peopleScore || !transportScore || !safetyScore) {
+    res.status(400).json({
+      error: 'All fields are required'
+    });
+    return;
+  }
+  const sql = `
+  update "trips"
+     set "review" = $1,
+         "thingsTodoScore" = $2,
+         "foodScore" = $3,
+         "peopleScore" = $4,
+         "transportScore" = $5,
+         "safetyScore" = $6
+   where "tripId" = $7
+   returning *
+  `;
+  const params = [review, thingsTodoScore, foodScore, peopleScore, transportScore, safetyScore, tripId];
+  db.query(sql, params)
+    .then(result => {
+      const [updatedTrip] = result.rows;
+      if (!updatedTrip) {
+        res.status(404).json({
+          error: `Cannot find trip with id: ${tripId}`
+        });
+      } else {
+        res.json(updatedTrip);
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'An unexpected error occurred'
+      });
+    });
+});
+
 app.get('/api/reviews', (req, res, next) => {
   const { userId } = req.user;
   if (!userId) {
