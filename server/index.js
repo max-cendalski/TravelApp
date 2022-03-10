@@ -18,6 +18,11 @@ const app = express();
 const jsonMiddleware = express.json();
 app.use(jsonMiddleware);
 
+app.listen(process.env.PORT, () => {
+  // eslint-disable-next-line no-console
+  console.log(`express server listening on port ${process.env.PORT}`);
+});
+
 app.post('/api/auth/sign-up', (req, res, next) => {
   const { username, password } = req.body;
   if (!username || !password) {
@@ -174,9 +179,34 @@ app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
     });
 });
 
-app.use(errorMiddleware);
-
-app.listen(process.env.PORT, () => {
-  // eslint-disable-next-line no-console
-  console.log(`express server listening on port ${process.env.PORT}`);
+app.get('/api/reviews', (req, res, next) => {
+  const { userId } = req.user;
+  if (!userId) {
+    throw new ClientError(401, 'invalid userId');
+  }
+  const sql = `
+    select  "tripId",
+            "cityName",
+            "mainPhotoUrl",
+            "review",
+            "thingsTodoScore",
+            "foodScore",
+            "peopleScore",
+            "transportScore",
+            "safetyScore",
+            "c"."name" as "countryName",
+            "u"."username"
+        from "trips"
+        join "countries" as "c" using ("countryId")
+        join "users" as "u" using ("userId")
+      where "userId" = $1
+  `;
+  const params = [userId];
+  db.query(sql, params)
+    .then(result => {
+      res.json(result.rows);
+    })
+    .catch(err => next(err));
 });
+
+app.use(errorMiddleware);

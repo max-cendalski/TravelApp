@@ -9,6 +9,7 @@ import SignUpForm from './components/sign-up-form';
 import NotFound from './pages/not-found.jsx';
 import TripDetails from './pages/trip-details.jsx';
 import ReviewForm from './pages/review-form.jsx';
+import Reviews from './pages/reviews';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -50,6 +51,7 @@ export default class App extends React.Component {
 
   handleConfirmLogout() {
     window.localStorage.removeItem('TravelApp-token');
+    window.location.hash = '';
     this.setState({
       user: null,
       isAuthorizing: false,
@@ -82,6 +84,8 @@ export default class App extends React.Component {
       return <SignUpForm />;
     } if (route.path === 'review-form') {
       return <ReviewForm />;
+    } if (route.path === 'my-reviews') {
+      return <Reviews />;
     }
     return <NotFound />;
   }
