@@ -179,7 +179,7 @@ app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
     });
 });
 
-app.put('/api/reviews/:tripId', (req, res) => {
+app.put('/api/reviews/:tripId', (req, res, next) => {
   const tripId = Number(req.params.tripId);
   const { userId } = req.user;
   if (!Number.isInteger(tripId) || tripId < 1) {
@@ -218,12 +218,8 @@ app.put('/api/reviews/:tripId', (req, res) => {
         res.json(updatedTrip);
       }
     })
-    .catch(err => {
-      console.error(err);
-      res.status(500).json({
-        error: 'An unexpected error occurred'
-      });
-    });
+    .catch(err => next(err));
+
 });
 
 app.get('/api/reviews', (req, res, next) => {
