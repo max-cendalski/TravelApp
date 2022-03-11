@@ -181,9 +181,10 @@ app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
 
 app.put('/api/reviews/:tripId', (req, res) => {
   const tripId = Number(req.params.tripId);
+  const { userId } = req.user;
   if (!Number.isInteger(tripId) || tripId < 1) {
     res.status(400).json({
-      error: 'grade must be a positive integer'
+      error: 'tripId must be a positive integer'
     });
     return;
   }
@@ -202,10 +203,10 @@ app.put('/api/reviews/:tripId', (req, res) => {
          "peopleScore" = $4,
          "transportScore" = $5,
          "safetyScore" = $6
-   where "tripId" = $7
+   where "tripId" = $7 AND "userId" = $8
    returning *
   `;
-  const params = [review, thingsTodoScore, foodScore, peopleScore, transportScore, safetyScore, tripId];
+  const params = [review, thingsTodoScore, foodScore, peopleScore, transportScore, safetyScore, tripId, userId];
   db.query(sql, params)
     .then(result => {
       const [updatedTrip] = result.rows;
