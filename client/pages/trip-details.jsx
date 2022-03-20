@@ -19,8 +19,6 @@ export default class TripDetails extends React.Component {
     fetch(`api/trips/${this.props.tripId}`)
       .then(res => res.json())
       .then(trip => this.setState({ trip }));
-    console.log('app.context.username', this.context.user);
-    console.log('trip data', this.state.trip);
   }
 
   render() {
@@ -73,7 +71,27 @@ export default class TripDetails extends React.Component {
             this.context.user.username === username && <button onClick={this.handleEditButton} className='edit-form-button'>Edit</button>
           }
         </div>
-      </div>
+          <form className='edit-form'>
+            <p>{thingsTodoScore}</p>
+            <label className='review-score-label'>Things to Do - {thingsTodoScore}</label>
+            <input className='review-score-input' type="number" max="100"></input>
+            <br />
+            <label className='review-score-label'>Food - {foodScore}</label>
+            <input className="review-score-input" type="number"></input>
+            <br />
+            <label className='review-score-label'>People - {peopleScore}</label>
+            <input className="review-score-input" type="number"></input>
+            <br />
+            <label className='review-score-label'>Transport - {transportScore}</label>
+            <input className="review-score-input" type="number"></input>
+            <br />
+            <label className='review-score-label'>Safety - {safetyScore}</label>
+            <input className="review-score-input" type="number"></input>
+            <br />
+            <textarea>{review}</textarea>
+          </form>
+
+         </div>
     );
   }
 }
