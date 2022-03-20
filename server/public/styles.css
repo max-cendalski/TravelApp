@@ -225,6 +225,21 @@
   cursor: pointer;
 }
 
+.edit-form-button {
+  border-radius: 5px;
+  margin-top: 20px;
+  background-color: rgb(240, 131, 52);
+  color: white;
+  width: 20vh;
+  border: none;
+  height: 2rem;
+  letter-spacing: 2px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-left: 1rem;
+}
+
 .form-label {
   border-bottom: 1px solid white;
   padding-bottom: 20px;
@@ -267,7 +282,7 @@ li:hover {
 }
 
 .review-container {
-  padding: 1rem;
+  margin-top: 1rem;
   font-size: 1.2rem;
 }
 

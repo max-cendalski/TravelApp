@@ -61,14 +61,12 @@ export default class TripDetails extends React.Component {
         </div>
         <div>
           {
-            this.context.user.username === username && <button>Edit</button>
+            this.context.user.username === username && <button className='edit-form-button'>Edit</button>
           }
         </div>
         <div className='row detailed-view-container'>
-          <div className='column-width100'>
             <div className='review-container'>
               <p>{review}</p>
-            </div>
           </div>
         </div>
       </div>
