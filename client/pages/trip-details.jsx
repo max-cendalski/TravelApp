@@ -8,10 +8,14 @@ export default class TripDetails extends React.Component {
     this.state = {
       trip: null
     };
+    this.handleEditButton = this.handleEditButton.bind(this);
+  }
+
+  handleEditButton() {
+    console.log('whee');
   }
 
   componentDidMount() {
-
     fetch(`api/trips/${this.props.tripId}`)
       .then(res => res.json())
       .then(trip => this.setState({ trip }));
@@ -59,15 +63,15 @@ export default class TripDetails extends React.Component {
             </div>
           </div>
         </div>
-        <div>
-          {
-            this.context.user.username === username && <button className='edit-form-button'>Edit</button>
-          }
-        </div>
         <div className='row detailed-view-container'>
             <div className='review-container'>
               <p>{review}</p>
           </div>
+        </div>
+         <div>
+          {
+            this.context.user.username === username && <button onClick={this.handleEditButton} className='edit-form-button'>Edit</button>
+          }
         </div>
       </div>
     );
