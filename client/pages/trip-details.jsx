@@ -71,26 +71,26 @@ export default class TripDetails extends React.Component {
             this.context.user.username === username && <button onClick={this.handleEditButton} className='edit-form-button'>Edit</button>
           }
         </div>
+        <div className='column-width25'>
           <form className='edit-form'>
-            <p>{thingsTodoScore}</p>
             <label className='review-score-label'>Things to Do - {thingsTodoScore}</label>
-            <input className='review-score-input' type="number" max="100"></input>
+            <input className='review-score-input float-right' type="number" max="100"></input>
             <br />
             <label className='review-score-label'>Food - {foodScore}</label>
-            <input className="review-score-input" type="number"></input>
+            <input className="review-score-input float-right" type="number"></input>
             <br />
             <label className='review-score-label'>People - {peopleScore}</label>
-            <input className="review-score-input" type="number"></input>
+            <input className="review-score-input float-right" type="number"></input>
             <br />
             <label className='review-score-label'>Transport - {transportScore}</label>
-            <input className="review-score-input" type="number"></input>
+            <input className="review-score-input float-right" type="number"></input>
             <br />
             <label className='review-score-label'>Safety - {safetyScore}</label>
-            <input className="review-score-input" type="number"></input>
+            <input className="review-score-input float-right" type="number"></input>
             <br />
             <textarea>{review}</textarea>
           </form>
-
+        </div>
          </div>
     );
   }
