@@ -34,7 +34,8 @@ export default class Reviews extends React.Component {
         <div className='list-flex'>
           {this.state.myReviews.map(trip =>
             <div className="image-item column-width50" key={trip.tripId}>
-              <Trip trip={trip} />
+              <Trip trip={trip}
+              />
             </div>)
           }
         </div>

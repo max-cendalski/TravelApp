@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from '../components/navbar';
+import AppContext from '../lib/app-context';
 
 export default class TripDetails extends React.Component {
   constructor(props) {
@@ -10,9 +11,12 @@ export default class TripDetails extends React.Component {
   }
 
   componentDidMount() {
+
     fetch(`api/trips/${this.props.tripId}`)
       .then(res => res.json())
       .then(trip => this.setState({ trip }));
+    console.log('app.context.username', this.context.user);
+    console.log('trip data', this.state.trip);
   }
 
   render() {
@@ -55,6 +59,11 @@ export default class TripDetails extends React.Component {
             </div>
           </div>
         </div>
+        <div>
+          {
+            this.context.user.username === username && <button>Edit</button>
+          }
+        </div>
         <div className='row detailed-view-container'>
           <div className='column-width100'>
             <div className='review-container'>
@@ -66,3 +75,5 @@ export default class TripDetails extends React.Component {
     );
   }
 }
+
+TripDetails.contextType = AppContext;
