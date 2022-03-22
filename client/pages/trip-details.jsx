@@ -76,12 +76,12 @@ export default class TripDetails extends React.Component {
         </div>
         </div>
 
-        <div className='row padding-top3 detailed-view-container'>
+        <div className='row horizontal padding-top3'>
           <div className='image-container column-width50'>
             <img className="photo" src={mainPhotoUrl} alt={cityName}></img>
           </div>
 
-          <form className='edit-form'>
+          <form className='edit-form column-width50'>
           <div className='column-width50'>
               <div className='label-input-container'>
               <label className='edit-score-label'>Country</label>
