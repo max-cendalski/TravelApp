@@ -294,7 +294,7 @@ li:hover {
   padding-bottom: 1rem;
 }
 
-.review-score-input {
+.input {
   width: 3rem;
   margin-right: 1rem;
 }
@@ -380,6 +380,35 @@ input::-webkit-inner-spin-button {
   float: right;
   margin-right: 20px;
   width: 30%;
+}
+
+.edit-form {
+  width: 50%;
+  padding: 5rem;
+}
+
+.edit-score-label {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.edit-form-text-input {
+  width: 6rem;
+  font-size: 1.1rem;
+}
+
+.edit-form-text-input::placeholder {
+  color: rgb(151, 147, 147);
+  font-weight: 400;
+}
+
+.label-input-container {
+  margin-bottom: 1rem;
+}
+
+.edit-textarea {
+  width: 100%;
 }
 
 .float-right {

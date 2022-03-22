@@ -36,6 +36,7 @@ export default class TripDetails extends React.Component {
       safetyScore
     } = this.state.trip;
     return (
+      <>
       <div className='container'>
         <Navbar handleChange={this.handleChange}
                 searchBox={this.state.searchBox}
@@ -44,6 +45,7 @@ export default class TripDetails extends React.Component {
           <div className='image-container column-width50'>
             <img className="photo" src={mainPhotoUrl} alt={cityName}></img>
           </div>
+
           <div className='horizontal column-width50'>
             <div className='column-width25'>
               <div className='score-container'>
@@ -66,32 +68,66 @@ export default class TripDetails extends React.Component {
               <p>{review}</p>
           </div>
         </div>
+
          <div>
           {
             this.context.user.username === username && <button onClick={this.handleEditButton} className='edit-form-button'>Edit</button>
           }
         </div>
-        <div className='column-width25'>
+        </div>
+
+        <div className='row padding-top3 detailed-view-container'>
+          <div className='image-container column-width50'>
+            <img className="photo" src={mainPhotoUrl} alt={cityName}></img>
+          </div>
+
           <form className='edit-form'>
-            <label className='review-score-label'>Things to Do - {thingsTodoScore}</label>
-            <input className='review-score-input float-right' type="number" max="100"></input>
-            <br />
-            <label className='review-score-label'>Food - {foodScore}</label>
-            <input className="review-score-input float-right" type="number"></input>
-            <br />
-            <label className='review-score-label'>People - {peopleScore}</label>
-            <input className="review-score-input float-right" type="number"></input>
-            <br />
-            <label className='review-score-label'>Transport - {transportScore}</label>
-            <input className="review-score-input float-right" type="number"></input>
-            <br />
-            <label className='review-score-label'>Safety - {safetyScore}</label>
-            <input className="review-score-input float-right" type="number"></input>
-            <br />
-            <textarea>{review}</textarea>
+          <div className='column-width50'>
+              <div className='label-input-container'>
+              <label className='edit-score-label'>Country</label>
+              <input className='edit-form-text-input float-right' type='text' placeholder={countryName}></input>
+          </div>
+
+              <div className='label-input-container'>
+              <label className='edit-score-label'>City</label>
+              <input className='edit-form-text-input float-right' type='text' placeholder={cityName}></input>
+              </div>
+              <div className='label-input-container'>
+
+              <label className='edit-score-label'>Things to Do</label>
+              <input className='edit-form-text-input float-right' type="number" max="100" placeholder={thingsTodoScore}></input>
+           </div>
+              <div className='label-input-container'>
+
+              <label className='edit-score-label'>Food</label>
+              <input className='edit-form-text-input float-right' type="number" max="100" placeholder={foodScore}></input>
+              </div>
+              <div className='label-input-container'>
+
+              <label className='edit-score-label'>People</label>
+              <input className='edit-form-text-input float-right' type="number" max="100" placeholder={peopleScore}></input>
+              </div>
+              <div className='label-input-container'>
+
+              <label className='edit-score-label'>Transport</label>
+              <input className='edit-form-text-input float-right' type="number" max="100" placeholder={transportScore}></input>
+              </div>
+              <div className='label-input-container'>
+
+              <label className='edit-score-label'>Safety</label>
+              <input className='edit-form-text-input float-right' type="number" max="100" placeholder={safetyScore}></input>
+              </div>
+
+          </div>
+
+              <div className='edit-textarea'>
+                <textarea className='edit-textarea'></textarea>
+              </div>
+
           </form>
         </div>
-         </div>
+
+      </>
     );
   }
 }
