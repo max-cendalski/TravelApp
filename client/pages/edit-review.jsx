@@ -1,18 +1,11 @@
 import React from 'react';
 
-export default class EditReview extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      review: null
-    };
-  }
+export default function EditReview(props) {
 
-  render() {
-    return (
+  return (
       <div>
         <h1>Edit Review</h1>
       </div>
-    );
-  }
+  );
+
 }
