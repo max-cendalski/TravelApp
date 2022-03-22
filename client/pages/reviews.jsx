@@ -12,7 +12,7 @@ export default class Reviews extends React.Component {
 
   componentDidMount() {
     const token = localStorage.getItem('TravelApp-token');
-    fetch('/api/reviews', {
+    fetch('/api/my-reviews', {
       method: 'GET',
       headers: {
         'X-Access-Token': token,

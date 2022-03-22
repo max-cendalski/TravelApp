@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from '../components/navbar';
 import AppContext from '../lib/app-context';
+import parseRoute from '../lib/parse-route';
 
 export default class TripDetails extends React.Component {
   constructor(props) {
@@ -119,7 +120,7 @@ export default class TripDetails extends React.Component {
 
           </div>
 
-                <textarea className='edit-form-textarea'>{review}</textarea>
+                <textarea className='edit-form-textarea'></textarea>
 
             <button className='edit-form-submit-button'>Submit</button>
           </form>

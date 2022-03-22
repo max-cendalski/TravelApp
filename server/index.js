@@ -222,7 +222,7 @@ app.put('/api/reviews/:tripId', (req, res, next) => {
 
 });
 
-app.get('/api/reviews', (req, res, next) => {
+app.get('/api/my-reviews', (req, res, next) => {
   const { userId } = req.user;
   if (!userId) {
     throw new ClientError(401, 'invalid userId');
