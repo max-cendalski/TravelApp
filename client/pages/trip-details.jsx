@@ -68,14 +68,13 @@ export default class TripDetails extends React.Component {
               <p>{review}</p>
           </div>
         </div>
-
-         <div>
+    <div>
           {
             this.context.user.username === username && <button onClick={this.handleEditButton} className='edit-form-button'>Edit</button>
           }
         </div>
         </div>
-
+          <div className='container'>
         <div className='row horizontal padding-top3 detailed-view-container'>
           <div className='image-container column-width50'>
             <img className="photo" src={mainPhotoUrl} alt={cityName}></img>
@@ -120,9 +119,12 @@ export default class TripDetails extends React.Component {
 
           </div>
 
-                <textarea className='edit-form-textarea'></textarea>
+                <textarea className='edit-form-textarea'>{review}</textarea>
 
+            <button className='edit-form-submit-button'>Submit</button>
           </form>
+
+        </div>
         </div>
 
       </>
