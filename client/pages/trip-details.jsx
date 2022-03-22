@@ -76,7 +76,7 @@ export default class TripDetails extends React.Component {
         </div>
         </div>
 
-        <div className='row horizontal padding-top3'>
+        <div className='row horizontal padding-top3 detailed-view-container'>
           <div className='image-container column-width50'>
             <img className="photo" src={mainPhotoUrl} alt={cityName}></img>
           </div>
@@ -120,9 +120,7 @@ export default class TripDetails extends React.Component {
 
           </div>
 
-              <div className='edit-textarea'>
-                <textarea className='edit-textarea'></textarea>
-              </div>
+                <textarea className='edit-form-textarea'></textarea>
 
           </form>
         </div>

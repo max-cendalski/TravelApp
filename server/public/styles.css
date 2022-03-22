@@ -383,7 +383,14 @@ input::-webkit-inner-spin-button {
 }
 
 .edit-form {
-  padding: 5rem 2rem;
+  padding: 2rem;
+}
+
+.edit-form-textarea {
+  height: 13rem;
+  width: 100%;
+  font-size: 1.1rem;
+  font-weight: 500;
 }
 
 .edit-score-label {
@@ -404,10 +411,6 @@ input::-webkit-inner-spin-button {
 
 .label-input-container {
   margin-bottom: 1rem;
-}
-
-.edit-textarea {
-  width: 100%;
 }
 
 .float-right {
