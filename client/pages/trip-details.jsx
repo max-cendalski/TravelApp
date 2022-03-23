@@ -17,7 +17,7 @@ export default class TripDetails extends React.Component {
       peopleScore: 0,
       transportScore: 0,
       safetyScore: 0,
-      review: '',
+      review: 'Fourth try',
       testTrip: null
     };
     this.handleEditButton = this.handleEditButton.bind(this);
@@ -35,49 +35,43 @@ export default class TripDetails extends React.Component {
     event.preventDefault();
     const token = window.localStorage.getItem('TravelApp-token');
     const editedTrip = {
-      tripId: this.props.tripId,
-      /*  userId: this.state.trip.userId,
-      userName: this.state.trip.username,
-      mainPhotoUrl: this.state.trip.mainPhotoUrl, */
-      /*   countryName: this.state.trip.countryName,
-      cityName: this.state.trip.cityName, */
+      // tripId: this.props.tripId,
+      // userId: this.state.trip.userId,
+      // userName: this.state.trip.username,
+      mainPhotoUrl: this.state.trip.mainPhotoUrl,
+      // countryName: this.state.trip.countryName,
+      // cityName: this.state.trip.cityName,
       thingsTodoScore: this.state.trip.thingsTodoScore,
       foodScore: this.state.trip.foodScore,
       peopleScore: this.state.trip.peopleScore,
       transportScore: this.state.trip.transportScore,
       safetyScore: this.state.trip.safetyScore,
-      review: this.state.trip.review
+      review: this.state.review
     };
-    /* const formData = new FormData();
-    formData.append('countryId', this.state.trip.countryId);
-    formData.append('city', this.state.trip.city);
-    formData.append('image', this.state.trip.mainPhotoUrl);
-    formData.append('review', this.state.trip.review);
-    formData.append('thingsTodoScore', this.state.trip.thingsTodoScore);
-    formData.append('foodScore', this.state.trip.foodScore);
-    formData.append('peopleScore', this.state.trip.peopleScore);
-    formData.append('transportScore', this.state.trip.transportScore);
-    formData.append('safetyScore', this.state.trip.safetyScore); */
+
     console.log('this.state.trip', this.state.trip);
     console.log('this.props.tripId:', this.props.tripId);
 
     fetch(`/api/reviews/${this.props.tripId}`, {
-      method: 'PUT',
+      method: 'PATCH',
       headers: {
-        'x-access-token': token
+        'x-access-token': token,
+        'Content-Type': 'application/json'
       },
-      body: editedTrip
+      body: JSON.stringify(editedTrip)
     })
       .then(response => response.json())
       .then(result => {
         console.log('result', result);
         this.setState({
-          testTrip: result
+          trip: result
         });
       });
+
   }
 
   componentDidMount() {
+    console.log(this.state.testTrip);
     fetch(`api/trips/${this.props.tripId}`)
       .then(response => response.json())
       .then(trip => this.setState({ trip }));

@@ -179,7 +179,7 @@ app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
     });
 });
 
-app.put('/api/reviews/:tripId', (req, res, next) => {
+app.patch('/api/reviews/:tripId', (req, res, next) => {
   const tripId = Number(req.params.tripId);
   const { userId } = req.user;
   if (!Number.isInteger(tripId) || tripId < 1) {
@@ -189,8 +189,6 @@ app.put('/api/reviews/:tripId', (req, res, next) => {
     return;
   }
   const {
-    countryName,
-    cityName,
     review,
     thingsTodoScore,
     foodScore,
@@ -198,7 +196,7 @@ app.put('/api/reviews/:tripId', (req, res, next) => {
     transportScore,
     safetyScore
   } = req.body;
-  if (!review || !thingsTodoScore || !foodScore || !peopleScore || !transportScore || !safetyScore || !countryName || !cityName) {
+  if (!review || !thingsTodoScore || !foodScore || !peopleScore || !transportScore || !safetyScore) {
     res.status(400).json({
       error: 'All fields are required'
     });
@@ -211,10 +209,8 @@ app.put('/api/reviews/:tripId', (req, res, next) => {
          "foodScore" = $3,
          "peopleScore" = $4,
          "transportScore" = $5,
-         "safetyScore" = $6,
-         "countryName" = $7,
-         "cityName" = $8
-   where "tripId" = $9 AND "userId" = $10
+         "safetyScore" = $6
+   where "tripId" = $7 AND "userId" = $8
    returning *
   `;
   const params = [review, thingsTodoScore, foodScore, peopleScore, transportScore, safetyScore, tripId, userId];
