@@ -13,6 +13,7 @@ export default class TripDetails extends React.Component {
 
     };
     this.handleEditButton = this.handleEditButton.bind(this);
+    this.handleSubmitEditedForm = this.handleSubmitEditedForm.bind(this);
   }
 
   handleEditButton() {
@@ -22,7 +23,9 @@ export default class TripDetails extends React.Component {
     });
   }
 
-  handleSubmitEditedForm() {
+  handleSubmitEditedForm(event) {
+    event.preventDefault();
+
     console.log('whee');
   }
 

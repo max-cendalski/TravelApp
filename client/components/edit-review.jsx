@@ -8,7 +8,7 @@ export default function EditReview(props) {
             <img className="photo" src={props.trip.mainPhotoUrl} alt={props.trip.cityName}></img>
           </div>
 
-          <form onChange={props.handleSubmitEditForm}className='edit-form column-width50'>
+          <form onSubmit={props.handleSubmitEditedForm}className='edit-form column-width50'>
           <div className='column-width50'>
               <div className='label-input-container'>
               <label className='edit-score-label'>Country</label>
