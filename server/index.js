@@ -189,6 +189,8 @@ app.put('/api/reviews/:tripId', (req, res, next) => {
     return;
   }
   const {
+    countryName,
+    cityName,
     review,
     thingsTodoScore,
     foodScore,
@@ -196,7 +198,7 @@ app.put('/api/reviews/:tripId', (req, res, next) => {
     transportScore,
     safetyScore
   } = req.body;
-  if (!review || !thingsTodoScore || !foodScore || !peopleScore || !transportScore || !safetyScore) {
+  if (!review || !thingsTodoScore || !foodScore || !peopleScore || !transportScore || !safetyScore || !countryName || !cityName) {
     res.status(400).json({
       error: 'All fields are required'
     });
@@ -209,8 +211,10 @@ app.put('/api/reviews/:tripId', (req, res, next) => {
          "foodScore" = $3,
          "peopleScore" = $4,
          "transportScore" = $5,
-         "safetyScore" = $6
-   where "tripId" = $7 AND "userId" = $8
+         "safetyScore" = $6,
+         "countryName" = $7,
+         "cityName" = $8
+   where "tripId" = $9 AND "userId" = $10
    returning *
   `;
   const params = [review, thingsTodoScore, foodScore, peopleScore, transportScore, safetyScore, tripId, userId];
