@@ -34,8 +34,6 @@ export default class TripDetails extends React.Component {
   }
 
   handleEditButton() {
-    console.log('this.state.trip', this.state.trip);
-    console.log('props.thingsTodoScore', this.state.thingsTodoScore);
     this.setState({
       reviewContainer: 'hidden',
       editReviewContainer: 'container',
@@ -65,7 +63,6 @@ export default class TripDetails extends React.Component {
       review: this.state.review
     };
 
-    // const editedTrip = this.state.trip;
     fetch(`/api/reviews/${this.props.tripId}`, {
       method: 'PATCH',
       headers: {
