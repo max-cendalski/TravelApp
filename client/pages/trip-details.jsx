@@ -10,24 +10,42 @@ export default class TripDetails extends React.Component {
       trip: null,
       reviewContainer: 'container',
       editReviewContainer: 'hidden',
-      countryName: '',
-      cityName: 0,
       thingsTodoScore: 0,
       foodScore: 0,
       peopleScore: 0,
       transportScore: 0,
       safetyScore: 0,
-      review: 'Fourth try',
-      testTrip: null
+      review: ''
     };
     this.handleEditButton = this.handleEditButton.bind(this);
     this.handleSubmitEditedForm = this.handleSubmitEditedForm.bind(this);
+    this.handleThingsTodoScoreChange = this.handleThingsTodoScoreChange.bind(this);
+    this.handleFoodScoreChange = this.handleFoodScoreChange.bind(this);
+    this.handlePeopleScoreChange = this.handlePeopleScoreChange.bind(this);
+    this.handleTransportScoreChange = this.handleTransportScoreChange.bind(this);
+    this.handleSafetyScoreChange = this.handleSafetyScoreChange.bind(this);
+    this.handleReviewChange = this.handleReviewChange.bind(this);
+  }
+
+  componentDidMount() {
+    fetch(`api/trips/${this.props.tripId}`)
+      .then(response => response.json())
+      .then(trip => this.setState({ trip }));
   }
 
   handleEditButton() {
+    console.log('this.state.trip', this.state.trip);
+    console.log('props.thingsTodoScore', this.state.thingsTodoScore);
     this.setState({
       reviewContainer: 'hidden',
-      editReviewContainer: 'container'
+      editReviewContainer: 'container',
+      thingsTodoScore: this.state.trip.thingsTodoScore,
+      foodScore: this.state.trip.foodScore,
+      peopleScore: this.state.trip.peopleScore,
+      transportScore: this.state.trip.transportScore,
+      safetyScore: this.state.trip.safetyScore,
+      review: this.state.trip.review
+
     });
   }
 
@@ -35,23 +53,19 @@ export default class TripDetails extends React.Component {
     event.preventDefault();
     const token = window.localStorage.getItem('TravelApp-token');
     const editedTrip = {
-      // tripId: this.props.tripId,
-      // userId: this.state.trip.userId,
-      // userName: this.state.trip.username,
+      countryName: this.state.trip.countryName,
+      cityName: this.state.trip.cityName,
+      tripId: this.props.tripId,
       mainPhotoUrl: this.state.trip.mainPhotoUrl,
-      // countryName: this.state.trip.countryName,
-      // cityName: this.state.trip.cityName,
-      thingsTodoScore: this.state.trip.thingsTodoScore,
-      foodScore: this.state.trip.foodScore,
-      peopleScore: this.state.trip.peopleScore,
-      transportScore: this.state.trip.transportScore,
-      safetyScore: this.state.trip.safetyScore,
+      thingsTodoScore: this.state.thingsTodoScore,
+      foodScore: this.state.foodScore,
+      peopleScore: this.state.peopleScore,
+      transportScore: this.state.transportScore,
+      safetyScore: this.state.safetyScore,
       review: this.state.review
     };
 
-    console.log('this.state.trip', this.state.trip);
-    console.log('this.props.tripId:', this.props.tripId);
-
+    // const editedTrip = this.state.trip;
     fetch(`/api/reviews/${this.props.tripId}`, {
       method: 'PATCH',
       headers: {
@@ -66,15 +80,45 @@ export default class TripDetails extends React.Component {
         this.setState({
           trip: result
         });
+        console.log('editedTrip', editedTrip);
       });
 
   }
 
-  componentDidMount() {
-    console.log(this.state.testTrip);
-    fetch(`api/trips/${this.props.tripId}`)
-      .then(response => response.json())
-      .then(trip => this.setState({ trip }));
+  handleReviewChange(event) {
+    this.setState({
+      review: event.target.value
+    });
+  }
+
+  handleThingsTodoScoreChange(event) {
+    this.setState({
+      thingsTodoScore: event.target.value
+    });
+  }
+
+  handleFoodScoreChange(event) {
+    this.setState({
+      foodScore: event.target.value
+    });
+  }
+
+  handlePeopleScoreChange(event) {
+    this.setState({
+      peopleScore: event.target.value
+    });
+  }
+
+  handleTransportScoreChange(event) {
+    this.setState({
+      transportScore: event.target.value
+    });
+  }
+
+  handleSafetyScoreChange(event) {
+    this.setState({
+      safetyScore: event.target.value
+    });
   }
 
   render() {
@@ -131,7 +175,13 @@ export default class TripDetails extends React.Component {
         </div>
         <div className={this.state.editReviewContainer}>
             <EditReview trip={this.state.trip}
+                        handleThingsTodoScoreChange = {this.handleThingsTodoScoreChange}
+                        handleFoodScoreChange = {this.handleFoodScoreChange}
+                        handlePeopleScoreChange = {this.handlePeopleScoreChange}
+                        handleTransportScoreChange = {this.handleTransportScoreChange}
+                        handleSafetyScoreChange = {this.handleSafetyScoreChange}
                         handleSubmitEditedForm={this.handleSubmitEditedForm}
+                        handleReviewChange = {this.handleReviewChange}
                         />
         </div>
       </>

@@ -8,7 +8,7 @@ export default function EditReview(props) {
             <img className="photo" src={props.trip.mainPhotoUrl} alt={props.trip.cityName}></img>
           </div>
 
-          <form onSubmit={props.handleSubmitEditedForm}className='edit-form column-width50'>
+          <form onSubmit={props.handleSubmitEditedForm} className='edit-form column-width50'>
           <div className='column-width50'>
               <div className='label-input-container'>
               <label className='edit-score-label'>Country</label>
@@ -22,31 +22,31 @@ export default function EditReview(props) {
               <div className='label-input-container'>
 
               <label className='edit-score-label'>Things to Do</label>
-              <input className='edit-form-text-input float-right' type="number" max="100" defaultValue={props.trip.thingsTodoScore}></input>
+              <input onChange={props.handleThingsTodoScoreChange} className='edit-form-text-input float-right' type="number" max="100" defaultValue={props.trip.thingsTodoScore} required></input>
               </div>
               <div className='label-input-container'>
 
               <label className='edit-score-label'>Food</label>
-              <input className='edit-form-text-input float-right' type="number" max="100" defaultValue={props.trip.foodScore}></input>
+              <input onChange={props.handleFoodScoreChange} className='edit-form-text-input float-right' type="number" max="100" defaultValue={props.trip.foodScore} required></input>
               </div>
               <div className='label-input-container'>
 
               <label className='edit-score-label'>People</label>
-              <input className='edit-form-text-input float-right' type="number" max="100" defaultValue={props.trip.peopleScore}></input>
+              <input onChange={props.handlePeopleScoreChange} className='edit-form-text-input float-right' type="number" max="100" defaultValue={props.trip.peopleScore} required></input>
               </div>
               <div className='label-input-container'>
 
               <label className='edit-score-label'>Transport</label>
-              <input className='edit-form-text-input float-right' type="number" max="100" defaultValue={props.trip.transportScore}></input>
+              <input onChange={props.handleTransportScoreChange} className='edit-form-text-input float-right' type="number" max="100" defaultValue={props.trip.transportScore} required></input>
               </div>
               <div className='label-input-container'>
 
               <label className='edit-score-label'>Safety</label>
-              <input className='edit-form-text-input float-right' type="number" max="100" defaultValue={props.trip.safetyScore}></input>
+              <input onChange={props.handleSafetyScoreChange} className='edit-form-text-input float-right' type="number" max="100" defaultValue={props.trip.safetyScore} required></input>
               </div>
 
               </div>
-              <textarea defaultValue={props.trip.review} className='edit-form-textarea'></textarea>
+              <textarea onChange={props.handleReviewChange} defaultValue={props.trip.review} className='edit-form-textarea' required></textarea>
             <button className='edit-form-submit-button'>Submit</button>
           </form>
 
