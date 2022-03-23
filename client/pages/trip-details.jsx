@@ -1,8 +1,7 @@
 import React from 'react';
 import Navbar from '../components/navbar';
 import AppContext from '../lib/app-context';
-import parseRoute from '../lib/parse-route';
-import EditReview from './edit-review';
+import EditReview from '../components/edit-review';
 
 export default class TripDetails extends React.Component {
   constructor(props) {
@@ -21,6 +20,10 @@ export default class TripDetails extends React.Component {
       review: 'hidden',
       editReview: 'container'
     });
+  }
+
+  handleSubmitEditedForm() {
+    console.log('whee');
   }
 
   componentDidMount() {
@@ -82,7 +85,9 @@ export default class TripDetails extends React.Component {
           </div>
         </div>
         <div className={this.state.editReview}>
-            <EditReview />
+            <EditReview trip={this.state.trip}
+                        handleSubmitEditedForm={this.handleSubmitEditedForm}
+                        />
         </div>
       </>
     );

@@ -420,11 +420,6 @@ input::-webkit-inner-spin-button {
   font-size: 1.1rem;
 }
 
-.edit-form-text-input::placeholder {
-  color: rgb(151, 147, 147);
-  font-weight: 400;
-}
-
 .label-input-container {
   margin-bottom: 1rem;
 }
