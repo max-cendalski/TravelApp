@@ -75,7 +75,10 @@ export default class TripDetails extends React.Component {
       .then(result => {
         console.log('result', result);
         this.setState({
-          trip: result
+          trip: result,
+          reviewContainer: 'container',
+          editReviewContainer: 'hidden'
+
         });
         console.log('editedTrip', editedTrip);
       });
