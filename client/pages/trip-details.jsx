@@ -8,9 +8,17 @@ export default class TripDetails extends React.Component {
     super(props);
     this.state = {
       trip: null,
-      review: 'container',
-      editReview: 'hidden'
-
+      reviewContainer: 'container',
+      editReviewContainer: 'hidden',
+      countryName: '',
+      cityName: 0,
+      thingsTodoScore: 0,
+      foodScore: 0,
+      peopleScore: 0,
+      transportScore: 0,
+      safetyScore: 0,
+      review: '',
+      testTrip: null
     };
     this.handleEditButton = this.handleEditButton.bind(this);
     this.handleSubmitEditedForm = this.handleSubmitEditedForm.bind(this);
@@ -18,20 +26,53 @@ export default class TripDetails extends React.Component {
 
   handleEditButton() {
     this.setState({
-      review: 'hidden',
-      editReview: 'container'
+      reviewContainer: 'hidden',
+      editReviewContainer: 'container'
     });
   }
 
   handleSubmitEditedForm(event) {
     event.preventDefault();
+    const token = window.localStorage.getItem('TravelApp-token');
+    const editedTrip = {
+      tripId: this.props.tripId,
+      userId: this.state.trip.userId,
+      userName: this.state.trip.username,
+      mainPhotoUrl: this.state.trip.mainPhotoUrl,
+      countryName: this.state.trip.countryName,
+      cityName: this.state.trip.cityName,
+      thingsTodoScore: this.state.trip.thingsTodoScore,
+      foodScore: this.state.trip.foodScore,
+      peopleScore: this.state.trip.peopleScore,
+      transportScore: this.state.trip.transportScore,
+      safetyScore: this.state.trip.safetyScore,
+      review: this.state.trip.review
+    };
+    console.log('this.state.trip', this.state.trip);
+    console.log('this.props.tripId:', this.props.tripId);
 
-    console.log('whee');
+    fetch('/api/reviews/:tripId', {
+      method: 'PUT',
+      headers: {
+        'x-access-token': token
+      },
+      body: editedTrip
+    })
+      .then(response => response.json())
+      .then(result => {
+        console.log('result', result);
+        this.setState({
+          testTrip: editedTrip
+        })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+      });
   }
 
   componentDidMount() {
     fetch(`api/trips/${this.props.tripId}`)
-      .then(res => res.json())
+      .then(response => response.json())
       .then(trip => this.setState({ trip }));
   }
 
@@ -51,7 +92,7 @@ export default class TripDetails extends React.Component {
     } = this.state.trip;
     return (
       <>
-        <div className={this.state.review}>
+        <div className={this.state.reviewContainer}>
           <Navbar handleChange={this.handleChange}
                   searchBox={this.state.searchBox}
           />
@@ -87,7 +128,7 @@ export default class TripDetails extends React.Component {
             }
           </div>
         </div>
-        <div className={this.state.editReview}>
+        <div className={this.state.editReviewContainer}>
             <EditReview trip={this.state.trip}
                         handleSubmitEditedForm={this.handleSubmitEditedForm}
                         />

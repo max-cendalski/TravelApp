@@ -188,7 +188,14 @@ app.put('/api/reviews/:tripId', (req, res, next) => {
     });
     return;
   }
-  const { review, thingsTodoScore, foodScore, peopleScore, transportScore, safetyScore } = req.body;
+  const {
+    review,
+    thingsTodoScore,
+    foodScore,
+    peopleScore,
+    transportScore,
+    safetyScore
+  } = req.body;
   if (!review || !thingsTodoScore || !foodScore || !peopleScore || !transportScore || !safetyScore) {
     res.status(400).json({
       error: 'All fields are required'
