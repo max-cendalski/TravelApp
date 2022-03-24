@@ -10,6 +10,7 @@ export default class TripDetails extends React.Component {
       trip: null,
       reviewContainer: 'container',
       editReviewContainer: 'hidden',
+      cityName: '',
       thingsTodoScore: 0,
       foodScore: 0,
       peopleScore: 0,
@@ -25,6 +26,7 @@ export default class TripDetails extends React.Component {
     this.handleTransportScoreChange = this.handleTransportScoreChange.bind(this);
     this.handleSafetyScoreChange = this.handleSafetyScoreChange.bind(this);
     this.handleReviewChange = this.handleReviewChange.bind(this);
+    this.handleCityNameChange = this.handleCityNameChange.bind(this);
   }
 
   componentDidMount() {
@@ -39,10 +41,25 @@ export default class TripDetails extends React.Component {
       .then(trip => this.setState({ trip }));
   }
 
+  componentWillUnmount() {
+    this.setState({
+      trip: null,
+      reviewContainer: 'container',
+      editReviewContainer: 'hidden',
+      thingsTodoScore: 0,
+      foodScore: 0,
+      peopleScore: 0,
+      transportScore: 0,
+      safetyScore: 0,
+      review: ''
+    });
+  }
+
   handleEditButton() {
     this.setState({
       reviewContainer: 'hidden',
       editReviewContainer: 'container',
+      cityName: this.state.trip.cityName,
       thingsTodoScore: this.state.trip.thingsTodoScore,
       foodScore: this.state.trip.foodScore,
       peopleScore: this.state.trip.peopleScore,
@@ -57,7 +74,7 @@ export default class TripDetails extends React.Component {
     const token = window.localStorage.getItem('TravelApp-token');
     const editedTrip = {
       countryName: this.state.trip.countryName,
-      cityName: this.state.trip.cityName,
+      cityName: this.state.cityName,
       tripId: this.props.tripId,
       mainPhotoUrl: this.state.trip.mainPhotoUrl,
       thingsTodoScore: this.state.thingsTodoScore,
@@ -86,6 +103,12 @@ export default class TripDetails extends React.Component {
         });
       });
 
+  }
+
+  handleCityNameChange(event) {
+    this.setState({
+      cityName: event.target.value
+    });
   }
 
   handleReviewChange(event) {
@@ -185,6 +208,7 @@ export default class TripDetails extends React.Component {
         </div>
         <div className={this.state.editReviewContainer}>
             <EditReview trip={this.state.trip}
+                        handleCityNameChange = {this.handleCityNameChange}
                         handleThingsTodoScoreChange = {this.handleThingsTodoScoreChange}
                         handleFoodScoreChange = {this.handleFoodScoreChange}
                         handlePeopleScoreChange = {this.handlePeopleScoreChange}
