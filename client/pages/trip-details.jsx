@@ -78,15 +78,12 @@ export default class TripDetails extends React.Component {
     })
       .then(response => response.json())
       .then(result => {
-        console.log('result', result);
         this.setState({
           trip: result,
           reviewContainer: 'container',
           editReviewContainer: 'hidden'
 
         });
-        console.log('editedTrip', editedTrip);
-        console.log('this.context.user.username', this.context.user.username);
       });
 
   }
