@@ -189,6 +189,7 @@ app.patch('/api/reviews/:tripId', (req, res, next) => {
     return;
   }
   const {
+    city,
     review,
     thingsTodoScore,
     foodScore,
@@ -196,7 +197,7 @@ app.patch('/api/reviews/:tripId', (req, res, next) => {
     transportScore,
     safetyScore
   } = req.body;
-  if (!review || !thingsTodoScore || !foodScore || !peopleScore || !transportScore || !safetyScore) {
+  if (!city || !review || !thingsTodoScore || !foodScore || !peopleScore || !transportScore || !safetyScore) {
     res.status(400).json({
       error: 'All fields are required'
     });
@@ -204,16 +205,17 @@ app.patch('/api/reviews/:tripId', (req, res, next) => {
   }
   const sql = `
   update "trips"
-     set "review" = $1,
-         "thingsTodoScore" = $2,
-         "foodScore" = $3,
-         "peopleScore" = $4,
-         "transportScore" = $5,
-         "safetyScore" = $6
-   where "tripId" = $7 AND "userId" = $8
+     set "city" = $1
+         "review" = $2,
+         "thingsTodoScore" = $3,
+         "foodScore" = $4,
+         "peopleScore" = $5,
+         "transportScore" = $6,
+         "safetyScore" = $7
+   where "tripId" = $8 AND "userId" = $9
    returning *
   `;
-  const params = [review, thingsTodoScore, foodScore, peopleScore, transportScore, safetyScore, tripId, userId];
+  const params = [city, review, thingsTodoScore, foodScore, peopleScore, transportScore, safetyScore, tripId, userId];
   db.query(sql, params)
     .then(result => {
       const [updatedTrip] = result.rows;
