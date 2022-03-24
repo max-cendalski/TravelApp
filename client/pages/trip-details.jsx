@@ -33,6 +33,12 @@ export default class TripDetails extends React.Component {
       .then(trip => this.setState({ trip }));
   }
 
+  componentDidUpdate() {
+    fetch(`api/trips/${this.props.tripId}`)
+      .then(response => response.json())
+      .then(trip => this.setState({ trip }));
+  }
+
   handleEditButton() {
     this.setState({
       reviewContainer: 'hidden',
@@ -43,7 +49,6 @@ export default class TripDetails extends React.Component {
       transportScore: this.state.trip.transportScore,
       safetyScore: this.state.trip.safetyScore,
       review: this.state.trip.review
-
     });
   }
 
@@ -81,6 +86,7 @@ export default class TripDetails extends React.Component {
 
         });
         console.log('editedTrip', editedTrip);
+        console.log('this.context.user.username', this.context.user.username);
       });
 
   }
@@ -121,6 +127,13 @@ export default class TripDetails extends React.Component {
     });
   }
 
+  handleCancelForm(event) {
+    this.setState({
+      reviewContainer: 'container',
+      editReviewContainer: 'hidden'
+    });
+  }
+
   render() {
     if (!this.state.trip) return null;
     const {
@@ -157,7 +170,7 @@ export default class TripDetails extends React.Component {
                 </div>
                 <div className='column-width25'>
                   <div className="detailed-text-container">
-                    <p className='country-name'>{countryName}-<span className='city-name'>{cityName}</span></p>
+                    <p className='country-name'>{countryName} - <span className='city-name'>{cityName}</span></p>
                     <span className='city-name'>@{username}</span></div>
                   </div>
                 </div>
@@ -182,6 +195,7 @@ export default class TripDetails extends React.Component {
                         handleSafetyScoreChange = {this.handleSafetyScoreChange}
                         handleSubmitEditedForm={this.handleSubmitEditedForm}
                         handleReviewChange = {this.handleReviewChange}
+                        handleCancelForm = {this.handleCancelForm}
                         />
         </div>
       </>
