@@ -11,6 +11,7 @@ export default class TripDetails extends React.Component {
       reviewContainer: 'container',
       editReviewContainer: 'hidden',
       cityName: '',
+      countryName: '',
       thingsTodoScore: 0,
       foodScore: 0,
       peopleScore: 0,
@@ -27,32 +28,13 @@ export default class TripDetails extends React.Component {
     this.handleSafetyScoreChange = this.handleSafetyScoreChange.bind(this);
     this.handleReviewChange = this.handleReviewChange.bind(this);
     this.handleCityNameChange = this.handleCityNameChange.bind(this);
+    this.handleCancelForm = this.handleCancelForm.bind(this);
   }
 
   componentDidMount() {
     fetch(`api/trips/${this.props.tripId}`)
       .then(response => response.json())
       .then(trip => this.setState({ trip }));
-  }
-
-  componentDidUpdate() {
-    fetch(`api/trips/${this.props.tripId}`)
-      .then(response => response.json())
-      .then(trip => this.setState({ trip }));
-  }
-
-  componentWillUnmount() {
-    this.setState({
-      trip: null,
-      reviewContainer: 'container',
-      editReviewContainer: 'hidden',
-      thingsTodoScore: 0,
-      foodScore: 0,
-      peopleScore: 0,
-      transportScore: 0,
-      safetyScore: 0,
-      review: ''
-    });
   }
 
   handleEditButton() {
@@ -73,7 +55,6 @@ export default class TripDetails extends React.Component {
     event.preventDefault();
     const token = window.localStorage.getItem('TravelApp-token');
     const editedTrip = {
-      countryName: this.state.trip.countryName,
       cityName: this.state.cityName,
       tripId: this.props.tripId,
       mainPhotoUrl: this.state.trip.mainPhotoUrl,
@@ -95,14 +76,14 @@ export default class TripDetails extends React.Component {
     })
       .then(response => response.json())
       .then(result => {
+        result.countryName = this.state.trip.countryName;
+        result.username = this.state.trip.username;
         this.setState({
           trip: result,
           reviewContainer: 'container',
           editReviewContainer: 'hidden'
-
         });
       });
-
   }
 
   handleCityNameChange(event) {

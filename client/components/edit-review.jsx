@@ -35,15 +35,10 @@ export default function EditReview(props) {
             </div>
             </div>
             <textarea onChange={props.handleReviewChange} defaultValue={props.trip.review} className='edit-form-textarea' required></textarea>
-            <button className='edit-form-button'>Submit</button>
-            <button className='cancel-edit-form-button'>Cancel</button>
+            <button type="submit" className='edit-form-button'>Submit</button>
+            <button type="button" onClick={props.handleCancelForm} className='cancel-edit-form-button'>Cancel</button>
           </form>
         </div>
       </div>
   );
 }
-
-/*   <div className='label-input-container'>
-              <label className='edit-score-label'>Country</label>
-              <input className='edit-form-text-input float-right' defaultValue={props.trip.countryName} type='text'></input>
-              </div>  */
