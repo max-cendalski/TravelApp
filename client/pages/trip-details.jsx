@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../components/navbar';
 import AppContext from '../lib/app-context';
 import EditReview from '../components/edit-review';
+import Comments from '../components/comments';
 
 export default class TripDetails extends React.Component {
   constructor(props) {
@@ -200,6 +201,7 @@ export default class TripDetails extends React.Component {
                         handleCancelForm = {this.handleCancelForm}
                         />
         </div>
+        <Comments />
       </>
     );
   }
