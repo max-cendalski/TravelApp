@@ -179,7 +179,59 @@ app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
     });
 });
 
-app.get('/api/reviews', (req, res, next) => {
+app.patch('/api/reviews/:tripId', (req, res, next) => {
+  const tripId = Number(req.params.tripId);
+  const { userId } = req.user;
+  if (!Number.isInteger(tripId) || tripId < 1) {
+    res.status(400).json({
+      error: 'tripId must be a positive integer'
+    });
+    return;
+  }
+  const {
+    cityName,
+    review,
+    thingsTodoScore,
+    foodScore,
+    peopleScore,
+    transportScore,
+    safetyScore
+  } = req.body;
+  if (!cityName || !review || !thingsTodoScore || !foodScore || !peopleScore || !transportScore || !safetyScore) {
+    res.status(400).json({
+      error: 'All fields are required'
+    });
+    return;
+  }
+  const sql = `
+  update "trips"
+     set "cityName" = $1,
+         "review" = $2,
+         "thingsTodoScore" = $3,
+         "foodScore" = $4,
+         "peopleScore" = $5,
+         "transportScore" = $6,
+         "safetyScore" = $7
+   where "tripId" = $8 AND "userId" = $9
+   returning *
+  `;
+  const params = [cityName, review, thingsTodoScore, foodScore, peopleScore, transportScore, safetyScore, tripId, userId];
+  db.query(sql, params)
+    .then(result => {
+      const [updatedTrip] = result.rows;
+      if (!updatedTrip) {
+        res.status(404).json({
+          error: `Cannot find trip with id: ${tripId}`
+        });
+      } else {
+        res.json(updatedTrip);
+      }
+    })
+    .catch(err => next(err));
+
+});
+
+app.get('/api/my-reviews', (req, res, next) => {
   const { userId } = req.user;
   if (!userId) {
     throw new ClientError(401, 'invalid userId');

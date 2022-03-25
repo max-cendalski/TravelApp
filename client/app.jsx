@@ -10,6 +10,7 @@ import NotFound from './pages/not-found.jsx';
 import TripDetails from './pages/trip-details.jsx';
 import ReviewForm from './pages/review-form.jsx';
 import Reviews from './pages/reviews';
+import EditReview from './components/edit-review.jsx';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -86,6 +87,8 @@ export default class App extends React.Component {
       return <ReviewForm />;
     } if (route.path === 'my-reviews') {
       return <Reviews />;
+    } if (route.path === 'edit/my-reviews') {
+      return <EditReview />;
     }
     return <NotFound />;
   }

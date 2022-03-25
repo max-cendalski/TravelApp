@@ -225,6 +225,22 @@
   cursor: pointer;
 }
 
+.edit-form-button {
+  border-radius: 5px;
+  margin-top: 20px;
+  background-color: rgb(240, 131, 52);
+  color: white;
+  width: 20vh;
+  border: none;
+  height: 2rem;
+  letter-spacing: 2px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  float: right;
+  margin-right: 1rem;
+}
+
 .form-label {
   border-bottom: 1px solid white;
   padding-bottom: 20px;
@@ -267,7 +283,7 @@ li:hover {
 }
 
 .review-container {
-  padding: 1rem;
+  margin-top: 1rem;
   font-size: 1.2rem;
 }
 
@@ -279,7 +295,7 @@ li:hover {
   padding-bottom: 1rem;
 }
 
-.review-score-input {
+.input {
   width: 3rem;
   margin-right: 1rem;
 }
@@ -367,6 +383,67 @@ input::-webkit-inner-spin-button {
   width: 30%;
 }
 
+.edit-form {
+  padding: 2rem;
+}
+
+.edit-form-textarea {
+  height: 13rem;
+  width: 100%;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.submit-button {
+  border-radius: 5px;
+  margin-top: 20px;
+  background-color: rgb(240, 131, 52);
+  color: white;
+  width: 20vh;
+  border: none;
+  height: 2rem;
+  letter-spacing: 2px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  float: right;
+}
+
+.edit-score-label {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.edit-form-text-input {
+  width: 6rem;
+  font-size: 1.1rem;
+}
+
+.label-input-container {
+  margin-bottom: 1rem;
+}
+
+.cancel-edit-form-button {
+  border-radius: 5px;
+  margin-top: 20px;
+  text-align: center;
+  background-color: rgb(163, 39, 23);
+  color: white;
+  width: 20vh;
+  border: none;
+  height: 2rem;
+  letter-spacing: 2px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
 .hidden {
   display: none;
 }
@@ -447,4 +524,5 @@ input::-webkit-inner-spin-button {
   .review-container {
     padding: 1rem 0;
   }
+}
 }
