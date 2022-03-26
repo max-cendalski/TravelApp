@@ -440,6 +440,21 @@ input::-webkit-inner-spin-button {
   float: left;
 }
 
+.add-comment-button {
+  border-radius: 5px;
+  margin-top: 20px;
+  text-align: center;
+  background-color: rgb(240, 131, 52);
+  color: white;
+  width: 20vh;
+  border: none;
+  height: 2rem;
+  letter-spacing: 2px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 .float-right {
   float: right;
 }

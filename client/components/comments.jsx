@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 export default function Comments(props) {
   return (
     <div>
-      <h1>comments</h1>
+      <h2>Comments</h2>
       <ul>
        {
         props.comments.map((comment, index) => {
@@ -11,7 +11,7 @@ export default function Comments(props) {
         })
       }
       </ul>
-      <button>Add Comment</button>
+      <button className='add-comment-button'>Add Comment</button>
     </div>
   );
 }
