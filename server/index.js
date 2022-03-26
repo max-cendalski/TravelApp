@@ -122,8 +122,7 @@ app.get('/api/trips/:tripId', (req, res, next) => {
     throw new ClientError(401, 'invalid tripId');
   }
   const sql = `
-  select "userId",
-         "cityName",
+  select "cityName",
          "mainPhotoUrl",
          "review",
          "thingsTodoScore",
@@ -132,16 +131,40 @@ app.get('/api/trips/:tripId', (req, res, next) => {
          "transportScore",
          "safetyScore",
          "c"."name" as "countryName",
-         "u"."username"
+         "u"."username",
+         "m"."content"
     from "trips"
     join "countries" as "c" using ("countryId")
     join "users" as "u" using ("userId")
+    join "comments" as "m" using ("tripId")
    where "tripId" = $1
   `;
   const params = [trip];
   db.query(sql, params)
     .then(result => {
       res.json(result.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/comments/:tripId', (req, res, next) => {
+  const trip = req.params.tripId;
+  if (!trip) {
+    throw new ClientError(401, 'invalid commentId');
+  }
+  const sql = `
+  select "tripId",
+         "u"."username",
+         "m"."content"
+    from "trips"
+    join "users" as "u" using ("userId")
+    join "comments" as "m" using ("tripId")
+   where "tripId" = $1
+  `;
+  const params = [trip];
+  db.query(sql, params)
+    .then(result => {
+      res.json(result.rows);
     })
     .catch(err => next(err));
 });

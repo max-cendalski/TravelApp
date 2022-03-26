@@ -49,4 +49,6 @@ Using this hybrid presentation style, Mayco guides us into the shrine complex. W
 
 
 insert into "comments" ("userId", "tripId","content")
-values ('2','3','I really enjoyed reading your review.');
+values
+('2','3','I really enjoyed reading your review.'),
+('1','3','Great Review');
