@@ -20,8 +20,6 @@ values
 
 
 
-
-
 insert into "trips" ("userId","countryId","cityName","mainPhotoUrl","review","thingsTodoScore","foodScore","peopleScore","transportScore","safetyScore")
 values
 ('1','1','Tokyo','/images/Japan1.jpg','Mayco, our guide for this 75-minute tour, tells us of Kyoto’s past as the capital of Japan from 794 to 1869, remarking that some people still consider it to be the nation’s capital over Tokyo. She goes on to illustrate several of Kyoto’s cultural offerings with a wide selection of photos and on-the-ground video footage, pausing periodically to engage her audience with questions, and fill in the story behind the visuals.
@@ -48,3 +46,7 @@ Using this hybrid presentation style, Mayco guides us into the shrine complex. W
 ('3','2','Papeete','/images/Tahiti4.jpg','Mayco, our guide for this 75-minute tour, tells us of Kyoto’s past as the capital of Japan from 794 to 1869, remarking that some people still consider it to be the nation’s capital over Tokyo. She goes on to illustrate several of Kyoto’s cultural offerings with a wide selection of photos and on-the-ground video footage, pausing periodically to engage her audience with questions, and fill in the story behind the visuals.
 
 Using this hybrid presentation style, Mayco guides us into the shrine complex. We follow clusters of visitors along the wide, maple-lined walking path and up a set of stairs, catching a glimpse of the red-and-green accented building that houses the main shrine before passing through another large torii gate. Here we get our first look at one of the most famous views in Japan: the Senbon Torii, or 1000 gates.','9','3','4','8','8');
+
+
+insert into "comments" ("userId", "tripId","content")
+values ('2','3','I really enjoyed reading your review.');
