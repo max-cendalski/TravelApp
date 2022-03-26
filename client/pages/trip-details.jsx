@@ -18,7 +18,8 @@ export default class TripDetails extends React.Component {
       peopleScore: 0,
       transportScore: 0,
       safetyScore: 0,
-      review: ''
+      review: '',
+      comments: []
     };
     this.handleEditButton = this.handleEditButton.bind(this);
     this.handleSubmitEditedForm = this.handleSubmitEditedForm.bind(this);
@@ -36,6 +37,9 @@ export default class TripDetails extends React.Component {
     fetch(`api/trips/${this.props.tripId}`)
       .then(response => response.json())
       .then(trip => this.setState({ trip }));
+    fetch(`api/comments/${this.props.tripId}`)
+      .then(response => response.json())
+      .then(comments => this.setState({ comments }));
   }
 
   handleEditButton() {
