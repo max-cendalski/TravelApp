@@ -205,7 +205,7 @@ export default class TripDetails extends React.Component {
                         handleCancelForm = {this.handleCancelForm}
                         />
         </div>
-        <Comments />
+        <Comments comments={this.state.comments}/>
       </>
     );
   }
