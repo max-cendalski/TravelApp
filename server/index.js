@@ -131,12 +131,10 @@ app.get('/api/trips/:tripId', (req, res, next) => {
          "transportScore",
          "safetyScore",
          "c"."name" as "countryName",
-         "u"."username",
-         "m"."content"
+         "u"."username"
     from "trips"
     join "countries" as "c" using ("countryId")
     join "users" as "u" using ("userId")
-    join "comments" as "m" using ("tripId")
    where "tripId" = $1
   `;
   const params = [trip];
