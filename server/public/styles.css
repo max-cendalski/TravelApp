@@ -275,7 +275,7 @@
   transition: 0.18s linear;
 }
 
-li:hover {
+.drop-down-list li: {
   transform: scale(1.2);
   background-color: rgb(112, 110, 110);
   border-top: 1px solid white;
@@ -462,6 +462,14 @@ input::-webkit-inner-spin-button {
 .comment-list-element {
   border: 1px solid black;
   padding: 1rem;
+}
+
+.comment-list-element h4 {
+  font-size: 1.2rem;
+}
+
+.comment-list-element > p {
+  font-size: 1.2rem;
 }
 
 .float-right {

@@ -151,12 +151,10 @@ app.get('/api/comments/:tripId', (req, res, next) => {
     throw new ClientError(401, 'invalid commentId');
   }
   const sql = `
-  select "tripId",
-         "u"."username",
-         "m"."content"
-    from "trips"
+  select "content",
+         "u"."username"
+    from "comments"
     join "users" as "u" using ("userId")
-    join "comments" as "m" using ("tripId")
    where "tripId" = $1
   `;
   const params = [trip];
@@ -283,3 +281,14 @@ app.get('/api/my-reviews', (req, res, next) => {
 });
 
 app.use(errorMiddleware);
+
+/*
+  const sql = `
+  select "tripId",
+         "u"."username",
+         "m"."content"
+    from "trips"
+    join "comments" as "m" using ("userId")
+    join "users" as "u" using ("tripId")
+   where "tripId" = $1
+  `; */
