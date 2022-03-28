@@ -36,6 +36,10 @@
   width: 100%;
 }
 
+.column-width90 {
+  width: 90%;
+}
+
 .column-width50 {
   width: 50%;
 }
@@ -454,17 +458,22 @@ input::-webkit-inner-spin-button {
   cursor: pointer;
 }
 
-.comment-list {
-  margin-top: 2rem;
+.comments-header {
+  margin-top: 1rem;
+}
+
+.comments-list {
   list-style-type: none;
+  padding: 0;
 }
 
 .comment-list-element {
   border: 1px solid black;
   padding: 1rem;
+  margin-bottom: 1rem;
 }
 
-.comment-list-element h4 {
+.comment-list-element > h4 {
   font-size: 1.2rem;
 }
 

@@ -206,7 +206,9 @@ export default class TripDetails extends React.Component {
                         />
         </div>
         <div className={this.state.reviewContainer}>
-          <Comments comments={this.state.comments}/>
+          <Comments comments={this.state.comments}
+                    user={this.context.username}
+                        />
         </div>
       </>
     );
