@@ -210,7 +210,7 @@ export default class TripDetails extends React.Component {
         <div className={this.state.reviewContainer}>
           <Comments comments={this.state.comments}
                     loggedUser={this.context.user.username}
-                    reviewUser={this.state.trip}
+                    author={this.state.trip.username}
                         />
         </div>
       </>
