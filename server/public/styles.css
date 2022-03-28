@@ -455,6 +455,15 @@ input::-webkit-inner-spin-button {
   cursor: pointer;
 }
 
+.comment-list {
+  list-style-type: none;
+}
+
+.comment-list-element {
+  border: 1px solid black;
+  padding: 1rem;
+}
+
 .float-right {
   float: right;
 }
