@@ -12,7 +12,7 @@ export default function Comments(props) {
       }
       </ul>
       {
-        // props.user.userId !== props.trip.userId && <button className='add-comment-button'>Add Comment</button>
+       props.loggedUser !== props.reviewUser.username && <button className='add-comment-button'>{props.user}Add Comment</button>
       }
 
     </div>

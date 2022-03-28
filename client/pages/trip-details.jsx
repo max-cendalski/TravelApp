@@ -43,6 +43,8 @@ export default class TripDetails extends React.Component {
   }
 
   handleEditButton() {
+    console.log('this.context.user.username', this.context.user.username);
+
     this.setState({
       reviewContainer: 'hidden',
       editReviewContainer: 'container',
@@ -207,7 +209,8 @@ export default class TripDetails extends React.Component {
         </div>
         <div className={this.state.reviewContainer}>
           <Comments comments={this.state.comments}
-                    user={this.context.username}
+                    loggedUser={this.context.user.username}
+                    reviewUser={this.state.trip}
                         />
         </div>
       </>
