@@ -7,7 +7,7 @@ export default function Comments(props) {
       <ul className='comment-list'>
        {
         props.comments.map((comment, index) => {
-          return <li className='comment-list-element' key={index + 1}>{comment.content} </li>;
+          return <li className='comment-list-element' key={index + 1}><h4>comment.username</h4><p>{comment.content}</p> </li>;
         })
       }
       </ul>
