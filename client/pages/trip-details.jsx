@@ -19,7 +19,9 @@ export default class TripDetails extends React.Component {
       transportScore: 0,
       safetyScore: 0,
       review: '',
-      comments: []
+      comments: [],
+      addCommentButton: 'add-comment-button',
+      commentForm: 'hidden'
     };
     this.handleEditButton = this.handleEditButton.bind(this);
     this.handleSubmitEditedForm = this.handleSubmitEditedForm.bind(this);
@@ -145,7 +147,10 @@ export default class TripDetails extends React.Component {
   }
 
   handleAddComment(event) {
-    console.log('whee');
+    this.setState({
+      commentForm: 'comment-form',
+      addCommentButton: 'hidden'
+    });
   }
 
   handleCommentForm(event) {
@@ -224,6 +229,8 @@ export default class TripDetails extends React.Component {
                     author={this.state.trip.username}
                     handleAddComment={this.handleAddComment}
                     handleCommentForm={this.handleCommentForm}
+                    addCommentButton = {this.state.addCommentButton}
+                    commentForm = {this.state.commentForm}
                     />
         </div>
       </>

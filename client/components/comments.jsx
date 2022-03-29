@@ -12,12 +12,12 @@ export default function Comments(props) {
       }
       </ul>
       {
-       props.loggedUser !== props.author && <button onClick={props.handleAddComment} className='add-comment-button float-right'>{props.user}Add Comment</button>
+       props.loggedUser !== props.author && <button onClick={props.handleAddComment} className={props.addCommentButton}>{props.user}Add Comment</button>
       }
-      <form onSubmit={props.handleCommentForm} className='comment-form'>
+      <form onSubmit={props.handleCommentForm} className={props.commentForm}>
         <textarea className='comment-textarea'>
         </textarea>
-        <button>Submit</button>
+        <button className='comment-submit-button'>Submit</button>
       </form>
     </div>
   );
