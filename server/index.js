@@ -332,14 +332,3 @@ app.get('/api/my-reviews', (req, res, next) => {
 });
 
 app.use(errorMiddleware);
-
-/*
-  const sql = `
-  select "tripId",
-         "u"."username",
-         "m"."content"
-    from "trips"
-    join "comments" as "m" using ("userId")
-    join "users" as "u" using ("tripId")
-   where "tripId" = $1
-  `; */
