@@ -148,7 +148,7 @@ app.get('/api/trips/:tripId', (req, res, next) => {
 app.get('/api/comments/:tripId', (req, res, next) => {
   const trip = Number(req.params.tripId);
   if (!trip) {
-    throw new ClientError(401, 'invalid commentId');
+    throw new ClientError(401, 'invalid tripId');
   }
   const sql = `
   select "content",
@@ -222,7 +222,7 @@ app.post('/api/trips/comments/:tripId', (req, res, next) => {
   const { content } = req.body;
   if (!content) {
     res.status(400).json({
-      error: 'All field are required'
+      error: 'missing data'
     });
     return;
   }
@@ -270,7 +270,7 @@ app.patch('/api/reviews/:tripId', (req, res, next) => {
   } = req.body;
   if (!cityName || !review || !thingsTodoScore || !foodScore || !peopleScore || !transportScore || !safetyScore) {
     res.status(400).json({
-      error: 'All fields are required'
+      error: 'missing data'
     });
     return;
   }
