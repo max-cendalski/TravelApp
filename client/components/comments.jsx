@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 export default function Comments(props) {
   return (
@@ -12,8 +12,13 @@ export default function Comments(props) {
       }
       </ul>
       {
-       props.loggedUser !== props.author && <button className='add-comment-button'>{props.user}Add Comment</button>
+       props.loggedUser !== props.author && <button onClick={props.handleAddComment} className='add-comment-button float-right'>{props.user}Add Comment</button>
       }
+      <form onSubmit={props.handleCommentForm} className='comment-form'>
+        <textarea className='comment-textarea'>
+        </textarea>
+        <button>Submit</button>
+      </form>
     </div>
   );
 }

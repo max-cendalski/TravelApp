@@ -31,6 +31,8 @@ export default class TripDetails extends React.Component {
     this.handleReviewChange = this.handleReviewChange.bind(this);
     this.handleCityNameChange = this.handleCityNameChange.bind(this);
     this.handleCancelForm = this.handleCancelForm.bind(this);
+    this.handleAddComment = this.handleAddComment.bind(this);
+    this.handleCommentForm = this.handleCommentForm.bind(this);
   }
 
   componentDidMount() {
@@ -142,6 +144,15 @@ export default class TripDetails extends React.Component {
     });
   }
 
+  handleAddComment(event) {
+    console.log('whee');
+  }
+
+  handleCommentForm(event) {
+    event.preventDefault();
+    console.log('form submitted');
+  }
+
   render() {
     if (!this.state.trip) return null;
     const {
@@ -211,7 +222,9 @@ export default class TripDetails extends React.Component {
           <Comments comments={this.state.comments}
                     loggedUser={this.context.user.username}
                     author={this.state.trip.username}
-                        />
+                    handleAddComment={this.handleAddComment}
+                    handleCommentForm={this.handleCommentForm}
+                    />
         </div>
       </>
     );
