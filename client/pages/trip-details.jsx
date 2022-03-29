@@ -163,9 +163,11 @@ export default class TripDetails extends React.Component {
 
   handleCommentForm(event) {
     event.preventDefault();
-    const comment = this.state.comment;
+    const comment = {
+      content: this.state.comment
+    };
     const token = window.localStorage.getItem('TravelApp-token');
-    fetch(`/api/reviews/${this.props.tripId}`, {
+    fetch(`/api/trips/comments/${this.props.tripId}`, {
       method: 'POST',
       headers: {
         'x-access-token': token,
