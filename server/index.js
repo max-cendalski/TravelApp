@@ -180,7 +180,19 @@ app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
   } = req.body;
   const url = '/images/' + req.file.filename;
   const sql = `
-              insert into "trips" ("countryId","userId","cityName","mainPhotoUrl","review","thingsTodoScore","foodScore","peopleScore","transportScore","safetyScore")
+              insert into "trips"
+              (
+                "countryId",
+                "userId",
+                "cityName",
+                "mainPhotoUrl",
+                "review",
+                "thingsTodoScore",
+                "foodScore",
+                "peopleScore",
+                "transportScore",
+                "safetyScore"
+              )
               values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
               returning *
               `;
@@ -189,6 +201,46 @@ app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
     .then(result => {
       const [review] = result.rows;
       res.status(201).json({ review });
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'an unexpected error occurred'
+      });
+    });
+});
+
+app.post('/api/trips/comments/:tripId', (req, res, next) => {
+  const tripId = Number(req.params.tripId);
+  const { userId } = req.user;
+  if (!Number.isInteger(tripId) || tripId < 1) {
+    res.status(400).json({
+      error: 'tripId must be a positive integer'
+    });
+    return;
+  }
+  const { content } = req.body;
+  if (!content) {
+    res.status(400).json({
+      error: 'All field are required'
+    });
+    return;
+  }
+  const sql = `
+              insert into "comments"
+              (
+                "content",
+                "userId",
+                "tripId"
+              )
+              values ($1,$2,$3)
+              returning *
+  `;
+  const params = [content, userId, tripId];
+  return db.query(sql, params)
+    .then(result => {
+      const [comment] = result.rows;
+      res.status(201).json({ comment });
     })
     .catch(err => {
       console.error(err);
@@ -247,7 +299,6 @@ app.patch('/api/reviews/:tripId', (req, res, next) => {
       }
     })
     .catch(err => next(err));
-
 });
 
 app.get('/api/my-reviews', (req, res, next) => {
