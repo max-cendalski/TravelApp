@@ -21,7 +21,8 @@ export default class TripDetails extends React.Component {
       review: '',
       comments: [],
       addCommentButton: 'add-comment-button',
-      commentForm: 'hidden'
+      commentForm: 'hidden',
+      comment: ''
     };
     this.handleEditButton = this.handleEditButton.bind(this);
     this.handleSubmitEditedForm = this.handleSubmitEditedForm.bind(this);
@@ -35,6 +36,7 @@ export default class TripDetails extends React.Component {
     this.handleCancelForm = this.handleCancelForm.bind(this);
     this.handleAddComment = this.handleAddComment.bind(this);
     this.handleCommentForm = this.handleCommentForm.bind(this);
+    this.handleCommentTextarea = this.handleCommentTextarea.bind(this);
   }
 
   componentDidMount() {
@@ -153,9 +155,29 @@ export default class TripDetails extends React.Component {
     });
   }
 
+  handleCommentTextarea(event) {
+    this.setState({
+      comment: event.target.value
+    });
+  }
+
   handleCommentForm(event) {
     event.preventDefault();
-    console.log('form submitted');
+    const comment = this.state.comment;
+    const token = window.localStorage.getItem('TravelApp-token');
+    fetch(`/api/reviews/${this.props.tripId}`, {
+      method: 'POST',
+      headers: {
+        'x-access-token': token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(comment)
+    })
+      .then(response => response.json())
+      .then(result => console.log('result', result))
+      .catch(error => {
+        console.error('Error :', error);
+      });
   }
 
   render() {
@@ -231,6 +253,7 @@ export default class TripDetails extends React.Component {
                     handleCommentForm={this.handleCommentForm}
                     addCommentButton = {this.state.addCommentButton}
                     commentForm = {this.state.commentForm}
+                    handleCommentTextarea = {this.handleCommentTextarea}
                     />
         </div>
       </>
