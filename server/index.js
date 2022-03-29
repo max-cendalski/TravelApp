@@ -117,7 +117,7 @@ app.get('/api/countries', (req, res, next) => {
 });
 
 app.get('/api/trips/:tripId', (req, res, next) => {
-  const trip = req.params.tripId;
+  const trip = Number(req.params.tripId);
   if (!trip) {
     throw new ClientError(401, 'invalid tripId');
   }
@@ -146,7 +146,7 @@ app.get('/api/trips/:tripId', (req, res, next) => {
 });
 
 app.get('/api/comments/:tripId', (req, res, next) => {
-  const trip = req.params.tripId;
+  const trip = Number(req.params.tripId);
   if (!trip) {
     throw new ClientError(401, 'invalid commentId');
   }
