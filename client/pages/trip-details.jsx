@@ -37,6 +37,7 @@ export default class TripDetails extends React.Component {
     this.handleAddComment = this.handleAddComment.bind(this);
     this.handleCommentForm = this.handleCommentForm.bind(this);
     this.handleCommentTextarea = this.handleCommentTextarea.bind(this);
+    this.handleCancelComment = this.handleCancelComment.bind(this);
   }
 
   componentDidMount() {
@@ -49,8 +50,6 @@ export default class TripDetails extends React.Component {
   }
 
   handleEditButton() {
-    console.log('this.context.user.username', this.context.user.username);
-
     this.setState({
       reviewContainer: 'hidden',
       editReviewContainer: 'container',
@@ -161,6 +160,13 @@ export default class TripDetails extends React.Component {
     });
   }
 
+  handleCancelComment(event) {
+    this.setState({
+      commentForm: 'hidden',
+      addCommentButton: 'add-comment-button'
+    });
+  }
+
   handleCommentForm(event) {
     event.preventDefault();
     const comment = {
@@ -176,7 +182,13 @@ export default class TripDetails extends React.Component {
       body: JSON.stringify(comment)
     })
       .then(response => response.json())
-      .then(result => console.log('result', result))
+      .then(result => {
+        this.setState({
+          commentForm: 'hidden',
+          addCommentButton: 'add-comment-button'
+        });
+      }
+      )
       .catch(error => {
         console.error('Error :', error);
       });
@@ -256,6 +268,7 @@ export default class TripDetails extends React.Component {
                     addCommentButton = {this.state.addCommentButton}
                     commentForm = {this.state.commentForm}
                     handleCommentTextarea = {this.handleCommentTextarea}
+                    handleCancelComment = {this.handleCancelComment}
                     />
         </div>
       </>
