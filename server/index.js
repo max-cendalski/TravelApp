@@ -235,7 +235,7 @@ app.post('/api/trips/comments/:tripId', (req, res, next) => {
             )
             values ($1,$2,$3)
             returning *
-  `;
+            `;
   const params = [content, userId, tripId];
   return db.query(sql, params)
     .then(result => {
@@ -322,7 +322,7 @@ app.get('/api/my-reviews', (req, res, next) => {
         join "countries" as "c" using ("countryId")
         join "users" as "u" using ("userId")
       where "userId" = $1
-  `;
+      `;
   const params = [userId];
   db.query(sql, params)
     .then(result => {

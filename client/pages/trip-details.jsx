@@ -161,9 +161,11 @@ export default class TripDetails extends React.Component {
   }
 
   handleCancelComment(event) {
+    event.preventDefault();
     this.setState({
       commentForm: 'hidden',
-      addCommentButton: 'add-comment-button'
+      addCommentButton: 'add-comment-button',
+      comment: ''
     });
   }
 

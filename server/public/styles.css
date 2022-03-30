@@ -448,6 +448,7 @@ input::-webkit-inner-spin-button {
 .add-comment-button {
   border-radius: 5px;
   margin: 20px 0;
+  margin-bottom: 20px;
   padding: 0 1rem;
   text-align: center;
   background-color: rgb(240, 131, 52);
