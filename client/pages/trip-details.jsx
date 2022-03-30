@@ -186,7 +186,7 @@ export default class TripDetails extends React.Component {
       .then(response => response.json())
       .then(result => {
         result.comment.username = this.context.user.username;
-        const comments = this.state.comments;
+        const comments = [...this.state.comments];
         comments.unshift(result.comment);
         this.setState({
           comments: comments,
