@@ -239,7 +239,7 @@ app.post('/api/trips/comments/:tripId', (req, res, next) => {
   const params = [content, userId, tripId];
   return db.query(sql, params)
     .then(result => {
-      const comment = result.rows[0];
+      const [comment] = result.rows;
       res.status(201).json({ comment });
     })
     .catch(err => {

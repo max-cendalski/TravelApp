@@ -169,7 +169,7 @@ export default class TripDetails extends React.Component {
 
   handleCommentForm(event) {
     event.preventDefault();
-    const comment = {
+    const content = {
       content: this.state.comment
     };
     const token = window.localStorage.getItem('TravelApp-token');
@@ -179,16 +179,20 @@ export default class TripDetails extends React.Component {
         'x-access-token': token,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(comment)
+      body: JSON.stringify(content)
     })
       .then(response => response.json())
       .then(result => {
+        result.comment.username = this.context.user.username;
+        const comments = this.state.comments;
+        comments.unshift(result.comment);
         this.setState({
+          comments: comments,
           commentForm: 'hidden',
-          addCommentButton: 'add-comment-button'
+          addCommentButton: 'add-comment-button',
+          comment: ''
         });
-      }
-      )
+      })
       .catch(error => {
         console.error('Error :', error);
       });
@@ -269,6 +273,7 @@ export default class TripDetails extends React.Component {
                     commentForm = {this.state.commentForm}
                     handleCommentTextarea = {this.handleCommentTextarea}
                     handleCancelComment = {this.handleCancelComment}
+                    commentValue = {this.state.comment}
                     />
         </div>
       </>

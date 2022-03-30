@@ -15,7 +15,7 @@ export default function Comments(props) {
        props.loggedUser !== props.author && <button onClick={props.handleAddComment} className={props.addCommentButton}>{props.user}Add Comment</button>
       }
       <form onSubmit={props.handleCommentForm} className={props.commentForm}>
-        <textarea className='comment-textarea' onChange={props.handleCommentTextarea} required>
+        <textarea className='comment-textarea' onChange={props.handleCommentTextarea} value={props.commentValue}required>
         </textarea>
         <button className='comment-submit-button'>Submit</button>
         <button onClick={props.handleCancelComment} className='comment-cancel-button'>Cancel</button>
