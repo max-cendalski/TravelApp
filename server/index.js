@@ -180,22 +180,22 @@ app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
   } = req.body;
   const url = '/images/' + req.file.filename;
   const sql = `
-              insert into "trips"
-              (
-                "countryId",
-                "userId",
-                "cityName",
-                "mainPhotoUrl",
-                "review",
-                "thingsTodoScore",
-                "foodScore",
-                "peopleScore",
-                "transportScore",
-                "safetyScore"
-              )
-              values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
-              returning *
-              `;
+  insert into "trips"
+            (
+              "countryId",
+              "userId",
+              "cityName",
+              "mainPhotoUrl",
+              "review",
+              "thingsTodoScore",
+              "foodScore",
+              "peopleScore",
+              "transportScore",
+              "safetyScore"
+            )
+            values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
+            returning *
+            `;
   const params = [countryId, req.user.userId, city, url, review, thingsTodoScore, foodScore, peopleScore, transportScore, safetyScore];
   return db.query(sql, params)
     .then(result => {
@@ -227,14 +227,14 @@ app.post('/api/trips/comments/:tripId', (req, res, next) => {
     return;
   }
   const sql = `
-              insert into "comments"
-              (
-                "content",
-                "userId",
-                "tripId"
-              )
-              values ($1,$2,$3)
-              returning *
+  insert into "comments"
+            (
+              "content",
+              "userId",
+              "tripId"
+            )
+            values ($1,$2,$3)
+            returning *
   `;
   const params = [content, userId, tripId];
   return db.query(sql, params)
