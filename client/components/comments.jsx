@@ -18,6 +18,7 @@ export default function Comments(props) {
         <textarea className='comment-textarea' onChange={props.handleCommentTextarea}>
         </textarea>
         <button className='comment-submit-button'>Submit</button>
+        <button className='comment-cancel-button'>Cancel</button>
       </form>
     </div>
   );
