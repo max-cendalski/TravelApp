@@ -20,7 +20,7 @@ export default class TripDetails extends React.Component {
       safetyScore: 0,
       review: '',
       comments: [],
-      addCommentButton: 'confirm-edit-button',
+      addCommentButton: 'app-button background-orange float-right',
       commentForm: 'hidden',
       comment: ''
     };
@@ -248,7 +248,7 @@ export default class TripDetails extends React.Component {
           </div>
           <div>
             {
-              this.context.user.username === username && <button onClick={this.handleEditButton} className='confirm-edit-button margin-right1rem'>Edit</button>
+              this.context.user.username === username && <button onClick={this.handleEditButton} className='app-button background-orange float-right margin-right1rem'>Edit</button>
             }
           </div>
         </div>
@@ -266,17 +266,17 @@ export default class TripDetails extends React.Component {
                         />
         </div>
         <div className={this.state.reviewContainer}>
-          <Comments comments={this.state.comments}
-                    loggedUser={this.context.user.username}
-                    author={this.state.trip.username}
-                    handleAddComment={this.handleAddComment}
-                    handleCommentForm={this.handleCommentForm}
-                    addCommentButton = {this.state.addCommentButton}
-                    commentForm = {this.state.commentForm}
-                    handleCommentTextarea = {this.handleCommentTextarea}
-                    handleCancelComment = {this.handleCancelComment}
-                    commentValue = {this.state.comment}
-                    />
+              <Comments comments={this.state.comments}
+                        loggedUser={this.context.user.username}
+                        author={this.state.trip.username}
+                        handleAddComment={this.handleAddComment}
+                        handleCommentForm={this.handleCommentForm}
+                        addCommentButton = {this.state.addCommentButton}
+                        commentForm = {this.state.commentForm}
+                        handleCommentTextarea = {this.handleCommentTextarea}
+                        handleCancelComment = {this.handleCancelComment}
+                        commentValue = {this.state.comment}
+                        />
         </div>
       </>
     );
