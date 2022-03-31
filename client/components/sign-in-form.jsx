@@ -55,8 +55,8 @@ export default class SignInForm extends React.Component {
             <label className="form-label">Sign in </label>
               <input required className="username-input input-form" type="text" value={this.state.username} onChange={this.handleUsernameChange} name="username" placeholder="username"/>
               <input required className="password-input input-form" type="password" value={this.state.password} onChange={this.handlePasswordChange} name="password" placeholder="password" />
-              <button className='confirm-form-button'>Confirm</button>
-              <button className='cancel-form-button' onClick={this.props.handleSwitchingModal}>Cancel</button>
+              <button className='cancel-button' onClick={this.props.handleSwitchingModal}>Cancel</button>
+              <button className='confirm-edit-button'>Confirm</button>
             </form>
           </div>
         </div>

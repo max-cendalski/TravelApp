@@ -46,14 +46,14 @@ export default class SignUpForm extends React.Component {
 
   render() {
     return (
-      <div className='form-component-container'>
+      <div className='margin-top3'>
           <div className='row centered'>
             <form onSubmit={this.handleSubmit} name="signInForm">
             <label className="form-label"> Sign up </label>
               <input required className="username-input input-form" type="text" value={this.state.username} onChange={this.handleUsernameChange} name="username" placeholder="username"/>
               <input required className="password-input input-form" type="password" value={this.state.password} onChange={this.handlePasswordChange} name="password" placeholder="password" />
-              <button className='confirm-form-button'>Confirm</button>
-              <button className='cancel-form-button' onClick={this.props.handleSwitchingModal}>Cancel</button>
+              <button className='confirm-edit-button'>Confirm</button>
+              <button className='cancel-button' onClick={this.props.handleSwitchingModal}>Cancel</button>
             </form>
           </div>
         </div>

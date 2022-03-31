@@ -248,7 +248,7 @@ export default class TripDetails extends React.Component {
           </div>
           <div>
             {
-              this.context.user.username === username && <button onClick={this.handleEditButton} className='edit-form-button'>Edit</button>
+              this.context.user.username === username && <button onClick={this.handleEditButton} className='confirm-edit-button margin-right1rem'>Edit</button>
             }
           </div>
         </div>
