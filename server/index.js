@@ -222,7 +222,7 @@ app.post('/api/trips/comments/:tripId', (req, res, next) => {
   const { content } = req.body;
   if (!content) {
     res.status(400).json({
-      error: 'missing data'
+      error: 'missing content'
     });
     return;
   }
