@@ -20,7 +20,7 @@ export default class TripDetails extends React.Component {
       safetyScore: 0,
       review: '',
       comments: [],
-      addCommentButton: 'add-comment-button',
+      addCommentButton: 'confirm-edit-button',
       commentForm: 'hidden',
       comment: ''
     };
@@ -191,7 +191,7 @@ export default class TripDetails extends React.Component {
         this.setState({
           comments: comments,
           commentForm: 'hidden',
-          addCommentButton: 'add-comment-button',
+          addCommentButton: 'confirm-edit-button',
           comment: ''
         });
       })
