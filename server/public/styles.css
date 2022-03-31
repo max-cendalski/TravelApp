@@ -334,10 +334,9 @@ input::-webkit-inner-spin-button {
   border-radius: 5px;
   position: absolute;
   background-color: white;
-  width: 380px;
-  height: 120px;
+  width: 50vh;
   top: 20vh;
-  left: 40%;
+  left: 40vh;
   color: red;
 }
 
