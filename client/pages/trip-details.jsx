@@ -164,8 +164,8 @@ export default class TripDetails extends React.Component {
     event.preventDefault();
     this.setState({
       commentForm: 'hidden',
-      addCommentButton: 'confirm-edit-button',
-      comment: ''
+      comment: '',
+      addCommentButton: 'app-button background-orange float-right'
     });
   }
 
@@ -191,8 +191,8 @@ export default class TripDetails extends React.Component {
         this.setState({
           comments: comments,
           commentForm: 'hidden',
-          addCommentButton: 'confirm-edit-button',
-          comment: ''
+          comment: '',
+          addCommentButton: 'app-button background-orange float-right'
         });
       })
       .catch(error => {
