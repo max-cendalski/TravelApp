@@ -333,10 +333,10 @@ input::-webkit-inner-spin-button {
 .logout-info {
   border-radius: 5px;
   position: absolute;
+  padding: 1rem;
   background-color: white;
-  width: 50vh;
   top: 20vh;
-  left: 40vh;
+  left: 40%;
   color: red;
 }
 
@@ -344,7 +344,6 @@ input::-webkit-inner-spin-button {
   text-align: center;
   width: 100%;
   margin-bottom: 30px;
-  margin-top: 10px;
   font-size: 1.6rem;
 }
 
