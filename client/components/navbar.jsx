@@ -147,8 +147,8 @@ export default class Navbar extends React.Component {
           </div>
           <div className={this.context.logoutInfo}>
             <h2>Are you sure you want to logout?</h2>
-            <button onClick={this.context.handleConfirmLogout} className='confirm-edit-button'>Confirm</button>
-            <button onClick={this.context.handleCancelLogout} className='cancel-button'>Cancel</button>
+            <button onClick={this.context.handleConfirmLogout} className='app-button background-orange float-right'>Confirm</button>
+            <button onClick={this.context.handleCancelLogout} className='app-button background-red'>Cancel</button>
           </div>
       </div>
     );
