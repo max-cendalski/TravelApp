@@ -164,7 +164,7 @@ export default class TripDetails extends React.Component {
     event.preventDefault();
     this.setState({
       commentForm: 'hidden',
-      addCommentButton: 'add-comment-button',
+      addCommentButton: 'confirm-edit-button',
       comment: ''
     });
   }
