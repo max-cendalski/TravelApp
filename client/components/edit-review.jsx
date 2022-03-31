@@ -35,8 +35,8 @@ export default function EditReview(props) {
             </div>
             </div>
             <textarea onChange={props.handleReviewChange} defaultValue={props.trip.review} className='edit-form-textarea' required></textarea>
-            <button type="submit" className='confirm-edit-button'>Submit</button>
-            <button type="button" onClick={props.handleCancelForm} className='cancel-button'>Cancel</button>
+            <button type="submit" className='app-button background-orange float-right'>Submit</button>
+            <button type="button" onClick={props.handleCancelForm} className='app-button background-red'>Cancel</button>
           </form>
         </div>
       </div>
