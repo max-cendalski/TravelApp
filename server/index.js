@@ -117,13 +117,12 @@ app.get('/api/countries', (req, res, next) => {
 });
 
 app.get('/api/trips/:tripId', (req, res, next) => {
-  const trip = req.params.tripId;
+  const trip = Number(req.params.tripId);
   if (!trip) {
     throw new ClientError(401, 'invalid tripId');
   }
   const sql = `
-  select "userId",
-         "cityName",
+  select "cityName",
          "mainPhotoUrl",
          "review",
          "thingsTodoScore",
@@ -146,6 +145,26 @@ app.get('/api/trips/:tripId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/comments/:tripId', (req, res, next) => {
+  const trip = Number(req.params.tripId);
+  if (!trip) {
+    throw new ClientError(401, 'invalid tripId');
+  }
+  const sql = `
+  select "content",
+         "u"."username"
+    from "comments"
+    join "users" as "u" using ("userId")
+   where "tripId" = $1
+  `;
+  const params = [trip];
+  db.query(sql, params)
+    .then(result => {
+      res.json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
 app.use(authorizationMiddleware);
 
 app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
@@ -161,15 +180,67 @@ app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
   } = req.body;
   const url = '/images/' + req.file.filename;
   const sql = `
-              insert into "trips" ("countryId","userId","cityName","mainPhotoUrl","review","thingsTodoScore","foodScore","peopleScore","transportScore","safetyScore")
-              values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
-              returning *
-              `;
+  insert into "trips"
+            (
+              "countryId",
+              "userId",
+              "cityName",
+              "mainPhotoUrl",
+              "review",
+              "thingsTodoScore",
+              "foodScore",
+              "peopleScore",
+              "transportScore",
+              "safetyScore"
+            )
+            values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
+            returning *
+            `;
   const params = [countryId, req.user.userId, city, url, review, thingsTodoScore, foodScore, peopleScore, transportScore, safetyScore];
   return db.query(sql, params)
     .then(result => {
       const [review] = result.rows;
       res.status(201).json({ review });
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'an unexpected error occurred'
+      });
+    });
+});
+
+app.post('/api/trips/comments/:tripId', (req, res, next) => {
+  const tripId = Number(req.params.tripId);
+  const { userId } = req.user;
+  if (!Number.isInteger(tripId) || tripId < 1) {
+    res.status(400).json({
+      error: 'tripId must be a positive integer'
+    });
+    return;
+  }
+  const { content } = req.body;
+  if (!content) {
+    res.status(400).json({
+      error: 'missing content'
+    });
+    return;
+  }
+  const sql = `
+  insert into "comments"
+            (
+              "content",
+              "userId",
+              "tripId"
+            )
+            values ($1,$2,$3)
+            returning *
+            `;
+  const params = [content, userId, tripId];
+  return db.query(sql, params)
+    .then(result => {
+      const [comment] = result.rows;
+      res.status(201).json({ comment });
     })
     .catch(err => {
       console.error(err);
@@ -199,7 +270,7 @@ app.patch('/api/reviews/:tripId', (req, res, next) => {
   } = req.body;
   if (!cityName || !review || !thingsTodoScore || !foodScore || !peopleScore || !transportScore || !safetyScore) {
     res.status(400).json({
-      error: 'All fields are required'
+      error: 'missing data'
     });
     return;
   }
@@ -228,7 +299,6 @@ app.patch('/api/reviews/:tripId', (req, res, next) => {
       }
     })
     .catch(err => next(err));
-
 });
 
 app.get('/api/my-reviews', (req, res, next) => {
@@ -252,7 +322,7 @@ app.get('/api/my-reviews', (req, res, next) => {
         join "countries" as "c" using ("countryId")
         join "users" as "u" using ("userId")
       where "userId" = $1
-  `;
+      `;
   const params = [userId];
   db.query(sql, params)
     .then(result => {

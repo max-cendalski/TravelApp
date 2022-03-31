@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../components/navbar';
 import AppContext from '../lib/app-context';
 import EditReview from '../components/edit-review';
+import Comments from '../components/comments';
 
 export default class TripDetails extends React.Component {
   constructor(props) {
@@ -17,7 +18,11 @@ export default class TripDetails extends React.Component {
       peopleScore: 0,
       transportScore: 0,
       safetyScore: 0,
-      review: ''
+      review: '',
+      comments: [],
+      addCommentButton: 'app-button background-orange float-right',
+      commentForm: 'hidden',
+      comment: ''
     };
     this.handleEditButton = this.handleEditButton.bind(this);
     this.handleSubmitEditedForm = this.handleSubmitEditedForm.bind(this);
@@ -29,12 +34,19 @@ export default class TripDetails extends React.Component {
     this.handleReviewChange = this.handleReviewChange.bind(this);
     this.handleCityNameChange = this.handleCityNameChange.bind(this);
     this.handleCancelForm = this.handleCancelForm.bind(this);
+    this.handleAddComment = this.handleAddComment.bind(this);
+    this.handleCommentForm = this.handleCommentForm.bind(this);
+    this.handleCommentTextarea = this.handleCommentTextarea.bind(this);
+    this.handleCancelComment = this.handleCancelComment.bind(this);
   }
 
   componentDidMount() {
     fetch(`api/trips/${this.props.tripId}`)
       .then(response => response.json())
       .then(trip => this.setState({ trip }));
+    fetch(`api/comments/${this.props.tripId}`)
+      .then(response => response.json())
+      .then(comments => this.setState({ comments }));
   }
 
   handleEditButton() {
@@ -135,6 +147,59 @@ export default class TripDetails extends React.Component {
     });
   }
 
+  handleAddComment(event) {
+    this.setState({
+      commentForm: 'comment-form',
+      addCommentButton: 'hidden'
+    });
+  }
+
+  handleCommentTextarea(event) {
+    this.setState({
+      comment: event.target.value
+    });
+  }
+
+  handleCancelComment(event) {
+    event.preventDefault();
+    this.setState({
+      commentForm: 'hidden',
+      comment: '',
+      addCommentButton: 'app-button background-orange float-right'
+    });
+  }
+
+  handleCommentForm(event) {
+    event.preventDefault();
+    const content = {
+      content: this.state.comment
+    };
+    const token = window.localStorage.getItem('TravelApp-token');
+    fetch(`/api/trips/comments/${this.props.tripId}`, {
+      method: 'POST',
+      headers: {
+        'x-access-token': token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(content)
+    })
+      .then(response => response.json())
+      .then(result => {
+        result.comment.username = this.context.user.username;
+        const comments = [...this.state.comments];
+        comments.unshift(result.comment);
+        this.setState({
+          comments: comments,
+          commentForm: 'hidden',
+          comment: '',
+          addCommentButton: 'app-button background-orange float-right'
+        });
+      })
+      .catch(error => {
+        console.error('Error :', error);
+      });
+  }
+
   render() {
     if (!this.state.trip) return null;
     const {
@@ -183,7 +248,7 @@ export default class TripDetails extends React.Component {
           </div>
           <div>
             {
-              this.context.user.username === username && <button onClick={this.handleEditButton} className='edit-form-button'>Edit</button>
+              this.context.user.username === username && <button onClick={this.handleEditButton} className='app-button background-orange float-right margin-right1rem'>Edit</button>
             }
           </div>
         </div>
@@ -198,6 +263,19 @@ export default class TripDetails extends React.Component {
                         handleSubmitEditedForm={this.handleSubmitEditedForm}
                         handleReviewChange = {this.handleReviewChange}
                         handleCancelForm = {this.handleCancelForm}
+                        />
+        </div>
+        <div className={this.state.reviewContainer}>
+              <Comments comments={this.state.comments}
+                        loggedUser={this.context.user.username}
+                        author={this.state.trip.username}
+                        handleAddComment={this.handleAddComment}
+                        handleCommentForm={this.handleCommentForm}
+                        addCommentButton = {this.state.addCommentButton}
+                        commentForm = {this.state.commentForm}
+                        handleCommentTextarea = {this.handleCommentTextarea}
+                        handleCancelComment = {this.handleCancelComment}
+                        commentValue = {this.state.comment}
                         />
         </div>
       </>

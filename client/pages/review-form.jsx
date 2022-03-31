@@ -183,9 +183,9 @@ export default class ReviewForm extends React.Component {
                 </div>
               </div>
               <label className='review-form-label'>Review</label>
-              <textarea className='column-width100' onChange={this.handleTextarea}rows="20" name="review" required></textarea>
-              <button className='confirm-form-button height-2rem'>Confirm</button>
-              <button className='cancel-form-button' onClick={this.handleCancelTripReview}>Cancel</button>
+              <textarea className='column-width100' onChange={this.handleTextarea} rows="20" name="review" required></textarea>
+              <button className='app-button background-orange float-right'>Confirm</button>
+              <button className='app-button background-red' onClick={this.handleCancelTripReview}>Cancel</button>
             </form>
           </div>
       </div>

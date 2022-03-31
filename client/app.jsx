@@ -50,14 +50,14 @@ export default class App extends React.Component {
     });
   }
 
-  handleConfirmLogout() {
+  handleConfirmLogout(event) {
     window.localStorage.removeItem('TravelApp-token');
-    window.location.hash = '';
     this.setState({
       user: null,
       isAuthorizing: false,
       logoutInfo: 'hidden'
     });
+    window.location.hash = '';
   }
 
   handleCancelLogout() {
