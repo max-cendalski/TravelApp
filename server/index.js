@@ -250,17 +250,46 @@ app.post('/api/trips/comments/:tripId', (req, res, next) => {
     });
 });
 
-app.post('/api/trips/rating/:tripId', (req, res, next) => {
+app.post('/api/trips/score/:tripId', (req, res, next) => {
   const tripId = Number(req.params.tripId);
-  const userId = req.user;
+  const { userId } = req.user;
   if (!Number.isInteger(tripId) || tripId < 1) {
     res.status(400).json({
       error: 'tripId must be a positive number'
     });
     return;
   }
-  const { content } = req.body;
+  const { score } = req.body;
+  if (!score) {
+    res.status(400).json({
+      error: 'missing score'
+    });
+    return;
+  }
+  const sql = `
+  insert into "tripScores"
+            (
+              "score",
+              "userId",
+              "tripId"
+            )
+            values ($1,$2,$3)
+            returning *
+  `;
+  const params = [score, userId, tripId];
+  return db.query(sql, params)
+    .then(result => {
+      const [score] = result.rows;
+      res.status(201).json({ score });
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'an unexpected error occurred'
+      });
+    });
 });
+
 app.patch('/api/reviews/:tripId', (req, res, next) => {
   const tripId = Number(req.params.tripId);
   const { userId } = req.user;
