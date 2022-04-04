@@ -53,3 +53,9 @@ values
 ('1','3','I really enjoyed reading your review.'),
 ('3','3','Great Review'),
 ('4','3','Thank you for a great review');
+
+insert into "tripScores" ("userId","tripId","score")
+values
+('1','8','50'),
+('3','8','100'),
+('4','8','100')
