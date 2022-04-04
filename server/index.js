@@ -250,6 +250,17 @@ app.post('/api/trips/comments/:tripId', (req, res, next) => {
     });
 });
 
+app.post('/api/trips/rating/:tripId', (req, res, next) => {
+  const tripId = Number(req.params.tripId);
+  const userId = req.user;
+  if (!Number.isInteger(tripId) || tripId < 1) {
+    res.status(400).json({
+      error: 'tripId must be a positive number'
+    });
+    return;
+  }
+  const { content } = req.body;
+});
 app.patch('/api/reviews/:tripId', (req, res, next) => {
   const tripId = Number(req.params.tripId);
   const { userId } = req.user;
