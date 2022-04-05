@@ -82,9 +82,7 @@ export default class ReviewScore extends React.Component {
     return (
     <section>
       <h2>Review Score</h2>
-      <p></p>
-      <p>{this.state.tripId}</p>
-      <p></p>
+      <p>{this.state.averageScore}</p>
     </section>
     );
   }
