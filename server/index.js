@@ -277,7 +277,6 @@ app.post('/api/trips/score/:tripId', (req, res, next) => {
 
 app.get('/api/trips/score/:tripId', (req, res, next) => {
   const tripId = Number(req.params.tripId);
-
   if (!Number.isInteger(tripId) || tripId < 1) {
     res.status(400).json({
       error: 'tripId must be a positive number'

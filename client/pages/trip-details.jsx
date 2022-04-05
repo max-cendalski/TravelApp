@@ -3,6 +3,7 @@ import Navbar from '../components/navbar';
 import AppContext from '../lib/app-context';
 import EditReview from '../components/edit-review';
 import Comments from '../components/comments';
+import ReviewScore from '../components/review-score';
 
 export default class TripDetails extends React.Component {
   constructor(props) {
@@ -252,6 +253,10 @@ export default class TripDetails extends React.Component {
             }
           </div>
         </div>
+        <section className='column-width90'>
+            <ReviewScore tripId = {this.props.tripId}
+                        />
+        </section>
         <div className={this.state.editReviewContainer}>
             <EditReview trip={this.state.trip}
                         handleCityNameChange = {this.handleCityNameChange}
@@ -265,7 +270,7 @@ export default class TripDetails extends React.Component {
                         handleCancelForm = {this.handleCancelForm}
                         />
         </div>
-        <div className={this.state.reviewContainer}>
+        <section className={this.state.reviewContainer}>
               <Comments comments={this.state.comments}
                         loggedUser={this.context.user.username}
                         author={this.state.trip.username}
@@ -277,7 +282,7 @@ export default class TripDetails extends React.Component {
                         handleCancelComment = {this.handleCancelComment}
                         commentValue = {this.state.comment}
                         />
-        </div>
+        </section>
       </>
     );
   }

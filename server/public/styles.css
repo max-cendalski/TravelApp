@@ -397,6 +397,10 @@ input::-webkit-inner-spin-button {
   font-size: 1.1rem;
 }
 
+.review-score {
+  width: 90%;
+}
+
 .float-right {
   float: right;
 }

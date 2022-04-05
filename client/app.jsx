@@ -76,7 +76,7 @@ export default class App extends React.Component {
       return <SearchResults country={country}/>;
     }
     if (route.path === 'trips') {
-      const tripId = route.params.get('tripId');
+      const tripId = Number(route.params.get('tripId'));
       return <TripDetails tripId={tripId} />;
     }
     if (route.path === 'sign-in') {
