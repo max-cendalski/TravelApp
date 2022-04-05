@@ -34,7 +34,7 @@ export default class ReviewScore extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      scores: null
+      averageScore: 0
     };
   }
 
@@ -49,10 +49,15 @@ export default class ReviewScore extends React.Component {
     })
       .then(response => response.json())
       .then(result => {
+        let totalScore = 0;
+        for (let i = 0; i < result.length; i++) {
+          totalScore += result[i].score;
+        }
+        totalScore = Math.floor(totalScore / result.length);
         this.setState({
-          scores: result
+          averageScore: totalScore
         });
-        console.log('this.state.scores', this.state.scores);
+        console.log(this.state.averageScore);
       });
   }
 
