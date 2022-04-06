@@ -1,35 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-// export default function ReviewScore(props) {
-
-/*   useEffect(() => {
-    const token = window.localStorage.getItem('TravelApp-token');
-    useEffect(() => {
-      fetch(`/api/trips/score/${props.tripId}`, {
-        method: 'GET',
-        headers: {
-          'x-access-token': token,
-          'content-type': 'application/json'
-        }
-      })
-        .then(response => response.json())
-        .then(result => {
-          console.log('result', result);
-          setScores(result);
-          console.log(scores);
-        });
-    }, []);
-  }); */
-
-/*   return (
-    <section>
-      <h2>Review Score</h2>
-      <p>{props.tripId}</p>
-      <p></p>
-    </section>
-  );
-} */
-
 export default class ReviewScore extends React.Component {
   constructor(props) {
     super(props);
@@ -57,7 +27,6 @@ export default class ReviewScore extends React.Component {
         this.setState({
           averageScore: totalScore
         });
-        console.log(this.state.averageScore);
       });
   }
 
@@ -80,9 +49,9 @@ export default class ReviewScore extends React.Component {
 
   render() {
     return (
-    <section>
-      <h2>Review Score</h2>
-      <p>{this.state.averageScore}</p>
+    <section className='review-score'>
+      <h2>Review Score :</h2>
+      <p><strong>{this.state.averageScore}</strong></p>
     </section>
     );
   }

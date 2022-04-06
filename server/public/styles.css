@@ -398,7 +398,16 @@ input::-webkit-inner-spin-button {
 }
 
 .review-score {
-  width: 90%;
+  margin-top: 2rem;
+}
+
+.review-score * {
+  display: inline-block;
+  padding-right: 1rem;
+}
+
+.review-score > p {
+  font-size: 1.4rem;
 }
 
 .float-right {
