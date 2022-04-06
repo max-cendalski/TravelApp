@@ -56,7 +56,5 @@ values
 
 insert into "tripScores" ("userId","tripId","score")
 values
-('1','8','50'),
-('3','8','100'),
+('2','8','100'),
 ('4','8','100'),
-('1','6','100')
