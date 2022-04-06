@@ -201,6 +201,10 @@ export default class TripDetails extends React.Component {
       });
   }
 
+  handleAddScore(event) {
+    console.log('whee');
+  }
+
   render() {
     if (!this.state.trip) return null;
     const {
@@ -256,6 +260,7 @@ export default class TripDetails extends React.Component {
         <section className='column-width90'>
             <ReviewScore tripId = {this.props.tripId}
                          user ={this.context.user.userId}
+               handleAddScore ={this.handleAddScore}
                         />
         </section>
         <div className={this.state.editReviewContainer}>

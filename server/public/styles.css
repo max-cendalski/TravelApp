@@ -408,9 +408,14 @@ input::-webkit-inner-spin-button {
 .review-score * {
   display: inline-block;
   padding-right: 1rem;
+  line-height: 0.8;
 }
 
-.review-score > p {
+.review-score input {
+  height: 2rem;
+}
+
+.review-score p {
   font-size: 1.4rem;
 }
 
