@@ -5,7 +5,8 @@ export default class ReviewScore extends React.Component {
     this.state = {
       averageScore: 0,
       userScored: false,
-      tripScore: 0
+      tripScore: 0,
+      scoreData: []
     };
     this.handleAddScore = this.handleAddScore.bind(this);
     this.handleScoreChange = this.handleScoreChange.bind(this);
@@ -31,7 +32,8 @@ export default class ReviewScore extends React.Component {
         if (findUser === true) {
           this.setState({
             averageScore: totalScore,
-            userScored: true
+            userScored: true,
+            scoreData: result
           });
         }
       });
@@ -84,7 +86,15 @@ export default class ReviewScore extends React.Component {
     })
       .then(response => response.json())
       .then(result => {
+        const scoreArray = [...this.state.scoreData];
+        scoreArray.push(result);
+        let totalScore = 0;
+        for (let i = 0; i < scoreArray.length; i++) {
+          totalScore += scoreArray[i].score;
+        }
+        totalScore = Math.floor(totalScore / result.length);
         this.setState({
+          averageScore: totalScore,
           userScored: true
         });
       });
