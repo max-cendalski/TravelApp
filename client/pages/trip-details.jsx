@@ -23,8 +23,7 @@ export default class TripDetails extends React.Component {
       comments: [],
       addCommentButton: 'app-button background-orange float-right',
       commentForm: 'hidden',
-      comment: '',
-      scoreValue: 0
+      comment: ''
     };
     this.handleEditButton = this.handleEditButton.bind(this);
     this.handleSubmitEditedForm = this.handleSubmitEditedForm.bind(this);
@@ -203,17 +202,6 @@ export default class TripDetails extends React.Component {
       });
   }
 
-  handleAddScore(event) {
-    event.preventDefault();
-    console.log(event.target.name);
-  }
-
-  handleScoreChange(event) {
-    this.setState({
-      scoreValue: event.target.value
-    });
-  }
-
   render() {
     if (!this.state.trip) return null;
     const {
@@ -269,8 +257,6 @@ export default class TripDetails extends React.Component {
         <section className='column-width90'>
             <ReviewScore tripId = {this.props.tripId}
                          user ={this.context.user.userId}
-               handleAddScore ={this.handleAddScore}
-            handleScoreChange ={this.handleScoreChange}
                         />
         </section>
         <div className={this.state.editReviewContainer}>

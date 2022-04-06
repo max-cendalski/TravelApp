@@ -5,7 +5,8 @@ export default class ReviewScore extends React.Component {
     super(props);
     this.state = {
       averageScore: 0,
-      userScored: false
+      userScored: false,
+      tripScores:[]
     };
   }
 
@@ -34,6 +35,30 @@ export default class ReviewScore extends React.Component {
           });
         }
       });
+  }
+    handleAddScore(event) {
+    event.preventDefault();
+    const token = window.localStorage.getItem('TravelApp-token');
+    fetch(`/api/trips/score/${this.props.tripId}`, {
+      method: 'POST',
+      headers: {
+        'x-access-token': token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(score)
+    })
+    .then(response => response.json())
+    .then(result => {
+      result.score.userId = this.context.user.userId
+      const scores = [...this.state.scores]
+    })
+    })
+  }
+
+  handleScoreChange(event) {
+    this.setState({
+      scoreValue: event.target.value
+    });
   }
 
   /*   componentDidUpdate() {
