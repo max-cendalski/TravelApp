@@ -39,7 +39,6 @@ export default class TripDetails extends React.Component {
     this.handleCommentForm = this.handleCommentForm.bind(this);
     this.handleCommentTextarea = this.handleCommentTextarea.bind(this);
     this.handleCancelComment = this.handleCancelComment.bind(this);
-    this.handleScoreChange = this.handleScoreChange.bind(this);
   }
 
   componentDidMount() {

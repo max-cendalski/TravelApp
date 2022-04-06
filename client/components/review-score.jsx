@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-
+import React from 'react';
 export default class ReviewScore extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       averageScore: 0,
       userScored: false,
-      tripScores:[]
+      tripScore: 0
     };
+    this.handleAddScore = this.handleAddScore.bind(this);
+    this.handleScoreChange = this.handleScoreChange.bind(this);
   }
 
   componentDidMount() {
-    console.log(this.props.user);
     const token = window.localStorage.getItem('TravelApp-token');
     fetch(`/api/trips/score/${this.props.tripId}`, {
       method: 'GET',
@@ -22,12 +22,12 @@ export default class ReviewScore extends React.Component {
     })
       .then(response => response.json())
       .then(result => {
-        const findUser = result.some(user => user.userId === this.props.user);
         let totalScore = 0;
         for (let i = 0; i < result.length; i++) {
           totalScore += result[i].score;
         }
         totalScore = Math.floor(totalScore / result.length);
+        const findUser = result.some(user => user.userId === this.props.user);
         if (findUser === true) {
           this.setState({
             averageScore: totalScore,
@@ -36,8 +36,43 @@ export default class ReviewScore extends React.Component {
         }
       });
   }
-    handleAddScore(event) {
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.averageScore !== this.state.averageScore) {
+      const token = window.localStorage.getItem('TravelApp-token');
+      fetch(`/api/trips/score/${this.props.tripId}`, {
+        method: 'GET',
+        headers: {
+          'X-Access-Token': token,
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(response => response.json())
+        .then(result => {
+          let totalScore = 0;
+          for (let i = 0; i < result.length; i++) {
+            totalScore += result[i].score;
+          }
+          totalScore = Math.floor(totalScore / result.length);
+          const findUser = result.some(user => user.userId === this.props.user);
+          if (findUser === true) {
+            this.setState({
+              averageScore: totalScore,
+              userScored: true
+            });
+          }
+        });
+    }
+  }
+
+  handleAddScore(event) {
     event.preventDefault();
+    const score = {
+      userId: this.props.user,
+      tripId: this.props.tripId,
+      score: this.state.tripScore
+    };
+
     const token = window.localStorage.getItem('TravelApp-token');
     fetch(`/api/trips/score/${this.props.tripId}`, {
       method: 'POST',
@@ -47,36 +82,19 @@ export default class ReviewScore extends React.Component {
       },
       body: JSON.stringify(score)
     })
-    .then(response => response.json())
-    .then(result => {
-      result.score.userId = this.context.user.userId
-      const scores = [...this.state.scores]
-    })
-    })
+      .then(response => response.json())
+      .then(result => {
+        this.setState({
+          userScored: true
+        });
+      });
   }
 
   handleScoreChange(event) {
     this.setState({
-      scoreValue: event.target.value
+      tripScore: event.target.value
     });
   }
-
-  /*   componentDidUpdate() {
-    const token = window.localStorage.getItem('TravelApp-token');
-    fetch('/api/trips/score/8', {
-      method: 'GET',
-      headers: {
-        'X-Access-Token': token,
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => response.json())
-      .then(result => {
-        this.setState({
-          scores: result
-        });
-      });
-  } */
 
   render() {
     return (
@@ -85,9 +103,8 @@ export default class ReviewScore extends React.Component {
       {
         this.state.userScored === true
           ? <p><strong>{this.state.averageScore} / 100</strong> </p>
-          : <form onSubmit={this.props.handleAddScore}><p><input onChange={this.props.handleScoreChange} className="review-score-input" type="number" name="score" max="100"></input></p><button type="submit" className='app-button'>Add Score</button></form>
+          : <form onSubmit={this.handleAddScore}><p><input onChange={this.handleScoreChange} className="review-score-input" type="number" name="score" max="100"></input></p><button type="submit" className='app-button'>Add Score</button></form>
       }
-
     </section>
     );
   }
