@@ -24,10 +24,16 @@ export default class ReviewScore extends React.Component {
       .then(response => response.json())
       .then(result => {
         let totalScore = 0;
-        for (let i = 0; i < result.length; i++) {
-          totalScore += result[i].score;
+        if (result.length > 1) {
+          for (let i = 0; i < result.length; i++) {
+            totalScore += result[i].score;
+          }
+          totalScore = Math.floor(totalScore / result.length);
+        } else {
+          totalScore = 0;
         }
-        totalScore = Math.floor(totalScore / result.length);
+
+        console.log('total score', totalScore);
         const findUser = result.some(user => user.userId === this.props.user);
         if (findUser === true) {
           this.setState({
@@ -36,6 +42,7 @@ export default class ReviewScore extends React.Component {
             scoreData: result
           });
         }
+        console.log('this.state.scoreData', this.state.scoreData);
       });
   }
 
@@ -59,16 +66,18 @@ export default class ReviewScore extends React.Component {
       .then(response => response.json())
       .then(result => {
         const scoreArray = [...this.state.scoreData];
-        scoreArray.push(result);
+        scoreArray.push(result.score);
         let totalScore = 0;
-        for (let i = 0; i < scoreArray.length; i++) {
-          totalScore += scoreArray[i].score;
+        if (scoreArray.length > 1) {
+          for (let i = 0; i < scoreArray.length; i++) {
+            totalScore += scoreArray[i].score;
+          }
+          totalScore = Math.floor(totalScore / result.length);
+          this.setState({
+            averageScore: totalScore,
+            userScored: true
+          });
         }
-        totalScore = Math.floor(totalScore / result.length);
-        this.setState({
-          averageScore: totalScore,
-          userScored: true
-        });
       });
   }
 
