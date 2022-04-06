@@ -5,7 +5,6 @@ export default class ReviewScore extends React.Component {
     this.state = {
       averageScore: 0,
       userScored: false,
-      tripScore: 0,
       scoreData: []
     };
     this.handleAddScore = this.handleAddScore.bind(this);
@@ -24,16 +23,24 @@ export default class ReviewScore extends React.Component {
       .then(response => response.json())
       .then(result => {
         let totalScore = 0;
+        if (result.length === 0) return;
         if (result.length > 1) {
           for (let i = 0; i < result.length; i++) {
             totalScore += result[i].score;
           }
           totalScore = Math.floor(totalScore / result.length);
+          this.setState({
+            averageScore: totalScore,
+            userScored: true,
+            scoreData: result
+          });
         } else {
-          totalScore = 0;
+          totalScore = result[0].score;
+          this.setState({
+            averageScore: totalScore,
+            scoreData: result
+          });
         }
-
-        console.log('total score', totalScore);
         const findUser = result.some(user => user.userId === this.props.user);
         if (findUser === true) {
           this.setState({
@@ -42,7 +49,6 @@ export default class ReviewScore extends React.Component {
             scoreData: result
           });
         }
-        console.log('this.state.scoreData', this.state.scoreData);
       });
   }
 
@@ -66,18 +72,22 @@ export default class ReviewScore extends React.Component {
       .then(response => response.json())
       .then(result => {
         const scoreArray = [...this.state.scoreData];
-        scoreArray.push(result.score);
+        scoreArray.unshift(result.score);
         let totalScore = 0;
+        if (scoreArray.length === 1) {
+          totalScore = scoreArray[0].score;
+        }
         if (scoreArray.length > 1) {
           for (let i = 0; i < scoreArray.length; i++) {
             totalScore += scoreArray[i].score;
           }
-          totalScore = Math.floor(totalScore / result.length);
-          this.setState({
-            averageScore: totalScore,
-            userScored: true
-          });
+          totalScore = Math.floor(totalScore / scoreArray.length);
         }
+        this.setState({
+          averageScore: totalScore,
+          userScored: true,
+          scoreData: scoreArray
+        });
       });
   }
 
