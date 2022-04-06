@@ -23,7 +23,8 @@ export default class TripDetails extends React.Component {
       comments: [],
       addCommentButton: 'app-button background-orange float-right',
       commentForm: 'hidden',
-      comment: ''
+      comment: '',
+      scoreValue: 0
     };
     this.handleEditButton = this.handleEditButton.bind(this);
     this.handleSubmitEditedForm = this.handleSubmitEditedForm.bind(this);
@@ -39,6 +40,7 @@ export default class TripDetails extends React.Component {
     this.handleCommentForm = this.handleCommentForm.bind(this);
     this.handleCommentTextarea = this.handleCommentTextarea.bind(this);
     this.handleCancelComment = this.handleCancelComment.bind(this);
+    this.handleScoreChange = this.handleScoreChange.bind(this);
   }
 
   componentDidMount() {
@@ -202,7 +204,14 @@ export default class TripDetails extends React.Component {
   }
 
   handleAddScore(event) {
-    console.log('whee');
+    event.preventDefault();
+    console.log(event.target.name);
+  }
+
+  handleScoreChange(event) {
+    this.setState({
+      scoreValue: event.target.value
+    });
   }
 
   render() {
@@ -261,6 +270,7 @@ export default class TripDetails extends React.Component {
             <ReviewScore tripId = {this.props.tripId}
                          user ={this.context.user.userId}
                handleAddScore ={this.handleAddScore}
+            handleScoreChange ={this.handleScoreChange}
                         />
         </section>
         <div className={this.state.editReviewContainer}>

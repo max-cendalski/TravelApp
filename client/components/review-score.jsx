@@ -60,7 +60,7 @@ export default class ReviewScore extends React.Component {
       {
         this.state.userScored === true
           ? <p><strong>{this.state.averageScore} / 100</strong> </p>
-          : <form onSubmit={this.props.handleAddScore}><p><input className="review-score-input" type="number" max="100"></input></p><button type="submit" className='app-button'>Add Score</button></form>
+          : <form onSubmit={this.props.handleAddScore}><p><input onChange={this.props.handleScoreChange} className="review-score-input" type="number" name="score" max="100"></input></p><button type="submit" className='app-button'>Add Score</button></form>
       }
 
     </section>
