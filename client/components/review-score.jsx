@@ -39,34 +39,6 @@ export default class ReviewScore extends React.Component {
       });
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.averageScore !== this.state.averageScore) {
-      const token = window.localStorage.getItem('TravelApp-token');
-      fetch(`/api/trips/score/${this.props.tripId}`, {
-        method: 'GET',
-        headers: {
-          'X-Access-Token': token,
-          'Content-Type': 'application/json'
-        }
-      })
-        .then(response => response.json())
-        .then(result => {
-          let totalScore = 0;
-          for (let i = 0; i < result.length; i++) {
-            totalScore += result[i].score;
-          }
-          totalScore = Math.floor(totalScore / result.length);
-          const findUser = result.some(user => user.userId === this.props.user);
-          if (findUser === true) {
-            this.setState({
-              averageScore: totalScore,
-              userScored: true
-            });
-          }
-        });
-    }
-  }
-
   handleAddScore(event) {
     event.preventDefault();
     const score = {
