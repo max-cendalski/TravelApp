@@ -58,7 +58,10 @@ export default class ReviewScore extends React.Component {
     <section className='review-score'>
       <h2>Review Score :</h2>
       {
-        this.state.userScored === true ? <p><strong>{this.state.averageScore} / 100</strong> </p> : <p><input type="number" max="100"></input></p>
+        this.state.userScored === true ? <p><strong>{this.state.averageScore} / 100</strong> </p> : <p><input className="review-score-input" type="number" max="100"></input></p>
+      }
+      {
+        !this.state.userScored && <p><button className='app-button'>Add Score</button></p>
       }
     </section>
     );

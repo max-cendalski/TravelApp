@@ -298,6 +298,10 @@ input::-webkit-inner-spin-button {
   font-weight: 700;
 }
 
+.review-score-input {
+  width: 3rem;
+}
+
 .review-form-label {
   display: inline-block;
   margin-bottom: 0.3rem;
