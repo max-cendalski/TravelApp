@@ -22,7 +22,7 @@ export default class ReviewScore extends React.Component {
     })
       .then(response => response.json())
       .then(result => {
-        if (this.props.loggedUsername === this.props.reviewAuthorName) {
+        if (this.props.loggedUsername === this.props.reviewAuthorName || result.some(item => item.userId === this.props.loggedUserId)) {
           this.setState({
             userScored: true
           });

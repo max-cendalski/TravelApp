@@ -255,6 +255,7 @@ export default class TripDetails extends React.Component {
         </div>
         <section className='column-width90'>
             <ReviewScore tripId = {this.props.tripId}
+                  loggedUserId ={this.context.user.userId}
                  loggedUsername ={this.context.user.username}
                 reviewAuthorName={this.state.trip.username}
                         />
