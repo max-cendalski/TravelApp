@@ -22,6 +22,11 @@ export default class ReviewScore extends React.Component {
     })
       .then(response => response.json())
       .then(result => {
+        if (this.props.loggedUsername === this.props.reviewAuthorName) {
+          this.setState({
+            userScored: true
+          });
+        }
         let totalScore = 0;
         if (result.length === 0) return;
         if (result.length > 1) {
@@ -41,14 +46,7 @@ export default class ReviewScore extends React.Component {
             scoreData: result
           });
         }
-        const findUser = result.some(user => user.userId === this.props.user);
-        if (findUser === true) {
-          this.setState({
-            averageScore: totalScore,
-            userScored: true,
-            scoreData: result
-          });
-        }
+
       });
   }
 
