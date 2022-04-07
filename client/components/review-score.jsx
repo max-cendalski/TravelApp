@@ -101,8 +101,8 @@ export default class ReviewScore extends React.Component {
       <h2>Review Score :</h2>
       {
         this.state.userScored === true
-          ? <p><strong>{this.state.averageScore} / 100</strong> </p>
-          : <form onSubmit={this.handleAddScore}><p><input onChange={this.handleScoreChange} className="review-score-input" type="number" name="score" max="100"></input></p><button type="submit" className='app-button'>Add Score</button></form>
+          ? <p><strong>{this.state.averageScore} / 100</strong></p>
+          : <form onSubmit={this.handleAddScore}><p><strong>{this.state.averageScore} / 100</strong></p><p><input onChange={this.handleScoreChange} className="review-score-input" type="number" name="score" max="100"></input></p><button type="submit" className='app-button'>Add Score</button></form>
       }
     </section>
     );
