@@ -402,13 +402,13 @@ input::-webkit-inner-spin-button {
 }
 
 .review-score {
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .review-score * {
   display: inline-block;
-  padding-right: 1rem;
-  line-height: 0.8;
+  padding-right: 0.5rem;
+  line-height: 0.7;
 }
 
 .review-score input {
