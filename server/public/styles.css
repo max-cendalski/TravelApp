@@ -298,6 +298,10 @@ input::-webkit-inner-spin-button {
   font-weight: 700;
 }
 
+.review-score-input {
+  width: 3rem;
+}
+
 .review-form-label {
   display: inline-block;
   margin-bottom: 0.3rem;
@@ -395,6 +399,24 @@ input::-webkit-inner-spin-button {
   width: 100%;
   height: 5rem;
   font-size: 1.1rem;
+}
+
+.review-score {
+  margin-top: 1rem;
+}
+
+.review-score * {
+  display: inline-block;
+  padding-right: 0.5rem;
+  line-height: 0.7;
+}
+
+.review-score input {
+  height: 2rem;
+}
+
+.review-score p {
+  font-size: 1.4rem;
 }
 
 .float-right {

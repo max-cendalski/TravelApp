@@ -51,13 +51,14 @@ export default class App extends React.Component {
   }
 
   handleConfirmLogout(event) {
+    const { route } = this.state;
+    route.path = '';
     window.localStorage.removeItem('TravelApp-token');
     this.setState({
       user: null,
       isAuthorizing: false,
       logoutInfo: 'hidden'
     });
-    window.location.hash = '';
   }
 
   handleCancelLogout() {
@@ -76,7 +77,7 @@ export default class App extends React.Component {
       return <SearchResults country={country}/>;
     }
     if (route.path === 'trips') {
-      const tripId = route.params.get('tripId');
+      const tripId = Number(route.params.get('tripId'));
       return <TripDetails tripId={tripId} />;
     }
     if (route.path === 'sign-in') {
