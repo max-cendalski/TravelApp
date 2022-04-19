@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from '../components/navbar';
+import PlacesAutocomplete from 'react-places-autocomplete';
 
 export default class ReviewForm extends React.Component {
   constructor(props) {
