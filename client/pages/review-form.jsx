@@ -27,8 +27,7 @@ export default class ReviewForm extends React.Component {
     this.handlePeopleInput = this.handlePeopleInput.bind(this);
     this.handleTransportInput = this.handleTransportInput.bind(this);
     this.handleSafetyInput = this.handleSafetyInput.bind(this);
-    this.handleSelect = this.handleSelect.bind(this)
-
+    this.handleOnLocationSubmit = this.handleOnLocationSubmit.bind(this)
   }
 
 
@@ -45,6 +44,12 @@ export default class ReviewForm extends React.Component {
           countries: result
         });
       });
+  }
+
+  handleOnLocationSubmit(event) {
+    event.preventDefault()
+    console.log('whee')
+    console.log('this.state.address',this.state.address)
   }
 
   handleSubmit(event) {
@@ -80,13 +85,6 @@ export default class ReviewForm extends React.Component {
 
   handleChange = address => {
     this.setState({ address });
-  };
-
-  handleSelect = address => {
-    geocodeByAddress(address)
-      .then(results => getLatLng(results[0]))
-      .then(latLng => console.log('Success', latLng))
-      .catch(error => console.error('Error', error));
   };
 
   handleTextarea(event) {
@@ -141,21 +139,20 @@ export default class ReviewForm extends React.Component {
         <Navbar />
           <div className='row centered padding-top15vh'>
           <PlacesAutocomplete
-          value={this.state.address}
+            value={this.state.address}
             onChange={this.handleChange}
-            onSelect={this.handleSelect}
-            handleOnSubmit = {this.handleOnSubmit}
+            handleOnLocationSubmit = {this.handleOnLocationSubmit}
             >
             {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
               <div>
-               <form onSubmit={this.handleOnSubmit}>
+               <form onSubmit={this.handleOnLocationSubmit}>
                  <input type="text"
                   {...getInputProps({
                     placeholder: 'Search Places ...',
                     className: 'location-search-input',
                   })}
                 />
-                <button>Submit</button>
+                <button>Add Location</button>
                </form>
                 <div className="autocomplete-dropdown-container">
                   {loading && <div>Loading...</div>}
@@ -168,14 +165,14 @@ export default class ReviewForm extends React.Component {
                       ? { backgroundColor: '#fafafa', cursor: 'pointer' }
                       : { backgroundColor: '#ffffff', cursor: 'pointer' };
                     return (
-                      <div
-                        key = {index + 1}
+                     <div
                         {...getSuggestionItemProps(suggestion, {
                           className,
                           style,
                         })}
+                        key={index + 1}
                       >
-                      <span>{suggestion.description}</span>
+                      <span className='test-class'>{suggestion.description}</span>
                       </div>
                     );
                   })}
@@ -220,7 +217,6 @@ export default class ReviewForm extends React.Component {
             </form>
           </div>
       </div>
-
     );
   }
 }
