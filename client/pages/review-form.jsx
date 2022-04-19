@@ -8,6 +8,7 @@ export default class ReviewForm extends React.Component {
     this.state = {
       countryId: '',
       countries: [],
+      address: '',
       city: '',
       review: '',
       thingsTodoScore: 0,
@@ -20,14 +21,16 @@ export default class ReviewForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCancelTripReview = this.handleCancelTripReview.bind(this);
-    this.handleCityInput = this.handleCityInput.bind(this);
     this.handleTextarea = this.handleTextarea.bind(this);
     this.handleThingsToDoInput = this.handleThingsToDoInput.bind(this);
     this.handleFoodInput = this.handleFoodInput.bind(this);
     this.handlePeopleInput = this.handlePeopleInput.bind(this);
     this.handleTransportInput = this.handleTransportInput.bind(this);
     this.handleSafetyInput = this.handleSafetyInput.bind(this);
+    this.handleSelect = this.handleSelect.bind(this)
+
   }
+
 
   componentDidMount() {
     fetch('/api/countries', {
@@ -75,17 +78,16 @@ export default class ReviewForm extends React.Component {
       });
   }
 
-  handleChange(event) {
-    this.setState({
-      countryId: event.target.value
-    });
-  }
+  handleChange = address => {
+    this.setState({ address });
+  };
 
-  handleCityInput(event) {
-    this.setState({
-      city: event.target.value
-    });
-  }
+  handleSelect = address => {
+    geocodeByAddress(address)
+      .then(results => getLatLng(results[0]))
+      .then(latLng => console.log('Success', latLng))
+      .catch(error => console.error('Error', error));
+  };
 
   handleTextarea(event) {
     this.setState({
@@ -138,24 +140,52 @@ export default class ReviewForm extends React.Component {
       <div className='container'>
         <Navbar />
           <div className='row centered padding-top15vh'>
+          <PlacesAutocomplete
+          value={this.state.address}
+            onChange={this.handleChange}
+            onSelect={this.handleSelect}
+            handleOnSubmit = {this.handleOnSubmit}
+            >
+            {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+              <div>
+               <form onSubmit={this.handleOnSubmit}>
+                 <input type="text"
+                  {...getInputProps({
+                    placeholder: 'Search Places ...',
+                    className: 'location-search-input',
+                  })}
+                />
+                <button>Submit</button>
+               </form>
+                <div className="autocomplete-dropdown-container">
+                  {loading && <div>Loading...</div>}
+                  {suggestions.map((suggestion,index) => {
+                    const className = suggestion.active
+                      ? 'suggestion-item--active'
+                      : 'suggestion-item';
+                    // inline style for demonstration purpose
+                    const style = suggestion.active
+                      ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                      : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                    return (
+                      <div
+                        key = {index + 1}
+                        {...getSuggestionItemProps(suggestion, {
+                          className,
+                          style,
+                        })}
+                      >
+                      <span>{suggestion.description}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </PlacesAutocomplete>
             <form className ="review-form" onSubmit={this.handleSubmit} name="reviewForm">
               <div className='row column-width100'>
-                <div className='review-form-left column-width50'>
-                  <div>
-                    <label className="review-form-label">Country</label>
-                    <br />
-                    <select className="select-element" value={this.state.countryId} onChange={this.handleChange} required>
-                    <option></option>
-                    {
-                      this.state.countries.map(country =>
-                      <option key={country.countryId} value={country.countryId}>{country.name}</option>)
-                    }
-                    </select>
-                  </div>
-                  <label className="review-form-label">City</label>
-                  <br />
-                  <input className="form-input-element" onChange={this.handleCityInput} type="text" placeholder='city' name='city' required></input>
-                </div>
+
                 <div className='review-form-right column-width50'>
                   <h3>Your score from 0 to 100</h3>
                   <input className="review-score-input" onChange={this.handleThingsToDoInput} max="100" type="number" required></input>
@@ -190,6 +220,27 @@ export default class ReviewForm extends React.Component {
             </form>
           </div>
       </div>
+
     );
   }
 }
+
+
+
+/*
+    <div className='review-form-left column-width50'>
+                  <div>
+                    <label className="review-form-label">Location</label>
+                    <br />
+                    <select className="select-element" value={this.state.countryId} onChange={this.handleChange} required>
+                    <option></option>
+                    {
+                      this.state.countries.map(country =>
+                      <option key={country.countryId} value={country.countryId}>{country.name}</option>)
+                    }
+                    </select>
+                  </div>
+                  <label className="review-form-label">City</label>
+                  <br />
+                  <input className="form-input-element" onChange={this.handleCityInput} type="text" placeholder='city' name='city' required></input>
+                </div> */

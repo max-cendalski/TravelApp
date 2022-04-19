@@ -419,6 +419,10 @@ input::-webkit-inner-spin-button {
   font-size: 1.4rem;
 }
 
+.autocomplete-dropdown-container {
+  position: absolute;
+}
+
 .float-right {
   float: right;
 }
