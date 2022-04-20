@@ -7,7 +7,6 @@ export default class ReviewForm extends React.Component {
     super(props);
     this.state = {
       countryId: '',
-      countries: [],
       address: '',
       city: '',
       review: '',
@@ -32,7 +31,8 @@ export default class ReviewForm extends React.Component {
 
 
   componentDidMount() {
-    fetch('/api/countries', {
+    console.log('componentDidMount')
+/*     fetch('/api/countries', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -43,7 +43,7 @@ export default class ReviewForm extends React.Component {
         this.setState({
           countries: result
         });
-      });
+      }); */
   }
 
   handleOnLocationSubmit(event) {
