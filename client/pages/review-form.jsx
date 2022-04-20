@@ -137,13 +137,13 @@ export default class ReviewForm extends React.Component {
       <div className='container'>
         <Navbar />
           <article className='row centered padding-top15vh'>
-          <PlacesAutocomplete
-            value={this.state.address}
-            onChange={this.handleChange}
-            handleOnLocationSubmit = {this.handleOnLocationSubmit}
-            >
-            {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-              <div>
+
+            <form className ="review-form" onSubmit={this.handleSubmit} name="reviewForm">
+              <PlacesAutocomplete value={this.state.address}
+                                  onChange={this.handleChange}
+              >
+              {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+              <section>
 
                <p>
                   <label htmlFor="location">You location</label>
@@ -178,29 +178,35 @@ export default class ReviewForm extends React.Component {
                     );
                   })}
                 </div>
-              </div>
-            )}
+              </section>
+              )}
           </PlacesAutocomplete>
-            <form className ="review-form" onSubmit={this.handleSubmit} name="reviewForm">
-
-                <div className='review-form-right column-width50'>
+                <section className='review-form-right column-width50'>
                   <h3>Your score from 0 to 100</h3>
-                  <input className="review-score-input" onChange={this.handleThingsToDoInput} max="100" type="number" required></input>
+                  <p>
+                   <input className="review-score-input" onChange={this.handleThingsToDoInput} max="100" type="number" required></input>
                   <label className="review-score-label">Things To Do</label>
-                  <br />
+                  </p>
+                  <p>
                   <input className="review-score-input" onChange={this.handleFoodInput} max="100" type="number" required></input>
                   <label className="review-score-label">Food</label>
-                  <br />
-                  <input className="review-score-input" onChange={this.handlePeopleInput} max="100" type="number" required></input>
+                  </p>
+                  <p>
+                   <input className="review-score-input" onChange={this.handlePeopleInput} max="100" type="number" required></input>
                   <label className="review-score-label">People</label>
-                  <br />
-                  <input className="review-score-input" onChange={this.handleTransportInput} max="100" type="number" required></input>
+                  </p>
+                  <p>
+                   <input className="review-score-input" onChange={this.handleTransportInput} max="100" type="number" required></input>
                   <label className="review-score-label">Transport</label>
-                  <br />
-                  <input className="review-score-input" onChange={this.handleSafetyInput} max="100" type="number" required></input>
+                  </p>
+
+                  <p>
+                   <input className="review-score-input" onChange={this.handleSafetyInput} max="100" type="number" required></input>
                   <label className="review-score-label">Safety</label>
-                </div>
-                <div>
+                  </p>
+
+                </section>
+                <section>
                 <h3>Upload File</h3>
                 <input className='file-upload'
                   required
@@ -208,7 +214,7 @@ export default class ReviewForm extends React.Component {
                   name="image"
                   ref={this.fileInputRef}
                   accept=".png, .jpg, .jpeg, .gif" />
-                </div>
+                </section>
 
               <label className='review-form-label'>Review</label>
               <textarea className='column-width100' onChange={this.handleTextarea} rows="20" name="review" required></textarea>
