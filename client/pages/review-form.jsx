@@ -6,7 +6,7 @@ export default class ReviewForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      countryId: '',
+      country: '',
       address: '',
       city: '',
       review: '',
@@ -30,9 +30,25 @@ export default class ReviewForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    const newLocation = this.state.address;
+    const newLocationArray = newLocation.split(',');
+    if (newLocationArray.length === 2) {
+      const [city, country] = newLocationArray;
+      this.setState({
+        cityToSave: city,
+        countryToSave: country
+      });
+    }
+    if (newLocationArray.length > 2) {
+      const [city,, country] = newLocationArray;
+      this.setState({
+        cityToSave: city,
+        countryToSave: country
+      });
+    }
     const formData = new FormData();
     const token = window.localStorage.getItem('TravelApp-token');
-    formData.append('countryId', this.state.countryId);
+    formData.append('country', this.state.country);
     formData.append('city', this.state.city);
     formData.append('image', this.fileInputRef.current.files[0]);
     formData.append('review', this.state.review);
@@ -123,7 +139,7 @@ export default class ReviewForm extends React.Component {
                 <section id="places-autocomplete-section">
                   <p>
                     <h3>Your Location</h3>
-                    <input type="text" name="location"
+                    <input type="text" name="location" required
                       {...getInputProps({
                         placeholder: 'Search Places ...',
                         className: 'location-search-input'
