@@ -136,7 +136,7 @@ export default class ReviewForm extends React.Component {
     return (
       <div className='container'>
         <Navbar />
-        <article id="review-form-container">
+        <article id="form-review-container">
           <form onSubmit={this.handleSubmit} name="reviewForm">
             <PlacesAutocomplete value={this.state.address}
                                 onChange={this.handleChange}
@@ -179,40 +179,40 @@ export default class ReviewForm extends React.Component {
             </section>
             )}
             </PlacesAutocomplete>
-              <section>
-                <h3>Your score from 0 to 100</h3>
-                <p>
-                  <input className="review-score-input" onChange={this.handleThingsToDoInput} max="100" type="number" required></input>
+            <section id="form-scores-container">
+              <h3>Your score from 0 to 100</h3>
+              <p>
+                <input className="review-score-input" onChange={this.handleThingsToDoInput} max="100" type="number" required></input>
                 <label className="review-score-label">Things To Do</label>
-                </p>
-                <p>
+              </p>
+              <p>
                 <input className="review-score-input" onChange={this.handleFoodInput} max="100" type="number" required></input>
                 <label className="review-score-label">Food</label>
-                </p>
-                <p>
-                  <input className="review-score-input" onChange={this.handlePeopleInput} max="100" type="number" required></input>
+              </p>
+              <p>
+                <input className="review-score-input" onChange={this.handlePeopleInput} max="100" type="number" required></input>
                 <label className="review-score-label">People</label>
-                </p>
-                <p>
-                  <input className="review-score-input" onChange={this.handleTransportInput} max="100" type="number" required></input>
+              </p>
+              <p>
+                <input className="review-score-input" onChange={this.handleTransportInput} max="100" type="number" required></input>
                 <label className="review-score-label">Transport</label>
-                </p>
+              </p>
 
-                <p>
-                  <input className="review-score-input" onChange={this.handleSafetyInput} max="100" type="number" required></input>
+              <p>
+                <input className="review-score-input" onChange={this.handleSafetyInput} max="100" type="number" required></input>
                 <label className="review-score-label">Safety</label>
-                </p>
-              </section>
-              <section>
+              </p>
+            </section>
+            <section id="upload-file-container">
               <h3>Upload File</h3>
-              <input className='file-upload'
+              <input className='form-file-upload'
                 required
                 type="file"
                 name="image"
                 ref={this.fileInputRef}
-                accept=".png, .jpg, .jpeg, .gif" />
-              </section>
-
+                accept=".png, .jpg, .jpeg, .gif"
+              />
+            </section>
             <label className='review-form-label'>Review</label>
             <textarea className='column-width100' onChange={this.handleTextarea} rows="20" name="review" required></textarea>
             <button className='app-button background-orange float-right'>Confirm</button>

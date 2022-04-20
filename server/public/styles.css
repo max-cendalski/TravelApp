@@ -291,6 +291,7 @@ input::-webkit-inner-spin-button {
 
 .review-score-input {
   width: 3rem;
+  margin: 0.5rem 0.5rem 0 0;
 }
 
 .review-form-label {
@@ -392,7 +393,7 @@ input::-webkit-inner-spin-button {
   font-size: 1.1rem;
 }
 
-#review-form-container {
+#form-review-container {
   display: grid;
   padding-top: 3rem;
 }
