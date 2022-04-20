@@ -26,29 +26,6 @@ export default class ReviewForm extends React.Component {
     this.handlePeopleInput = this.handlePeopleInput.bind(this);
     this.handleTransportInput = this.handleTransportInput.bind(this);
     this.handleSafetyInput = this.handleSafetyInput.bind(this);
-    this.handleOnLocationSubmit = this.handleOnLocationSubmit.bind(this);
-  }
-
-  componentDidMount() {
-    console.log('componentDidMount');
-    /*     fetch('/api/countries', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => response.json())
-      .then(result => {
-        this.setState({
-          countries: result
-        });
-      }); */
-  }
-
-  handleOnLocationSubmit(event) {
-    event.preventDefault();
-    console.log('whee');
-    console.log('this.state.address', this.state.address);
   }
 
   handleSubmit(event) {
@@ -143,7 +120,7 @@ export default class ReviewForm extends React.Component {
                                   onChange={this.handleChange}
               >
               {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                <section>
+                <section id="places-autocomplete-section">
                   <p>
                     <h3>Your Location</h3>
                     <input type="text" name="location"
@@ -153,7 +130,6 @@ export default class ReviewForm extends React.Component {
                       })}
                     />
                   </p>
-
                 <div className="autocomplete-dropdown-container">
                   {loading && <div>Loading...</div>}
                   {suggestions.map((suggestion, index) => {

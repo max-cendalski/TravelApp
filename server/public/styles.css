@@ -312,10 +312,6 @@ input::-webkit-inner-spin-button {
   margin-bottom: 1rem;
 }
 
-.file-upload {
-  margin-top: 1rem;
-}
-
 .logout-info {
   border-radius: 5px;
   position: absolute;
@@ -390,13 +386,13 @@ input::-webkit-inner-spin-button {
   font-size: 1.1rem;
 }
 
-#review-form-container {
-  display: grid;
-  padding-top: 3.5rem;
+#places-autocomplete-section input {
+  width: 12.5rem;
 }
 
-#places-autocomplete  {
-
+#review-form-container form {
+  padding-top: 3.5rem;
+  width: 60%;
 }
 
 #review-form-scores-section {
@@ -409,12 +405,11 @@ input::-webkit-inner-spin-button {
 }
 
 #review-form-upload-file-section input {
-  padding: 0.5rem 1rem 0 0;
+  padding: 0.25rem 1rem 0 0;
 }
 
 #review-form-textarea-section {
   margin-top: 1rem;
-  width: 100%;
 }
 
 #review-form-textarea-section textarea {
@@ -515,5 +510,9 @@ input::-webkit-inner-spin-button {
 
   .review-container {
     padding: 1rem 0;
+  }
+
+  #review-form-container form {
+    width: 90%;
   }
 }
