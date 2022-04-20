@@ -136,111 +136,90 @@ export default class ReviewForm extends React.Component {
     return (
       <div className='container'>
         <Navbar />
-          <article className='row centered padding-top15vh'>
-
-            <form className ="review-form" onSubmit={this.handleSubmit} name="reviewForm">
-              <PlacesAutocomplete value={this.state.address}
-                                  onChange={this.handleChange}
-              >
-              {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+        <article id="review-form-container">
+          <form onSubmit={this.handleSubmit} name="reviewForm">
+            <PlacesAutocomplete value={this.state.address}
+                                onChange={this.handleChange}
+            >
+            {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
               <section>
+                <p>
+                  <label className="review-score-label">You location</label>
+                  <input type="text" name="location"
+                    {...getInputProps({
+                      placeholder: 'Search Places ...',
+                      className: 'location-search-input'
+                    })}
+                  />
+                </p>
 
-               <p>
-                  <label htmlFor="location">You location</label>
-                     <input type="text" name="location"
-                  {...getInputProps({
-                    placeholder: 'Search Places ...',
-                    className: 'location-search-input'
-                  })}
-                />
-               </p>
+              <div className="autocomplete-dropdown-container">
+                {loading && <div>Loading...</div>}
+                {suggestions.map((suggestion, index) => {
+                  const className = suggestion.active
+                    ? 'suggestion-item--active'
+                    : 'suggestion-item';
+                  // inline style for demonstration purpose
+                  const style = suggestion.active
+                    ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                    : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                  return (
+                    <div
+                      {...getSuggestionItemProps(suggestion, {
+                        className,
+                        style
+                      })}
+                      key={index + 1}
+                    >
+                    <span className='test-class'>{suggestion.description}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+            )}
+            </PlacesAutocomplete>
+              <section>
+                <h3>Your score from 0 to 100</h3>
+                <p>
+                  <input className="review-score-input" onChange={this.handleThingsToDoInput} max="100" type="number" required></input>
+                <label className="review-score-label">Things To Do</label>
+                </p>
+                <p>
+                <input className="review-score-input" onChange={this.handleFoodInput} max="100" type="number" required></input>
+                <label className="review-score-label">Food</label>
+                </p>
+                <p>
+                  <input className="review-score-input" onChange={this.handlePeopleInput} max="100" type="number" required></input>
+                <label className="review-score-label">People</label>
+                </p>
+                <p>
+                  <input className="review-score-input" onChange={this.handleTransportInput} max="100" type="number" required></input>
+                <label className="review-score-label">Transport</label>
+                </p>
 
-                <div className="autocomplete-dropdown-container">
-                  {loading && <div>Loading...</div>}
-                  {suggestions.map((suggestion, index) => {
-                    const className = suggestion.active
-                      ? 'suggestion-item--active'
-                      : 'suggestion-item';
-                    // inline style for demonstration purpose
-                    const style = suggestion.active
-                      ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                      : { backgroundColor: '#ffffff', cursor: 'pointer' };
-                    return (
-                     <div
-                        {...getSuggestionItemProps(suggestion, {
-                          className,
-                          style
-                        })}
-                        key={index + 1}
-                      >
-                      <span className='test-class'>{suggestion.description}</span>
-                      </div>
-                    );
-                  })}
-                </div>
+                <p>
+                  <input className="review-score-input" onChange={this.handleSafetyInput} max="100" type="number" required></input>
+                <label className="review-score-label">Safety</label>
+                </p>
               </section>
-              )}
-          </PlacesAutocomplete>
-                <section className='review-form-right column-width50'>
-                  <h3>Your score from 0 to 100</h3>
-                  <p>
-                   <input className="review-score-input" onChange={this.handleThingsToDoInput} max="100" type="number" required></input>
-                  <label className="review-score-label">Things To Do</label>
-                  </p>
-                  <p>
-                  <input className="review-score-input" onChange={this.handleFoodInput} max="100" type="number" required></input>
-                  <label className="review-score-label">Food</label>
-                  </p>
-                  <p>
-                   <input className="review-score-input" onChange={this.handlePeopleInput} max="100" type="number" required></input>
-                  <label className="review-score-label">People</label>
-                  </p>
-                  <p>
-                   <input className="review-score-input" onChange={this.handleTransportInput} max="100" type="number" required></input>
-                  <label className="review-score-label">Transport</label>
-                  </p>
+              <section>
+              <h3>Upload File</h3>
+              <input className='file-upload'
+                required
+                type="file"
+                name="image"
+                ref={this.fileInputRef}
+                accept=".png, .jpg, .jpeg, .gif" />
+              </section>
 
-                  <p>
-                   <input className="review-score-input" onChange={this.handleSafetyInput} max="100" type="number" required></input>
-                  <label className="review-score-label">Safety</label>
-                  </p>
-
-                </section>
-                <section>
-                <h3>Upload File</h3>
-                <input className='file-upload'
-                  required
-                  type="file"
-                  name="image"
-                  ref={this.fileInputRef}
-                  accept=".png, .jpg, .jpeg, .gif" />
-                </section>
-
-              <label className='review-form-label'>Review</label>
-              <textarea className='column-width100' onChange={this.handleTextarea} rows="20" name="review" required></textarea>
-              <button className='app-button background-orange float-right'>Confirm</button>
-              <button className='app-button background-red' onClick={this.handleCancelTripReview}>Cancel</button>
-            </form>
-          </article>
+            <label className='review-form-label'>Review</label>
+            <textarea className='column-width100' onChange={this.handleTextarea} rows="20" name="review" required></textarea>
+            <button className='app-button background-orange float-right'>Confirm</button>
+            <button className='app-button background-red' onClick={this.handleCancelTripReview}>Cancel</button>
+          </form>
+        </article>
       </div>
     );
   }
 }
-
-/*
-    <div className='review-form-left column-width50'>
-                  <div>
-                    <label className="review-form-label">Location</label>
-                    <br />
-                    <select className="select-element" value={this.state.countryId} onChange={this.handleChange} required>
-                    <option></option>
-                    {
-                      this.state.countries.map(country =>
-                      <option key={country.countryId} value={country.countryId}>{country.name}</option>)
-                    }
-                    </select>
-                  </div>
-                  <label className="review-form-label">City</label>
-                  <br />
-                  <input className="form-input-element" onChange={this.handleCityInput} type="text" placeholder='city' name='city' required></input>
-                </div> */
