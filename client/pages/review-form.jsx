@@ -136,50 +136,52 @@ export default class ReviewForm extends React.Component {
     return (
       <div className='container'>
         <Navbar />
-        <article id="form-review-container">
+        <article id="review-form-container">
           <form onSubmit={this.handleSubmit} name="reviewForm">
-            <PlacesAutocomplete value={this.state.address}
-                                onChange={this.handleChange}
-            >
-            {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-              <section>
-                <p>
-                  <label className="review-score-label">You location</label>
-                  <input type="text" name="location"
-                    {...getInputProps({
-                      placeholder: 'Search Places ...',
-                      className: 'location-search-input'
-                    })}
-                  />
-                </p>
-
-              <div className="autocomplete-dropdown-container">
-                {loading && <div>Loading...</div>}
-                {suggestions.map((suggestion, index) => {
-                  const className = suggestion.active
-                    ? 'suggestion-item--active'
-                    : 'suggestion-item';
-                  // inline style for demonstration purpose
-                  const style = suggestion.active
-                    ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                    : { backgroundColor: '#ffffff', cursor: 'pointer' };
-                  return (
-                    <div
-                      {...getSuggestionItemProps(suggestion, {
-                        className,
-                        style
+            <section id="places-autocomplete">
+              <PlacesAutocomplete value={this.state.address}
+                                  onChange={this.handleChange}
+              >
+              {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                <section>
+                  <p>
+                    <h3>Your Location</h3>
+                    <input type="text" name="location"
+                      {...getInputProps({
+                        placeholder: 'Search Places ...',
+                        className: 'location-search-input'
                       })}
-                      key={index + 1}
-                    >
-                    <span className='test-class'>{suggestion.description}</span>
-                    </div>
-                  );
-                })}
-              </div>
+                    />
+                  </p>
+
+                <div className="autocomplete-dropdown-container">
+                  {loading && <div>Loading...</div>}
+                  {suggestions.map((suggestion, index) => {
+                    const className = suggestion.active
+                      ? 'suggestion-item--active'
+                      : 'suggestion-item';
+                    // inline style for demonstration purpose
+                    const style = suggestion.active
+                      ? { backgroundColor: '#1c861c', cursor: 'pointer', color: '#ffffff' }
+                      : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                    return (
+                      <div
+                        {...getSuggestionItemProps(suggestion, {
+                          className,
+                          style
+                        })}
+                        key={index + 1}
+                      >
+                      <span className='test-class'>{suggestion.description}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </section>
+              )}
+              </PlacesAutocomplete>
             </section>
-            )}
-            </PlacesAutocomplete>
-            <section id="form-scores-container">
+            <section id="review-form-scores-section">
               <h3>Your score from 0 to 100</h3>
               <p>
                 <input className="review-score-input" onChange={this.handleThingsToDoInput} max="100" type="number" required></input>
@@ -203,7 +205,7 @@ export default class ReviewForm extends React.Component {
                 <label className="review-score-label">Safety</label>
               </p>
             </section>
-            <section id="upload-file-container">
+            <section id="review-form-upload-file-section">
               <h3>Upload File</h3>
               <input className='form-file-upload'
                 required
@@ -213,10 +215,12 @@ export default class ReviewForm extends React.Component {
                 accept=".png, .jpg, .jpeg, .gif"
               />
             </section>
-            <label className='review-form-label'>Review</label>
-            <textarea className='column-width100' onChange={this.handleTextarea} rows="20" name="review" required></textarea>
-            <button className='app-button background-orange float-right'>Confirm</button>
-            <button className='app-button background-red' onClick={this.handleCancelTripReview}>Cancel</button>
+            <section id="review-form-textarea-section">
+              <h3>Your review</h3>
+              <textarea onChange={this.handleTextarea} rows="20" name="review" required></textarea>
+              <button className='app-button background-orange float-right'>Confirm</button>
+              <button className='app-button background-red' onClick={this.handleCancelTripReview}>Cancel</button>
+            </section>
           </form>
         </article>
       </div>
