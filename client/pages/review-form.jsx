@@ -26,13 +26,12 @@ export default class ReviewForm extends React.Component {
     this.handlePeopleInput = this.handlePeopleInput.bind(this);
     this.handleTransportInput = this.handleTransportInput.bind(this);
     this.handleSafetyInput = this.handleSafetyInput.bind(this);
-    this.handleOnLocationSubmit = this.handleOnLocationSubmit.bind(this)
+    this.handleOnLocationSubmit = this.handleOnLocationSubmit.bind(this);
   }
 
-
   componentDidMount() {
-    console.log('componentDidMount')
-/*     fetch('/api/countries', {
+    console.log('componentDidMount');
+    /*     fetch('/api/countries', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -47,9 +46,9 @@ export default class ReviewForm extends React.Component {
   }
 
   handleOnLocationSubmit(event) {
-    event.preventDefault()
-    console.log('whee')
-    console.log('this.state.address',this.state.address)
+    event.preventDefault();
+    console.log('whee');
+    console.log('this.state.address', this.state.address);
   }
 
   handleSubmit(event) {
@@ -83,9 +82,9 @@ export default class ReviewForm extends React.Component {
       });
   }
 
-  handleChange = address => {
+  handleChange(address) {
     this.setState({ address });
-  };
+  }
 
   handleTextarea(event) {
     this.setState({
@@ -137,7 +136,7 @@ export default class ReviewForm extends React.Component {
     return (
       <div className='container'>
         <Navbar />
-          <div className='row centered padding-top15vh'>
+          <article className='row centered padding-top15vh'>
           <PlacesAutocomplete
             value={this.state.address}
             onChange={this.handleChange}
@@ -145,18 +144,20 @@ export default class ReviewForm extends React.Component {
             >
             {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
               <div>
-               <form onSubmit={this.handleOnLocationSubmit}>
-                 <input type="text"
+
+               <p>
+                  <label htmlFor="location">You location</label>
+                     <input type="text" name="location"
                   {...getInputProps({
                     placeholder: 'Search Places ...',
-                    className: 'location-search-input',
+                    className: 'location-search-input'
                   })}
                 />
-                <button>Add Location</button>
-               </form>
+               </p>
+
                 <div className="autocomplete-dropdown-container">
                   {loading && <div>Loading...</div>}
-                  {suggestions.map((suggestion,index) => {
+                  {suggestions.map((suggestion, index) => {
                     const className = suggestion.active
                       ? 'suggestion-item--active'
                       : 'suggestion-item';
@@ -168,7 +169,7 @@ export default class ReviewForm extends React.Component {
                      <div
                         {...getSuggestionItemProps(suggestion, {
                           className,
-                          style,
+                          style
                         })}
                         key={index + 1}
                       >
@@ -181,7 +182,6 @@ export default class ReviewForm extends React.Component {
             )}
           </PlacesAutocomplete>
             <form className ="review-form" onSubmit={this.handleSubmit} name="reviewForm">
-              <div className='row column-width100'>
 
                 <div className='review-form-right column-width50'>
                   <h3>Your score from 0 to 100</h3>
@@ -209,19 +209,17 @@ export default class ReviewForm extends React.Component {
                   ref={this.fileInputRef}
                   accept=".png, .jpg, .jpeg, .gif" />
                 </div>
-              </div>
+
               <label className='review-form-label'>Review</label>
               <textarea className='column-width100' onChange={this.handleTextarea} rows="20" name="review" required></textarea>
               <button className='app-button background-orange float-right'>Confirm</button>
               <button className='app-button background-red' onClick={this.handleCancelTripReview}>Cancel</button>
             </form>
-          </div>
+          </article>
       </div>
     );
   }
 }
-
-
 
 /*
     <div className='review-form-left column-width50'>
