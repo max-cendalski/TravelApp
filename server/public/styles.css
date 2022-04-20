@@ -466,25 +466,16 @@ input::-webkit-inner-spin-button {
     padding-top: 4rem;
   }
 
-  #review-container {
-    width: 95%;
-  }
-
-  .review-form-right h3 {
-    padding-top: 1rem;
-    padding-bottom: 0.5rem;
-  }
-
   .travel-app-home {
     display: none;
   }
 
   .search-box-container {
-    margin-left: 0.2rem;
+    margin-left: 1.35rem;
   }
 
   .login-icon {
-    margin-right: 0.2rem;
+    margin-right: 1.25rem;
   }
 
   .form-input-element {
