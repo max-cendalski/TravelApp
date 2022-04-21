@@ -87,15 +87,14 @@ app.get('/api/countries/:country', (req, res, next) => {
   }
 
   const sql = `
-  select "cityName",
+  select "city",
+         "country",
          "tripId",
          "mainPhotoUrl",
-         "u"."username",
-         "c"."name" as "countryName"
+         "u"."username"
     from "trips"
-    join "countries" as "c" using ("countryId")
     join "users" as "u" using ("userId")
-   where "c"."name" = $1
+   where "country" = $1
   `;
   const params = [country];
   db.query(sql, params)
@@ -107,8 +106,8 @@ app.get('/api/countries/:country', (req, res, next) => {
 
 app.get('/api/countries', (req, res, next) => {
   const sql = `
-    select *
-    from "countries"
+    select "country"
+    from "trips"
   `;
   db.query(sql)
     .then(result => {

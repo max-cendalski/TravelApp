@@ -5,19 +5,6 @@ values
 ('max2','$argon2i$v=19$m=4096,t=3,p=1$Tj30MSC0jfftI78mfYMFxw$qO6BX55FwQIXXLlkLGT043HFyFUWetV3E8MooOPSkmw'),
 ('max3','$argon2i$v=19$m=4096,t=3,p=1$KXrcBRAGJ3AMz0THaR8jFA$ax/JR0lo4hUeKI6jRBYHJSvCc8u/A7RD4fANOIq6kHk');
 
-/* insert into "countries" ("name")
-values
-('Japan'),
-('Tahiti'),
-('Iceland'),
-('Singapore'),
-('Australia'),
-('Italy'),
-('Greece'),
-('Nigeria'),
-('Madagascar'),
-('Cuba');
- */
 
 
 insert into "trips" ("userId","country","city","mainPhotoUrl","review","thingsTodoScore","foodScore","peopleScore","transportScore","safetyScore")
