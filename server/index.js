@@ -182,9 +182,9 @@ app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
   const sql = `
   insert into "trips"
             (
-              "country",
               "userId",
-              "cityName",
+              "country",
+              "city",
               "mainPhotoUrl",
               "review",
               "thingsTodoScore",
@@ -196,7 +196,7 @@ app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
             values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
             returning *
             `;
-  const params = [country, req.user.userId, city, url, review, thingsTodoScore, foodScore, peopleScore, transportScore, safetyScore];
+  const params = [req.user.userId, country, city, url, review, thingsTodoScore, foodScore, peopleScore, transportScore, safetyScore];
   return db.query(sql, params)
     .then(result => {
       const [review] = result.rows;

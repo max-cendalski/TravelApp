@@ -46,9 +46,9 @@ CREATE TABLE "public"."additionalPhotos" (
 
 CREATE TABLE "public"."trips" (
 	"tripId" serial NOT NULL,
-  "countryId" int NOT NULL,
 	"userId" int NOT NULL,
-	"cityName" TEXT NOT NULL,
+  "country" TEXT NOT NULL,
+	"city" TEXT NOT NULL,
 	"mainPhotoUrl" TEXT NOT NULL default 'url',
 	"review" TEXT NOT NULL,
 	"thingsTodoScore" int NOT NULL default 0,
@@ -64,14 +64,14 @@ CREATE TABLE "public"."trips" (
 
 
 
-CREATE TABLE "public"."countries" (
+/* CREATE TABLE "public"."countries" (
 	"countryId" serial NOT NULL UNIQUE,
 	"name" TEXT NOT NULL,
 	CONSTRAINT "countries_pk" PRIMARY KEY ("countryId")
 ) WITH (
   OIDS=FALSE
 );
-
+ */
 
 
 

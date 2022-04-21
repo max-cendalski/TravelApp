@@ -30,22 +30,6 @@ export default class ReviewForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const newLocation = this.state.address;
-    const newLocationArray = newLocation.split(',');
-    if (newLocationArray.length === 2) {
-      const [city, country] = newLocationArray;
-      this.setState({
-        cityToSave: city,
-        countryToSave: country
-      });
-    }
-    if (newLocationArray.length > 2) {
-      const [city,, country] = newLocationArray;
-      this.setState({
-        cityToSave: city,
-        countryToSave: country
-      });
-    }
     const formData = new FormData();
     const token = window.localStorage.getItem('TravelApp-token');
     formData.append('country', this.state.country);
@@ -76,7 +60,15 @@ export default class ReviewForm extends React.Component {
   }
 
   handleChange(address) {
-    this.setState({ address });
+    const locationString = address;
+    const locationArray = locationString.split(',');
+    const city = locationArray[0];
+    const country = locationArray[locationArray.length - 1];
+    this.setState({
+      country: country,
+      city: city,
+      address
+    });
   }
 
   handleTextarea(event) {
@@ -137,37 +129,37 @@ export default class ReviewForm extends React.Component {
               >
               {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                 <section id="places-autocomplete-section">
-                  <p>
-                    <h3>Your Location</h3>
-                    <input type="text" name="location" required
-                      {...getInputProps({
-                        placeholder: 'Search Places ...',
-                        className: 'location-search-input'
-                      })}
-                    />
-                  </p>
-                <div className="autocomplete-dropdown-container">
-                  {loading && <div>Loading...</div>}
-                  {suggestions.map((suggestion, index) => {
-                    const className = suggestion.active
-                      ? 'suggestion-item--active'
-                      : 'suggestion-item';
-                    // inline style for demonstration purpose
-                    const style = suggestion.active
-                      ? { backgroundColor: '#1c861c', cursor: 'pointer', color: '#ffffff' }
-                      : { backgroundColor: '#ffffff', cursor: 'pointer' };
-                    return (
-                      <div
-                        {...getSuggestionItemProps(suggestion, {
-                          className,
-                          style
+                  <label className='review-score-label'>Your Location</label>
+                    <p>
+                      <input type="text" name="location" required
+                        {...getInputProps({
+                          placeholder: 'Search Places ...',
+                          className: 'location-search-input'
                         })}
-                        key={index + 1}
-                      >
-                      <span className='test-class'>{suggestion.description}</span>
-                      </div>
-                    );
-                  })}
+                      />
+                    </p>
+                   <div className="autocomplete-dropdown-container">
+                    {loading && <div>Loading...</div>}
+                    {suggestions.map((suggestion, index) => {
+                      const className = suggestion.active
+                        ? 'suggestion-item--active'
+                        : 'suggestion-item';
+                      // inline style for demonstration purpose
+                      const style = suggestion.active
+                        ? { backgroundColor: '#1c861c', cursor: 'pointer', color: '#ffffff' }
+                        : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                      return (
+                        <div
+                          {...getSuggestionItemProps(suggestion, {
+                            className,
+                            style
+                          })}
+                          key={index + 1}
+                          >
+                          <span className='test-class'>{suggestion.description}</span>
+                        </div>
+                      );
+                    })}
                 </div>
               </section>
               )}
