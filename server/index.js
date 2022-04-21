@@ -353,7 +353,8 @@ app.get('/api/my-reviews', (req, res, next) => {
   }
   const sql = `
     select  "tripId",
-            "cityName",
+            "city",
+            "country",
             "mainPhotoUrl",
             "review",
             "thingsTodoScore",
@@ -361,10 +362,8 @@ app.get('/api/my-reviews', (req, res, next) => {
             "peopleScore",
             "transportScore",
             "safetyScore",
-            "c"."name" as "countryName",
             "u"."username"
         from "trips"
-        join "countries" as "c" using ("countryId")
         join "users" as "u" using ("userId")
       where "userId" = $1
       `;

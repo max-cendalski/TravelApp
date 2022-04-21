@@ -45,12 +45,12 @@ export default class Reviews extends React.Component {
 }
 
 function Trip(props) {
-  const { tripId, countryName, cityName, mainPhotoUrl } = props.trip;
+  const { tripId, country, city, mainPhotoUrl } = props.trip;
   return (
     <a
       href={`#trips?tripId=${tripId}`}>
       <div className="text-container">
-      <p className='country-name'>{countryName}-<span className='city-name'>{cityName}</span></p>
+      <p className='country-name'>{country}-<span className='city-name'>{city}</span></p>
       </div>
       <div className='image-container'><img className="photo" src={mainPhotoUrl}></img></div>
     </a>

@@ -51,19 +51,19 @@ export default class ReviewForm extends React.Component {
     })
       .then(response => response.json())
       .then(result => {
-        window.location.hash = '#';
         this.fileInputRef.current.value = null;
       })
       .catch(error => {
         console.error('Error:', error);
       });
+    window.location.hash = '#';
   }
 
   handleChange(address) {
     const locationString = address;
     const locationArray = locationString.split(',');
     const city = locationArray[0];
-    const country = locationArray[locationArray.length - 1];
+    const country = locationArray[locationArray.length - 1].trim();
     this.setState({
       country: country,
       city: city,
