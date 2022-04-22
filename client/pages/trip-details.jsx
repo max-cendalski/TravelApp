@@ -4,6 +4,8 @@ import AppContext from '../lib/app-context';
 import EditReview from '../components/edit-review';
 import Comments from '../components/comments';
 import ReviewScore from '../components/review-score';
+import { Map, Marker } from 'google-maps-react';
+import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 
 export default class TripDetails extends React.Component {
   constructor(props) {
@@ -12,8 +14,8 @@ export default class TripDetails extends React.Component {
       trip: null,
       reviewContainer: 'container',
       editReviewContainer: 'hidden',
-      city: '',
-      country: '',
+      city: 'Tokyo',
+      country: 'Japan',
       thingsTodoScore: 0,
       foodScore: 0,
       peopleScore: 0,
@@ -23,7 +25,11 @@ export default class TripDetails extends React.Component {
       comments: [],
       addCommentButton: 'app-button background-orange float-right',
       commentForm: 'hidden',
-      comment: ''
+      comment: '',
+      mapCenter: {
+        lat: 33.5685,
+        lng: -117.7263
+      }
     };
     this.handleEditButton = this.handleEditButton.bind(this);
     this.handleSubmitEditedForm = this.handleSubmitEditedForm.bind(this);
@@ -44,10 +50,24 @@ export default class TripDetails extends React.Component {
   componentDidMount() {
     fetch(`api/trips/${this.props.tripId}`)
       .then(response => response.json())
-      .then(trip => this.setState({ trip }));
+      .then(trip => this.setState({ trip }))
+      .then(location => this.setState({
+        city: this.state.trip.city,
+        country: this.state.trip.country
+      }));
     fetch(`api/comments/${this.props.tripId}`)
       .then(response => response.json())
       .then(comments => this.setState({ comments }));
+      const address = this.state.
+    const city = this.state.city;
+    const country = this.state.country;
+    geocodeByAddress(address)
+      .then(results => getLatLng(results[0]))
+      .then(latLng => {
+        this.setState({ address });
+        this.setState({ mapCenter: latLng });
+      })
+      .catch(error => console.error('Error', error));
   }
 
   handleEditButton() {
@@ -217,6 +237,10 @@ export default class TripDetails extends React.Component {
       transportScore,
       safetyScore
     } = this.state.trip;
+    const containerStyle = {
+      width: '600px',
+      height: '60%'
+    };
     return (
       <>
         <div className={this.state.reviewContainer}>
@@ -261,6 +285,28 @@ export default class TripDetails extends React.Component {
                  loggedUsername ={this.context.user.username}
                 reviewAuthorName={this.state.trip.username}
                         />
+        </section>
+
+            <section id="map" className={this.state.map}>
+          <Map
+            containerStyle={containerStyle}
+            google={this.props.google}
+            initialCenter = {{
+              lat: this.state.mapCenter.lat,
+              lng: this.state.mapCenter.lng
+            }}
+            center={{
+              lat: this.state.mapCenter.lat,
+              lng: this.state.mapCenter.lng
+            }}
+            >
+            <Marker
+            position= {{
+              lat: this.state.mapCenter.lat,
+              lng: this.state.mapCenter.lng
+            }}
+            />
+          </Map>
         </section>
         <div className={this.state.editReviewContainer}>
             <EditReview trip={this.state.trip}
