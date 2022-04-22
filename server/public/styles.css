@@ -433,6 +433,11 @@ input::-webkit-inner-spin-button {
   padding: 0.125rem;
 }
 
+.map {
+  width: 5rem;
+  height: 10rem;
+}
+
 .float-right {
   float: right;
 }

@@ -254,37 +254,36 @@ export class TripDetails extends React.Component {
           <Navbar handleChange={this.handleChange}
                   searchBox={this.state.searchBox}
           />
-            <div className='row padding-top3 detailed-view-container'>
-              <div className='image-container column-width50'>
-                <img className="photo" src={mainPhotoUrl} alt={city}></img>
-              </div>
-              <div className='horizontal column-width50'>
-                <div className='column-width25'>
-                  <div className='score-container'>
-                    <p className='score-text'>Things to Do - {thingsTodoScore}</p>
-                    <p className='score-text'>Food - {foodScore}</p>
-                    <p className='score-text'>People - {peopleScore}</p>
-                    <p className='score-text'>Transport - {transportScore}</p>
-                    <p className='score-text'>Safety - {safetyScore}</p>
-                  </div>
-                </div>
-                <div className='column-width25'>
-                  <div className="detailed-text-container">
+            <article>
+             <section>
                     <p className='country-name'>{country} - <span className='city-name'>{city}</span></p>
-                    <span className='city-name'>@{username}</span></div>
-                  </div>
-                </div>
-              </div>
-            <div className='row detailed-view-container'>
-            <div className='review-container'>
+                    <span className='city-name'>@{username}</span>
+                  </section>
+                       <section id="scores-container">
+                  <ul>
+                    <li className='score-text'>Things to Do - {thingsTodoScore}</li>
+                    <li className='score-text'>Food - {foodScore}</li>
+                    <li className='score-text'>People - {peopleScore}</li>
+                    <li className='score-text'>Transport - {transportScore}</li>
+                    <li className='score-text'>Safety - {safetyScore}</li>
+                  </ul>
+                </section>
+              </article>
+              <section id="main-photo-detailed-view">
+
+                <img className="photo" src={mainPhotoUrl} alt={city}></img>
+
+              </section>
+
+            <article>
               <p>{review}</p>
-            </div>
-          </div>
-          <div>
+            </article>
+
+          <section>
             {
               this.context.user.username === username && <button onClick={this.handleEditButton} className='app-button background-orange float-right margin-right1rem'>Edit</button>
             }
-          </div>
+          </section>
         </div>
         <section className='column-width90'>
             <ReviewScore tripId = {this.props.tripId}
@@ -295,14 +294,10 @@ export class TripDetails extends React.Component {
         </section>
 
         <section id="map" className={this.state.map}>
-
           <Map
             containerStyle={containerStyle}
             google={this.props.google}
-             /* initialCenter = {{
-               lat: this.state.mapCenter.lat,
-               lng: this.state.mapCenter.lng
-             }} */
+
             center={{
               lat: this.state.mapCenter.lat,
               lng: this.state.mapCenter.lng
