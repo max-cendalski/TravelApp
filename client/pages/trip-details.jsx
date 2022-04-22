@@ -12,8 +12,8 @@ export default class TripDetails extends React.Component {
       trip: null,
       reviewContainer: 'container',
       editReviewContainer: 'hidden',
-      cityName: '',
-      countryName: '',
+      city: '',
+      country: '',
       thingsTodoScore: 0,
       foodScore: 0,
       peopleScore: 0,
@@ -54,7 +54,8 @@ export default class TripDetails extends React.Component {
     this.setState({
       reviewContainer: 'hidden',
       editReviewContainer: 'container',
-      cityName: this.state.trip.cityName,
+      country: this.state.trip.country,
+      city: this.state.trip.city,
       thingsTodoScore: this.state.trip.thingsTodoScore,
       foodScore: this.state.trip.foodScore,
       peopleScore: this.state.trip.peopleScore,
@@ -68,7 +69,8 @@ export default class TripDetails extends React.Component {
     event.preventDefault();
     const token = window.localStorage.getItem('TravelApp-token');
     const editedTrip = {
-      cityName: this.state.cityName,
+      city: this.state.city,
+      country: this.state.country,
       tripId: this.props.tripId,
       mainPhotoUrl: this.state.trip.mainPhotoUrl,
       thingsTodoScore: this.state.thingsTodoScore,
@@ -101,7 +103,7 @@ export default class TripDetails extends React.Component {
 
   handleCityNameChange(event) {
     this.setState({
-      cityName: event.target.value
+      city: event.target.value
     });
   }
 
@@ -204,8 +206,8 @@ export default class TripDetails extends React.Component {
   render() {
     if (!this.state.trip) return null;
     const {
-      countryName,
-      cityName,
+      country,
+      city,
       username,
       mainPhotoUrl,
       review,
@@ -223,7 +225,7 @@ export default class TripDetails extends React.Component {
           />
             <div className='row padding-top3 detailed-view-container'>
               <div className='image-container column-width50'>
-                <img className="photo" src={mainPhotoUrl} alt={cityName}></img>
+                <img className="photo" src={mainPhotoUrl} alt={city}></img>
               </div>
               <div className='horizontal column-width50'>
                 <div className='column-width25'>
@@ -237,7 +239,7 @@ export default class TripDetails extends React.Component {
                 </div>
                 <div className='column-width25'>
                   <div className="detailed-text-container">
-                    <p className='country-name'>{countryName} - <span className='city-name'>{cityName}</span></p>
+                    <p className='country-name'>{country} - <span className='city-name'>{city}</span></p>
                     <span className='city-name'>@{username}</span></div>
                   </div>
                 </div>
