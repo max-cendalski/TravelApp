@@ -4,18 +4,18 @@ import AppContext from '../lib/app-context';
 import EditReview from '../components/edit-review';
 import Comments from '../components/comments';
 import ReviewScore from '../components/review-score';
-import { Map, Marker } from 'google-maps-react';
+import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 
-export default class TripDetails extends React.Component {
+export class TripDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       trip: null,
       reviewContainer: 'container',
       editReviewContainer: 'hidden',
-      city: 'Tokyo',
-      country: 'Japan',
+      city: '',
+      country: '',
       thingsTodoScore: 0,
       foodScore: 0,
       peopleScore: 0,
@@ -50,24 +50,21 @@ export default class TripDetails extends React.Component {
   componentDidMount() {
     fetch(`api/trips/${this.props.tripId}`)
       .then(response => response.json())
-      .then(trip => this.setState({ trip }))
-      .then(location => this.setState({
-        city: this.state.trip.city,
-        country: this.state.trip.country
-      }));
+      .then(trip => {
+        this.setState({ trip });
+        const address = `${this.state.trip.country}, ${this.state.trip.city}`;
+        geocodeByAddress(address)
+          .then(results => getLatLng(results[0]))
+          .then(latLng => {
+            this.setState({ mapCenter: latLng });
+          })
+          .catch(error => console.error('Error', error));
+      });
+
     fetch(`api/comments/${this.props.tripId}`)
       .then(response => response.json())
       .then(comments => this.setState({ comments }));
-      const address = this.state.
-    const city = this.state.city;
-    const country = this.state.country;
-    geocodeByAddress(address)
-      .then(results => getLatLng(results[0]))
-      .then(latLng => {
-        this.setState({ address });
-        this.setState({ mapCenter: latLng });
-      })
-      .catch(error => console.error('Error', error));
+
   }
 
   handleEditButton() {
@@ -223,6 +220,16 @@ export default class TripDetails extends React.Component {
       });
   }
 
+  handleSelect(address) {
+    geocodeByAddress(address)
+      .then(results => getLatLng(results[0]))
+      .then(latLng => {
+        this.setState({ address });
+        this.setState({ mapCenter: latLng });
+      })
+      .catch(error => console.error('Error', error));
+  }
+
   render() {
     if (!this.state.trip) return null;
     const {
@@ -287,14 +294,15 @@ export default class TripDetails extends React.Component {
                         />
         </section>
 
-            <section id="map" className={this.state.map}>
+        <section id="map" className={this.state.map}>
+
           <Map
             containerStyle={containerStyle}
             google={this.props.google}
-            initialCenter = {{
-              lat: this.state.mapCenter.lat,
-              lng: this.state.mapCenter.lng
-            }}
+             /* initialCenter = {{
+               lat: this.state.mapCenter.lat,
+               lng: this.state.mapCenter.lng
+             }} */
             center={{
               lat: this.state.mapCenter.lat,
               lng: this.state.mapCenter.lng
@@ -338,5 +346,9 @@ export default class TripDetails extends React.Component {
     );
   }
 }
+
+export default GoogleApiWrapper({
+  apiKey: 'AIzaSyCfY6ZRvXRb8M7sKT5QM2pWZmuF6NCECEM'
+})(TripDetails);
 
 TripDetails.contextType = AppContext;
