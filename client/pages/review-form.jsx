@@ -1,12 +1,13 @@
 import React from 'react';
 import Navbar from '../components/navbar';
+import PlacesAutocomplete from 'react-places-autocomplete';
 
 export default class ReviewForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      countryId: '',
-      countries: [],
+      country: '',
+      address: '',
       city: '',
       review: '',
       thingsTodoScore: 0,
@@ -19,7 +20,6 @@ export default class ReviewForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCancelTripReview = this.handleCancelTripReview.bind(this);
-    this.handleCityInput = this.handleCityInput.bind(this);
     this.handleTextarea = this.handleTextarea.bind(this);
     this.handleThingsToDoInput = this.handleThingsToDoInput.bind(this);
     this.handleFoodInput = this.handleFoodInput.bind(this);
@@ -28,26 +28,11 @@ export default class ReviewForm extends React.Component {
     this.handleSafetyInput = this.handleSafetyInput.bind(this);
   }
 
-  componentDidMount() {
-    fetch('/api/countries', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => response.json())
-      .then(result => {
-        this.setState({
-          countries: result
-        });
-      });
-  }
-
   handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData();
     const token = window.localStorage.getItem('TravelApp-token');
-    formData.append('countryId', this.state.countryId);
+    formData.append('country', this.state.country);
     formData.append('city', this.state.city);
     formData.append('image', this.fileInputRef.current.files[0]);
     formData.append('review', this.state.review);
@@ -66,23 +51,23 @@ export default class ReviewForm extends React.Component {
     })
       .then(response => response.json())
       .then(result => {
-        window.location.hash = '#';
         this.fileInputRef.current.value = null;
       })
       .catch(error => {
         console.error('Error:', error);
       });
+    window.location.hash = '#';
   }
 
-  handleChange(event) {
+  handleChange(address) {
+    const locationString = address;
+    const locationArray = locationString.split(',');
+    const city = locationArray[0];
+    const country = locationArray[locationArray.length - 1].trim();
     this.setState({
-      countryId: event.target.value
-    });
-  }
-
-  handleCityInput(event) {
-    this.setState({
-      city: event.target.value
+      country: country,
+      city: city,
+      address
     });
   }
 
@@ -136,58 +121,92 @@ export default class ReviewForm extends React.Component {
     return (
       <div className='container'>
         <Navbar />
-          <div className='row centered padding-top15vh'>
-            <form className ="review-form" onSubmit={this.handleSubmit} name="reviewForm">
-              <div className='row column-width100'>
-                <div className='review-form-left column-width50'>
-                  <div>
-                    <label className="review-form-label">Country</label>
-                    <br />
-                    <select className="select-element" value={this.state.countryId} onChange={this.handleChange} required>
-                    <option></option>
-                    {
-                      this.state.countries.map(country =>
-                      <option key={country.countryId} value={country.countryId}>{country.name}</option>)
-                    }
-                    </select>
-                  </div>
-                  <label className="review-form-label">City</label>
-                  <br />
-                  <input className="form-input-element" onChange={this.handleCityInput} type="text" placeholder='city' name='city' required></input>
+        <article id="review-form-container">
+          <form onSubmit={this.handleSubmit} name="reviewForm">
+            <section id="places-autocomplete">
+              <PlacesAutocomplete value={this.state.address}
+                                  onChange={this.handleChange}
+              >
+              {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                <section id="places-autocomplete-section">
+                  <label className='review-score-label'>Your Location</label>
+                    <p>
+                      <input type="text" name="location" required
+                        {...getInputProps({
+                          placeholder: 'Search Places ...',
+                          className: 'location-search-input'
+                        })}
+                      />
+                    </p>
+                   <div className="autocomplete-dropdown-container">
+                    {loading && <div>Loading...</div>}
+                    {suggestions.map((suggestion, index) => {
+                      const className = suggestion.active
+                        ? 'suggestion-item--active'
+                        : 'suggestion-item';
+                      // inline style for demonstration purpose
+                      const style = suggestion.active
+                        ? { backgroundColor: '#1c861c', cursor: 'pointer', color: '#ffffff' }
+                        : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                      return (
+                        <div
+                          {...getSuggestionItemProps(suggestion, {
+                            className,
+                            style
+                          })}
+                          key={index + 1}
+                          >
+                          <span className='test-class'>{suggestion.description}</span>
+                        </div>
+                      );
+                    })}
                 </div>
-                <div className='review-form-right column-width50'>
-                  <h3>Your score from 0 to 100</h3>
-                  <input className="review-score-input" onChange={this.handleThingsToDoInput} max="100" type="number" required></input>
-                  <label className="review-score-label">Things To Do</label>
-                  <br />
-                  <input className="review-score-input" onChange={this.handleFoodInput} max="100" type="number" required></input>
-                  <label className="review-score-label">Food</label>
-                  <br />
-                  <input className="review-score-input" onChange={this.handlePeopleInput} max="100" type="number" required></input>
-                  <label className="review-score-label">People</label>
-                  <br />
-                  <input className="review-score-input" onChange={this.handleTransportInput} max="100" type="number" required></input>
-                  <label className="review-score-label">Transport</label>
-                  <br />
-                  <input className="review-score-input" onChange={this.handleSafetyInput} max="100" type="number" required></input>
-                  <label className="review-score-label">Safety</label>
-                </div>
-                <div>
-                <h3>Upload File</h3>
-                <input className='file-upload'
-                  required
-                  type="file"
-                  name="image"
-                  ref={this.fileInputRef}
-                  accept=".png, .jpg, .jpeg, .gif" />
-                </div>
-              </div>
-              <label className='review-form-label'>Review</label>
-              <textarea className='column-width100' onChange={this.handleTextarea} rows="20" name="review" required></textarea>
+              </section>
+              )}
+              </PlacesAutocomplete>
+            </section>
+            <section id="review-form-scores-section">
+              <h3>Your score from 0 to 100</h3>
+              <p>
+                <input className="review-score-input" onChange={this.handleThingsToDoInput} max="100" type="number" required></input>
+                <label className="review-score-label">Things To Do</label>
+              </p>
+              <p>
+                <input className="review-score-input" onChange={this.handleFoodInput} max="100" type="number" required></input>
+                <label className="review-score-label">Food</label>
+              </p>
+              <p>
+                <input className="review-score-input" onChange={this.handlePeopleInput} max="100" type="number" required></input>
+                <label className="review-score-label">People</label>
+              </p>
+              <p>
+                <input className="review-score-input" onChange={this.handleTransportInput} max="100" type="number" required></input>
+                <label className="review-score-label">Transport</label>
+              </p>
+
+              <p>
+                <input className="review-score-input" onChange={this.handleSafetyInput} max="100" type="number" required></input>
+                <label className="review-score-label">Safety</label>
+              </p>
+            </section>
+            <section id="review-form-upload-file-section">
+              <h3>Upload File</h3>
+              <input className='form-file-upload'
+                required
+                type="file"
+                name="image"
+                ref={this.fileInputRef}
+                accept=".png, .jpg, .jpeg, .gif"
+              />
+            </section>
+            <section id="review-form-textarea-section">
+              <h3>Your review</h3>
+              <textarea onChange={this.handleTextarea} rows="20" name="review" required></textarea>
               <button className='app-button background-orange float-right'>Confirm</button>
               <button className='app-button background-red' onClick={this.handleCancelTripReview}>Cancel</button>
-            </form>
-          </div>
+            </section>
+          </form>
+        </article>
       </div>
     );
   }

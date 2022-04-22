@@ -59,12 +59,12 @@ export default class SearchResults extends React.Component {
 }
 
 function Trip(props) {
-  const { tripId, countryName, cityName, username, mainPhotoUrl } = props.trip;
+  const { tripId, country, city, username, mainPhotoUrl } = props.trip;
   return (
     <a
       href={`#trips?tripId=${tripId}`}>
       <div className="text-container">
-      <p className='country-name'>{countryName}-<span className='city-name'>{cityName}</span></p>
+      <p className='country-name'>{country}-<span className='city-name'>{city}</span></p>
       <span className='city-name'>@{username}</span></div>
       <div className='image-container'><img className="photo" src={mainPhotoUrl}></img></div>
     </a>

@@ -87,15 +87,14 @@ app.get('/api/countries/:country', (req, res, next) => {
   }
 
   const sql = `
-  select "cityName",
+  select "city",
+         "country",
          "tripId",
          "mainPhotoUrl",
-         "u"."username",
-         "c"."name" as "countryName"
+         "u"."username"
     from "trips"
-    join "countries" as "c" using ("countryId")
     join "users" as "u" using ("userId")
-   where "c"."name" = $1
+   where "country" = $1
   `;
   const params = [country];
   db.query(sql, params)
@@ -107,8 +106,8 @@ app.get('/api/countries/:country', (req, res, next) => {
 
 app.get('/api/countries', (req, res, next) => {
   const sql = `
-    select *
-    from "countries"
+    select "country"
+    from "trips"
   `;
   db.query(sql)
     .then(result => {
@@ -169,7 +168,7 @@ app.use(authorizationMiddleware);
 
 app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
   const {
-    countryId,
+    country,
     city,
     review,
     thingsTodoScore,
@@ -182,9 +181,9 @@ app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
   const sql = `
   insert into "trips"
             (
-              "countryId",
               "userId",
-              "cityName",
+              "country",
+              "city",
               "mainPhotoUrl",
               "review",
               "thingsTodoScore",
@@ -196,7 +195,7 @@ app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
             values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
             returning *
             `;
-  const params = [countryId, req.user.userId, city, url, review, thingsTodoScore, foodScore, peopleScore, transportScore, safetyScore];
+  const params = [req.user.userId, country, city, url, review, thingsTodoScore, foodScore, peopleScore, transportScore, safetyScore];
   return db.query(sql, params)
     .then(result => {
       const [review] = result.rows;
@@ -354,7 +353,8 @@ app.get('/api/my-reviews', (req, res, next) => {
   }
   const sql = `
     select  "tripId",
-            "cityName",
+            "city",
+            "country",
             "mainPhotoUrl",
             "review",
             "thingsTodoScore",
@@ -362,10 +362,8 @@ app.get('/api/my-reviews', (req, res, next) => {
             "peopleScore",
             "transportScore",
             "safetyScore",
-            "c"."name" as "countryName",
             "u"."username"
         from "trips"
-        join "countries" as "c" using ("countryId")
         join "users" as "u" using ("userId")
       where "userId" = $1
       `;

@@ -270,15 +270,6 @@
   border-radius: 3px;
 }
 
-.review-container {
-  margin-top: 1rem;
-  font-size: 1.2rem;
-}
-
-.review-form {
-  width: 50%;
-}
-
 .review-form-right h3 {
   padding-bottom: 1rem;
 }
@@ -296,10 +287,12 @@ input::-webkit-inner-spin-button {
 .review-score-label {
   font-size: 1.2rem;
   font-weight: 700;
+  margin-right: 0.5rem;
 }
 
 .review-score-input {
   width: 3rem;
+  margin: 0.375rem 0.5rem 0 0;
 }
 
 .review-form-label {
@@ -317,14 +310,6 @@ input::-webkit-inner-spin-button {
 
 .select-element {
   margin-bottom: 1rem;
-}
-
-.file-upload {
-  margin-top: 1rem;
-}
-
-.file-upload-button {
-  margin-top: 1rem;
 }
 
 .logout-info {
@@ -401,8 +386,34 @@ input::-webkit-inner-spin-button {
   font-size: 1.1rem;
 }
 
-.review-score {
+#places-autocomplete-section input {
+  width: 12.5rem;
+}
+
+#review-form-container form {
+  padding-top: 3.5rem;
+  width: 60%;
+}
+
+#review-form-scores-section {
   margin-top: 1rem;
+  padding-left: 0.125rem;
+}
+
+#review-form-upload-file-section {
+  margin-top: 1rem;
+}
+
+#review-form-upload-file-section input {
+  padding: 0.25rem 1rem 0 0;
+}
+
+#review-form-textarea-section {
+  margin-top: 1rem;
+}
+
+#review-form-textarea-section textarea {
+  width: 100%;
 }
 
 .review-score * {
@@ -411,12 +422,15 @@ input::-webkit-inner-spin-button {
   line-height: 0.7;
 }
 
-.review-score input {
-  height: 2rem;
-}
-
 .review-score p {
   font-size: 1.4rem;
+}
+
+.autocomplete-dropdown-container {
+  position: absolute;
+  font-size: 1.1rem;
+  font-weight: 400;
+  padding: 0.125rem;
 }
 
 .float-right {
@@ -448,17 +462,8 @@ input::-webkit-inner-spin-button {
     display: none;
   }
 
-  .review-form {
-    width: 95%;
-  }
-
   .padding-top15vh {
     padding-top: 4rem;
-  }
-
-  .review-form-right h3 {
-    padding-top: 1rem;
-    padding-bottom: 0.5rem;
   }
 
   .travel-app-home {
@@ -466,11 +471,11 @@ input::-webkit-inner-spin-button {
   }
 
   .search-box-container {
-    margin-left: 0.2rem;
+    margin-left: 1.35rem;
   }
 
   .login-icon {
-    margin-right: 0.2rem;
+    margin-right: 1.25rem;
   }
 
   .form-input-element {
@@ -496,5 +501,9 @@ input::-webkit-inner-spin-button {
 
   .review-container {
     padding: 1rem 0;
+  }
+
+  #review-form-container form {
+    width: 90%;
   }
 }
