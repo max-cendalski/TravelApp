@@ -121,7 +121,8 @@ app.get('/api/trips/:tripId', (req, res, next) => {
     throw new ClientError(401, 'invalid tripId');
   }
   const sql = `
-  select "cityName",
+  select "city",
+         "country",
          "mainPhotoUrl",
          "review",
          "thingsTodoScore",
@@ -129,10 +130,8 @@ app.get('/api/trips/:tripId', (req, res, next) => {
          "peopleScore",
          "transportScore",
          "safetyScore",
-         "c"."name" as "countryName",
          "u"."username"
     from "trips"
-    join "countries" as "c" using ("countryId")
     join "users" as "u" using ("userId")
    where "tripId" = $1
   `;
