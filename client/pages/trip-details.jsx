@@ -29,8 +29,10 @@ export class TripDetails extends React.Component {
       mapCenter: {
         lat: 33.5685,
         lng: -117.7263
-      }
+      },
+      containerWidth: '38%'
     };
+
     this.handleEditButton = this.handleEditButton.bind(this);
     this.handleSubmitEditedForm = this.handleSubmitEditedForm.bind(this);
     this.handleThingsTodoScoreChange = this.handleThingsTodoScoreChange.bind(this);
@@ -244,11 +246,13 @@ export class TripDetails extends React.Component {
       transportScore,
       safetyScore
     } = this.state.trip;
+
     const containerStyle = {
-      position: 'relative',
-      width: '40%',
-      height: '40%',
-      left: '5rem'
+      width: this.state.containerWidth,
+      top: '21rem',
+      height: '23rem',
+      left: '1rem',
+      border: '1px solid rgb(240,131,52)'
     };
     return (
         <>
@@ -258,8 +262,8 @@ export class TripDetails extends React.Component {
         <article id ="trip-details-container" className='container'>
         <article id="name-location-scores-trip-details">
           <section>
-            <h3 className='country-name'>{country} - <span className='city-name'>{city}</span></h3>
-            <span className='city-name'>@{username}</span>
+            <h2>{country} - {city}</h2>
+            <h3> @{username}</h3>
           </section>
           <section id="scores-container">
             <ul>
@@ -272,7 +276,7 @@ export class TripDetails extends React.Component {
           </section>
         </article>
 
-          <section id="map-trip-details-container">
+          <div id="map-trip-details-container">
           <Map
             id="map-trip-details"
             containerStyle={containerStyle}
@@ -289,7 +293,7 @@ export class TripDetails extends React.Component {
             }}
             />
           </Map>
-        </section>
+        </div>
 
         <section id="main-photo-trip-details">
           <img className="photo" src={mainPhotoUrl} alt={city}></img>
@@ -327,7 +331,7 @@ export class TripDetails extends React.Component {
           />
         </section>
 
-                <article id="edit-trip-review" className={this.state.editReviewContainer}>
+        <article id="edit-trip-review" className={this.state.editReviewContainer}>
           <EditReview trip={this.state.trip}
                       handleCityNameChange = {this.handleCityNameChange}
                       handleThingsTodoScoreChange = {this.handleThingsTodoScoreChange}
