@@ -245,19 +245,20 @@ export class TripDetails extends React.Component {
       safetyScore
     } = this.state.trip;
     const containerStyle = {
-      width: '30%',
-      height: '30%'
-
+      position: 'relative',
+      width: '40%',
+      height: '40%',
+      left: '5rem'
     };
     return (
-      <article className='container'>
+        <>
         <Navbar handleChange={this.handleChange}
                 searchBox={this.state.searchBox}
         />
-
+        <article id ="trip-details-container" className='container'>
         <article id="name-location-scores-trip-details">
           <section>
-            <p className='country-name'>{country} - <span className='city-name'>{city}</span></p>
+            <h3 className='country-name'>{country} - <span className='city-name'>{city}</span></h3>
             <span className='city-name'>@{username}</span>
           </section>
           <section id="scores-container">
@@ -271,12 +272,9 @@ export class TripDetails extends React.Component {
           </section>
         </article>
 
-        <section id="main-photo-trip-details">
-          <img className="photo" src={mainPhotoUrl} alt={city}></img>
-        </section>
-
-        <section id="map-trip-details">
+          <section id="map-trip-details-container">
           <Map
+            id="map-trip-details"
             containerStyle={containerStyle}
             google={this.props.google}
             center={{
@@ -291,6 +289,10 @@ export class TripDetails extends React.Component {
             }}
             />
           </Map>
+        </section>
+
+        <section id="main-photo-trip-details">
+          <img className="photo" src={mainPhotoUrl} alt={city}></img>
         </section>
 
         <article id="review-trip-details">
@@ -339,6 +341,7 @@ export class TripDetails extends React.Component {
           />
         </article>
       </article>
+      </>
     );
   }
 }
