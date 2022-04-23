@@ -245,59 +245,40 @@ export class TripDetails extends React.Component {
       safetyScore
     } = this.state.trip;
     const containerStyle = {
-      width: '600px',
-      height: '60%'
+      width: '30%',
+      height: '30%'
+
     };
     return (
-      <>
-        <div className={this.state.reviewContainer}>
-          <Navbar handleChange={this.handleChange}
-                  searchBox={this.state.searchBox}
-          />
-            <article>
-             <section>
-                    <p className='country-name'>{country} - <span className='city-name'>{city}</span></p>
-                    <span className='city-name'>@{username}</span>
-                  </section>
-                       <section id="scores-container">
-                  <ul>
-                    <li className='score-text'>Things to Do - {thingsTodoScore}</li>
-                    <li className='score-text'>Food - {foodScore}</li>
-                    <li className='score-text'>People - {peopleScore}</li>
-                    <li className='score-text'>Transport - {transportScore}</li>
-                    <li className='score-text'>Safety - {safetyScore}</li>
-                  </ul>
-                </section>
-              </article>
-              <section id="main-photo-detailed-view">
+      <article className='container'>
+        <Navbar handleChange={this.handleChange}
+                searchBox={this.state.searchBox}
+        />
 
-                <img className="photo" src={mainPhotoUrl} alt={city}></img>
-
-              </section>
-
-            <article>
-              <p>{review}</p>
-            </article>
-
+        <article id="name-scores-trip-details">
           <section>
-            {
-              this.context.user.username === username && <button onClick={this.handleEditButton} className='app-button background-orange float-right margin-right1rem'>Edit</button>
-            }
+            <p className='country-name'>{country} - <span className='city-name'>{city}</span></p>
+            <span className='city-name'>@{username}</span>
           </section>
-        </div>
-        <section className='column-width90'>
-            <ReviewScore tripId = {this.props.tripId}
-                  loggedUserId ={this.context.user.userId}
-                 loggedUsername ={this.context.user.username}
-                reviewAuthorName={this.state.trip.username}
-                        />
+          <section id="scores-container">
+            <ul>
+              <li className='score-text'>Things to Do - {thingsTodoScore}</li>
+              <li className='score-text'>Food - {foodScore}</li>
+              <li className='score-text'>People - {peopleScore}</li>
+              <li className='score-text'>Transport - {transportScore}</li>
+              <li className='score-text'>Safety - {safetyScore}</li>
+            </ul>
+          </section>
+        </article>
+
+        <section id="main-photo-trip-details">
+          <img className="photo" src={mainPhotoUrl} alt={city}></img>
         </section>
 
-        <section id="map" className={this.state.map}>
+        <section id="map-trip-details">
           <Map
             containerStyle={containerStyle}
             google={this.props.google}
-
             center={{
               lat: this.state.mapCenter.lat,
               lng: this.state.mapCenter.lng
@@ -311,33 +292,53 @@ export class TripDetails extends React.Component {
             />
           </Map>
         </section>
-        <div className={this.state.editReviewContainer}>
-            <EditReview trip={this.state.trip}
-                        handleCityNameChange = {this.handleCityNameChange}
-                        handleThingsTodoScoreChange = {this.handleThingsTodoScoreChange}
-                        handleFoodScoreChange = {this.handleFoodScoreChange}
-                        handlePeopleScoreChange = {this.handlePeopleScoreChange}
-                        handleTransportScoreChange = {this.handleTransportScoreChange}
-                        handleSafetyScoreChange = {this.handleSafetyScoreChange}
-                        handleSubmitEditedForm={this.handleSubmitEditedForm}
-                        handleReviewChange = {this.handleReviewChange}
-                        handleCancelForm = {this.handleCancelForm}
-                        />
-        </div>
-        <section className={this.state.reviewContainer}>
-              <Comments comments={this.state.comments}
-                        loggedUser={this.context.user.username}
-                        author={this.state.trip.username}
-                        handleAddComment={this.handleAddComment}
-                        handleCommentForm={this.handleCommentForm}
-                        addCommentButton = {this.state.addCommentButton}
-                        commentForm = {this.state.commentForm}
-                        handleCommentTextarea = {this.handleCommentTextarea}
-                        handleCancelComment = {this.handleCancelComment}
-                        commentValue = {this.state.comment}
-                        />
+
+        <article id="edit-trip-review" className={this.state.editReviewContainer}>
+          <EditReview trip={this.state.trip}
+                      handleCityNameChange = {this.handleCityNameChange}
+                      handleThingsTodoScoreChange = {this.handleThingsTodoScoreChange}
+                      handleFoodScoreChange = {this.handleFoodScoreChange}
+                      handlePeopleScoreChange = {this.handlePeopleScoreChange}
+                      handleTransportScoreChange = {this.handleTransportScoreChange}
+                      handleSafetyScoreChange = {this.handleSafetyScoreChange}
+                      handleSubmitEditedForm={this.handleSubmitEditedForm}
+                      handleReviewChange = {this.handleReviewChange}
+                      handleCancelForm = {this.handleCancelForm}
+          />
+        </article>
+
+        <article id="review-trip-details">
+          <p>{review}</p>
+        </article>
+
+        <section>
+          {
+            this.context.user.username === username && <button onClick={this.handleEditButton} className='app-button background-orange margin-right1rem'>Edit</button>
+          }
         </section>
-      </>
+
+        <section id="review-scores-trip-details">
+          <ReviewScore tripId = {this.props.tripId}
+                 loggedUserId = {this.context.user.userId}
+               loggedUsername = {this.context.user.username}
+             reviewAuthorName = {this.state.trip.username}
+          />
+        </section>
+
+        <section id="comments-trip-details">
+          <Comments comments={this.state.comments}
+                    loggedUser={this.context.user.username}
+                    author={this.state.trip.username}
+                    handleAddComment={this.handleAddComment}
+                    handleCommentForm={this.handleCommentForm}
+                    addCommentButton = {this.state.addCommentButton}
+                    commentForm = {this.state.commentForm}
+                    handleCommentTextarea = {this.handleCommentTextarea}
+                    handleCancelComment = {this.handleCancelComment}
+                    commentValue = {this.state.comment}
+          />
+        </section>
+      </article>
     );
   }
 }
