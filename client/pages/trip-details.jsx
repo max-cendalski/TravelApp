@@ -255,7 +255,7 @@ export class TripDetails extends React.Component {
                 searchBox={this.state.searchBox}
         />
 
-        <article id="name-scores-trip-details">
+        <article id="name-location-scores-trip-details">
           <section>
             <p className='country-name'>{country} - <span className='city-name'>{city}</span></p>
             <span className='city-name'>@{username}</span>
@@ -293,20 +293,6 @@ export class TripDetails extends React.Component {
           </Map>
         </section>
 
-        <article id="edit-trip-review" className={this.state.editReviewContainer}>
-          <EditReview trip={this.state.trip}
-                      handleCityNameChange = {this.handleCityNameChange}
-                      handleThingsTodoScoreChange = {this.handleThingsTodoScoreChange}
-                      handleFoodScoreChange = {this.handleFoodScoreChange}
-                      handlePeopleScoreChange = {this.handlePeopleScoreChange}
-                      handleTransportScoreChange = {this.handleTransportScoreChange}
-                      handleSafetyScoreChange = {this.handleSafetyScoreChange}
-                      handleSubmitEditedForm={this.handleSubmitEditedForm}
-                      handleReviewChange = {this.handleReviewChange}
-                      handleCancelForm = {this.handleCancelForm}
-          />
-        </article>
-
         <article id="review-trip-details">
           <p>{review}</p>
         </article>
@@ -338,6 +324,20 @@ export class TripDetails extends React.Component {
                     commentValue = {this.state.comment}
           />
         </section>
+
+                <article id="edit-trip-review" className={this.state.editReviewContainer}>
+          <EditReview trip={this.state.trip}
+                      handleCityNameChange = {this.handleCityNameChange}
+                      handleThingsTodoScoreChange = {this.handleThingsTodoScoreChange}
+                      handleFoodScoreChange = {this.handleFoodScoreChange}
+                      handlePeopleScoreChange = {this.handlePeopleScoreChange}
+                      handleTransportScoreChange = {this.handleTransportScoreChange}
+                      handleSafetyScoreChange = {this.handleSafetyScoreChange}
+                      handleSubmitEditedForm={this.handleSubmitEditedForm}
+                      handleReviewChange = {this.handleReviewChange}
+                      handleCancelForm = {this.handleCancelForm}
+          />
+        </article>
       </article>
     );
   }
