@@ -438,7 +438,7 @@ input::-webkit-inner-spin-button {
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: 20rem 20rem auto 5rem 5rem 5rem;
+  grid-template-rows: 20rem 20rem auto auto 5rem 5rem;
 }
 
 #name-location-scores-trip-details {
@@ -560,9 +560,5 @@ input::-webkit-inner-spin-button {
 
   #review-form-container form {
     width: 90%;
-  }
-
-  #map-trip-details {
-    width: 100%;
   }
 }
