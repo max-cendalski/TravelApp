@@ -3,7 +3,7 @@ import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import { useState } from 'react/cjs/react.production.min';
 
-export default function MapComponent(props) {
+function MapComponent(props) {
   const containerStyle = {
     width: this.state.containerWidth,
     top: '21rem',
@@ -13,23 +13,26 @@ export default function MapComponent(props) {
   };
   return (
     <article>
-
           <Map
             id="map-trip-details"
             containerStyle={containerStyle}
             google={this.props.google}
             center={{
-              lat: this.state.mapCenter.lat,
-              lng: this.state.mapCenter.lng
+              lat: this.props.mapCenter.lat,
+              lng: this.props.mapCenter.lng
             }}
             >
             <Marker
             position= {{
-              lat: this.state.mapCenter.lat,
-              lng: this.state.mapCenter.lng
+              lat: this.props.mapCenter.lat,
+              lng: this.props.mapCenter.lng
             }}
             />
         </Map>
          </article>
   );
 }
+
+export default GoogleApiWrapper({
+  apiKey: 'AIzaSyCfY6ZRvXRb8M7sKT5QM2pWZmuF6NCECEM'
+})(MapComponent);

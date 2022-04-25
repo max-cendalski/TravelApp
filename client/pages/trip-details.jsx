@@ -270,9 +270,10 @@ export class TripDetails extends React.Component {
           </section>
         </article>
 
-        <div id="map-trip-details-container">
-
-        </div>
+        <article id="map-trip-details-container">
+        <MapComponent mapCenter={this.state.mapCenter}
+        />
+        </article>
 
         <section id="main-photo-trip-details">
           <img className="photo" src={mainPhotoUrl} alt={city}></img>
@@ -328,9 +329,5 @@ export class TripDetails extends React.Component {
     );
   }
 }
-
-export default GoogleApiWrapper({
-  apiKey: 'AIzaSyCfY6ZRvXRb8M7sKT5QM2pWZmuF6NCECEM'
-})(TripDetails);
 
 TripDetails.contextType = AppContext;
