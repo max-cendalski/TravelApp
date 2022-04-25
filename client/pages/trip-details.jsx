@@ -4,11 +4,10 @@ import AppContext from '../lib/app-context';
 import EditReview from '../components/edit-review';
 import Comments from '../components/comments';
 import ReviewScore from '../components/review-score';
-import MapComponent from '../components/map';
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 
-export default class TripDetails extends React.Component {
+export class TripDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -248,6 +247,13 @@ export default class TripDetails extends React.Component {
       safetyScore
     } = this.state.trip;
 
+    const containerStyle = {
+      width: this.state.containerWidth,
+      top: '21rem',
+      height: '23rem',
+      left: '1rem',
+      border: '1px solid rgb(240,131,52)'
+    };
     return (
         <>
         <Navbar handleChange={this.handleChange}
@@ -270,10 +276,24 @@ export default class TripDetails extends React.Component {
           </section>
         </article>
 
-        <article id="map-trip-details-container">
-          <MapComponent mapCenter={this.state.mapCenter}
-          />
-        </article>
+        <selector id="map-trip-details-container">
+          <Map
+            id="map-trip-details"
+            containerStyle={containerStyle}
+            google={this.props.google}
+            center={{
+              lat: this.state.mapCenter.lat,
+              lng: this.state.mapCenter.lng
+            }}
+            >
+            <Marker
+            position= {{
+              lat: this.state.mapCenter.lat,
+              lng: this.state.mapCenter.lng
+            }}
+            />
+          </Map>
+        </selector>
 
         <section id="main-photo-trip-details">
           <img className="photo" src={mainPhotoUrl} alt={city}></img>
@@ -329,5 +349,9 @@ export default class TripDetails extends React.Component {
     );
   }
 }
+
+export default GoogleApiWrapper({
+  apiKey: 'AIzaSyCfY6ZRvXRb8M7sKT5QM2pWZmuF6NCECEM'
+})(TripDetails);
 
 TripDetails.contextType = AppContext;
