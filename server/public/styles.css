@@ -489,6 +489,15 @@ input::-webkit-inner-spin-button {
 }
 
 @media screen and  (max-width: 660px) {
+  #trip-details-container {
+    padding-top: 3rem;
+    margin: 0 1rem;
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(1fr, 1fr);
+    grid-template-rows: 20rem 20rem auto 5rem 5rem 5rem;
+  }
+
   .column-width50 {
     width: 100%;
   }

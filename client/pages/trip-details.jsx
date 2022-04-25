@@ -276,7 +276,7 @@ export class TripDetails extends React.Component {
           </section>
         </article>
 
-        <selector id="map-trip-details-container">
+        <div id="map-trip-details-container">
           <Map
             id="map-trip-details"
             containerStyle={containerStyle}
@@ -293,7 +293,7 @@ export class TripDetails extends React.Component {
             }}
             />
           </Map>
-        </selector>
+        </div>
 
         <section id="main-photo-trip-details">
           <img className="photo" src={mainPhotoUrl} alt={city}></img>
