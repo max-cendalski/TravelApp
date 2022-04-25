@@ -447,6 +447,11 @@ input::-webkit-inner-spin-button {
   grid-row: 1/2;
 }
 
+#map-trip-details {
+  width: 100%;
+  grid-column: 1/3;
+}
+
 #name-location-scores-trip-details ul {
   padding-top: 0.5rem;
   list-style: none;
@@ -458,11 +463,14 @@ input::-webkit-inner-spin-button {
 }
 
 #main-photo-trip-details {
+  width: 100%;
   grid-column: 3/6;
   grid-row: 1/3;
 }
 
 #review-trip-details {
+  font-size: 1.2rem;
+  font-weight: 500;
   grid-column: 1/6;
   grid-row: 3/3;
 }
@@ -552,5 +560,9 @@ input::-webkit-inner-spin-button {
 
   #review-form-container form {
     width: 90%;
+  }
+
+  #map-trip-details {
+    width: 100%;
   }
 }

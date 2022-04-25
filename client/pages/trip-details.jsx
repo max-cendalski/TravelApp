@@ -281,9 +281,9 @@ export class TripDetails extends React.Component {
           </section>
         </article>
 
-        <div id="map-trip-details-container">
+        <div id="map-trip-details">
+
           <Map
-            id="map-trip-details"
             containerStyle={containerStyle}
             google={this.props.google}
             center={{
@@ -298,7 +298,7 @@ export class TripDetails extends React.Component {
             }}
             />
           </Map>
-        </div>
+         </div>
 
         <section id="main-photo-trip-details">
           <img className="photo" src={mainPhotoUrl} alt={city}></img>
