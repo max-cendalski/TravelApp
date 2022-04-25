@@ -66,7 +66,11 @@ export class TripDetails extends React.Component {
     fetch(`api/comments/${this.props.tripId}`)
       .then(response => response.json())
       .then(comments => this.setState({ comments }));
-
+    if (window.innerWidth < 800) {
+      this.setState({
+        containerWidth: '95%'
+      });
+    }
   }
 
   handleEditButton() {
@@ -233,6 +237,7 @@ export class TripDetails extends React.Component {
   }
 
   render() {
+
     if (!this.state.trip) return null;
     const {
       country,
