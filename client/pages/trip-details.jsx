@@ -8,7 +8,7 @@ import MapComponent from '../components/map';
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 
-export class TripDetails extends React.Component {
+export default class TripDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -271,8 +271,8 @@ export class TripDetails extends React.Component {
         </article>
 
         <article id="map-trip-details-container">
-        <MapComponent mapCenter={this.state.mapCenter}
-        />
+          <MapComponent mapCenter={this.state.mapCenter}
+          />
         </article>
 
         <section id="main-photo-trip-details">
