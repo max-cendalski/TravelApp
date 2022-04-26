@@ -563,16 +563,18 @@ input::-webkit-inner-spin-button {
   }
 
   #main-photo-trip-details {
-    width: 100%;
     grid-column: 1/6;
     grid-row: 2/3;
   }
 
   #name-location-scores-trip-details ul {
-    font-size: 0.5rem;
     list-style: none;
     background-color: rgb(251, 251, 251);
     padding: 0;
+  }
+
+  #name-location-scores-trip-details li {
+    font-size: 0.9rem;
   }
 
   #name-location-scores-trip-details h3 {

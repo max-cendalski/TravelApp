@@ -61,7 +61,7 @@ export default class TripDetails extends React.Component {
               this.setState({ mapCenter: latLng });
             })
             .catch(error => console.error('Error', error));
-        }, '300');
+        }, '400');
       });
 
     fetch(`api/comments/${this.props.tripId}`)
