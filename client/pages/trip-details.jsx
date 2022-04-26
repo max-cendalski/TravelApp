@@ -288,9 +288,9 @@ export default class TripDetails extends React.Component {
           <p>{review}</p>
         </article>
 
-        <section>
+        <section id="review-edit-button-trip-details">
           {
-            this.context.user.username === username && <button onClick={this.handleEditButton} className='app-button background-orange margin-right1rem'>Edit</button>
+            this.context.user.username === username && <button onClick={this.handleEditButton} className='app-button background-orange'>Edit Review</button>
           }
         </section>
 
