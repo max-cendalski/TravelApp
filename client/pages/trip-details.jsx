@@ -259,21 +259,21 @@ export default class TripDetails extends React.Component {
                 searchBox={this.state.searchBox}
         />
         <article id ="trip-details-container" className='container'>
-        <article id="name-location-scores-trip-details">
-          <section>
-            <h2>{country} - {city}</h2>
-            <h3> @{username}</h3>
-          </section>
-          <section id="scores-container">
-            <ul>
-              <li className='score-text'>Things to Do - {thingsTodoScore}</li>
-              <li className='score-text'>Food - {foodScore}</li>
-              <li className='score-text'>People - {peopleScore}</li>
-              <li className='score-text'>Transport - {transportScore}</li>
-              <li className='score-text'>Safety - {safetyScore}</li>
-            </ul>
-          </section>
-        </article>
+          <article id="name-location-scores-trip-details">
+            <section>
+              <h2>{country} - {city}</h2>
+              <h3> @{username}</h3>
+            </section>
+            <section id="scores-container">
+              <ul>
+                <li className='score-text'>Things to Do - {thingsTodoScore}</li>
+                <li className='score-text'>Food - {foodScore}</li>
+                <li className='score-text'>People - {peopleScore}</li>
+                <li className='score-text'>Transport - {transportScore}</li>
+                <li className='score-text'>Safety - {safetyScore}</li>
+              </ul>
+            </section>
+          </article>
 
       <MapComponent
           lat={this.state.mapCenter.lat}

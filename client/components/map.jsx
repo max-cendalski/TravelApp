@@ -16,7 +16,10 @@ function MapComponent(props) {
     }
     window.addEventListener('resize', handleResize);
     if (screenWidth < 660) {
-      containerStyle.width = '95%';
+      containerStyle.width = '55%';
+      containerStyle.top = '4rem';
+      containerStyle.left = '10rem';
+      containerStyle.height = '19rem';
     }
     if (screenWidth > 660) {
       containerStyle.width = '38%';
