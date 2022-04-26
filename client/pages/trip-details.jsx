@@ -29,8 +29,7 @@ export default class TripDetails extends React.Component {
       mapCenter: {
         lat: 0,
         lng: 0
-      },
-      containerWidth: '39%'
+      }
     };
 
     this.handleEditButton = this.handleEditButton.bind(this);
@@ -279,10 +278,6 @@ export default class TripDetails extends React.Component {
       <MapComponent
           lat={this.state.mapCenter.lat}
           lng={this.state.mapCenter.lng}
-          width={this.state.containerWidth}
-          mapCenter={this.state.mapCenter}
-          country= {this.state.trip.country}
-          city= {this.state.trip.city}
     />
 
         <section id="main-photo-trip-details">
