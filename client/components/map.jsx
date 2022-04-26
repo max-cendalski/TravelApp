@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 
 function MapComponent(props) {
@@ -9,20 +9,16 @@ function MapComponent(props) {
     left: '1rem',
     border: '1px solid rgb(240,131,52)'
   };
-  const [screen, setWidth] = useState({
-    width: window.innerWidth
-  });
-  useEffect(() => {
+  const [screenWidth, setWidth] = useState(window.innerWidth);
+  useLayoutEffect(() => {
     function handleResize() {
-      setWidth({
-        width: window.innerWidth
-      });
+      setWidth(window.innerWidth);
     }
     window.addEventListener('resize', handleResize);
-    if (screen.width < 660) {
+    if (screenWidth < 660) {
       containerStyle.width = '95%';
     }
-    if (screen.width > 660) {
+    if (screenWidth > 660) {
       containerStyle.width = '38%';
     }
     return _ => {
