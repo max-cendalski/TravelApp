@@ -51,5 +51,5 @@ function MapComponent(props) {
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyCfY6ZRvXRb8M7sKT5QM2pWZmuF6NCECEM'
+  apiKey: process.env.GOOGLE_MAPS_API_KEY
 })(MapComponent);
