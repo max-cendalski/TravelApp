@@ -294,7 +294,7 @@ export default class TripDetails extends React.Component {
           }
         </section>
 
-        <section id="review-scores-trip-details">
+        <section id="scores-trip-details">
           <ReviewScore tripId = {this.props.tripId}
                  loggedUserId = {this.context.user.userId}
                loggedUsername = {this.context.user.username}

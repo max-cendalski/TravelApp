@@ -475,7 +475,7 @@ input::-webkit-inner-spin-button {
   grid-row: 3/3;
 }
 
-#review-scores-trip-details {
+#scores-trip-details {
   margin-top: 1rem;
   margin-left: 2rem;
   grid-column: 1/6;
@@ -577,5 +577,18 @@ input::-webkit-inner-spin-button {
 
   #name-location-scores-trip-details h3 {
     padding-bottom: 1rem;
+  }
+
+  #comments-trip-details {
+    margin: 0 1rem;
+    grid-column: 1/6;
+    grid-row: 5/auto;
+  }
+
+  #scores-trip-details {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    grid-column: 1/6;
+    grid-row: 4/5;
   }
 }
