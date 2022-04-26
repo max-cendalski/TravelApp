@@ -4,7 +4,6 @@ import AppContext from '../lib/app-context';
 import EditReview from '../components/edit-review';
 import Comments from '../components/comments';
 import ReviewScore from '../components/review-score';
-// import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import MapComponent from '../components/map';
 
