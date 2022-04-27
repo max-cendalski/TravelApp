@@ -31,22 +31,22 @@ function MapComponent(props) {
 
   return (
     <div>
-        <Map
-            containerStyle={containerStyle}
-            google={props.google}
-            center={{
+      <Map
+          containerStyle={containerStyle}
+          google={props.google}
+          center={{
+            lat: props.lat,
+            lng: props.lng
+          }}
+          >
+            <Marker
+            position= {{
               lat: props.lat,
               lng: props.lng
             }}
-            >
-              <Marker
-              position= {{
-                lat: props.lat,
-                lng: props.lng
-              }}
-            />
-        </Map>
-      </div>
+          />
+      </Map>
+    </div>
   );
 }
 

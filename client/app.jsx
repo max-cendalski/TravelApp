@@ -19,8 +19,7 @@ export default class App extends React.Component {
       user: null,
       isAuthorizing: false,
       route: parseRoute(window.location.hash),
-      logoutInfo: 'hidden',
-      tripToEdit: 5
+      logoutInfo: 'hidden'
     };
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleLogoutWindow = this.handleLogoutWindow.bind(this);
@@ -80,7 +79,6 @@ export default class App extends React.Component {
     if (route.path === 'trips') {
       const tripId = Number(route.params.get('tripId'));
       return <TripDetails tripId={tripId}
-                          handleEditButton={this.handleEditButton}
                           />;
     }
     if (route.path === 'sign-in') {
@@ -92,7 +90,9 @@ export default class App extends React.Component {
     } if (route.path === 'my-reviews') {
       return <Reviews />;
     } if (route.path === 'edit/review') {
-      return <EditReview />;
+      const tripId = Number(route.params.get('tripId'));
+      return <EditReview tripId={tripId}
+      />;
     }
     return <NotFound />;
   }

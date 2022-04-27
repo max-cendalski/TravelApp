@@ -78,13 +78,13 @@ export default class TripDetails extends React.Component {
 
   handleEditButton(event) {
     event.preventDefault();
-    this.setState({
+    window.location.hash = `#edit/review?tripId=${this.props.tripId}`;
+  }
+  /*   this.setState({
       editReviewContainer: 'container',
       idTripDetailsContainer: '',
       tripDetailsContainer: 'hidden'
-    });
-
-  }
+    }); */
 
   handleSubmitEditedForm(event) {
     event.preventDefault();
@@ -272,59 +272,59 @@ export default class TripDetails extends React.Component {
             </section>
           </article>
 
-      <MapComponent
-          lat={this.state.mapCenter.lat}
-          lng={this.state.mapCenter.lng}
-      />
+          <MapComponent
+              lat={this.state.mapCenter.lat}
+              lng={this.state.mapCenter.lng}
+          />
 
-        <section id="main-photo-trip-details">
-          <img className="photo" src={mainPhotoUrl} alt={city}></img>
-        </section>
+          <section id="main-photo-trip-details">
+            <img className="photo" src={mainPhotoUrl} alt={city}></img>
+          </section>
 
-        <article id="review-trip-details">
-          <p>{review}</p>
+          <article id="review-trip-details">
+            <p>{review}</p>
+          </article>
+
+          <section id="review-edit-button-trip-details">
+            {
+              this.context.user.username === username && <button onClick={this.handleEditButton} className='app-button background-orange'>Edit Review</button>
+            }
+          </section>
+
+          <section id="scores-trip-details">
+            <ReviewScore tripId = {this.props.tripId}
+                  loggedUserId = {this.context.user.userId}
+                loggedUsername = {this.context.user.username}
+              reviewAuthorName = {this.state.trip.username}
+            />
+          </section>
+
+          <section id="comments-trip-details">
+            <Comments comments={this.state.comments}
+                      loggedUser={this.context.user.username}
+                      author={this.state.trip.username}
+                      handleAddComment={this.handleAddComment}
+                      handleCommentForm={this.handleCommentForm}
+                      addCommentButton = {this.state.addCommentButton}
+                      commentForm = {this.state.commentForm}
+                      handleCommentTextarea = {this.handleCommentTextarea}
+                      handleCancelComment = {this.handleCancelComment}
+                      commentValue = {this.state.comment}
+            />
+          </section>
         </article>
-
-        <section id="review-edit-button-trip-details">
-          {
-            this.context.user.username === username && <button onClick={this.handleEditButton} className='app-button background-orange'>Edit Review</button>
-          }
-        </section>
-
-        <section id="scores-trip-details">
-          <ReviewScore tripId = {this.props.tripId}
-                 loggedUserId = {this.context.user.userId}
-               loggedUsername = {this.context.user.username}
-             reviewAuthorName = {this.state.trip.username}
+        <article className={this.state.editReviewContainer}>
+          <EditReview trip={this.state.trip}
+                      handleCityNameChange = {this.handleCityNameChange}
+                      handleThingsTodoScoreChange = {this.handleThingsTodoScoreChange}
+                      handleFoodScoreChange = {this.handleFoodScoreChange}
+                      handlePeopleScoreChange = {this.handlePeopleScoreChange}
+                      handleTransportScoreChange = {this.handleTransportScoreChange}
+                      handleSafetyScoreChange = {this.handleSafetyScoreChange}
+                      handleSubmitEditedForm={this.handleSubmitEditedForm}
+                      handleReviewChange = {this.handleReviewChange}
+                      handleCancelForm = {this.handleCancelForm}
           />
-        </section>
-
-        <section id="comments-trip-details">
-          <Comments comments={this.state.comments}
-                    loggedUser={this.context.user.username}
-                    author={this.state.trip.username}
-                    handleAddComment={this.handleAddComment}
-                    handleCommentForm={this.handleCommentForm}
-                    addCommentButton = {this.state.addCommentButton}
-                    commentForm = {this.state.commentForm}
-                    handleCommentTextarea = {this.handleCommentTextarea}
-                    handleCancelComment = {this.handleCancelComment}
-                    commentValue = {this.state.comment}
-          />
-        </section>
-      </article>
-      <article className={this.state.editReviewContainer}>
-        <EditReview trip={this.state.trip}
-                    handleCityNameChange = {this.handleCityNameChange}
-                    handleThingsTodoScoreChange = {this.handleThingsTodoScoreChange}
-                    handleFoodScoreChange = {this.handleFoodScoreChange}
-                    handlePeopleScoreChange = {this.handlePeopleScoreChange}
-                    handleTransportScoreChange = {this.handleTransportScoreChange}
-                    handleSafetyScoreChange = {this.handleSafetyScoreChange}
-                    handleSubmitEditedForm={this.handleSubmitEditedForm}
-                    handleReviewChange = {this.handleReviewChange}
-                    handleCancelForm = {this.handleCancelForm}
-        />
         </article>
       </>
     );
