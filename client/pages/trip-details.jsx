@@ -13,8 +13,7 @@ export default class TripDetails extends React.Component {
     this.state = {
       trip: null,
       editReviewContainer: 'hidden',
-      tripDetailsContainer: 'container',
-      idTrip: 'trip-details-container',
+      tripDetailsContainer: 'trip-details-container',
       city: '',
       country: '',
       thingsTodoScore: 0,
@@ -78,26 +77,12 @@ export default class TripDetails extends React.Component {
 
   handleEditButton(event) {
     event.preventDefault();
-    console.log('this.props.tripId', this.props.tripId);
-    // window.location.hash = 'edit/review';
     this.setState({
       editReviewContainer: 'container',
-      tripDetailsContainer: 'hidden',
+      idTripDetailsContainer: 'hidden',
       idTrip: 'hidden'
     });
-    // window.location.hash = 'edit/review';
 
-    /*     this.setState({
-      reviewContainer: 'hidden',
-      country: this.state.trip.country,
-      city: this.state.trip.city,
-      thingsTodoScore: this.state.trip.thingsTodoScore,
-      foodScore: this.state.trip.foodScore,
-      peopleScore: this.state.trip.peopleScore,
-      transportScore: this.state.trip.transportScore,
-      safetyScore: this.state.trip.safetyScore,
-      review: this.state.trip.review
-    }); */
   }
 
   handleSubmitEditedForm(event) {
@@ -269,7 +254,7 @@ export default class TripDetails extends React.Component {
         <Navbar handleChange={this.handleChange}
                 searchBox={this.state.searchBox}
         />
-        <article id={this.state.idTrip} className={this.state.tripDetailsContainer}>
+        <article id={this.state.tripDetailsContainer}>
           <article id="name-location-scores-trip-details">
             <section>
               <h2>{country} - {city}</h2>
