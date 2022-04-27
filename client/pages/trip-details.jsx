@@ -34,20 +34,11 @@ export default class TripDetails extends React.Component {
     };
 
     this.handleEditButton = this.handleEditButton.bind(this);
-    this.handleSubmitEditedForm = this.handleSubmitEditedForm.bind(this);
-    this.handleThingsTodoScoreChange = this.handleThingsTodoScoreChange.bind(this);
-    this.handleFoodScoreChange = this.handleFoodScoreChange.bind(this);
-    this.handlePeopleScoreChange = this.handlePeopleScoreChange.bind(this);
-    this.handleTransportScoreChange = this.handleTransportScoreChange.bind(this);
-    this.handleSafetyScoreChange = this.handleSafetyScoreChange.bind(this);
-    this.handleReviewChange = this.handleReviewChange.bind(this);
-    this.handleCityNameChange = this.handleCityNameChange.bind(this);
-    this.handleCancelForm = this.handleCancelForm.bind(this);
     this.handleAddComment = this.handleAddComment.bind(this);
     this.handleCommentForm = this.handleCommentForm.bind(this);
     this.handleCommentTextarea = this.handleCommentTextarea.bind(this);
     this.handleCancelComment = this.handleCancelComment.bind(this);
-    this.handleEditButton = this.handleEditButton.bind(this);
+
   }
 
   componentDidMount() {
@@ -78,13 +69,8 @@ export default class TripDetails extends React.Component {
 
   handleEditButton(event) {
     event.preventDefault();
-    window.location.hash = `#edit/review?tripId=${this.props.tripId}`;
+    window.location.hash = `#edit/trip?tripId=${this.props.tripId}`;
   }
-  /*   this.setState({
-      editReviewContainer: 'container',
-      idTripDetailsContainer: '',
-      tripDetailsContainer: 'hidden'
-    }); */
 
   handleSubmitEditedForm(event) {
     event.preventDefault();
@@ -122,77 +108,6 @@ export default class TripDetails extends React.Component {
       });
   }
 
-  handleCityNameChange(event) {
-    this.setState({
-      city: event.target.value
-    });
-  }
-
-  handleReviewChange(event) {
-    this.setState({
-      review: event.target.value
-    });
-  }
-
-  handleThingsTodoScoreChange(event) {
-    this.setState({
-      thingsTodoScore: event.target.value
-    });
-  }
-
-  handleFoodScoreChange(event) {
-    this.setState({
-      foodScore: event.target.value
-    });
-  }
-
-  handlePeopleScoreChange(event) {
-    this.setState({
-      peopleScore: event.target.value
-    });
-  }
-
-  handleTransportScoreChange(event) {
-    this.setState({
-      transportScore: event.target.value
-    });
-  }
-
-  handleSafetyScoreChange(event) {
-    this.setState({
-      safetyScore: event.target.value
-    });
-  }
-
-  handleCancelForm(event) {
-    this.setState({
-      idTripDetailsContainer: 'trip-details-container',
-      editReviewContainer: 'hidden'
-    });
-  }
-
-  handleAddComment(event) {
-    this.setState({
-      commentForm: 'comment-form',
-      addCommentButton: 'hidden'
-    });
-  }
-
-  handleCommentTextarea(event) {
-    this.setState({
-      comment: event.target.value
-    });
-  }
-
-  handleCancelComment(event) {
-    event.preventDefault();
-    this.setState({
-      commentForm: 'hidden',
-      comment: '',
-      addCommentButton: 'app-button background-orange float-right'
-    });
-  }
-
   handleCommentForm(event) {
     event.preventDefault();
     const content = {
@@ -224,6 +139,28 @@ export default class TripDetails extends React.Component {
       });
   }
 
+  handleAddComment(event) {
+    this.setState({
+      commentForm: 'comment-form',
+      addCommentButton: 'hidden'
+    });
+  }
+
+  handleCommentTextarea(event) {
+    this.setState({
+      comment: event.target.value
+    });
+  }
+
+  handleCancelComment(event) {
+    event.preventDefault();
+    this.setState({
+      commentForm: 'hidden',
+      comment: '',
+      addCommentButton: 'app-button background-orange float-right'
+    });
+  }
+
   handleSelect(address) {
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
@@ -235,7 +172,6 @@ export default class TripDetails extends React.Component {
   }
 
   render() {
-
     if (!this.state.trip) return null;
     const {
       country,
