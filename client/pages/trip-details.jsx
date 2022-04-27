@@ -13,7 +13,8 @@ export default class TripDetails extends React.Component {
     this.state = {
       trip: null,
       editReviewContainer: 'hidden',
-      tripDetailsContainer: 'trip-details-container',
+      tripDetailsContainer: 'container',
+      idTripDetailsContainer: 'trip-details-container',
       city: '',
       country: '',
       thingsTodoScore: 0,
@@ -79,8 +80,8 @@ export default class TripDetails extends React.Component {
     event.preventDefault();
     this.setState({
       editReviewContainer: 'container',
-      idTripDetailsContainer: 'hidden',
-      idTrip: 'hidden'
+      idTripDetailsContainer: '',
+      tripDetailsContainer: 'hidden'
     });
 
   }
@@ -165,7 +166,7 @@ export default class TripDetails extends React.Component {
 
   handleCancelForm(event) {
     this.setState({
-      idTrip: 'trip-details-container',
+      idTripDetailsContainer: 'trip-details-container',
       editReviewContainer: 'hidden'
     });
   }
@@ -254,7 +255,7 @@ export default class TripDetails extends React.Component {
         <Navbar handleChange={this.handleChange}
                 searchBox={this.state.searchBox}
         />
-        <article id={this.state.tripDetailsContainer}>
+        <article id={this.state.idTripDetailsContainer} className={this.state.tripDetailsContainer}>
           <article id="name-location-scores-trip-details">
             <section>
               <h2>{country} - {city}</h2>
