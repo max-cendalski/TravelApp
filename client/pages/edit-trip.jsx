@@ -71,14 +71,13 @@ export default class EditTrip extends React.Component {
     })
       .then(response => response.json())
       .then(result => {
-        console.log('result1', result);
         result.country = this.state.trip.country;
         result.username = this.state.trip.username;
-        console.log('result', result);
         this.setState({
           trip: result
         });
       });
+    window.location.hash = `#trips?tripId=${this.props.tripId}`;
   }
 
   handleCityNameChange(event) {
@@ -140,44 +139,44 @@ export default class EditTrip extends React.Component {
       safetyScore
     } = this.state.trip;
     return (
-      <div className='container'>
-        <div className='row horizontal padding-top3 detailed-view-container'>
-          <div className='image-container column-width50'>
+
+        <article id='edit-trip' className='row horizontal'>
+          <section className='image-container column-width50'>
             <img className="photo" src={mainPhotoUrl} alt={city}></img>
-          </div>
+          </section>
           <form onSubmit={this.handleSubmitForm} className='edit-form column-width50'>
-          <div className='column-width50'>
-            <div className='label-input-container'>
+          <section className='column-width50'>
+            <p className='label-input-container'>
               <label className='edit-score-label'>City</label>
               <input onChange={this.handleCityNameChange} className='edit-form-text-input float-right' type='text' defaultValue={city}></input>
-            </div>
-            <div className='label-input-container'>
+            </p>
+            <p className='label-input-container'>
               <label className='edit-score-label'>Things to Do</label>
               <input onChange={this.handleThingsTodoScoreChange} className='edit-form-text-input float-right' type="number" max="100" defaultValue={thingsTodoScore} required></input>
-            </div>
-            <div className='label-input-container'>
+            </p>
+            <p className='label-input-container'>
               <label className='edit-score-label'>Food</label>
               <input onChange={this.handleFoodScoreChange} className='edit-form-text-input float-right' type="number" max="100" defaultValue={foodScore} required></input>
-            </div>
-            <div className='label-input-container'>
+            </p>
+            <p className='label-input-container'>
               <label className='edit-score-label'>People</label>
               <input onChange={this.handlePeopleScoreChange} className='edit-form-text-input float-right' type="number" max="100" defaultValue={peopleScore} required></input>
-            </div>
-            <div className='label-input-container'>
+            </p>
+            <p className='label-input-container'>
               <label className='edit-score-label'>Transport</label>
               <input onChange={this.handleTransportScoreChange} className='edit-form-text-input float-right' type="number" max="100" defaultValue={transportScore} required></input>
-            </div>
-            <div className='label-input-container'>
+            </p>
+            <p className='label-input-container'>
               <label className='edit-score-label'>Safety</label>
               <input onChange={this.handleSafetyScoreChange} className='edit-form-text-input float-right' type="number" max="100" defaultValue={safetyScore} required></input>
-            </div>
-            </div>
+            </p>
+          </section>
             <textarea onChange={this.handleReviewChange} defaultValue={review} className='edit-form-textarea' required></textarea>
             <button type="submit" className='app-button background-orange float-right'>Submit</button>
             <button type="button" onClick={this.handleCancelForm} className='app-button background-red'>Cancel</button>
           </form>
-        </div>
-      </div>
+        </article>
+
     );
   }
 }

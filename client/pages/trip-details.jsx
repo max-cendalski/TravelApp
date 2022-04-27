@@ -244,19 +244,6 @@ export default class TripDetails extends React.Component {
             />
           </section>
         </article>
-        <article className={this.state.editReviewContainer}>
-          <EditReview trip={this.state.trip}
-                      handleCityNameChange = {this.handleCityNameChange}
-                      handleThingsTodoScoreChange = {this.handleThingsTodoScoreChange}
-                      handleFoodScoreChange = {this.handleFoodScoreChange}
-                      handlePeopleScoreChange = {this.handlePeopleScoreChange}
-                      handleTransportScoreChange = {this.handleTransportScoreChange}
-                      handleSafetyScoreChange = {this.handleSafetyScoreChange}
-                      handleSubmitEditedForm={this.handleSubmitEditedForm}
-                      handleReviewChange = {this.handleReviewChange}
-                      handleCancelForm = {this.handleCancelForm}
-          />
-        </article>
       </>
     );
   }
