@@ -11,7 +11,7 @@ export default function EditReview(props) {
           <div className='column-width50'>
             <div className='label-input-container'>
               <label className='edit-score-label'>City</label>
-              <input onChange={props.handleCityNameChange} className='edit-form-text-input float-right' type='text' defaultValue={props.trip.city}></input>
+              <input onChange={props.handleCityNameChange} className='edit-form-text-input float-right' type='text' defaultValue={props.trip.cityName}></input>
             </div>
             <div className='label-input-container'>
               <label className='edit-score-label'>Things to Do</label>

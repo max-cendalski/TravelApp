@@ -294,7 +294,7 @@ app.get('/api/trips/score/:tripId', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.patch('/api/reviews/:tripId', (req, res, next) => {
+app.patch('/api/edit/review/:tripId', (req, res, next) => {
   const tripId = Number(req.params.tripId);
   const { userId } = req.user;
   if (!Number.isInteger(tripId) || tripId < 1) {

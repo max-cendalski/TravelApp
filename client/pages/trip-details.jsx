@@ -1,9 +1,9 @@
 import React from 'react';
 import Navbar from '../components/navbar';
 import AppContext from '../lib/app-context';
-import EditReview from '../components/edit-review';
 import Comments from '../components/comments';
 import ReviewScore from '../components/review-score';
+import EditReview from '../components/edit-review';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import MapComponent from '../components/map';
 
@@ -12,8 +12,9 @@ export default class TripDetails extends React.Component {
     super(props);
     this.state = {
       trip: null,
-      reviewContainer: 'container',
       editReviewContainer: 'hidden',
+      tripDetailsContainer: 'container',
+      idTrip: 'trip-details-container',
       city: '',
       country: '',
       thingsTodoScore: 0,
@@ -46,6 +47,7 @@ export default class TripDetails extends React.Component {
     this.handleCommentForm = this.handleCommentForm.bind(this);
     this.handleCommentTextarea = this.handleCommentTextarea.bind(this);
     this.handleCancelComment = this.handleCancelComment.bind(this);
+    this.handleEditButton = this.handleEditButton.bind(this);
   }
 
   componentDidMount() {
@@ -61,7 +63,7 @@ export default class TripDetails extends React.Component {
               this.setState({ mapCenter: latLng });
             })
             .catch(error => console.error('Error', error));
-        }, '400');
+        }, '800');
       });
 
     fetch(`api/comments/${this.props.tripId}`)
@@ -74,10 +76,19 @@ export default class TripDetails extends React.Component {
     }
   }
 
-  handleEditButton() {
+  handleEditButton(event) {
+    event.preventDefault();
+    console.log('this.props.tripId', this.props.tripId);
+    // window.location.hash = 'edit/review';
     this.setState({
-      reviewContainer: 'hidden',
       editReviewContainer: 'container',
+      tripDetailsContainer: 'hidden',
+      idTrip: 'hidden'
+    });
+    // window.location.hash = 'edit/review';
+
+    /*     this.setState({
+      reviewContainer: 'hidden',
       country: this.state.trip.country,
       city: this.state.trip.city,
       thingsTodoScore: this.state.trip.thingsTodoScore,
@@ -86,7 +97,7 @@ export default class TripDetails extends React.Component {
       transportScore: this.state.trip.transportScore,
       safetyScore: this.state.trip.safetyScore,
       review: this.state.trip.review
-    });
+    }); */
   }
 
   handleSubmitEditedForm(event) {
@@ -169,7 +180,7 @@ export default class TripDetails extends React.Component {
 
   handleCancelForm(event) {
     this.setState({
-      reviewContainer: 'container',
+      idTrip: 'trip-details-container',
       editReviewContainer: 'hidden'
     });
   }
@@ -258,7 +269,7 @@ export default class TripDetails extends React.Component {
         <Navbar handleChange={this.handleChange}
                 searchBox={this.state.searchBox}
         />
-        <article id ="trip-details-container" className='container'>
+        <article id={this.state.idTrip} className={this.state.tripDetailsContainer}>
           <article id="name-location-scores-trip-details">
             <section>
               <h2>{country} - {city}</h2>
@@ -278,7 +289,7 @@ export default class TripDetails extends React.Component {
       <MapComponent
           lat={this.state.mapCenter.lat}
           lng={this.state.mapCenter.lng}
-    />
+      />
 
         <section id="main-photo-trip-details">
           <img className="photo" src={mainPhotoUrl} alt={city}></img>
@@ -315,21 +326,20 @@ export default class TripDetails extends React.Component {
                     commentValue = {this.state.comment}
           />
         </section>
-
-        <article id="edit-trip-review" className={this.state.editReviewContainer}>
-          <EditReview trip={this.state.trip}
-                      handleCityNameChange = {this.handleCityNameChange}
-                      handleThingsTodoScoreChange = {this.handleThingsTodoScoreChange}
-                      handleFoodScoreChange = {this.handleFoodScoreChange}
-                      handlePeopleScoreChange = {this.handlePeopleScoreChange}
-                      handleTransportScoreChange = {this.handleTransportScoreChange}
-                      handleSafetyScoreChange = {this.handleSafetyScoreChange}
-                      handleSubmitEditedForm={this.handleSubmitEditedForm}
-                      handleReviewChange = {this.handleReviewChange}
-                      handleCancelForm = {this.handleCancelForm}
-          />
-        </article>
       </article>
+      <article className={this.state.editReviewContainer}>
+        <EditReview trip={this.state.trip}
+                    handleCityNameChange = {this.handleCityNameChange}
+                    handleThingsTodoScoreChange = {this.handleThingsTodoScoreChange}
+                    handleFoodScoreChange = {this.handleFoodScoreChange}
+                    handlePeopleScoreChange = {this.handlePeopleScoreChange}
+                    handleTransportScoreChange = {this.handleTransportScoreChange}
+                    handleSafetyScoreChange = {this.handleSafetyScoreChange}
+                    handleSubmitEditedForm={this.handleSubmitEditedForm}
+                    handleReviewChange = {this.handleReviewChange}
+                    handleCancelForm = {this.handleCancelForm}
+        />
+        </article>
       </>
     );
   }
