@@ -123,11 +123,8 @@ export default class EditTrip extends React.Component {
     });
   }
 
-  handleCancelForm(event) {
-    this.setState({
-      idTripDetailsContainer: 'trip-details-container',
-      editReviewContainer: 'hidden'
-    });
+  handleCancelForm() {
+    window.location.hash = `#trips?tripId=${this.props.tripId}`;
   }
 
   render() {
