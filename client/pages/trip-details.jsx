@@ -54,17 +54,12 @@ export default class TripDetails extends React.Component {
               this.setState({ mapCenter: latLng });
             })
             .catch(error => console.error('Error', error));
-        }, '800');
+        }, '700');
       });
 
     fetch(`api/comments/${this.props.tripId}`)
       .then(response => response.json())
       .then(comments => this.setState({ comments }));
-    if (window.innerWidth < 800) {
-      this.setState({
-        containerWidth: '95%'
-      });
-    }
   }
 
   handleEditButton(event) {
