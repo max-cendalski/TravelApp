@@ -201,7 +201,7 @@ export default class ReviewForm extends React.Component {
             </section>
             <section id="review-form-textarea-section">
               <h3>Your review</h3>
-              <textarea onChange={this.handleTextarea} rows="20" name="review" required></textarea>
+              <textarea className='form-textarea' onChange={this.handleTextarea} rows="20" name="review" required></textarea>
               <button className='app-button background-orange float-right'>Confirm</button>
               <button className='app-button background-red' onClick={this.handleCancelTripReview}>Cancel</button>
             </section>

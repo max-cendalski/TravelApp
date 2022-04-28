@@ -43,24 +43,20 @@ export default class TripDetails extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`api/trips/${this.props.tripId}`)
-      .then(response => response.json())
-      .then(trip => {
-        this.setState({ trip });
-        setTimeout(() => {
-          const address = `${this.state.trip.country}, ${this.state.trip.city}`;
-          geocodeByAddress(address)
-            .then(results => getLatLng(results[0]))
-            .then(latLng => {
-              this.setState({ mapCenter: latLng });
-            })
-            .catch(error => console.error('Error', error));
-        }, '700');
-      });
-
-    fetch(`api/comments/${this.props.tripId}`)
-      .then(response => response.json())
-      .then(comments => this.setState({ comments }));
+    Promise.all([
+      fetch(`api/trips/${this.props.tripId}`).then(response => response.json()).then(trip => this.setState({ trip })),
+      fetch(`api/comments/${this.props.tripId}`).then(response => response.json()).then(comments => this.setState({ comments }))
+    ]).then(() => {
+      setTimeout(() => {
+        const address = `${this.state.trip.country}, ${this.state.trip.city}`;
+        geocodeByAddress(address)
+          .then(results => getLatLng(results[0]))
+          .then(latLng => {
+            this.setState({ mapCenter: latLng });
+          })
+          .catch(error => console.error('Error', error));
+      }, '700');
+    });
   }
 
   handleEditButton(event) {

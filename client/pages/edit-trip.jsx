@@ -76,8 +76,8 @@ export default class EditTrip extends React.Component {
         this.setState({
           trip: result
         });
+        window.location.hash = `#trips?tripId=${this.props.tripId}`;
       });
-    window.location.hash = `#trips?tripId=${this.props.tripId}`;
   }
 
   handleCityNameChange(event) {
@@ -171,7 +171,7 @@ export default class EditTrip extends React.Component {
               <input onChange={this.handleSafetyScoreChange} className='edit-form-text-input float-right' type="number" max="100" defaultValue={safetyScore} required></input>
             </p>
           </section>
-            <textarea onChange={this.handleReviewChange} defaultValue={review} className='edit-form-textarea' required></textarea>
+            <textarea onChange={this.handleReviewChange} defaultValue={review} className='form-textarea' required></textarea>
             <button type="submit" className='app-button background-orange float-right'>Submit</button>
             <button type="button" onClick={this.handleCancelForm} className='app-button background-red'>Cancel</button>
           </form>
