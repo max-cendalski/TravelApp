@@ -10,7 +10,7 @@ import NotFound from './pages/not-found.jsx';
 import TripDetails from './pages/trip-details.jsx';
 import ReviewForm from './pages/review-form.jsx';
 import Reviews from './pages/reviews';
-import EditReview from './components/edit-review.jsx';
+import EditTrip from './pages/edit-trip';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -78,7 +78,8 @@ export default class App extends React.Component {
     }
     if (route.path === 'trips') {
       const tripId = Number(route.params.get('tripId'));
-      return <TripDetails tripId={tripId} />;
+      return <TripDetails tripId={tripId}
+                          />;
     }
     if (route.path === 'sign-in') {
       return <SignInForm />;
@@ -88,8 +89,10 @@ export default class App extends React.Component {
       return <ReviewForm />;
     } if (route.path === 'my-reviews') {
       return <Reviews />;
-    } if (route.path === 'edit/my-reviews') {
-      return <EditReview />;
+    } if (route.path === 'edit/trip') {
+      const tripId = Number(route.params.get('tripId'));
+      return <EditTrip tripId={tripId}
+      />;
     }
     return <NotFound />;
   }

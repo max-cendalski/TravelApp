@@ -121,7 +121,8 @@ app.get('/api/trips/:tripId', (req, res, next) => {
     throw new ClientError(401, 'invalid tripId');
   }
   const sql = `
-  select "cityName",
+  select "city",
+         "country",
          "mainPhotoUrl",
          "review",
          "thingsTodoScore",
@@ -129,10 +130,8 @@ app.get('/api/trips/:tripId', (req, res, next) => {
          "peopleScore",
          "transportScore",
          "safetyScore",
-         "c"."name" as "countryName",
          "u"."username"
     from "trips"
-    join "countries" as "c" using ("countryId")
     join "users" as "u" using ("userId")
    where "tripId" = $1
   `;
@@ -295,7 +294,7 @@ app.get('/api/trips/score/:tripId', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.patch('/api/reviews/:tripId', (req, res, next) => {
+app.patch('/api/edit/trip/:tripId', (req, res, next) => {
   const tripId = Number(req.params.tripId);
   const { userId } = req.user;
   if (!Number.isInteger(tripId) || tripId < 1) {
@@ -305,7 +304,7 @@ app.patch('/api/reviews/:tripId', (req, res, next) => {
     return;
   }
   const {
-    cityName,
+    city,
     review,
     thingsTodoScore,
     foodScore,
@@ -313,7 +312,7 @@ app.patch('/api/reviews/:tripId', (req, res, next) => {
     transportScore,
     safetyScore
   } = req.body;
-  if (!cityName || !review || !thingsTodoScore || !foodScore || !peopleScore || !transportScore || !safetyScore) {
+  if (!city || !review || !thingsTodoScore || !foodScore || !peopleScore || !transportScore || !safetyScore) {
     res.status(400).json({
       error: 'missing data'
     });
@@ -321,7 +320,7 @@ app.patch('/api/reviews/:tripId', (req, res, next) => {
   }
   const sql = `
   update "trips"
-     set "cityName" = $1,
+     set "city" = $1,
          "review" = $2,
          "thingsTodoScore" = $3,
          "foodScore" = $4,
@@ -331,7 +330,7 @@ app.patch('/api/reviews/:tripId', (req, res, next) => {
    where "tripId" = $8 AND "userId" = $9
    returning *
   `;
-  const params = [cityName, review, thingsTodoScore, foodScore, peopleScore, transportScore, safetyScore, tripId, userId];
+  const params = [city, review, thingsTodoScore, foodScore, peopleScore, transportScore, safetyScore, tripId, userId];
   db.query(sql, params)
     .then(result => {
       const [updatedTrip] = result.rows;
