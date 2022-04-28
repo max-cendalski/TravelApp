@@ -446,6 +446,7 @@ input::-webkit-inner-spin-button {
 
 #name-location-scores-trip-details ul {
   padding-top: 0.5rem;
+  padding-left: 0;
   list-style: none;
   background-color: rgb(251, 251, 251);
 }
