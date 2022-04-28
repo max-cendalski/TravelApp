@@ -3,7 +3,6 @@ import Navbar from '../components/navbar';
 import AppContext from '../lib/app-context';
 import Comments from '../components/comments';
 import ReviewScore from '../components/review-score';
-import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import MapComponent from '../components/map';
 
 export default class TripDetails extends React.Component {
@@ -28,11 +27,7 @@ export default class TripDetails extends React.Component {
       comments: [],
       addCommentButton: 'app-button background-orange float-right',
       commentForm: 'hidden',
-      comment: '',
-      mapCenter: {
-        lat: 0,
-        lng: 0
-      }
+      comment: ''
     };
 
     this.handleEditButton = this.handleEditButton.bind(this);
@@ -46,17 +41,7 @@ export default class TripDetails extends React.Component {
     Promise.all([
       fetch(`api/trips/${this.props.tripId}`).then(response => response.json()).then(trip => this.setState({ trip })),
       fetch(`api/comments/${this.props.tripId}`).then(response => response.json()).then(comments => this.setState({ comments }))
-    ]).then(() => {
-      setTimeout(() => {
-        const address = `${this.state.trip.country}, ${this.state.trip.city}`;
-        geocodeByAddress(address)
-          .then(results => getLatLng(results[0]))
-          .then(latLng => {
-            this.setState({ mapCenter: latLng });
-          })
-          .catch(error => console.error('Error', error));
-      }, '700');
-    });
+    ]).catch(error => console.error('Error', error));
   }
 
   handleEditButton(event) {
@@ -152,16 +137,6 @@ export default class TripDetails extends React.Component {
     });
   }
 
-  handleSelect(address) {
-    geocodeByAddress(address)
-      .then(results => getLatLng(results[0]))
-      .then(latLng => {
-        this.setState({ address });
-        this.setState({ mapCenter: latLng });
-      })
-      .catch(error => console.error('Error', error));
-  }
-
   render() {
     if (!this.state.trip) return null;
     const {
@@ -200,8 +175,8 @@ export default class TripDetails extends React.Component {
           </article>
 
           <MapComponent
-              lat={this.state.mapCenter.lat}
-              lng={this.state.mapCenter.lng}
+               city={city}
+                country={country}
           />
 
           <section id="main-photo-trip-details">

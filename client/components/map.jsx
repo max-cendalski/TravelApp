@@ -1,5 +1,6 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
+import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 
 function MapComponent(props) {
   const containerStyle = {
@@ -9,6 +10,7 @@ function MapComponent(props) {
     left: '1rem',
     border: '1px solid rgb(240,131,52)'
   };
+  const [latLng, setLatLng] = useState({ lat: 0, lng: 0 });
   const [screenWidth, setWidth] = useState(window.innerWidth);
   useLayoutEffect(() => {
     function handleResize() {
@@ -28,6 +30,14 @@ function MapComponent(props) {
       window.removeEventListener('resize', handleResize);
     };
   });
+  useEffect(() => {
+    const address = `${props.country}, ${props.city}`;
+    geocodeByAddress(address)
+      .then(results => getLatLng(results[0]))
+      .then(latLng => {
+        setLatLng({ lat: latLng.lat, lng: latLng.lng });
+      });
+  }, []);
 
   return (
     <div>
@@ -35,14 +45,14 @@ function MapComponent(props) {
           containerStyle={containerStyle}
           google={props.google}
           center={{
-            lat: props.lat,
-            lng: props.lng
+            lat: latLng.lat,
+            lng: latLng.lng
           }}
           >
             <Marker
             position= {{
-              lat: props.lat,
-              lng: props.lng
+              lat: latLng.lat,
+              lng: latLng.lng
             }}
           />
       </Map>
