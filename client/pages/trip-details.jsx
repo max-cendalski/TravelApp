@@ -3,7 +3,6 @@ import Navbar from '../components/navbar';
 import AppContext from '../lib/app-context';
 import Comments from '../components/comments';
 import ReviewScore from '../components/review-score';
-import EditReview from '../components/edit-review';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import MapComponent from '../components/map';
 
@@ -11,6 +10,9 @@ export default class TripDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      error: false,
+      position: null,
+      redirect: false,
       trip: null,
       editReviewContainer: 'hidden',
       tripDetailsContainer: 'container',
@@ -38,7 +40,6 @@ export default class TripDetails extends React.Component {
     this.handleCommentForm = this.handleCommentForm.bind(this);
     this.handleCommentTextarea = this.handleCommentTextarea.bind(this);
     this.handleCancelComment = this.handleCancelComment.bind(this);
-
   }
 
   componentDidMount() {
@@ -63,7 +64,6 @@ export default class TripDetails extends React.Component {
   }
 
   handleEditButton(event) {
-    event.preventDefault();
     window.location.hash = `#edit/trip?tripId=${this.props.tripId}`;
   }
 

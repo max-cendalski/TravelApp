@@ -114,11 +114,8 @@
 }
 
 .image-container {
-  object-fit: contain;
-  display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
   height: 50vh;
 }
 
@@ -328,7 +325,7 @@ input::-webkit-inner-spin-button {
 }
 
 .edit-form-textarea {
-  height: 13rem;
+  height: 12rem;
   width: 100%;
   font-size: 1.1rem;
   font-weight: 500;

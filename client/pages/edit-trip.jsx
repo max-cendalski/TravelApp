@@ -142,7 +142,7 @@ export default class EditTrip extends React.Component {
 
         <article id='edit-trip' className='row horizontal'>
           <section className='image-container column-width50'>
-            <img className="photo" src={mainPhotoUrl} alt={city}></img>
+            <img className='photo' src={mainPhotoUrl} alt={city}></img>
           </section>
           <form onSubmit={this.handleSubmitForm} className='edit-form column-width50'>
           <section className='column-width50'>
