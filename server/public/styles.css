@@ -498,6 +498,19 @@ input::-webkit-inner-spin-button {
   padding-top: 1rem;
 }
 
+#search-result-list {
+  position: absolute;
+  list-style: none;
+  background-color: white;
+  width: 14rem;
+}
+
+#search-result-list li:hover {
+  cursor: pointer;
+  background-color: green;
+  color: white;
+}
+
 .float-right {
   float: right;
 }

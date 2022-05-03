@@ -11,7 +11,8 @@ export default class Navbar extends React.Component {
       visible: 'hidden',
       modal: 'hidden',
       signUpForm: false,
-      signInForm: false
+      signInForm: false,
+      searchResults: ''
     });
 
     this.handleChange = this.handleChange.bind(this);
@@ -28,12 +29,14 @@ export default class Navbar extends React.Component {
 
   handleChange(event) {
     this.setState({
+      locations: this.context.locations,
       searchBox: event.target.value
     });
   }
 
   handleSubmit(event) {
     event.preventDefault();
+    console.log('this.context.locations', this.context.locations);
     window.location.hash = `#search-results?country=${this.state.searchBox}`;
     this.setState({
       searchBox: ''
@@ -100,6 +103,15 @@ export default class Navbar extends React.Component {
             <input className="search-box" type="search" value={this.state.searchBox} onChange={this.handleChange} name="searchBox" placeholder="search for a country" required/>
             <button className='submit-search-button'>Submit</button>
           </form>
+          <section id="search-section">
+            <ul id="search-result-list">
+              {
+                this.state.searchBox && this.context.locations.map((location, index) => {
+                  return <li data-country={location.country} data-city={location.city} key={index}>{location.country}: {location.city}</li>;
+                })
+              }
+            </ul>
+          </section>
         </div>
         <div className='travel-app-home'>
           <h1><a href="#">TravelApp</a></h1>
