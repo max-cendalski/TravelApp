@@ -25,6 +25,7 @@ export default class Navbar extends React.Component {
     this.handleModalClick = this.handleModalClick.bind(this);
     this.handleSignInButton = this.handleSignInButton.bind(this);
     this.handleMyReviewsButton = this.handleMyReviewsButton.bind(this);
+    this.handleSearchListClick = this.handleSearchListClick.bind(this);
   }
 
   handleChange(event) {
@@ -40,6 +41,13 @@ export default class Navbar extends React.Component {
     window.location.hash = `#search-results?country=${this.state.searchBox}`;
     this.setState({
       searchBox: ''
+    });
+  }
+
+  handleSearchListClick(event) {
+    console.log('event.target', event.target.getAttribute('data-country'));
+    this.setState({
+      searchBox: `${event.target.getAttribute('data-country')},${event.target.getAttribute('data-city')}`
     });
   }
 
@@ -107,7 +115,7 @@ export default class Navbar extends React.Component {
             <ul id="search-result-list">
               {
                 this.state.searchBox && this.context.locations.map((location, index) => {
-                  return <li data-country={location.country} data-city={location.city} key={index}>{location.country}: {location.city}</li>;
+                  return <li onClick={this.handleSearchListClick} id="search-result-list-item"data-country={location.country} data-city={location.city} key={index}>{location.country}: {location.city}</li>;
                 })
               }
             </ul>

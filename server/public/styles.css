@@ -511,6 +511,10 @@ input::-webkit-inner-spin-button {
   color: white;
 }
 
+#search-result-list-item {
+  padding: 0.125rem;
+}
+
 .float-right {
   float: right;
 }
