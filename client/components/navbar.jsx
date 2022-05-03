@@ -31,23 +31,40 @@ export default class Navbar extends React.Component {
 
   handleChange(event) {
     event.preventDefault();
+    console.log('this.context.locations', this.context.locations);
     const letter = event.target.value.toLowerCase();
     this.setState({
       searchBox: letter
     });
-    const locationsArray = [];
+    let locationsArray = [];
+    let filteredLocations = [];
+    let newFiltered = [];
     if (letter === '') {
       this.setState({
         searchArray: []
       });
     } else {
-      this.context.locations.forEach(location => {
-        if (location.country.toLowerCase().includes(letter) || location.city.toLowerCase().includes(letter)) {
+      filteredLocations = this.context.locations.filter((location, index, array) =>
+        index === array.findIndex(item => (
+          item.country === location.country || item.city === location.city
+        ))
+      );
+      newFiltered = filteredLocations.reverse();
+      console.log('filteredLocations', newFiltered);
+      newFiltered.forEach(location => {
+        if (location.country.toLowerCase().includes(letter) | location.city.toLowerCase().includes(letter)) {
           locationsArray.push(location);
+          console.log('locationsArray', locationsArray);
           this.setState({
             searchArray: locationsArray
           });
+        } else {
+          this.setState({
+            searchArray: []
+          });
         }
+        locationsArray = [];
+        filteredLocations = [];
       });
     }
   }
@@ -132,7 +149,7 @@ export default class Navbar extends React.Component {
             <ul id="search-result-list">
               {
                 this.state.searchArray && this.state.searchArray.map((location, index) => {
-                  return <li onClick={this.handleSearchListClick} id="search-result-list-item"data-country={location.country} data-city={location.city} key={index}>{location.country}, {location.city}</li>;
+                  return <li onClick={this.handleSearchListClick} id="search-result-list-item" data-country={location.country} data-city={location.city} key={index}>{location.country}, {location.city}</li>;
                 })
               }
             </ul>
