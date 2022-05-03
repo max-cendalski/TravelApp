@@ -12,7 +12,8 @@ export default class Navbar extends React.Component {
       modal: 'hidden',
       signUpForm: false,
       signInForm: false,
-      searchResults: ''
+      searchResults: '',
+      searchArray: []
     });
 
     this.handleChange = this.handleChange.bind(this);
@@ -29,25 +30,41 @@ export default class Navbar extends React.Component {
   }
 
   handleChange(event) {
+    event.preventDefault();
+    const letter = event.target.value.toLowerCase();
     this.setState({
-      locations: this.context.locations,
-      searchBox: event.target.value
+      searchBox: letter
     });
+    const locationsArray = [];
+    if (letter === '') {
+      this.setState({
+        searchArray: []
+      });
+    } else {
+      this.context.locations.forEach(location => {
+        if (location.country.toLowerCase().includes(letter) || location.city.toLowerCase().includes(letter)) {
+          locationsArray.push(location);
+          this.setState({
+            searchArray: locationsArray
+          });
+        }
+      });
+    }
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log('this.context.locations', this.context.locations);
-    window.location.hash = `#search-results?country=${this.state.searchBox}`;
+    const country = this.state.searchBox.split(',')[0];
+    window.location.hash = `#search-results?country=${country}`;
     this.setState({
       searchBox: ''
     });
   }
 
   handleSearchListClick(event) {
-    console.log('event.target', event.target.getAttribute('data-country'));
     this.setState({
-      searchBox: `${event.target.getAttribute('data-country')},${event.target.getAttribute('data-city')}`
+      searchBox: `${event.target.getAttribute('data-country')},${event.target.getAttribute('data-city')}`,
+      searchArray: []
     });
   }
 
@@ -114,8 +131,8 @@ export default class Navbar extends React.Component {
           <section id="search-section">
             <ul id="search-result-list">
               {
-                this.state.searchBox && this.context.locations.map((location, index) => {
-                  return <li onClick={this.handleSearchListClick} id="search-result-list-item"data-country={location.country} data-city={location.city} key={index}>{location.country}: {location.city}</li>;
+                this.state.searchArray && this.state.searchArray.map((location, index) => {
+                  return <li onClick={this.handleSearchListClick} id="search-result-list-item"data-country={location.country} data-city={location.city} key={index}>{location.country}, {location.city}</li>;
                 })
               }
             </ul>
