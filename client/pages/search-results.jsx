@@ -22,8 +22,6 @@ export default class SearchResults extends React.Component {
           countries: result
         });
       });
-    /*    console.log('props.country', this.props.country);
-    console.log('this.stae.countrie', this.state.countries); */
   }
 
   componentDidUpdate(prevProps) {
@@ -42,7 +40,6 @@ export default class SearchResults extends React.Component {
           countries: result
         });
       });
-    // console.log('this.stae.countrie', this.state.countries);
   }
 
   render() {

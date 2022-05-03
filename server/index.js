@@ -23,6 +23,18 @@ app.listen(process.env.PORT, () => {
   console.log(`express server listening on port ${process.env.PORT}`);
 });
 
+app.get('/api/locations', (req, res, next) => {
+  const sql = `
+  select "country",
+         "city"
+    from "trips"
+              `;
+  db.query(sql)
+    .then(result => {
+      res.json(result.rows);
+    });
+});
+
 app.post('/api/auth/sign-up', (req, res, next) => {
   const { username, password } = req.body;
   if (!username || !password) {
