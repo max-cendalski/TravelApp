@@ -42,7 +42,7 @@ export default class Navbar extends React.Component {
       });
     } else {
       this.context.locations.forEach(location => {
-        if (location.country.toLowerCase().includes(letter.toLowerCase()) || location.city.toLowerCase().includes(letter.toLowerCase)) {
+        if (location.country.includes(letter.toLowerCase()) || location.city.includes(letter.toLowerCase)) {
           locationsArray.push(location);
           const filteredLocations = locationsArray.filter((location, index, array) =>
             index === array.findIndex(item => (
@@ -137,7 +137,7 @@ export default class Navbar extends React.Component {
             <ul id="search-result-list">
               {
                 this.state.searchArray && this.state.searchArray.map((location, index) => {
-                  return <li onClick={this.handleSearchListClick} id="search-result-list-item" data-country={location.country} data-city={location.city} key={index}>{location.country}, {location.city}</li>;
+                  return <li onClick={this.handleSearchListClick} className="search-result-list-item" data-country={location.country} data-city={location.city} key={index}>{location.country}, {location.city}</li>;
                 })
               }
             </ul>

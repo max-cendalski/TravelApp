@@ -513,16 +513,17 @@ input::-webkit-inner-spin-button {
   list-style: none;
   background-color: white;
   width: 14rem;
+  padding-left: 0;
+}
+
+#search-result-list li {
+  padding: 0.4rem 0.5rem;
 }
 
 #search-result-list li:hover {
   cursor: pointer;
   background-color: green;
   color: white;
-}
-
-#search-result-list-item {
-  padding: 0.125rem;
 }
 
 .float-right {
