@@ -73,6 +73,11 @@
   font-size: 1.2rem;
 }
 
+.country-name,
+.city-name::first-letter {
+  text-transform: capitalize;
+}
+
 .city-name {
   font-size: 1.1rem;
 }
@@ -437,6 +442,11 @@ input::-webkit-inner-spin-button {
   margin-top: 2rem;
   grid-column: 1/3;
   grid-row: 1/2;
+}
+
+#name-location-scores-trip-details h2 {
+  font-size: 1.4rem;
+  text-transform: capitalize;
 }
 
 #map-trip-details {
