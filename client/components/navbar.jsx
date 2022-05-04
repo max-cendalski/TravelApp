@@ -31,40 +31,28 @@ export default class Navbar extends React.Component {
 
   handleChange(event) {
     event.preventDefault();
-    console.log('this.context.locations', this.context.locations);
-    const letter = event.target.value.toLowerCase();
+    const letter = event.target.value;
     this.setState({
       searchBox: letter
     });
-    let locationsArray = [];
-    let filteredLocations = [];
-    let newFiltered = [];
+    const locationsArray = [];
     if (letter === '') {
       this.setState({
         searchArray: []
       });
     } else {
-      filteredLocations = this.context.locations.filter((location, index, array) =>
-        index === array.findIndex(item => (
-          item.country === location.country || item.city === location.city
-        ))
-      );
-      newFiltered = filteredLocations.reverse();
-      console.log('filteredLocations', newFiltered);
-      newFiltered.forEach(location => {
-        if (location.country.toLowerCase().includes(letter) | location.city.toLowerCase().includes(letter)) {
+      this.context.locations.forEach(location => {
+        if (location.country.toLowerCase().includes(letter.toLowerCase()) || location.city.toLowerCase().includes(letter.toLowerCase)) {
           locationsArray.push(location);
-          console.log('locationsArray', locationsArray);
+          const filteredLocations = locationsArray.filter((location, index, array) =>
+            index === array.findIndex(item => (
+              item.country === location.country && item.city === location.city
+            ))
+          );
           this.setState({
-            searchArray: locationsArray
-          });
-        } else {
-          this.setState({
-            searchArray: []
+            searchArray: filteredLocations
           });
         }
-        locationsArray = [];
-        filteredLocations = [];
       });
     }
   }
