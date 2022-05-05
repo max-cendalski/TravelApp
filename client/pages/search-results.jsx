@@ -11,7 +11,7 @@ export default class SearchResults extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`/api/countries/${this.props.country}`, {
+    fetch(`/api/countries/${this.props.countries}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -28,7 +28,8 @@ export default class SearchResults extends React.Component {
             countries: result
           });
         }
-      });
+      })
+      .catch(error => error(console.error('Error', error)));
   }
 
   componentDidUpdate(prevProps) {
@@ -46,7 +47,8 @@ export default class SearchResults extends React.Component {
         this.setState({
           countries: result
         });
-      });
+      })
+      .catch(error => error(console.error('Error', error)));
 
   }
 
