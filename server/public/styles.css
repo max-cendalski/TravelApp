@@ -526,6 +526,13 @@ input::-webkit-inner-spin-button {
   color: white;
 }
 
+.nothing-found-msg {
+  text-align: center;
+  margin: 5% auto;
+  width: 80%;
+  font-size: 1.8rem;
+}
+
 .float-right {
   float: right;
 }

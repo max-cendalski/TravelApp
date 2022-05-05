@@ -74,10 +74,11 @@ function Trip(props) {
   return (
     <a
       href={`#trips?tripId=${tripId}`}>
-      <div className="text-container">
-      <p className='country-name'>{country}-<span className='city-name'>{city}</span></p>
-      <span className='city-name'>@{username}</span></div>
-      <div className='image-container'><img className="photo" src={mainPhotoUrl}></img></div>
+      <section className="text-container">
+        <p className='country-name'>{country}-<span className='city-name'>{city}</span></p>
+        <span className='city-name'>@{username}</span>
+      </section>
+      <section className='image-container'><img className="photo" src={mainPhotoUrl}></img></section>
     </a>
   );
 }
