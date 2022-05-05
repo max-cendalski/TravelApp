@@ -11,7 +11,7 @@ export default class SearchResults extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`/api/countries/${this.props.countries}`, {
+    fetch(`/api/countries/${this.props.country}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -19,15 +19,10 @@ export default class SearchResults extends React.Component {
     })
       .then(response => response.json())
       .then(result => {
-        if (result.length === 0) {
-          this.setState({
-            nothingFoundMessage: 'Nothing Found'
-          });
-        } else {
-          this.setState({
-            countries: result
-          });
-        }
+        this.setState({
+          countries: result
+        });
+
       })
       .catch(error => error(console.error('Error', error)));
   }
@@ -56,6 +51,8 @@ export default class SearchResults extends React.Component {
     return (
       <article className='container'>
       <Navbar />
+        (this.state.countries)
+        ?
         <section className='list-flex'>
           {this.state.countries.map(trip =>
             <div className="image-item column-width50" key={trip.tripId}>
@@ -63,8 +60,9 @@ export default class SearchResults extends React.Component {
             </div>)
           }
         </section>
+        :
         <section className='nothing-found-msg'>
-          <h1>{this.state.nothingFoundMessage}</h1>
+          <h1>Nothing found</h1>
         </section>
       </article>
     );
