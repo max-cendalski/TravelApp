@@ -62,7 +62,7 @@ export default class SearchResults extends React.Component {
         </section>
         :
         <section className='nothing-found-msg'>
-          <h1>Nothing found</h1>
+          <h1>Nothing found!</h1>
         </section>
       </article>
     );

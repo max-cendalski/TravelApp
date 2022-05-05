@@ -174,14 +174,7 @@
   color: white;
 }
 
-.username-input {
-  height: 3rem;
-  display: block;
-  border-bottom: 1px solid white;
-  outline: none;
-  width: 45vh;
-}
-
+.username-input,
 .password-input {
   height: 3rem;
   display: block;
@@ -531,6 +524,14 @@ input::-webkit-inner-spin-button {
   margin: 5% auto;
   width: 80%;
   font-size: 1.8rem;
+}
+
+.not-found-page {
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 5% auto;
+  width: 100%;
+  line-height: 2;
 }
 
 .float-right {
