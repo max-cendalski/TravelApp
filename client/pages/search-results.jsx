@@ -5,7 +5,8 @@ export default class SearchResults extends React.Component {
   constructor(props) {
     super(props);
     this.state = ({
-      countries: []
+      countries: [],
+      nothingFoundMessage: ''
     });
   }
 
@@ -18,9 +19,15 @@ export default class SearchResults extends React.Component {
     })
       .then(response => response.json())
       .then(result => {
-        this.setState({
-          countries: result
-        });
+        if (result.length === 0) {
+          this.setState({
+            nothingFoundMessage: 'Nothing Found'
+          });
+        } else {
+          this.setState({
+            countries: result
+          });
+        }
       });
   }
 
@@ -40,20 +47,24 @@ export default class SearchResults extends React.Component {
           countries: result
         });
       });
+
   }
 
   render() {
     return (
-      <div className='container'>
+      <article className='container'>
       <Navbar />
-        <div className='list-flex'>
+        <section className='list-flex'>
           {this.state.countries.map(trip =>
             <div className="image-item column-width50" key={trip.tripId}>
               <Trip trip={trip} />
             </div>)
           }
-        </div>
-      </div>
+        </section>
+        <section className='nothing-found-msg'>
+          <h1>{this.state.nothingFoundMessage}</h1>
+        </section>
+      </article>
     );
   }
 }
