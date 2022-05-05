@@ -5,7 +5,8 @@ export default class SignUpForm extends React.Component {
     super(props);
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      userExiststMsg: 'invisible'
     };
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -14,7 +15,8 @@ export default class SignUpForm extends React.Component {
 
   handleUsernameChange(event) {
     this.setState({
-      username: event.target.value
+      username: event.target.value,
+      userExiststMsg: 'invisible'
     });
   }
 
@@ -39,24 +41,34 @@ export default class SignUpForm extends React.Component {
     })
       .then(response => response.json())
       .then(result => {
-        window.location.hash = '';
-        this.props.handleSwitchingModal();
+        if (result.error) {
+          this.setState({
+            userExiststMsg: 'row'
+          });
+        } else {
+          window.location.hash = '';
+          this.props.handleSwitchingModal();
+        }
+      })
+      .catch(error => {
+        console.error('Error', error.message);
       });
   }
 
   render() {
     return (
-      <div className='margin-top3'>
-          <div className='row centered'>
-            <form onSubmit={this.handleSubmit} name="signInForm">
+          <article>
+            <section className={this.state.userExiststMsg}>
+              <h1 className='username-exists-msg'>User with that username already exists!</h1>
+            </section>
+            <form onSubmit={this.handleSubmit} name="signUpForm">
             <label className="form-label"> Sign up </label>
               <input required className="username-input input-form" type="text" value={this.state.username} onChange={this.handleUsernameChange} name="username" placeholder="username"/>
               <input required className="password-input input-form" type="password" value={this.state.password} onChange={this.handlePasswordChange} name="password" placeholder="password" />
               <button className='app-button background-orange float-right'>Confirm</button>
               <button className='app-button background-red' onClick={this.props.handleSwitchingModal}>Cancel</button>
             </form>
-          </div>
-        </div>
+          </article>
     );
   }
 }

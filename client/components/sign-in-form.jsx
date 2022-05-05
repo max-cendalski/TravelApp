@@ -48,9 +48,7 @@ export default class SignInForm extends React.Component {
 
   render() {
     return (
-      <div className='relative'>
-        <div className='form-component-container'>
-          <div className='row centered'>
+          <article className='margin-top3'>
             <form onSubmit={this.handleSubmit} name="signInForm">
             <label className="form-label">Sign in </label>
               <input required className="username-input input-form" type="text" value={this.state.username} onChange={this.handleUsernameChange} name="username" placeholder="username"/>
@@ -58,9 +56,7 @@ export default class SignInForm extends React.Component {
               <button className='app-button background-red' onClick={this.props.handleSwitchingModal}>Cancel</button>
               <button className='app-button background-orange float-right'>Confirm</button>
             </form>
-          </div>
-        </div>
-      </div>
+          </article>
     );
   }
 }

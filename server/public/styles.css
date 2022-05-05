@@ -538,6 +538,17 @@ input::-webkit-inner-spin-button {
   float: right;
 }
 
+.username-exists-msg {
+  text-align: center;
+  font-size: 1.4rem;
+  margin-top: 2rem;
+  color: white;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
 .hidden {
   display: none;
 }

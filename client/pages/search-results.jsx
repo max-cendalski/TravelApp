@@ -24,7 +24,9 @@ export default class SearchResults extends React.Component {
         });
 
       })
-      .catch(error => error(console.error('Error', error)));
+      .catch(error => {
+        console.error('Error', error);
+      });
   }
 
   componentDidUpdate(prevProps) {
@@ -43,7 +45,9 @@ export default class SearchResults extends React.Component {
           countries: result
         });
       })
-      .catch(error => error(console.error('Error', error)));
+      .catch(error => {
+        console.error('Error', error);
+      });
 
   }
 
@@ -62,7 +66,7 @@ export default class SearchResults extends React.Component {
         </section>
         :
         <section className='nothing-found-msg'>
-          <h1>Nothing found!</h1>
+          <h1>Nothing found</h1>
         </section>
       </article>
     );
