@@ -11,7 +11,9 @@ export default class Navbar extends React.Component {
       visible: 'hidden',
       modal: 'hidden',
       signUpForm: false,
-      signInForm: false
+      signInForm: false,
+      searchResults: '',
+      searchArray: []
     });
 
     this.handleChange = this.handleChange.bind(this);
@@ -24,19 +26,50 @@ export default class Navbar extends React.Component {
     this.handleModalClick = this.handleModalClick.bind(this);
     this.handleSignInButton = this.handleSignInButton.bind(this);
     this.handleMyReviewsButton = this.handleMyReviewsButton.bind(this);
+    this.handleSearchListClick = this.handleSearchListClick.bind(this);
   }
 
   handleChange(event) {
+    event.preventDefault();
+    const letter = event.target.value;
     this.setState({
-      searchBox: event.target.value
+      searchBox: letter
     });
+    const locationsArray = [];
+    if (letter === '') {
+      this.setState({
+        searchArray: []
+      });
+    } else {
+      this.context.locations.forEach(location => {
+        if (location.country.includes(letter.toLowerCase()) || location.city.includes(letter.toLowerCase)) {
+          locationsArray.push(location);
+          const filteredLocations = locationsArray.filter((location, index, array) =>
+            index === array.findIndex(item => (
+              item.country === location.country && item.city === location.city
+            ))
+          );
+          this.setState({
+            searchArray: filteredLocations
+          });
+        }
+      });
+    }
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    window.location.hash = `#search-results?country=${this.state.searchBox}`;
+    const country = this.state.searchBox.split(',')[0];
+    window.location.hash = `#search-results?country=${country}`;
     this.setState({
       searchBox: ''
+    });
+  }
+
+  handleSearchListClick(event) {
+    this.setState({
+      searchBox: `${event.target.getAttribute('data-country')},${event.target.getAttribute('data-city')}`,
+      searchArray: []
     });
   }
 
@@ -97,9 +130,18 @@ export default class Navbar extends React.Component {
       <div className='navbar-container row' onMouseLeave={this.handleOnMouseLeave}>
         <div className='search-box-container'>
           <form onSubmit={this.handleSubmit}>
-            <input className="search-box" type="search" value={this.state.searchBox} onChange={this.handleChange} name="searchBox" placeholder="search for a country" required/>
+            <input className="search-box" type="search" value={this.state.searchBox} onChange={this.handleChange} autoComplete="off" name="searchBox" placeholder="search for a country" required/>
             <button className='submit-search-button'>Submit</button>
           </form>
+          <section id="search-section">
+            <ul id="search-result-list">
+              {
+                this.state.searchArray && this.state.searchArray.map((location, index) => {
+                  return <li onClick={this.handleSearchListClick} className="search-result-list-item" data-country={location.country} data-city={location.city} key={index}>{location.country}, {location.city}</li>;
+                })
+              }
+            </ul>
+          </section>
         </div>
         <div className='travel-app-home'>
           <h1><a href="#">TravelApp</a></h1>

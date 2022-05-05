@@ -19,7 +19,8 @@ export default class App extends React.Component {
       user: null,
       isAuthorizing: false,
       route: parseRoute(window.location.hash),
-      logoutInfo: 'hidden'
+      logoutInfo: 'hidden',
+      locations: []
     };
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleLogoutWindow = this.handleLogoutWindow.bind(this);
@@ -28,6 +29,19 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
+    fetch('api/locations', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json()
+        .then(locations => {
+          this.setState({
+            locations: locations
+          });
+        })
+      );
     window.addEventListener('hashchange', () => {
       this.setState({
         route: parseRoute(window.location.hash)
@@ -98,9 +112,9 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { user, route, isAuthorizing, logoutInfo } = this.state;
+    const { user, route, isAuthorizing, logoutInfo, locations } = this.state;
     const { handleSignIn, handleLogoutWindow, handleConfirmLogout, handleCancelLogout } = this;
-    const contextValue = { user, route, handleLogoutWindow, handleSignIn, isAuthorizing, logoutInfo, handleConfirmLogout, handleCancelLogout };
+    const contextValue = { locations, user, route, handleLogoutWindow, handleSignIn, isAuthorizing, logoutInfo, handleConfirmLogout, handleCancelLogout };
     return (
       <AppContext.Provider value = {contextValue}>
         {this.renderPage()}

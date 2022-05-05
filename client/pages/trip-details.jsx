@@ -160,7 +160,7 @@ export default class TripDetails extends React.Component {
         <article id={this.state.idTripDetailsContainer} className={this.state.tripDetailsContainer}>
           <article id="name-location-scores-trip-details">
             <section>
-              <h2>{country} - {city}</h2>
+              <h2 className='country-name'>{country}-<span className='city-name'>{city}</span></h2>
               <h3> @{username}</h3>
             </section>
             <section>
