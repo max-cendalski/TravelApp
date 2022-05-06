@@ -138,6 +138,7 @@ export default class TripDetails extends React.Component {
   }
 
   render() {
+
     if (!this.state.trip) return null;
     const {
       country,
@@ -194,11 +195,14 @@ export default class TripDetails extends React.Component {
           </section>
 
           <section id="scores-trip-details">
-            <ReviewScore tripId = {this.props.tripId}
-                  loggedUserId = {this.context.user.userId}
-                loggedUsername = {this.context.user.username}
-              reviewAuthorName = {this.state.trip.username}
+          {
+            this.context.user.username !== username && <ReviewScore tripId = {this.props.tripId}
+                                                              loggedUserId = {this.context.user.userId}
+                                                            loggedUsername = {this.context.user.username}
+                                                          reviewAuthorName = {this.state.trip.username}
             />
+          }
+
           </section>
 
           <section id="comments-trip-details">
