@@ -84,13 +84,13 @@
 }
 
 .travel-app-home {
-  font-size: 0.7rem;
   margin-left: 11rem;
 }
 
 .travel-app-home a {
   color: rgb(240, 131, 52);
   text-decoration: none;
+  font-size: 2rem;
 }
 
 .login-icon {

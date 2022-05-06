@@ -5,8 +5,7 @@ export default class SearchResults extends React.Component {
   constructor(props) {
     super(props);
     this.state = ({
-      countries: [],
-      nothingFoundMessage: ''
+      countries: []
     });
   }
 
@@ -22,11 +21,9 @@ export default class SearchResults extends React.Component {
         this.setState({
           countries: result
         });
-
-      })
-      .catch(error => {
-        console.error('Error', error);
-      });
+      }
+      )
+      .catch(error => error(console.error('Error', error)));
   }
 
   componentDidUpdate(prevProps) {
@@ -45,30 +42,30 @@ export default class SearchResults extends React.Component {
           countries: result
         });
       })
-      .catch(error => {
-        console.error('Error', error);
-      });
+      .catch(error => error(console.error('Error', error)));
 
   }
 
   render() {
     return (
-      <article className='container'>
-      <Navbar />
-        (this.state.countries)
-        ?
-        <section className='list-flex'>
-          {this.state.countries.map(trip =>
-            <div className="image-item column-width50" key={trip.tripId}>
-              <Trip trip={trip} />
-            </div>)
-          }
-        </section>
-        :
-        <section className='nothing-found-msg'>
-          <h1>Nothing found</h1>
-        </section>
-      </article>
+     <>
+      {this.state.countries.length === 0
+        ? (
+            <section className='nothing-found-msg'><h1>Nothing found</h1></section>
+          )
+        : (
+            <article>
+              <Navbar />
+              <section className='list-flex'>
+                {this.state.countries.map(trip =>
+                  <div className="image-item column-width50" key={trip.tripId}>
+                    <Trip trip={trip} />
+                  </div>)
+                }
+              </section>
+            </article>
+          )}
+    </>
     );
   }
 }
@@ -78,11 +75,10 @@ function Trip(props) {
   return (
     <a
       href={`#trips?tripId=${tripId}`}>
-      <section className="text-container">
-        <p className='country-name'>{country}-<span className='city-name'>{city}</span></p>
-        <span className='city-name'>@{username}</span>
-      </section>
-      <section className='image-container'><img className="photo" src={mainPhotoUrl}></img></section>
+      <div className="text-container">
+      <p className='country-name'>{country}-<span className='city-name'>{city}</span></p>
+      <span className='city-name'>@{username}</span></div>
+      <div className='image-container'><img className="photo" src={mainPhotoUrl}></img></div>
     </a>
   );
 }
