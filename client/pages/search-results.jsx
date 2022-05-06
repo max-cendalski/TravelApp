@@ -48,12 +48,9 @@ export default class SearchResults extends React.Component {
 
   render() {
     return (
-     <>
-      {this.state.countries.length === 0
+     <article>
+      {this.state.countries.length > 0
         ? (
-            <section className='nothing-found-msg'><h1>Nothing found</h1></section>
-          )
-        : (
             <article>
               <Navbar />
               <section className='list-flex'>
@@ -64,8 +61,14 @@ export default class SearchResults extends React.Component {
                 }
               </section>
             </article>
+          )
+        : (
+          <article>
+            <Navbar />
+            <h1 className='nothing-found-msg'>Nothing Found</h1>
+          </article>
           )}
-    </>
+    </article>
     );
   }
 }

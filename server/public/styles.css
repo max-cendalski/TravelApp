@@ -517,7 +517,7 @@ input::-webkit-inner-spin-button {
 
 .nothing-found-msg {
   text-align: center;
-  margin: 5% auto;
+  padding-top: 6rem;
   width: 80%;
   font-size: 1.8rem;
 }
