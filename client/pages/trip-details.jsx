@@ -138,7 +138,6 @@ export default class TripDetails extends React.Component {
   }
 
   render() {
-
     if (!this.state.trip) return null;
     const {
       country,
@@ -175,9 +174,8 @@ export default class TripDetails extends React.Component {
             </section>
           </article>
 
-          <MapComponent
-               city={city}
-                country={country}
+          <MapComponent city={city}
+                     country={country}
           />
 
           <section id="main-photo-trip-details">
@@ -195,13 +193,11 @@ export default class TripDetails extends React.Component {
           </section>
 
           <section id="scores-trip-details">
-          {
-            this.context.user.username !== username && <ReviewScore tripId = {this.props.tripId}
-                                                              loggedUserId = {this.context.user.userId}
-                                                            loggedUsername = {this.context.user.username}
-                                                          reviewAuthorName = {this.state.trip.username}
+            <ReviewScore tripId = {this.props.tripId}
+                   loggedUserId = {this.context.user.userId}
+                 loggedUsername = {this.context.user.username}
+               reviewAuthorName = {this.state.trip.username}
             />
-          }
 
           </section>
 

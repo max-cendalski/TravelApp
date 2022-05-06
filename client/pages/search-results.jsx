@@ -5,8 +5,7 @@ export default class SearchResults extends React.Component {
   constructor(props) {
     super(props);
     this.state = ({
-      countries: [],
-      data: false
+      countries: []
     });
   }
 
@@ -20,8 +19,7 @@ export default class SearchResults extends React.Component {
       .then(response => response.json())
       .then(result => {
         this.setState({
-          countries: result,
-          data: true
+          countries: result
         });
       }
       )
@@ -49,10 +47,10 @@ export default class SearchResults extends React.Component {
   }
 
   render() {
-    if (this.state.data === false) return null;
+    if (!this.state.countries) return null;
     return (
      <article>
-      {this.state.countries.length > 0
+      {this.state.countries
         ? (
             <article>
               <Navbar />

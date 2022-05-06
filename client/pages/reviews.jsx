@@ -28,18 +28,29 @@ export default class Reviews extends React.Component {
   }
 
   render() {
+    if (!this.state.myReviews) return null;
     return (
-     <div className='container'>
-      <Navbar />
-        <div className='list-flex'>
-          {this.state.myReviews.map(trip =>
-            <div className="image-item column-width50" key={trip.tripId}>
-              <Trip trip={trip}
-              />
-            </div>)
-          }
-        </div>
-      </div>
+     <article>
+      {this.state.myReviews
+        ? (
+          <article>
+            <Navbar />
+              <section className='list-flex'>
+                {this.state.myReviews.map(trip =>
+                  <div className="image-item column-width50" key={trip.tripId}>
+                    <Trip trip={trip} />
+                  </div>)
+                }
+              </section>
+            </article>
+          )
+        : (
+          <article>
+            <Navbar />
+            <h1 className='nothing-found-msg'>You don &apos;t have any reviews!</h1>
+          </article>
+          )}
+      </article>
     );
   }
 }
