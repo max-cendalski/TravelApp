@@ -541,6 +541,12 @@ input::-webkit-inner-spin-button {
   color: white;
 }
 
+.password-notification {
+  color: white;
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
 .invisible {
   visibility: hidden;
 }
