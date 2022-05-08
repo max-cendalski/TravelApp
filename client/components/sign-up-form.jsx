@@ -62,14 +62,18 @@ export default class SignUpForm extends React.Component {
               <h1 className='username-exists-msg'>User with that username already exists!</h1>
             </section>
             <form onSubmit={this.handleSubmit} name="signUpForm">
+            <p>
               <label className="form-label"> Sign up </label>
               <input required className="username-input input-form" type="text" value={this.state.username} onChange={this.handleUsernameChange} name="username" placeholder="username"/>
+            </p>
+            <p>
               <input required className="password-input input-form" type="password" value={this.state.password} onChange={this.handlePasswordChange} name="password" placeholder="password" minLength="6"/>
-              <p className='password-notification'>password must be at least 6 characters long</p>
-              <button className='app-button background-orange float-right'>Confirm</button>
-              <button className='app-button background-red' onClick={this.props.handleSwitchingModal}>Cancel</button>
-            </form>
-          </article>
+            </p>
+            <p className='password-notification'>password must be at least 6 characters long</p>
+            <button className='app-button background-orange float-right'>Confirm</button>
+            <button className='app-button background-red' onClick={this.props.handleSwitchingModal}>Cancel</button>
+          </form>
+        </article>
     );
   }
 }

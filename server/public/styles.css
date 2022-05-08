@@ -173,7 +173,6 @@
 .username-input,
 .password-input {
   height: 3rem;
-  display: block;
   border-bottom: 1px solid white;
   outline: none;
   width: 45vh;
