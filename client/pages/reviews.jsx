@@ -31,7 +31,7 @@ export default class Reviews extends React.Component {
     if (!this.state.myReviews) return null;
     return (
      <article>
-      {this.state.myReviews
+      {this.state.myReviews.length > 0
         ? (
           <article>
             <Navbar />
