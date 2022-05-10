@@ -168,8 +168,8 @@ export default class TripDetails extends React.Component {
 
     return (
       !this.context.user
-        ? <article className='logged-in-error'>
-            <h1>You need to be logged in to see detail trip review!</h1>
+        ? <article>
+            <h1 className='nothing-found-msg'>You need to be logged in to see detail trip review!</h1>
           </article>
         : <article>
             <Navbar handleChange={this.handleChange}
