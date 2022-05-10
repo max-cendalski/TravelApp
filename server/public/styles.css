@@ -36,10 +36,6 @@
   width: 100%;
 }
 
-.column-width90 {
-  width: 90%;
-}
-
 .column-width50 {
   width: 50%;
 }
@@ -88,13 +84,13 @@
 }
 
 .travel-app-home {
-  font-size: 0.7rem;
   margin-left: 11rem;
 }
 
 .travel-app-home a {
   color: rgb(240, 131, 52);
   text-decoration: none;
+  font-size: 2rem;
 }
 
 .login-icon {
@@ -174,14 +170,7 @@
   color: white;
 }
 
-.username-input {
-  height: 3rem;
-  display: block;
-  border-bottom: 1px solid white;
-  outline: none;
-  width: 45vh;
-}
-
+.username-input,
 .password-input {
   height: 3rem;
   display: block;
@@ -526,8 +515,40 @@ input::-webkit-inner-spin-button {
   color: white;
 }
 
+.nothing-found-msg {
+  text-align: center;
+  padding-top: 6rem;
+  width: 80%;
+  font-size: 1.8rem;
+}
+
+.not-found-page {
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 5% auto;
+  width: 100%;
+  line-height: 2;
+}
+
 .float-right {
   float: right;
+}
+
+.username-exists-msg {
+  text-align: center;
+  font-size: 1.4rem;
+  margin-top: 2rem;
+  color: white;
+}
+
+.password-notification {
+  color: white;
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+.invisible {
+  visibility: hidden;
 }
 
 .hidden {

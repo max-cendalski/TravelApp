@@ -21,7 +21,9 @@ export default class SearchResults extends React.Component {
         this.setState({
           countries: result
         });
-      });
+      }
+      )
+      .catch(error => error(console.error('Error', error)));
   }
 
   componentDidUpdate(prevProps) {
@@ -39,21 +41,35 @@ export default class SearchResults extends React.Component {
         this.setState({
           countries: result
         });
-      });
+      })
+      .catch(error => error(console.error('Error', error)));
+
   }
 
   render() {
+    if (!this.state.countries) return null;
     return (
-      <div className='container'>
-      <Navbar />
-        <div className='list-flex'>
-          {this.state.countries.map(trip =>
-            <div className="image-item column-width50" key={trip.tripId}>
-              <Trip trip={trip} />
-            </div>)
-          }
-        </div>
-      </div>
+     <article>
+      {this.state.countries.length > 0
+        ? (
+            <article>
+              <Navbar />
+              <section className='list-flex'>
+                {this.state.countries.map(trip =>
+                  <div className="image-item column-width50" key={trip.tripId}>
+                    <Trip trip={trip} />
+                  </div>)
+                }
+              </section>
+            </article>
+          )
+        : (
+          <article>
+            <Navbar />
+            <h1 className='nothing-found-msg'>Nothing Found!</h1>
+          </article>
+          )}
+    </article>
     );
   }
 }
@@ -63,10 +79,10 @@ function Trip(props) {
   return (
     <a
       href={`#trips?tripId=${tripId}`}>
-      <div className="text-container">
+      <section className="text-container">
       <p className='country-name'>{country}-<span className='city-name'>{city}</span></p>
-      <span className='city-name'>@{username}</span></div>
-      <div className='image-container'><img className="photo" src={mainPhotoUrl}></img></div>
+      <span className='city-name'>@{username}</span></section>
+      <section className='image-container'><img className="photo" src={mainPhotoUrl}></img></section>
     </a>
   );
 }

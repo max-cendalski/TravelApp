@@ -174,9 +174,8 @@ export default class TripDetails extends React.Component {
             </section>
           </article>
 
-          <MapComponent
-               city={city}
-                country={country}
+          <MapComponent city={city}
+                     country={country}
           />
 
           <section id="main-photo-trip-details">
@@ -195,10 +194,11 @@ export default class TripDetails extends React.Component {
 
           <section id="scores-trip-details">
             <ReviewScore tripId = {this.props.tripId}
-                  loggedUserId = {this.context.user.userId}
-                loggedUsername = {this.context.user.username}
-              reviewAuthorName = {this.state.trip.username}
+                   loggedUserId = {this.context.user.userId}
+                 loggedUsername = {this.context.user.username}
+               reviewAuthorName = {this.state.trip.username}
             />
+
           </section>
 
           <section id="comments-trip-details">

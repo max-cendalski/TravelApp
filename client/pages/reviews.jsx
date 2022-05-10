@@ -28,18 +28,29 @@ export default class Reviews extends React.Component {
   }
 
   render() {
+    if (!this.state.myReviews) return null;
     return (
-     <div className='container'>
-      <Navbar />
-        <div className='list-flex'>
-          {this.state.myReviews.map(trip =>
-            <div className="image-item column-width50" key={trip.tripId}>
-              <Trip trip={trip}
-              />
-            </div>)
-          }
-        </div>
-      </div>
+     <article>
+      {this.state.myReviews.length > 0
+        ? (
+          <article>
+            <Navbar />
+              <section className='list-flex'>
+                {this.state.myReviews.map(trip =>
+                  <div className="image-item column-width50" key={trip.tripId}>
+                    <Trip trip={trip} />
+                  </div>)
+                }
+              </section>
+            </article>
+          )
+        : (
+          <article>
+            <Navbar />
+            <h1 className='nothing-found-msg'>You don &apos;t have any reviews!</h1>
+          </article>
+          )}
+      </article>
     );
   }
 }
@@ -49,10 +60,10 @@ function Trip(props) {
   return (
     <a
       href={`#trips?tripId=${tripId}`}>
-      <div className="text-container">
-      <p className='country-name'>{country}-<span className='city-name'>{city}</span></p>
-      </div>
-      <div className='image-container'><img className="photo" src={mainPhotoUrl}></img></div>
+      <section className="text-container">
+        <p className='country-name'>{country}-<span className='city-name'>{city}</span></p>
+      </section>
+      <section className='image-container'><img className="photo" src={mainPhotoUrl}></img></section>
     </a>
   );
 }
