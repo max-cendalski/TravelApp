@@ -138,7 +138,12 @@ export default class TripDetails extends React.Component {
   }
 
   render() {
-    if (!this.state.trip) return null;
+    if (!this.context.username) {
+      return (
+        <h1>you need to be log in</h1>
+      );
+    }
+    // if (!this.state.trip) return null;
     const {
       country,
       city,
