@@ -58,6 +58,7 @@ app.post('/api/auth/sign-up', (req, res, next) => {
         .catch(err => next(err));
     });
 });
+
 app.post('/api/auth/sign-in', (req, res, next) => {
   const { username, password } = req.body;
   if (!username || !password) {
@@ -127,6 +128,8 @@ app.get('/api/countries', (req, res, next) => {
     });
 });
 
+app.use(authorizationMiddleware);
+
 app.get('/api/trips/:tripId', (req, res, next) => {
   const trip = Number(req.params.tripId);
   if (!trip) {
@@ -174,8 +177,6 @@ app.get('/api/comments/:tripId', (req, res, next) => {
     })
     .catch(err => next(err));
 });
-
-app.use(authorizationMiddleware);
 
 app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
   const {
