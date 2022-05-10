@@ -38,9 +38,23 @@ export default class TripDetails extends React.Component {
   }
 
   componentDidMount() {
+    const token = window.localStorage.getItem('TravelApp-token');
     Promise.all([
-      fetch(`api/trips/${this.props.tripId}`).then(response => response.json()).then(trip => this.setState({ trip })),
-      fetch(`api/comments/${this.props.tripId}`).then(response => response.json()).then(comments => this.setState({ comments }))
+      fetch(`api/trips/${this.props.tripId}`, {
+        method: 'GET',
+        headers: {
+          'x-access-token': token,
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(response => response.json()).then(trip => this.setState({ trip })),
+      fetch(`api/comments/${this.props.tripId}`, {
+        method: 'GET',
+        headers: {
+          'x-access-token': token,
+          'Content-Type': 'application/json'
+        }
+      }).then(response => response.json()).then(comments => this.setState({ comments }))
     ]).catch(error => console.error('Error', error));
   }
 
@@ -138,12 +152,14 @@ export default class TripDetails extends React.Component {
   }
 
   render() {
-    if (!this.context.username) {
+    if (!this.state.trip) return null;
+    if (!this.context.user) {
       return (
-        <h1>you need to be log in</h1>
+        <article className='logged-in-error'>
+          <h1>You need to be logged in to see detail trip review!</h1>
+        </article>
       );
     }
-    // if (!this.state.trip) return null;
     const {
       country,
       city,

@@ -526,6 +526,11 @@ input::-webkit-inner-spin-button {
   color: white;
 }
 
+.logged-in-error {
+  margin: 1rem auto;
+  text-align: center;
+}
+
 .float-right {
   float: right;
 }
