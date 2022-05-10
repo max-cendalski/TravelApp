@@ -62,7 +62,8 @@ export default class Navbar extends React.Component {
     const country = this.state.searchBox.split(',')[0];
     window.location.hash = `#search-results?country=${country}`;
     this.setState({
-      searchBox: ''
+      searchBox: '',
+      searchArray: ''
     });
   }
 

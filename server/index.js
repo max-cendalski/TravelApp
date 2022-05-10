@@ -47,6 +47,7 @@ app.post('/api/auth/sign-up', (req, res, next) => {
       const sql = `
         insert into "users" ("username", "password")
         values ($1, $2)
+        on conflict ("username") do nothing
         returning *
     `;
       const params = [username, hashedPassword];

@@ -5,15 +5,13 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <div className='container'>
+      <article className='container'>
         <Navbar />
-        <div className='container'>
-          <div className='row'>
+          <section className='row'>
             <img className="photo" src='images/Tahiti1.jpg' />
-          </div>
-        </div>
-        <div className='list-flex'></div>
-      </div>
+          </section>
+        <section className='list-flex'></section>
+      </article>
     );
   }
 }
