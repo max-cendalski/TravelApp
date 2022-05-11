@@ -33,7 +33,6 @@ export default class Home extends React.Component {
           <section className='row'>
             <img className="photo" src='images/Tahiti1.jpg' />
           </section>
-        <section className='list-flex'></section>
       </article>
     );
   }
