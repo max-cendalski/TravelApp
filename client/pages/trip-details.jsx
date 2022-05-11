@@ -38,9 +38,23 @@ export default class TripDetails extends React.Component {
   }
 
   componentDidMount() {
+    const token = window.localStorage.getItem('TravelApp-token');
     Promise.all([
-      fetch(`api/trips/${this.props.tripId}`).then(response => response.json()).then(trip => this.setState({ trip })),
-      fetch(`api/comments/${this.props.tripId}`).then(response => response.json()).then(comments => this.setState({ comments }))
+      fetch(`api/trips/${this.props.tripId}`, {
+        method: 'GET',
+        headers: {
+          'x-access-token': token,
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(response => response.json()).then(trip => this.setState({ trip })),
+      fetch(`api/comments/${this.props.tripId}`, {
+        method: 'GET',
+        headers: {
+          'x-access-token': token,
+          'Content-Type': 'application/json'
+        }
+      }).then(response => response.json()).then(comments => this.setState({ comments }))
     ]).catch(error => console.error('Error', error));
   }
 
@@ -153,69 +167,73 @@ export default class TripDetails extends React.Component {
     } = this.state.trip;
 
     return (
-        <>
-        <Navbar handleChange={this.handleChange}
-                searchBox={this.state.searchBox}
-        />
-        <article id={this.state.idTripDetailsContainer} className={this.state.tripDetailsContainer}>
-          <article id="name-location-scores-trip-details">
-            <section>
-              <h2 className='country-name'>{country}-<span className='city-name'>{city}</span></h2>
-              <h3> @{username}</h3>
-            </section>
-            <section>
-              <ul>
-                <li className='score-text'>Things to Do - {thingsTodoScore}</li>
-                <li className='score-text'>Food - {foodScore}</li>
-                <li className='score-text'>People - {peopleScore}</li>
-                <li className='score-text'>Transport - {transportScore}</li>
-                <li className='score-text'>Safety - {safetyScore}</li>
-              </ul>
-            </section>
+      !this.context.user
+        ? <article>
+            <h1 className='nothing-found-msg'>You need to be logged in to see detail trip review!</h1>
           </article>
+        : <article>
+            <Navbar handleChange={this.handleChange}
+                    searchBox={this.state.searchBox}
+            />
+          <article id={this.state.idTripDetailsContainer} className={this.state.tripDetailsContainer}>
+            <article id="name-location-scores-trip-details">
+              <section>
+                <h2 className='country-name'>{country}-<span className='city-name'>{city}</span></h2>
+                <h3> @{username}</h3>
+              </section>
+              <section>
+                <ul>
+                  <li className='score-text'>Things to Do - {thingsTodoScore}</li>
+                  <li className='score-text'>Food - {foodScore}</li>
+                  <li className='score-text'>People - {peopleScore}</li>
+                  <li className='score-text'>Transport - {transportScore}</li>
+                  <li className='score-text'>Safety - {safetyScore}</li>
+                </ul>
+              </section>
+            </article>
 
-          <MapComponent city={city}
-                     country={country}
-          />
-
-          <section id="main-photo-trip-details">
-            <img className="photo" src={mainPhotoUrl} alt={city}></img>
-          </section>
-
-          <article id="review-trip-details">
-            <p>{review}</p>
-          </article>
-
-          <section id="review-edit-button-trip-details">
-            {
-              this.context.user.username === username && <button onClick={this.handleEditButton} className='app-button background-orange'>Edit Review</button>
-            }
-          </section>
-
-          <section id="scores-trip-details">
-            <ReviewScore tripId = {this.props.tripId}
-                   loggedUserId = {this.context.user.userId}
-                 loggedUsername = {this.context.user.username}
-               reviewAuthorName = {this.state.trip.username}
+            <MapComponent
+                    city={city}
+                 country={country}
             />
 
-          </section>
+            <section id="main-photo-trip-details">
+              <img className="photo" src={mainPhotoUrl} alt={city}></img>
+            </section>
 
-          <section id="comments-trip-details">
-            <Comments comments={this.state.comments}
-                      loggedUser={this.context.user.username}
-                      author={this.state.trip.username}
-                      handleAddComment={this.handleAddComment}
-                      handleCommentForm={this.handleCommentForm}
-                      addCommentButton = {this.state.addCommentButton}
-                      commentForm = {this.state.commentForm}
-                      handleCommentTextarea = {this.handleCommentTextarea}
-                      handleCancelComment = {this.handleCancelComment}
-                      commentValue = {this.state.comment}
-            />
-          </section>
+            <article id="review-trip-details">
+              <p>{review}</p>
+            </article>
+
+            <section id="review-edit-button-trip-details">
+              {
+                this.context.user.username === username && <button onClick={this.handleEditButton} className='app-button background-orange'>Edit Review</button>
+              }
+            </section>
+
+            <section id="scores-trip-details">
+              <ReviewScore tripId = {this.props.tripId}
+                    loggedUserId = {this.context.user.userId}
+                  loggedUsername = {this.context.user.username}
+                reviewAuthorName = {this.state.trip.username}
+              />
+            </section>
+
+            <section id="comments-trip-details">
+              <Comments comments={this.state.comments}
+                        loggedUser={this.context.user.username}
+                        author={this.state.trip.username}
+                        handleAddComment={this.handleAddComment}
+                        handleCommentForm={this.handleCommentForm}
+                        addCommentButton = {this.state.addCommentButton}
+                        commentForm = {this.state.commentForm}
+                        handleCommentTextarea = {this.handleCommentTextarea}
+                        handleCancelComment = {this.handleCancelComment}
+                        commentValue = {this.state.comment}
+              />
+            </section>
+          </article>
         </article>
-      </>
     );
   }
 }

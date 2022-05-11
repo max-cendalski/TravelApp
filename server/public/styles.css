@@ -515,6 +515,11 @@ input::-webkit-inner-spin-button {
   color: white;
 }
 
+.logged-in-error {
+  margin: 1rem auto;
+  text-align: center;
+}
+
 .nothing-found-msg {
   text-align: center;
   padding-top: 6rem;

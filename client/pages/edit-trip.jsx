@@ -25,7 +25,15 @@ export default class EditTrip extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`api/trips/${this.props.tripId}`)
+    const token = window.localStorage.getItem('TravelApp-token');
+    fetch(`api/trips/${this.props.tripId}`, {
+      method: 'GET',
+      headers: {
+        'x-access-token': token,
+        'Content-Type': 'application/json'
+      }
+
+    })
       .then(response => response.json())
       .then(trip => {
         this.setState({ trip });
