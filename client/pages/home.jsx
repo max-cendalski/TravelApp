@@ -2,6 +2,28 @@ import React from 'react';
 import Navbar from '../components/navbar';
 
 export default class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      images: []
+    };
+  }
+
+  componentDidMount() {
+    fetch('/api/images', {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(result => {
+        this.setState({
+          images: result
+        });
+      })
+      .catch(error => error(console.error('Error', error)));
+  }
 
   render() {
     return (
