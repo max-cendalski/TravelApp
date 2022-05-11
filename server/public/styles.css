@@ -2,6 +2,11 @@
   max-width: 1920px;
 }
 
+#carousel-container {
+  width: 100%;
+  margin: 0 auto;
+}
+
 .navbar-container {
   position: fixed;
   width: 100%;

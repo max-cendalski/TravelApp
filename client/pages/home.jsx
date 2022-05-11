@@ -1,11 +1,14 @@
 import React from 'react';
 import Navbar from '../components/navbar';
 
+import { Carousel } from 'react-responsive-carousel';
 export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      images: []
+      images: [],
+      photoOne: '/images/Japan1.jpg',
+      countries: []
     };
   }
 
@@ -18,9 +21,18 @@ export default class Home extends React.Component {
     })
       .then(response => response.json())
       .then(result => {
+        const photos = [];
+        const countries = [];
+        for (let i = 0; i < 4; i++) {
+          photos.push(result[i].mainPhotoUrl);
+          countries.push(result[i].country);
+        }
         this.setState({
-          images: result
+          images: photos,
+          countries
         });
+        console.log('this.state.images', this.state.images);
+
       })
       .catch(error => error(console.error('Error', error)));
   }
@@ -28,11 +40,32 @@ export default class Home extends React.Component {
   render() {
     if (!this.state.images) return null;
     return (
-      <article className='container'>
+      <article id="carousel-container">
         <Navbar />
-          <section className='row'>
-            <img className="photo" src='images/Tahiti1.jpg' />
-          </section>
+              <Carousel
+                  autoPlay={true}
+                  interval={5000}
+                  infiniteLoop={true}
+                  showThumbs={false}
+                  stopOnHover={false}
+                  showIndicators={true}
+                  animationHandler={'fade'}
+                  showStatus={false}
+                  transitionTime={2000}
+                 >
+                 <div>
+                    <img src={this.state.images[0]} />
+                </div>
+                <div>
+                    <img src={this.state.images[1]} />
+                </div>
+                <div>
+                    <img src={this.state.images[2]} />
+                </div>
+                 <div>
+                    <img src={this.state.images[3]} />
+                </div>
+            </Carousel>
       </article>
     );
   }
