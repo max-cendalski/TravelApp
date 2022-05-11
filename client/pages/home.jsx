@@ -30,8 +30,6 @@ export default class Home extends React.Component {
           images,
           countries
         });
-        console.log('this.state.images', this.state.images);
-
       })
       .catch(error => error(console.error('Error', error)));
   }
@@ -39,7 +37,7 @@ export default class Home extends React.Component {
   render() {
     if (!this.state.images) return null;
     return (
-      <article id="carousel-container">
+      <article>
         <Navbar />
               <Carousel
                   autoPlay={true}
@@ -51,18 +49,19 @@ export default class Home extends React.Component {
                   animationHandler={'fade'}
                   showStatus={false}
                   transitionTime={2000}
+                  dynamicHeight={false}
                  >
-                 <div>
-                    <img src={this.state.images[0]} />
+                 <div className='image-home'>
+                    <img className='photo' src={this.state.images[0]} />
                 </div>
-                <div>
-                    <img src={this.state.images[1]} />
+                <div className='image-home'>
+                    <img className='photo' src={this.state.images[1]} />
                 </div>
-                <div>
-                    <img src={this.state.images[2]} />
+                <div className='image-home'>
+                    <img className='photo' src={this.state.images[2]} />
                 </div>
-                 <div>
-                    <img src={this.state.images[3]} />
+                 <div className='image-home'>
+                    <img className='photo' src={this.state.images[3]} />
                 </div>
             </Carousel>
       </article>
