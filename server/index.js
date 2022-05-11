@@ -38,7 +38,8 @@ app.get('/api/locations', (req, res, next) => {
 app.get('/api/images', (req, res, next) => {
   const sql = `
   select "mainPhotoUrl",
-         "country"
+         "country",
+         "city"
     from "trips"
          `;
   db.query(sql)

@@ -26,6 +26,7 @@ export default class Home extends React.Component {
   }
 
   render() {
+    if (!this.state.images) return null;
     return (
       <article className='container'>
         <Navbar />
