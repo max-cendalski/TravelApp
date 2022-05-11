@@ -7,7 +7,6 @@ export default class Home extends React.Component {
     super(props);
     this.state = {
       images: [],
-      photoOne: '/images/Japan1.jpg',
       countries: []
     };
   }
@@ -21,14 +20,14 @@ export default class Home extends React.Component {
     })
       .then(response => response.json())
       .then(result => {
-        const photos = [];
+        const images = [];
         const countries = [];
         for (let i = 0; i < 4; i++) {
-          photos.push(result[i].mainPhotoUrl);
+          images.push(result[i].mainPhotoUrl);
           countries.push(result[i].country);
         }
         this.setState({
-          images: photos,
+          images,
           countries
         });
         console.log('this.state.images', this.state.images);
