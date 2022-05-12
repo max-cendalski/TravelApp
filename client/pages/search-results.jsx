@@ -21,8 +21,6 @@ export default class SearchResults extends React.Component {
         this.setState({
           countries: result
         });
-        console.log('this.state.countries', this.state.countries);
-
       })
       .catch(error => error(console.error('Error', error)));
   }
@@ -51,7 +49,7 @@ export default class SearchResults extends React.Component {
     if (!this.state.countries) return null;
     return (
      <article>
-      {this.state.countries.length > 0
+      {this.state.countries
         ? (
             <article>
               <Navbar />

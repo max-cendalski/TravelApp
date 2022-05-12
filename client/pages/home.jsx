@@ -7,7 +7,8 @@ export default class Home extends React.Component {
     super(props);
     this.state = {
       images: [],
-      countries: []
+      countries: [],
+      allCountries: []
     };
   }
 
@@ -20,15 +21,15 @@ export default class Home extends React.Component {
     })
       .then(response => response.json())
       .then(result => {
-        const images = [];
+      /*   const images = [];
         const countries = [];
         for (let i = 0; i < 5; i++) {
           images.push(result[i].mainPhotoUrl);
           countries.push(result[i].country);
-        }
+        } */
         this.setState({
-          images,
-          countries
+
+          allCountries: result
         });
       })
       .catch(error => error(console.error('Error', error)));
@@ -51,22 +52,16 @@ export default class Home extends React.Component {
                   transitionTime={2000}
                   dynamicHeight={false}
                  >
-                 <div className='image-home'>
-                  <p className='carousel-country-name'>{this.state.countries[0]}</p>
-                  <img className='photo' src={this.state.images[0]} />
-                </div>
-                <div className='image-home'>
-                  <p className='carousel-country-name'>{this.state.countries[1]}</p>
-                  <img className='photo' src={this.state.images[1]} />
-                </div>
-                <div className='image-home'>
-                  <p className='carousel-country-name'>{this.state.countries[2]}</p>
-                  <img className='photo' src={this.state.images[2]} />
-                </div>
-                <div className='image-home'>
-                  <p className='carousel-country-name'>{this.state.countries[3]}</p>
-                  <img className='photo' src={this.state.images[3]} />
-                </div>
+                 {
+                   this.state.allCountries.map((trip, index) => {
+                     return (
+                       <div key={index} className='image-home'>
+                        <p className='carousel-country-name'>{trip.country}</p>
+                        <img className='photo' src={trip.mainPhotoUrl} alt={trip.country} />
+                      </div>
+                     );
+                   })
+                 }
             </Carousel>
       </article>
     );
