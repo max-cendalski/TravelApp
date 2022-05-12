@@ -32,7 +32,8 @@ app.get('/api/locations', (req, res, next) => {
   db.query(sql)
     .then(result => {
       res.json(result.rows);
-    });
+    })
+    .catch(err => next(err));
 });
 
 app.get('/api/images', (req, res, next) => {
@@ -45,7 +46,8 @@ app.get('/api/images', (req, res, next) => {
   db.query(sql)
     .then(result => {
       res.json(result.rows);
-    });
+    })
+    .catch(err => next(err));
 });
 
 app.post('/api/auth/sign-up', (req, res, next) => {
