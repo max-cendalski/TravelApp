@@ -23,7 +23,8 @@
     "pg": "^8.6.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-places-autocomplete": "^7.3.0"
+    "react-places-autocomplete": "^7.3.0",
+    "react-responsive-carousel": "^3.2.23"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",

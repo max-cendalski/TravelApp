@@ -32,7 +32,6 @@ export default class EditTrip extends React.Component {
         'x-access-token': token,
         'Content-Type': 'application/json'
       }
-
     })
       .then(response => response.json())
       .then(trip => {

@@ -21,8 +21,7 @@ export default class SearchResults extends React.Component {
         this.setState({
           countries: result
         });
-      }
-      )
+      })
       .catch(error => error(console.error('Error', error)));
   }
 

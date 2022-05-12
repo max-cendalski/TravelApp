@@ -6,7 +6,7 @@ function MapComponent(props) {
   const containerStyle = {
     width: '',
     top: '21rem',
-    height: '23rem',
+    height: '24rem',
     left: '1rem',
     border: '1px solid rgb(240,131,52)'
   };

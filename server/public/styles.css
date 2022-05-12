@@ -2,6 +2,26 @@
   max-width: 1920px;
 }
 
+.image-home {
+  padding-top: 4rem;
+  height: 90vh;
+}
+
+.carousel-country-name {
+  position: absolute;
+  padding: 0.2rem 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  background-color: white;
+  text-transform: capitalize;
+  top: 12%;
+  left: 2rem;
+}
+
+.control-arrow {
+  top: 4rem !important;
+}
+
 .navbar-container {
   position: fixed;
   width: 100%;
@@ -16,7 +36,7 @@
   max-width: 1920px;
   display: flex;
   flex-wrap: wrap;
-  padding-top: 3rem;
+  padding-top: 4rem;
   margin-right: 2rem;
   margin-left: 2rem;
 }
@@ -419,7 +439,7 @@ input::-webkit-inner-spin-button {
 }
 
 #trip-details-container {
-  padding-top: 3rem;
+  padding-top: 4rem;
   margin: 0 1rem;
   display: grid;
   grid-gap: 1rem;
@@ -567,6 +587,20 @@ input::-webkit-inner-spin-button {
 
   .column-width25 {
     width: 100%;
+  }
+
+  .image-home {
+    margin: 0 0.2rem;
+    padding-top: 3rem;
+    height: 60vh;
+  }
+
+  .control-arrow {
+    top: 3rem !important;
+  }
+
+  .carousel-country-name {
+    left: 0;
   }
 
   .image-item {
