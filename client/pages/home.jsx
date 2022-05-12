@@ -22,7 +22,7 @@ export default class Home extends React.Component {
       .then(result => {
         const images = [];
         const countries = [];
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 5; i++) {
           images.push(result[i].mainPhotoUrl);
           countries.push(result[i].country);
         }
@@ -52,16 +52,20 @@ export default class Home extends React.Component {
                   dynamicHeight={false}
                  >
                  <div className='image-home'>
-                    <img className='photo' src={this.state.images[0]} />
+                  <p className='carousel-country-name'>{this.state.countries[0]}</p>
+                  <img className='photo' src={this.state.images[0]} />
                 </div>
                 <div className='image-home'>
-                    <img className='photo' src={this.state.images[1]} />
+                  <p className='carousel-country-name'>{this.state.countries[1]}</p>
+                  <img className='photo' src={this.state.images[1]} />
                 </div>
                 <div className='image-home'>
-                    <img className='photo' src={this.state.images[2]} />
+                  <p className='carousel-country-name'>{this.state.countries[2]}</p>
+                  <img className='photo' src={this.state.images[2]} />
                 </div>
-                 <div className='image-home'>
-                    <img className='photo' src={this.state.images[3]} />
+                <div className='image-home'>
+                  <p className='carousel-country-name'>{this.state.countries[3]}</p>
+                  <img className='photo' src={this.state.images[3]} />
                 </div>
             </Carousel>
       </article>

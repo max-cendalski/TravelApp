@@ -4,7 +4,18 @@
 
 .image-home {
   padding-top: 4rem;
-  height: 80vh;
+  height: 90vh;
+}
+
+.carousel-country-name {
+  position: absolute;
+  padding: 0.2rem 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  background-color: white;
+  text-transform: capitalize;
+  top: 12%;
+  left: 2rem;
 }
 
 .navbar-container {
@@ -576,8 +587,12 @@ input::-webkit-inner-spin-button {
 
   .image-home {
     margin: 0 0.2rem;
-    padding-top: 3.3rem;
-    height: 50vh;
+    padding-top: 3rem;
+    height: 60vh;
+  }
+
+  .carousel-country-name {
+    left: 0;
   }
 
   .image-item {
