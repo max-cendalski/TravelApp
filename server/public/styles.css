@@ -18,6 +18,10 @@
   left: 2rem;
 }
 
+.control-arrow {
+  top: 4rem !important;
+}
+
 .navbar-container {
   position: fixed;
   width: 100%;
@@ -589,6 +593,10 @@ input::-webkit-inner-spin-button {
     margin: 0 0.2rem;
     padding-top: 3rem;
     height: 60vh;
+  }
+
+  .control-arrow {
+    top: 3rem !important;
   }
 
   .carousel-country-name {
