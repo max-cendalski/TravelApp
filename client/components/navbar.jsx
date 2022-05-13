@@ -128,13 +128,13 @@ export default class Navbar extends React.Component {
 
   render() {
     return (
-      <article className='navbar-container row' onMouseLeave={this.handleOnMouseLeave}>
-        <div className='search-box-container'>
+      <article className='navbar-container' onMouseLeave={this.handleOnMouseLeave}>
+        <section className='search-box-container'>
           <form onSubmit={this.handleSubmit}>
             <input className="search-box" type="search" value={this.state.searchBox} onChange={this.handleChange} autoComplete="off" name="searchBox" placeholder="search for a country" required/>
             <button className='submit-search-button'>Submit</button>
           </form>
-          <section id="search-section">
+          <section>
             <ul id="search-result-list">
               {
                 this.state.searchArray && this.state.searchArray.map((location, index) => {
@@ -143,7 +143,7 @@ export default class Navbar extends React.Component {
               }
             </ul>
           </section>
-        </div>
+        </section>
         <section className='travel-app-home'>
           <h1><a href="#">TravelApp</a></h1>
         </section>
@@ -191,11 +191,11 @@ export default class Navbar extends React.Component {
             </section>
           }
           </article>
-          <div className={this.context.logoutInfo}>
+          <article className={this.context.logoutInfo}>
             <h2>Are you sure you want to logout?</h2>
             <button onClick={this.context.handleConfirmLogout} className='app-button background-orange float-right'>Confirm</button>
             <button onClick={this.context.handleCancelLogout} className='app-button background-red'>Cancel</button>
-          </div>
+          </article>
       </article>
     );
   }
