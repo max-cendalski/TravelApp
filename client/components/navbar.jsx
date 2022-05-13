@@ -150,7 +150,7 @@ export default class Navbar extends React.Component {
           <section className={this.state.visible}>
           <h1><a href="#">TA</a></h1>
         </section>
-        <div className='login-icon' onMouseEnter={this.handleOnMouseEnter}>
+        <section className='login-icon' onMouseEnter={this.handleOnMouseEnter}>
         {
           this.context.user && <p className='name-paragraph'>Hello, {this.context.user.username}</p>
         }
@@ -174,23 +174,23 @@ export default class Navbar extends React.Component {
               }
               </ul>
             </section>
-          </div>
-          <div className={this.state.modal}>
+          </section>
+          <article className={this.state.modal}>
           {
             this.state.signUpForm &&
-            <div className='row padding-top20vh'>
+            <section className='row padding-top20vh'>
               <SignUpForm handleSwitchingModal={this.handleSwitchingModal}
                           handleIsAuthorizing={this.handleIsAuthorizing}/>
-            </div>
+            </section>
           }
           {
             this.state.signInForm &&
-            <div className='row padding-top20vh'>
+            <section className='row padding-top20vh'>
               <SignInForm handleSwitchingModal={this.handleSwitchingModal}
                           handleIsAuthorizing={this.handleIsAuthorizing}/>
-            </div>
+            </section>
           }
-          </div>
+          </article>
           <div className={this.context.logoutInfo}>
             <h2>Are you sure you want to logout?</h2>
             <button onClick={this.context.handleConfirmLogout} className='app-button background-orange float-right'>Confirm</button>
