@@ -144,9 +144,12 @@ export default class Navbar extends React.Component {
             </ul>
           </section>
         </div>
-        <div className='travel-app-home'>
+        <section className='travel-app-home'>
           <h1><a href="#">TravelApp</a></h1>
-        </div>
+        </section>
+          <section className={this.state.visible}>
+          <h1><a href="#">TA</a></h1>
+        </section>
         <div className='login-icon' onMouseEnter={this.handleOnMouseEnter}>
         {
           this.context.user && <p className='name-paragraph'>Hello, {this.context.user.username}</p>
