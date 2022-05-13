@@ -30,6 +30,7 @@
   border-bottom: 1px solid black;
   background-color: white;
   z-index: 2;
+  align-items: center;
 }
 
 .list-flex {
@@ -103,8 +104,14 @@
   margin-right: 1rem;
 }
 
+.search-box-container {
+  margin-left: 2rem;
+  flex-basis: 30%;
+}
+
 .travel-app-home {
-  margin-left: 11rem;
+  text-align: center;
+  flex-basis: 30%;
 }
 
 .travel-app-home a {
@@ -116,12 +123,11 @@
 .login-icon {
   cursor: pointer;
   margin-right: 2rem;
-  padding-top: 0.3rem;
+  flex-basis: 30%;
 }
 
-.search-box-container {
-  margin-left: 2rem;
-  padding-top: 0.3rem;
+.login-icon i {
+  float: right;
 }
 
 .photo {
@@ -609,7 +615,7 @@ input::-webkit-inner-spin-button {
   }
 
   .list-flex {
-    margin: 0;
+    padding-top: 3rem;
   }
 
   .name-paragraph {
@@ -626,6 +632,7 @@ input::-webkit-inner-spin-button {
 
   .search-box-container {
     margin-left: 0.2rem;
+    flex-basis: 70%;
   }
 
   .login-icon {
@@ -647,6 +654,11 @@ input::-webkit-inner-spin-button {
 
   .horizontal {
     flex-direction: column;
+  }
+
+  .text-container {
+    left: 0;
+    padding: 0.125rem;
   }
 
   .detailed-text-container {

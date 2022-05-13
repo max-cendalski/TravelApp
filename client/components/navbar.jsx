@@ -128,7 +128,7 @@ export default class Navbar extends React.Component {
 
   render() {
     return (
-      <article className='navbar-container' onMouseLeave={this.handleOnMouseLeave}>
+      <article className='navbar-container row' onMouseLeave={this.handleOnMouseLeave}>
         <section className='search-box-container'>
           <form onSubmit={this.handleSubmit}>
             <input type="search" value={this.state.searchBox} onChange={this.handleChange} autoComplete="off" name="searchBox" placeholder="search for a country" required/>
