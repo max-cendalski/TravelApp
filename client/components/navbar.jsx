@@ -128,7 +128,7 @@ export default class Navbar extends React.Component {
 
   render() {
     return (
-      <div className='navbar-container row' onMouseLeave={this.handleOnMouseLeave}>
+      <article className='navbar-container row' onMouseLeave={this.handleOnMouseLeave}>
         <div className='search-box-container'>
           <form onSubmit={this.handleSubmit}>
             <input className="search-box" type="search" value={this.state.searchBox} onChange={this.handleChange} autoComplete="off" name="searchBox" placeholder="search for a country" required/>
@@ -152,7 +152,7 @@ export default class Navbar extends React.Component {
           this.context.user && <p className='name-paragraph'>Hello, {this.context.user.username}</p>
         }
           <i className="fas fa-user user-icon"></i>
-            <div className={this.state.visible}>
+            <section className={this.state.visible}>
               <ul className='drop-down-list'>
               {
                 !this.context.user && <li className="sign-up-button" onClick={this.handleSignUp}>Sign Up</li>
@@ -170,7 +170,7 @@ export default class Navbar extends React.Component {
                 this.context.user && <li className='logoutButton' onClick={this.context.handleLogoutWindow}>Logout</li>
               }
               </ul>
-            </div>
+            </section>
           </div>
           <div className={this.state.modal}>
           {
@@ -193,7 +193,7 @@ export default class Navbar extends React.Component {
             <button onClick={this.context.handleConfirmLogout} className='app-button background-orange float-right'>Confirm</button>
             <button onClick={this.context.handleCancelLogout} className='app-button background-red'>Cancel</button>
           </div>
-      </div>
+      </article>
     );
   }
 }
