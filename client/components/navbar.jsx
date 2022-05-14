@@ -129,7 +129,6 @@ export default class Navbar extends React.Component {
   render() {
     return (
       <article className='navbar-container row' onMouseLeave={this.handleOnMouseLeave}>
-
         <section className='navbar-search-box-container'>
           <form onSubmit={this.handleSubmit}>
             <input type="search" value={this.state.searchBox} onChange={this.handleChange} autoComplete="off" name="searchBox" placeholder="search for a country" required/>
@@ -183,14 +182,14 @@ export default class Navbar extends React.Component {
         <article className={this.state.modal}>
         {
           this.state.signUpForm &&
-          <section className='row padding-top20vh'>
+          <section className='row'>
             <SignUpForm handleSwitchingModal={this.handleSwitchingModal}
                         handleIsAuthorizing={this.handleIsAuthorizing}/>
           </section>
         }
         {
           this.state.signInForm &&
-          <section className='row padding-top20vh'>
+          <section className='row'>
             <SignInForm handleSwitchingModal={this.handleSwitchingModal}
                         handleIsAuthorizing={this.handleIsAuthorizing}/>
           </section>
