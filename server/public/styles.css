@@ -25,12 +25,11 @@
 .navbar-container {
   position: fixed;
   width: 100%;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
   border-bottom: 1px solid black;
   background-color: white;
   z-index: 2;
   align-items: center;
+  height: 3rem;
 }
 
 .list-flex {
@@ -61,28 +60,8 @@
   width: 50%;
 }
 
-.column-width25 {
-  width: 25%;
-}
-
-.padding-top3 {
-  padding-top: 3rem;
-}
-
-.padding-top15vh {
-  padding-top: 15vh;
-}
-
 .margin-top3 {
   margin-top: 3rem;
-}
-
-.margin-right1rem {
-  margin-right: 1rem;
-}
-
-.height-2rem {
-  height: 3rem;
 }
 
 .country-name {
@@ -99,35 +78,39 @@
   font-size: 1.1rem;
 }
 
-.name-paragraph {
-  display: inline-block;
-  margin-right: 1rem;
-}
-
-.search-box-container {
+.navbar-search-box-container {
   margin-left: 2rem;
-  flex-basis: 30%;
+  display: inline-block;
+  flex-basis: 33%;
 }
 
-.travel-app-home {
+.navbar-travel-app-home {
   text-align: center;
-  flex-basis: 30%;
+  margin: 0 auto;
+  flex-basis: 33%;
 }
 
-.travel-app-home a {
+.navbar-travel-app-home a {
   color: rgb(240, 131, 52);
   text-decoration: none;
   font-size: 2rem;
 }
 
-.login-icon {
+.navbar-login-icon-section {
   cursor: pointer;
-  margin-right: 2rem;
-  flex-basis: 30%;
+  flex-basis: 33%;
 }
 
-.login-icon i {
+.icon-class {
   float: right;
+  margin-right: 2rem;
+  width: 5%;
+}
+
+.navbar-name-paragraph {
+  display: inline-block;
+  text-align: end;
+  width: 85%;
 }
 
 .photo {
@@ -256,8 +239,8 @@
 .drop-down-container {
   background-color: rgb(112, 110, 110);
   position: absolute;
-  right: 0;
-  top: 38px;
+  right: 2.1rem;
+  top: 48px;
   text-align: center;
 }
 
@@ -446,7 +429,7 @@ input::-webkit-inner-spin-button {
 
 #trip-details-container {
   padding-top: 4rem;
-  margin: 0 1rem;
+  margin: 0 2rem;
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: repeat(5, 1fr);
@@ -615,29 +598,30 @@ input::-webkit-inner-spin-button {
   }
 
   .list-flex {
-    padding-top: 3rem;
+    padding-top: 4rem;
+    margin: 0 0.2rem;
   }
 
   .name-paragraph {
     display: none;
   }
 
-  .padding-top15vh {
-    padding-top: 4rem;
-  }
-
-  .travel-app-home {
+  .navbar-travel-app-home {
     display: none;
   }
 
-  .search-box-container {
+  .navbar-search-box-container {
     margin-left: 0.2rem;
     flex-basis: 70%;
   }
 
-  .login-icon {
-    margin-right: 0.2rem;
-    margin-left: auto;
+  .navbar-login-icon-section i {
+    float: right;
+    margin-right: 0.8rem;
+  }
+
+  .drop-down-container {
+    right: 0.2rem;
   }
 
   .form-input-element {
@@ -668,6 +652,10 @@ input::-webkit-inner-spin-button {
 
   .review-container {
     padding: 1rem 0;
+  }
+
+  #trip-details-container {
+    margin: 0 0.2rem;
   }
 
   #review-form-container form {

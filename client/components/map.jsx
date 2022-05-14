@@ -7,7 +7,7 @@ function MapComponent(props) {
     width: '',
     top: '21rem',
     height: '24rem',
-    left: '1rem',
+    left: '2rem',
     border: '1px solid rgb(240,131,52)'
   };
   const [latLng, setLatLng] = useState({ lat: 0, lng: 0 });
@@ -18,10 +18,10 @@ function MapComponent(props) {
     }
     window.addEventListener('resize', handleResize);
     if (screenWidth < 660) {
-      containerStyle.width = '55%';
+      containerStyle.width = '60%';
       containerStyle.top = '4rem';
-      containerStyle.left = '40%';
-      containerStyle.height = '19rem';
+      containerStyle.left = '38%';
+      containerStyle.height = '20rem';
     }
     if (screenWidth > 660) {
       containerStyle.width = '38%';

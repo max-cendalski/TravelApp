@@ -129,7 +129,7 @@ export default class Navbar extends React.Component {
   render() {
     return (
       <article className='navbar-container row' onMouseLeave={this.handleOnMouseLeave}>
-        <section className='search-box-container'>
+        <section className='navbar-search-box-container'>
           <form onSubmit={this.handleSubmit}>
             <input type="search" value={this.state.searchBox} onChange={this.handleChange} autoComplete="off" name="searchBox" placeholder="search for a country" required/>
             <button className='submit-search-button'>Submit</button>
@@ -144,17 +144,24 @@ export default class Navbar extends React.Component {
             </ul>
           </section>
         </section>
-        <section className='travel-app-home'>
+
+        <section className='navbar-travel-app-home'>
           <h1><a href="#">TravelApp</a></h1>
         </section>
           <section className={this.state.visible}>
           <h1><a href="#">TA</a></h1>
         </section>
-        <section className='login-icon' onMouseEnter={this.handleOnMouseEnter}>
-        {
-          this.context.user && <p className='name-paragraph'>Hello, {this.context.user.username}</p>
-        }
-          <i className="fas fa-user user-icon"></i>
+
+        <section className="navbar-login-icon-section" onMouseEnter={this.handleOnMouseEnter}>
+
+          {
+                this.context.user && <p className='navbar-name-paragraph'>Hello, {this.context.user.username}</p>
+              }
+
+          <i className="fas fa-user icon-class" />
+
+        </section>
+
             <section className={this.state.visible}>
               <ul className='drop-down-list'>
               {
@@ -174,7 +181,7 @@ export default class Navbar extends React.Component {
               }
               </ul>
             </section>
-          </section>
+
           <article className={this.state.modal}>
           {
             this.state.signUpForm &&
