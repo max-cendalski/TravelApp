@@ -84,13 +84,17 @@
   flex-basis: 33%;
 }
 
-.navbar-travel-app-home {
+.navbar-app-mobile {
+  display: none;
+}
+
+.navbar-app-home {
   text-align: center;
   margin: 0 auto;
   flex-basis: 33%;
 }
 
-.navbar-travel-app-home a {
+.navbar-app-home a {
   color: rgb(240, 131, 52);
   text-decoration: none;
   font-size: 2rem;
@@ -602,22 +606,40 @@ input::-webkit-inner-spin-button {
     margin: 0 0.2rem;
   }
 
-  .name-paragraph {
+  .navbar-name-paragraph {
     display: none;
   }
 
-  .navbar-travel-app-home {
+  .navbar-app-home {
     display: none;
+  }
+
+  .navbar-app-mobile {
+    display: block;
+    margin-left: 0.2rem;
+    flex-basis: 10%;
+  }
+
+  .navbar-app-mobile a {
+    color: rgb(240, 131, 52);
+    text-decoration: none;
+    font-size: 1.3rem;
   }
 
   .navbar-search-box-container {
-    margin-left: 0.2rem;
     flex-basis: 70%;
+    padding: 0;
+    margin-left: 0.2rem;
+  }
+
+  .navbar-login-icon-section {
+    display: inline-block;
+    flex-basis: 5%;
   }
 
   .navbar-login-icon-section i {
     float: right;
-    margin-right: 0.8rem;
+    margin-right: 1rem;
   }
 
   .drop-down-container {
