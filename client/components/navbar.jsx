@@ -128,13 +128,13 @@ export default class Navbar extends React.Component {
 
   render() {
     return (
-      <div className='navbar-container row' onMouseLeave={this.handleOnMouseLeave}>
-        <div className='search-box-container'>
+      <article className='navbar-container row' onMouseLeave={this.handleOnMouseLeave}>
+        <section className='navbar-search-box-container'>
           <form onSubmit={this.handleSubmit}>
-            <input className="search-box" type="search" value={this.state.searchBox} onChange={this.handleChange} autoComplete="off" name="searchBox" placeholder="search for a country" required/>
+            <input type="search" value={this.state.searchBox} onChange={this.handleChange} autoComplete="off" name="searchBox" placeholder="search for a country" required/>
             <button className='submit-search-button'>Submit</button>
           </form>
-          <section id="search-section">
+          <section>
             <ul id="search-result-list">
               {
                 this.state.searchArray && this.state.searchArray.map((location, index) => {
@@ -143,57 +143,64 @@ export default class Navbar extends React.Component {
               }
             </ul>
           </section>
-        </div>
-        <div className='travel-app-home'>
+        </section>
+
+        <section className='navbar-app-home'>
           <h1><a href="#">TravelApp</a></h1>
-        </div>
-        <div className='login-icon' onMouseEnter={this.handleOnMouseEnter}>
+        </section>
+             <section className='navbar-app-mobile'>
+          <h1><a href="#"><p>Travel</p><p>App</p></a></h1>
+        </section>
+
+        <section className="navbar-login-icon-section" onMouseEnter={this.handleOnMouseEnter}>
+          {
+            this.context.user && <p className='navbar-name-paragraph'>Hello, {this.context.user.username}</p>
+          }
+          <i className="fas fa-user icon-class" />
+        </section>
+
+        <section className={this.state.visible}>
+          <ul className='drop-down-list'>
+          {
+            !this.context.user && <li className="sign-up-button" onClick={this.handleSignUp}>Sign Up</li>
+          }
+          {
+            !this.context.user && <li className='sign-in-button' onClick={this.handleSignInButton}>Sign In</li>
+          }
+          {
+            this.context.user && <li className='my-reviews-link' onClick={this.handleMyReviewsButton}>My Reviews</li>
+          }
+          {
+            this.context.user && <li className='write-review-button'><a className="write-review-link" href="#review-form">Write Review</a></li>
+          }
+          {
+            this.context.user && <li className='logoutButton' onClick={this.context.handleLogoutWindow}>Logout</li>
+          }
+          </ul>
+        </section>
+
+        <article className={this.state.modal}>
         {
-          this.context.user && <p className='name-paragraph'>Hello, {this.context.user.username}</p>
+          this.state.signUpForm &&
+          <section className='row'>
+            <SignUpForm handleSwitchingModal={this.handleSwitchingModal}
+                        handleIsAuthorizing={this.handleIsAuthorizing}/>
+          </section>
         }
-          <i className="fas fa-user user-icon"></i>
-            <div className={this.state.visible}>
-              <ul className='drop-down-list'>
-              {
-                !this.context.user && <li className="sign-up-button" onClick={this.handleSignUp}>Sign Up</li>
-              }
-              {
-                !this.context.user && <li className='sign-in-button' onClick={this.handleSignInButton}>Sign In</li>
-              }
-              {
-                this.context.user && <li className='my-reviews-link' onClick={this.handleMyReviewsButton}>My Reviews</li>
-              }
-              {
-                this.context.user && <li className='write-review-button'><a className="write-review-link" href="#review-form">Write Review</a></li>
-              }
-              {
-                this.context.user && <li className='logoutButton' onClick={this.context.handleLogoutWindow}>Logout</li>
-              }
-              </ul>
-            </div>
-          </div>
-          <div className={this.state.modal}>
-          {
-            this.state.signUpForm &&
-            <div className='row padding-top20vh'>
-              <SignUpForm handleSwitchingModal={this.handleSwitchingModal}
-                          handleIsAuthorizing={this.handleIsAuthorizing}/>
-            </div>
-          }
-          {
-            this.state.signInForm &&
-            <div className='row padding-top20vh'>
-              <SignInForm handleSwitchingModal={this.handleSwitchingModal}
-                          handleIsAuthorizing={this.handleIsAuthorizing}/>
-            </div>
-          }
-          </div>
-          <div className={this.context.logoutInfo}>
-            <h2>Are you sure you want to logout?</h2>
-            <button onClick={this.context.handleConfirmLogout} className='app-button background-orange float-right'>Confirm</button>
-            <button onClick={this.context.handleCancelLogout} className='app-button background-red'>Cancel</button>
-          </div>
-      </div>
+        {
+          this.state.signInForm &&
+          <section className='row'>
+            <SignInForm handleSwitchingModal={this.handleSwitchingModal}
+                        handleIsAuthorizing={this.handleIsAuthorizing}/>
+          </section>
+        }
+        </article>
+        <article className={this.context.logoutInfo}>
+          <h2>Are you sure you want to logout?</h2>
+          <button onClick={this.context.handleConfirmLogout} className='app-button background-orange float-right'>Confirm</button>
+          <button onClick={this.context.handleCancelLogout} className='app-button background-red'>Cancel</button>
+        </article>
+      </article>
     );
   }
 }

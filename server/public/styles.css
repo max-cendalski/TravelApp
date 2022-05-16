@@ -1,10 +1,12 @@
 .container {
   max-width: 1920px;
+  margin: 0 auto;
 }
 
 .image-home {
   padding-top: 4rem;
   height: 90vh;
+  max-width: 1920px;
 }
 
 .carousel-country-name {
@@ -14,7 +16,7 @@
   font-weight: 600;
   background-color: white;
   text-transform: capitalize;
-  top: 12%;
+  top: 15%;
   left: 2rem;
 }
 
@@ -25,11 +27,16 @@
 .navbar-container {
   position: fixed;
   width: 100%;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
   border-bottom: 1px solid black;
   background-color: white;
   z-index: 2;
+  align-items: center;
+  height: 3rem;
+}
+
+.navbar-container form {
+  width: 15rem;
+  margin: 0;
 }
 
 .list-flex {
@@ -60,28 +67,8 @@
   width: 50%;
 }
 
-.column-width25 {
-  width: 25%;
-}
-
-.padding-top3 {
-  padding-top: 3rem;
-}
-
-.padding-top15vh {
-  padding-top: 15vh;
-}
-
 .margin-top3 {
   margin-top: 3rem;
-}
-
-.margin-right1rem {
-  margin-right: 1rem;
-}
-
-.height-2rem {
-  height: 3rem;
 }
 
 .country-name {
@@ -98,30 +85,43 @@
   font-size: 1.1rem;
 }
 
-.name-paragraph {
+.navbar-search-box-container {
+  margin-left: 2rem;
   display: inline-block;
-  margin-right: 1rem;
+  flex-basis: 33%;
 }
 
-.travel-app-home {
-  margin-left: 11rem;
+.navbar-app-mobile {
+  display: none;
 }
 
-.travel-app-home a {
+.navbar-app-home {
+  text-align: center;
+  margin: 0 auto;
+  flex-basis: 33%;
+}
+
+.navbar-app-home a {
   color: rgb(240, 131, 52);
   text-decoration: none;
   font-size: 2rem;
 }
 
-.login-icon {
+.navbar-login-icon-section {
   cursor: pointer;
-  margin-right: 2rem;
-  padding-top: 0.3rem;
+  flex-basis: 33%;
 }
 
-.search-box-container {
-  margin-left: 2rem;
-  padding-top: 0.3rem;
+.icon-class {
+  float: right;
+  margin-right: 2rem;
+  width: 5%;
+}
+
+.navbar-name-paragraph {
+  display: inline-block;
+  text-align: end;
+  width: 85%;
 }
 
 .photo {
@@ -250,8 +250,8 @@
 .drop-down-container {
   background-color: rgb(112, 110, 110);
   position: absolute;
-  right: 0;
-  top: 38px;
+  right: 2.1rem;
+  top: 48px;
   text-align: center;
 }
 
@@ -440,7 +440,7 @@ input::-webkit-inner-spin-button {
 
 #trip-details-container {
   padding-top: 4rem;
-  margin: 0 1rem;
+  margin: 0 2rem;
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: repeat(5, 1fr);
@@ -521,7 +521,7 @@ input::-webkit-inner-spin-button {
   position: absolute;
   list-style: none;
   background-color: white;
-  width: 14rem;
+  width: 11rem;
   padding-left: 0;
 }
 
@@ -531,7 +531,7 @@ input::-webkit-inner-spin-button {
 
 #search-result-list li:hover {
   cursor: pointer;
-  background-color: green;
+  background-color: rgb(28, 134, 28);
   color: white;
 }
 
@@ -591,8 +591,8 @@ input::-webkit-inner-spin-button {
 
   .image-home {
     margin: 0 0.2rem;
-    padding-top: 3rem;
-    height: 60vh;
+    padding-top: 4rem;
+    height: 50vh;
   }
 
   .control-arrow {
@@ -601,6 +601,7 @@ input::-webkit-inner-spin-button {
 
   .carousel-country-name {
     left: 0;
+    top: 17%;
   }
 
   .image-item {
@@ -609,28 +610,46 @@ input::-webkit-inner-spin-button {
   }
 
   .list-flex {
-    margin: 0;
-  }
-
-  .name-paragraph {
-    display: none;
-  }
-
-  .padding-top15vh {
     padding-top: 4rem;
+    margin: 0 0.2rem;
   }
 
-  .travel-app-home {
+  .navbar-name-paragraph {
     display: none;
   }
 
-  .search-box-container {
+  .navbar-app-home {
+    display: none;
+  }
+
+  .navbar-app-mobile {
+    display: inline-block;
+    flex-basis: 20%;
+  }
+
+  .navbar-app-mobile a {
+    color: rgb(240, 131, 52);
+    text-decoration: none;
+    font-size: 1.2rem;
+  }
+
+  .navbar-search-box-container {
+    flex-basis: 70%;
     margin-left: 0.2rem;
   }
 
-  .login-icon {
-    margin-right: 0.2rem;
-    margin-left: auto;
+  .navbar-login-icon-section {
+    display: inline-block;
+    flex-basis: 5%;
+  }
+
+  .navbar-login-icon-section i {
+    float: right;
+    margin-right: 1rem;
+  }
+
+  .drop-down-container {
+    right: 0.2rem;
   }
 
   .form-input-element {
@@ -649,6 +668,11 @@ input::-webkit-inner-spin-button {
     flex-direction: column;
   }
 
+  .text-container {
+    left: 0;
+    padding: 0.125rem;
+  }
+
   .detailed-text-container {
     margin-left: 1rem;
     margin-top: 20px;
@@ -656,6 +680,10 @@ input::-webkit-inner-spin-button {
 
   .review-container {
     padding: 1rem 0;
+  }
+
+  #trip-details-container {
+    margin: 0 0.2rem;
   }
 
   #review-form-container form {
