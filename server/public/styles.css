@@ -34,6 +34,11 @@
   height: 3rem;
 }
 
+.navbar-container form {
+  width: 15rem;
+  margin: 0;
+}
+
 .list-flex {
   max-width: 1920px;
   display: flex;
@@ -619,14 +624,13 @@ input::-webkit-inner-spin-button {
 
   .navbar-app-mobile {
     display: inline-block;
-    margin-left: 0.2rem;
-    flex-basis: 10%;
+    flex-basis: 20%;
   }
 
   .navbar-app-mobile a {
     color: rgb(240, 131, 52);
     text-decoration: none;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
 
   .navbar-search-box-container {

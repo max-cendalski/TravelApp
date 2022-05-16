@@ -149,7 +149,7 @@ export default class Navbar extends React.Component {
           <h1><a href="#">TravelApp</a></h1>
         </section>
              <section className='navbar-app-mobile'>
-          <h1><a href="#">TravelApp</a></h1>
+          <h1><a href="#"><p>Travel</p><p>App</p></a></h1>
         </section>
 
         <section className="navbar-login-icon-section" onMouseEnter={this.handleOnMouseEnter}>
