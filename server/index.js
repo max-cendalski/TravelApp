@@ -205,7 +205,8 @@ app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
     transportScore,
     safetyScore
   } = req.body;
-  const url = '/images/' + req.file.filename;
+  // const url = '/images/' + req.file.filename;
+  const url = req.file.location;
   const sql = `
   insert into "trips"
             (

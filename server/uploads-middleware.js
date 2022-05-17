@@ -22,7 +22,7 @@ const storage = multerS3({
   contentType: (req, file, done) => {
     const contentType = mime.getType(file.originalname);
     done(null, contentType);
-  },
+  }/* ,
   destination(req, file, callback) {
     callback(null, imagesDirectory);
   },
@@ -30,11 +30,11 @@ const storage = multerS3({
     const fileExtension = path.extname(file.originalname);
     const name = `${file.fieldname}-${Date.now()}${fileExtension}`;
     callback(null, name);
-  }
+  } */
 });
 
 const uploadsMiddleware = multer({
-  storage: storage
-}).single('images');
+  storage
+}).single('image');
 
 module.exports = uploadsMiddleware;
