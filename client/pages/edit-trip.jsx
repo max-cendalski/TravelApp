@@ -26,7 +26,7 @@ export default class EditTrip extends React.Component {
 
   componentDidMount() {
     const token = window.localStorage.getItem('TravelApp-token');
-    fetch(`api/trips/${this.props.tripId}`, {
+    fetch(`/api/trips/${this.props.tripId}`, {
       method: 'GET',
       headers: {
         'x-access-token': token,
@@ -68,7 +68,7 @@ export default class EditTrip extends React.Component {
       review: this.state.review
     };
 
-    fetch(`api/edit/trip/${tripId}`, {
+    fetch(`/api/edit/trip/${tripId}`, {
       method: 'PATCH',
       headers: {
         'x-access-token': token,

@@ -40,7 +40,7 @@ export default class TripDetails extends React.Component {
   componentDidMount() {
     const token = window.localStorage.getItem('TravelApp-token');
     Promise.all([
-      fetch(`api/trips/${this.props.tripId}`, {
+      fetch(`/api/trips/${this.props.tripId}`, {
         method: 'GET',
         headers: {
           'x-access-token': token,
@@ -48,7 +48,7 @@ export default class TripDetails extends React.Component {
         }
       })
         .then(response => response.json()).then(trip => this.setState({ trip })),
-      fetch(`api/comments/${this.props.tripId}`, {
+      fetch(`/api/comments/${this.props.tripId}`, {
         method: 'GET',
         headers: {
           'x-access-token': token,
