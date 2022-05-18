@@ -1,8 +1,9 @@
 import React from 'react';
 import Navbar from '../components/navbar';
 import PlacesAutocomplete from 'react-places-autocomplete';
+import { GoogleApiWrapper } from 'google-maps-react';
 
-export default class ReviewForm extends React.Component {
+export class ReviewForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -125,6 +126,7 @@ export default class ReviewForm extends React.Component {
         <article id="review-form-container">
           <form onSubmit={this.handleSubmit} name="reviewForm">
             <section id="places-autocomplete">
+
               <PlacesAutocomplete value={this.state.address}
                                   onChange={this.handleChange}
               >
@@ -212,3 +214,7 @@ export default class ReviewForm extends React.Component {
     );
   }
 }
+
+export default GoogleApiWrapper({
+  apiKey: process.env.GOOGLE_MAPS_API_KEY
+})(ReviewForm);
