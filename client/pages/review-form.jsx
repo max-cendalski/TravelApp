@@ -51,12 +51,13 @@ export default class ReviewForm extends React.Component {
     })
       .then(response => response.json())
       .then(result => {
-        this.fileInputRef.current.value = null;
+        // console.log('this.fileInput.current.value', this.fileInputRef.current.value);
+        // this.fileInputRef.current.value = null;
+        window.location.hash = '#';
       })
       .catch(error => {
         console.error('Error:', error);
       });
-    window.location.hash = '#';
   }
 
   handleChange(address) {
