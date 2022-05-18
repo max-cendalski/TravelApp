@@ -39,7 +39,7 @@ export default class Home extends React.Component {
     return (
       <article>
         <Navbar />
-              <Carousel
+               <Carousel
                   autoPlay={true}
                   interval={4000}
                   infiniteLoop={true}

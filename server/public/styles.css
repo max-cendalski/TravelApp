@@ -34,11 +34,6 @@
   height: 3rem;
 }
 
-.navbar-container form {
-  width: 15rem;
-  margin: 0;
-}
-
 .list-flex {
   max-width: 1920px;
   display: flex;
@@ -324,7 +319,6 @@ input::-webkit-inner-spin-button {
   background-color: white;
   top: 20vh;
   left: 40%;
-  color: red;
 }
 
 .logout-info h2 {
