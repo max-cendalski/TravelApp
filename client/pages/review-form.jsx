@@ -52,8 +52,6 @@ export class ReviewForm extends React.Component {
     })
       .then(response => response.json())
       .then(result => {
-        // console.log('this.fileInput.current.value', this.fileInputRef.current.value);
-        // this.fileInputRef.current.value = null;
         window.location.hash = '#';
       })
       .catch(error => {
