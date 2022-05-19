@@ -1,4 +1,5 @@
 require('dotenv/config');
+const staticMiddleware = require('./static-middleware');
 const pg = require('pg');
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
@@ -15,6 +16,8 @@ const db = new pg.Pool({
 });
 
 const app = express();
+app.use(staticMiddleware);
+
 const jsonMiddleware = express.json();
 app.use(jsonMiddleware);
 
