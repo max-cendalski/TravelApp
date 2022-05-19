@@ -64,16 +64,6 @@ CREATE TABLE "public"."trips" (
 
 
 
-/* CREATE TABLE "public"."countries" (
-	"countryId" serial NOT NULL UNIQUE,
-	"name" TEXT NOT NULL,
-	CONSTRAINT "countries_pk" PRIMARY KEY ("countryId")
-) WITH (
-  OIDS=FALSE
-);
- */
-
-
 
 CREATE TABLE "public"."tripScores" (
 	"userId" int NOT NULL,
