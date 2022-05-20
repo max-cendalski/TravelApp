@@ -49,7 +49,7 @@ export default class SearchResults extends React.Component {
     if (!this.state.countries) return null;
     return (
      <article>
-      {this.state.countries
+      {(this.state.countries.length > 0)
         ? (
             <article>
               <Navbar />
