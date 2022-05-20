@@ -44,12 +44,12 @@ export default class Home extends React.Component {
                   interval={4000}
                   infiniteLoop={true}
                   showThumbs={false}
-                  stopOnHover={false}
                   showIndicators={true}
                   animationHandler={'fade'}
                   showStatus={false}
                   transitionTime={2000}
                   dynamicHeight={false}
+                  swipeable={false}
                  >
                  <div className='image-home'>
                    <p className='carousel-country-name'>{this.state.countries[0]}</p>

@@ -1,9 +1,8 @@
 import React from 'react';
 import Navbar from '../components/navbar';
 import PlacesAutocomplete from 'react-places-autocomplete';
-import { GoogleApiWrapper } from 'google-maps-react';
 
-export class ReviewForm extends React.Component {
+export default class ReviewForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -212,7 +211,3 @@ export class ReviewForm extends React.Component {
     );
   }
 }
-
-export default GoogleApiWrapper({
-  apiKey: process.env.GOOGLE_MAPS_API_KEY
-})(ReviewForm);
