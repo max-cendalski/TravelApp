@@ -185,13 +185,19 @@
   color: white;
 }
 
+.sign-form {
+  margin-top: 2rem;
+  width: 24rem;
+}
+
 .username-input,
 .password-input {
   height: 3rem;
   display: block;
   border-bottom: 1px solid white;
   outline: none;
-  width: 45vh;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .row {
@@ -648,6 +654,11 @@ input::-webkit-inner-spin-button {
 
   .form-input-element {
     width: 90%;
+  }
+
+  .sign-form {
+    margin-top: 2rem;
+    width: 20rem;
   }
 
   .logout-info {

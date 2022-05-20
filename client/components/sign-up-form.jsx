@@ -61,7 +61,7 @@ export default class SignUpForm extends React.Component {
             <section className={this.state.userExiststMsg}>
               <h1 className='username-exists-msg'>User with that username already exists!</h1>
             </section>
-            <form onSubmit={this.handleSubmit} name="signUpForm">
+            <form className='sign-form' onSubmit={this.handleSubmit} name="signUpForm">
             <p>
               <label className="form-label"> Sign up </label>
               <input required className="username-input input-form" type="text" value={this.state.username} onChange={this.handleUsernameChange} name="username" placeholder="username"/>
