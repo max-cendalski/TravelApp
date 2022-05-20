@@ -6,7 +6,8 @@ export default class SignInForm extends React.Component {
     super(props);
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      errroMsg: 'invisible'
     };
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -40,15 +41,27 @@ export default class SignInForm extends React.Component {
     })
       .then(response => response.json())
       .then(result => {
-        this.context.handleSignIn(result);
-        window.location.hash = '';
-        this.props.handleSwitchingModal();
+        if (result.error) {
+          this.setState({
+            errroMsg: 'row'
+          });
+        } else {
+          this.context.handleSignIn(result);
+          window.location.hash = '';
+          this.props.handleSwitchingModal();
+        }
+      })
+      .catch(error => {
+        console.error('Error', error.message);
       });
   }
 
   render() {
     return (
           <article>
+          <section className={this.state.errroMsg}>
+              <h1 className='username-exists-msg'>Incorrect username or password!</h1>
+            </section>
             <form className='sign-form' onSubmit={this.handleSubmit} name="signInForm">
             <p>
               <label className="form-label"> Sign In </label>

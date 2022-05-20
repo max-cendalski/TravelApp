@@ -12,7 +12,6 @@ import ReviewForm from './pages/review-form.jsx';
 import Reviews from './pages/reviews';
 import EditTrip from './pages/edit-trip';
 
-import { GoogleApiWrapper } from 'google-maps-react';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
