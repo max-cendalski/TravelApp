@@ -326,7 +326,9 @@ input::-webkit-inner-spin-button {
   padding: 1rem;
   background-color: white;
   top: 20vh;
+  width: 25rem;
   left: 40%;
+  box-shadow: 5px 5px 5px 5px rgb(28, 27, 27);
 }
 
 .logout-info h2 {
@@ -607,6 +609,11 @@ input::-webkit-inner-spin-button {
     font-size: 1.1rem;
   }
 
+  .logout-info {
+    width: 80%;
+    left: 10%;
+  }
+
   .city-name {
     font-size: 1rem;
   }
@@ -681,10 +688,6 @@ input::-webkit-inner-spin-button {
   .sign-form {
     margin-top: 2rem;
     width: 20rem;
-  }
-
-  .logout-info {
-    left: 12%;
   }
 
   .image-container {
