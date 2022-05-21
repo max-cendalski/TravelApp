@@ -5,7 +5,8 @@ export default class SearchResults extends React.Component {
   constructor(props) {
     super(props);
     this.state = ({
-      countries: []
+      countries: [],
+      isLoading: true
     });
   }
 
@@ -19,7 +20,8 @@ export default class SearchResults extends React.Component {
       .then(response => response.json())
       .then(result => {
         this.setState({
-          countries: result
+          countries: result,
+          isLoading: false
         });
       })
       .catch(error => error(console.error('Error', error)));
@@ -46,7 +48,7 @@ export default class SearchResults extends React.Component {
   }
 
   render() {
-    if (!this.state.countries) return null;
+    if (this.state.isLoading === true) return null;
     return (
      <article>
       {(this.state.countries.length > 0)
