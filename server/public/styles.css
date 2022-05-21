@@ -18,6 +18,7 @@
   text-transform: capitalize;
   top: 15%;
   left: 2rem;
+  border-radius: 2px;
 }
 
 .control-arrow {
@@ -120,6 +121,7 @@
 }
 
 .photo {
+  border-radius: 3px;
   width: 100%;
   height: 100%;
 }
@@ -143,6 +145,7 @@
   padding: 5px;
   cursor: pointer;
   color: black;
+  border-radius: 2px;
 }
 
 .detailed-text-container {
@@ -182,7 +185,7 @@
 }
 
 ::placeholder {
-  color: rgb(140, 136, 136);
+  color: rgb(134, 129, 129);
   font-style: italic;
 }
 
@@ -217,7 +220,7 @@
 
 .app-button {
   border-radius: 5px;
-  padding: 0.5rem 1.5rem;
+  padding: 0.2rem 1.2rem;
   margin-top: 1rem;
   background-color: rgb(240, 131, 52);
   color: white;
@@ -294,13 +297,14 @@ input::-webkit-inner-spin-button {
 }
 
 .review-score-label {
-  font-size: 1.2rem;
+  font-size: 1.125rem;
   font-weight: 700;
   margin-right: 0.5rem;
 }
 
 .review-score-input {
   width: 3rem;
+  margin-right: 0.5rem;
 }
 
 .review-form-label {
@@ -607,7 +611,7 @@ input::-webkit-inner-spin-button {
 
   .logout-info {
     padding: 0.5rem;
-    width: 80%;
+    width: 75%;
   }
 
   .country-name {

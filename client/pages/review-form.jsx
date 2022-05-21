@@ -133,7 +133,7 @@ export default class ReviewForm extends React.Component {
                     <p>
                       <input type="text" name="location" required
                         {...getInputProps({
-                          placeholder: 'type ciyt and country',
+                          placeholder: 'type city and country',
                           className: 'location-search-input'
                         })}
                       />
