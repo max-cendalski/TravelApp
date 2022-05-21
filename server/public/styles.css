@@ -66,14 +66,14 @@
   margin-top: 3rem;
 }
 
-.country-name {
-  font-weight: 700;
-  font-size: 1.2rem;
-}
-
 .country-name,
 .city-name::first-letter {
   text-transform: capitalize;
+}
+
+.country-name {
+  font-weight: 700;
+  font-size: 1.2rem;
 }
 
 .city-name {
@@ -263,6 +263,7 @@
 }
 
 .drop-down-list li {
+  text-align: center;
   cursor: pointer;
   color: white;
   border-bottom: 1px solid white;
@@ -587,6 +588,26 @@ input::-webkit-inner-spin-button {
 
   .column-width25 {
     width: 100%;
+  }
+
+  .drop-down-list {
+    width: 9rem;
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .drop-down-list li {
+    font-size: 0.9rem;
+    padding: 0.8rem;
+  }
+
+  .country-name {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  .city-name {
+    font-size: 0.9rem;
   }
 
   .image-home {
