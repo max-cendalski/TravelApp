@@ -182,7 +182,8 @@
 }
 
 ::placeholder {
-  color: white;
+  color: rgb(140, 136, 136);
+  font-style: italic;
 }
 
 .sign-form {
