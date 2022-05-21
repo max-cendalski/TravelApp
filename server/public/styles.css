@@ -325,9 +325,10 @@ input::-webkit-inner-spin-button {
   position: absolute;
   padding: 1rem;
   background-color: white;
-  top: 20vh;
   width: 25rem;
-  left: 40%;
+  top: 20vh;
+  left: 0;
+  right: 0;
   box-shadow: 5px 5px 5px 5px rgb(28, 27, 27);
 }
 
@@ -604,14 +605,14 @@ input::-webkit-inner-spin-button {
     padding: 0.8rem;
   }
 
+  .logout-info {
+    padding: 0.5rem;
+    width: 80%;
+  }
+
   .country-name {
     font-weight: 600;
     font-size: 1.1rem;
-  }
-
-  .logout-info {
-    width: 80%;
-    left: 10%;
   }
 
   .city-name {
