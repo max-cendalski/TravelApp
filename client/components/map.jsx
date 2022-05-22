@@ -2,7 +2,7 @@ import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 
-function MapComponent(props) {
+export function MapComponent(props) {
   const containerStyle = {
     width: '',
     top: '21rem',

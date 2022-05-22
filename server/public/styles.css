@@ -18,6 +18,7 @@
   text-transform: capitalize;
   top: 15%;
   left: 2rem;
+  border-radius: 2px;
 }
 
 .control-arrow {
@@ -66,14 +67,14 @@
   margin-top: 3rem;
 }
 
-.country-name {
-  font-weight: 700;
-  font-size: 1.2rem;
-}
-
 .country-name,
 .city-name::first-letter {
   text-transform: capitalize;
+}
+
+.country-name {
+  font-weight: 700;
+  font-size: 1.2rem;
 }
 
 .city-name {
@@ -120,6 +121,7 @@
 }
 
 .photo {
+  border-radius: 3px;
   width: 100%;
   height: 100%;
 }
@@ -143,6 +145,7 @@
   padding: 5px;
   cursor: pointer;
   color: black;
+  border-radius: 2px;
 }
 
 .detailed-text-container {
@@ -182,7 +185,8 @@
 }
 
 ::placeholder {
-  color: white;
+  color: rgb(134, 129, 129);
+  font-style: italic;
 }
 
 .sign-form {
@@ -216,7 +220,7 @@
 
 .app-button {
   border-radius: 5px;
-  padding: 0.5rem 1.5rem;
+  padding: 0.2rem 1.2rem;
   margin-top: 1rem;
   background-color: rgb(240, 131, 52);
   color: white;
@@ -263,6 +267,7 @@
 }
 
 .drop-down-list li {
+  text-align: center;
   cursor: pointer;
   color: white;
   border-bottom: 1px solid white;
@@ -292,13 +297,14 @@ input::-webkit-inner-spin-button {
 }
 
 .review-score-label {
-  font-size: 1.2rem;
+  font-size: 1.125rem;
   font-weight: 700;
   margin-right: 0.5rem;
 }
 
 .review-score-input {
   width: 3rem;
+  margin-right: 0.5rem;
 }
 
 .review-form-label {
@@ -323,8 +329,11 @@ input::-webkit-inner-spin-button {
   position: absolute;
   padding: 1rem;
   background-color: white;
+  width: 25rem;
   top: 20vh;
-  left: 40%;
+  left: 0;
+  right: 0;
+  box-shadow: 5px 5px 5px 5px rgb(28, 27, 27);
 }
 
 .logout-info h2 {
@@ -589,6 +598,31 @@ input::-webkit-inner-spin-button {
     width: 100%;
   }
 
+  .drop-down-list {
+    width: 9rem;
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .drop-down-list li {
+    font-size: 0.9rem;
+    padding: 0.8rem;
+  }
+
+  .logout-info {
+    padding: 0.5rem;
+    width: 75%;
+  }
+
+  .country-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  .city-name {
+    font-size: 1rem;
+  }
+
   .image-home {
     margin: 0 0.2rem;
     padding-top: 4rem;
@@ -659,10 +693,6 @@ input::-webkit-inner-spin-button {
   .sign-form {
     margin-top: 2rem;
     width: 20rem;
-  }
-
-  .logout-info {
-    left: 12%;
   }
 
   .image-container {

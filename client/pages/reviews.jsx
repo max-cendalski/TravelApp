@@ -6,7 +6,8 @@ export default class Reviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = ({
-      myReviews: []
+      myReviews: [],
+      isLoading: true
     });
   }
 
@@ -22,13 +23,14 @@ export default class Reviews extends React.Component {
       .then(response => response.json())
       .then(result => {
         this.setState({
-          myReviews: result
+          myReviews: result,
+          isLoading: 'false'
         });
       });
   }
 
   render() {
-    if (!this.state.myReviews) return null;
+    if (this.state.isLoading === true) return null;
     return (
      <article>
       {this.state.myReviews

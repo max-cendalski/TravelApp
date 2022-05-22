@@ -11,8 +11,9 @@ import TripDetails from './pages/trip-details.jsx';
 import ReviewForm from './pages/review-form.jsx';
 import Reviews from './pages/reviews';
 import EditTrip from './pages/edit-trip';
+import { GoogleApiWrapper } from 'google-maps-react';
 
-export default class App extends React.Component {
+export class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -122,3 +123,7 @@ export default class App extends React.Component {
     );
   }
 }
+
+export default GoogleApiWrapper({
+  apiKey: process.env.GOOGLE_MAPS_API_KEY
+})(App);
