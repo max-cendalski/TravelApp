@@ -605,8 +605,8 @@ input::-webkit-inner-spin-button {
   }
 
   .drop-down-list li {
-    font-size: 0.9rem;
-    padding: 0.8rem;
+    font-size: 0.8rem;
+    padding: 0.7rem;
   }
 
   .logout-info {
@@ -758,5 +758,16 @@ input::-webkit-inner-spin-button {
     margin: 0 0.125rem;
     grid-column: 1/6;
     grid-row: 6/auto;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .container {
+    max-width: 3440px;
+  }
+
+  .carousel-country-name {
+    top: 12%;
+    left: 23%;
   }
 }
