@@ -22,7 +22,7 @@ export default class Home extends React.Component {
       .then(result => {
         const images = [];
         const countries = [];
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 7; i++) {
           images.push(result[i].mainPhotoUrl);
           countries.push(result[i].country);
         }
@@ -65,6 +65,14 @@ export default class Home extends React.Component {
                   <div className='image-home'>
                     <p className='carousel-country-name'>{this.state.countries[3]}</p>
                     <img className='photo' src={this.state.images[3]} />
+                  </div>
+                  <div className='image-home'>
+                    <p className='carousel-country-name'>{this.state.countries[4]}</p>
+                    <img className='photo' src={this.state.images[4]} />
+                  </div>
+                     <div className='image-home'>
+                    <p className='carousel-country-name'>{this.state.countries[5]}</p>
+                    <img className='photo' src={this.state.images[5]} />
                   </div>
             </Carousel>
       </article>
