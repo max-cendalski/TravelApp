@@ -760,3 +760,14 @@ input::-webkit-inner-spin-button {
     grid-row: 6/auto;
   }
 }
+
+@media screen and (min-width: 1920px) {
+  .container {
+    max-width: 3440px;
+  }
+
+  .carousel-country-name {
+    top: 12%;
+    left: 23%;
+  }
+}
