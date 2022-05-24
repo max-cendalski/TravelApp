@@ -70,8 +70,9 @@ The nearby streets have some important buildings, namely the Church of Our Lady 
 
 insert into "comments" ("userId", "tripId","content")
 values
-('1','2','Looks like Kyoto is perfect travel destination for me!'),
+('1','2','Looks like Kyoto is a perfect travel destination for me!'),
 ('2','3','One day I need to visit the island of Moorea'),
+('3','3','Yes, agreed.'),
 ('3','5','Thank you for a great trip review.'),
 ('4','4','Thank you for very informative trip review.'),
 ('5','7','I really enjoy reading your review.');
