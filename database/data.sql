@@ -25,7 +25,7 @@ I recommend to everyone to go and discover the richness and charms of Rhodes.'
   a small hill with great views of the area and three cats that everyone seemed to know, feed and pet. I was told on two occasions that the grey one was the mother and the black one was the baby. I never learned the story of the third one that was always hiding and avoiding people.'
   ,'94','77','90','93','84'),
 
-('5','tahiti','papeete','/images/moorea.jpg','Tahiti, you are under a lot of pressure, you and your 118 islands spread across the area of Europe. In the imagination of so many travellers you are the epitome of a tropical island paradise, with a bonus mix of French and Polynesian cultures.
+('5','tahiti','papeete','/images/moorea.jpg','In Tahiti, you are under a lot of pressure, you and your 118 islands spread across the area of Europe. In the imagination of so many travellers you are the epitome of a tropical island paradise, with a bonus mix of French and Polynesian cultures.
  The weather alone is near perfect - water temperature in the high 20s year-round, and winter air temperature of about 27 degrees. The more affordable tourist season is April-May, while the wet season is during the hot summer months of December to March. Humpback whales call these waters
   home from August to December, when they journey from Antarctica to have their young.The island of Papeete is a 30-minute ferry trip from the capital, Papeete, where international flights land. Six ferries a day make the crossing, not just for tourists but also for the many Moorea locals who
    work in Papeete. My Tuesday afternoon ferry is packed with school children making the return journey to the smaller island, some clutching baguettes. Most resorts offer transfers from the ferry terminal, plus there are taxis or the islands one car rental, Avis, across the road. Papeete is
@@ -65,3 +65,20 @@ where you can buy tickets to visit the cathedral and the nearby Archbishop’s P
 The Market Square (Torvet) is the heart of Trondheim and when we visited, on a Saturday morning, this was clearly the busiest area with plenty of stalls selling different local produce. At the center of the square lies the monument to Viking Olav Tryggvason, which happens to be a sundial!
 The nearby streets have some important buildings, namely the Church of Our Lady and Stiftsgården – a massive wooden building that acts as the local royal residence.'
 ,'77','79','70','82','84');
+
+
+
+insert into "comments" ("userId", "tripId","content")
+values
+('1','2','Looks like Kyoto is perfect travel destination for me!'),
+('2','3','One day I need to visit the island of Moorea'),
+('3','5','Thank you for a great trip review.'),
+('4','4','Thank you for very informative trip review.'),
+('5','7','I really enjoy reading your review.');
+
+insert into "tripScores" ("userId","tripId","score")
+values
+('1','3','90'),
+('2','2','80'),
+('3','1','77'),
+('4','5','93');
