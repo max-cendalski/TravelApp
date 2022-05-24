@@ -25,10 +25,10 @@ I recommend to everyone to go and discover the richness and charms of Rhodes.'
   a small hill with great views of the area and three cats that everyone seemed to know, feed and pet. I was told on two occasions that the grey one was the mother and the black one was the baby. I never learned the story of the third one that was always hiding and avoiding people.'
   ,'94','77','90','93','84'),
 
-('5','tahiti','moorea','/images/moorea.jpg','Tahiti, you are under a lot of pressure, you and your 118 islands spread across the area of Europe. In the imagination of so many travellers you are the epitome of a tropical island paradise, with a bonus mix of French and Polynesian cultures.
+('5','tahiti','papeete','/images/moorea.jpg','Tahiti, you are under a lot of pressure, you and your 118 islands spread across the area of Europe. In the imagination of so many travellers you are the epitome of a tropical island paradise, with a bonus mix of French and Polynesian cultures.
  The weather alone is near perfect - water temperature in the high 20s year-round, and winter air temperature of about 27 degrees. The more affordable tourist season is April-May, while the wet season is during the hot summer months of December to March. Humpback whales call these waters
-  home from August to December, when they journey from Antarctica to have their young.The island of Moorea is a 30-minute ferry trip from the capital, Papeete, where international flights land. Six ferries a day make the crossing, not just for tourists but also for the many Moorea locals who
-   work in Papeete. My Tuesday afternoon ferry is packed with school children making the return journey to the smaller island, some clutching baguettes. Most resorts offer transfers from the ferry terminal, plus there are taxis or the islands one car rental, Avis, across the road. Moorea is
+  home from August to December, when they journey from Antarctica to have their young.The island of Papeete is a 30-minute ferry trip from the capital, Papeete, where international flights land. Six ferries a day make the crossing, not just for tourists but also for the many Moorea locals who
+   work in Papeete. My Tuesday afternoon ferry is packed with school children making the return journey to the smaller island, some clutching baguettes. Most resorts offer transfers from the ferry terminal, plus there are taxis or the islands one car rental, Avis, across the road. Papeete is
    encircled by a reef, with 12 natural breaks caused by freshwater running off the mountains, allowing access for fishing boats as well as cruise ships. Waves crash constantly a few hundred metres from shore, but inside the lagoon it is still and ideal for snorkelling and paddleboarding.'
 ,'87','77','81','90','88'),
 
