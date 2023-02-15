@@ -18,10 +18,10 @@ const Home = () => {
       .then(result => {
         const images = [];
         const countries = [];
+
         for (let i = 0; i < 7; i++) {
           images.push(result[i].mainPhotoUrl);
           countries.push(result[i].country);
-
         }
         setImagesCarousel(images);
         setCountriesCarousel(countries);
@@ -40,7 +40,7 @@ const Home = () => {
         showThumbs={false}
         showIndicators={true}
         showStatus={false}
-        transitionTime={1700}
+        transitionTime={1600}
         dynamicHeight={false}
         swipeable={true}
       >
@@ -72,6 +72,7 @@ const Home = () => {
           <p className="carousel-country-name">{countriesCarousel[6]}</p>
           <img className="photo" src={imagesCarousel[6]} />
         </div>
+
       </Carousel>
     </article>
   );
