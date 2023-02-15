@@ -1,17 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../components/navbar';
 
 import { Carousel } from 'react-responsive-carousel';
-export default class Home extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      images: [],
-      countries: []
-    };
-  }
 
-  componentDidMount() {
+const Home = () => {
+  const [imagesCarousel, setImagesCarousel] = useState([]);
+  const [countriesCarousel, setCountriesCarousel] = useState([]);
+
+  useEffect(() => {
     fetch('/api/images', {
       method: 'GET',
       headers: {
@@ -25,57 +21,60 @@ export default class Home extends React.Component {
         for (let i = 0; i < 7; i++) {
           images.push(result[i].mainPhotoUrl);
           countries.push(result[i].country);
+
         }
-        this.setState({
-          images,
-          countries
-        });
+        setImagesCarousel(images);
+        setCountriesCarousel(countries);
       })
       .catch(error => error(console.error('Error', error)));
-  }
+  }, []);
 
-  render() {
-    if (!this.state.images) return null;
-    return (
-      <article>
-        <Navbar />
-               <Carousel
-                  autoPlay={true}
-                  interval={4000}
-                  infiniteLoop={true}
-                  showThumbs={false}
-                  showIndicators={true}
-                  showStatus={false}
-                  transitionTime={1700}
-                  dynamicHeight={false}
-                  swipeable={true}
-                 >
-                 <div className='image-home'>
-                   <p className='carousel-country-name'>{this.state.countries[0]}</p>
-                   <img className='photo' src={this.state.images[0]} />
-                  </div>
-                  <div className='image-home'>
-                    <p className='carousel-country-name'>{this.state.countries[1]}</p>
-                    <img className='photo' src={this.state.images[1]} />
-                  </div>
-                  <div className='image-home'>
-                    <p className='carousel-country-name'>{this.state.countries[2]}</p>
-                    <img className='photo' src={this.state.images[2]} />
-                  </div>
-                  <div className='image-home'>
-                    <p className='carousel-country-name'>{this.state.countries[3]}</p>
-                    <img className='photo' src={this.state.images[3]} />
-                  </div>
-                  <div className='image-home'>
-                    <p className='carousel-country-name'>{this.state.countries[4]}</p>
-                    <img className='photo' src={this.state.images[4]} />
-                  </div>
-                     <div className='image-home'>
-                    <p className='carousel-country-name'>{this.state.countries[5]}</p>
-                    <img className='photo' src={this.state.images[5]} />
-                  </div>
-            </Carousel>
-      </article>
-    );
-  }
-}
+  if (!imagesCarousel) return null;
+  return (
+    <article>
+      <Navbar />
+      <Carousel
+        autoPlay={true}
+        interval={4500}
+        infiniteLoop={true}
+        showThumbs={false}
+        showIndicators={true}
+        showStatus={false}
+        transitionTime={1700}
+        dynamicHeight={false}
+        swipeable={true}
+      >
+        <div className="image-home">
+          <p className="carousel-country-name">{countriesCarousel[0]}</p>
+          <img className="photo" src={imagesCarousel[0]} />
+        </div>
+        <div className="image-home">
+          <p className="carousel-country-name">{countriesCarousel[1]}</p>
+          <img className="photo" src={imagesCarousel[1]} />
+        </div>
+        <div className="image-home">
+          <p className="carousel-country-name">{countriesCarousel[2]}</p>
+          <img className="photo" src={imagesCarousel[2]} />
+        </div>
+        <div className="image-home">
+          <p className="carousel-country-name">{countriesCarousel[3]}</p>
+          <img className="photo" src={imagesCarousel[3]} />
+        </div>
+        <div className="image-home">
+          <p className="carousel-country-name">{countriesCarousel[4]}</p>
+          <img className="photo" src={imagesCarousel[4]} />
+        </div>
+        <div className="image-home">
+          <p className="carousel-country-name">{countriesCarousel[5]}</p>
+          <img className="photo" src={imagesCarousel[5]} />
+        </div>
+        <div className="image-home">
+          <p className="carousel-country-name">{countriesCarousel[6]}</p>
+          <img className="photo" src={imagesCarousel[6]} />
+        </div>
+      </Carousel>
+    </article>
+  );
+};
+
+export default Home;
