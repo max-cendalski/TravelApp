@@ -72,6 +72,15 @@ const Navbar = () => {
     setVisible("hidden");
   };
 
+  const handleSignUp = () => {
+    setModal("modal-visible");
+    setSignUpForm(!this.state.signUpForm);
+  };
+
+  const handleSignInButton = () => {
+    setModal("modal-visible");
+    setSignInForm(!this.state.signInForm);
+  };
   return (
     <article
       className="navbar-container row"
