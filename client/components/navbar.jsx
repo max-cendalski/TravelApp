@@ -74,13 +74,27 @@ const Navbar = () => {
 
   const handleSignUp = () => {
     setModal("modal-visible");
-    setSignUpForm(!this.state.signUpForm);
+    setSignUpForm(!signUpForm);
   };
 
   const handleSignInButton = () => {
     setModal("modal-visible");
-    setSignInForm(!this.state.signInForm);
+    setSignInForm(!signInForm);
   };
+
+  const handleLoginIcon = () => {
+    setVisible(!visible);
+    //list: 'drop-down-container'
+  };
+
+  const handleModalClick = () => {
+    setModal("hidden");
+  };
+
+  const handleMyReviewsButton = () => {
+    window.location.hash = "my-reviews";
+  };
+
   return (
     <article
       className="navbar-container row"
