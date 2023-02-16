@@ -1,7 +1,22 @@
 import React from 'react';
 import SignUpForm from '../components/sign-up-form';
 import SignInForm from '../components/sign-in-form';
+import {useState, useEffect} from 'react';
 import AppContext from '../lib/app-context';
+
+
+
+/* const Navbar = ()=> {
+  const [searchBox, setSearchBox]  = useState('')
+  const [visible, setVisible] = useState('hidden');
+  const [modal, setModal]  = useState('hidden');
+  const [signUpForm, setSignUpForm] = useState(false)
+  const [signInForm, setSignInForm] = useState(false)
+  const [searchArray, setSearchArray] = useState([])
+
+
+} */
+
 
 export default class Navbar extends React.Component {
   constructor(props) {
