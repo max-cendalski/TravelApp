@@ -48,6 +48,14 @@ const Navbar = () => {
     setSearchBox("");
     setSearchArray("");
   };
+  const handleSearchListClick = (event) => {
+    setSearchBox(
+      `${event.target.getAttribute("data-country")},${event.target.getAttribute(
+        "data-city"
+      )}`
+    );
+    setSearchArray([]);
+  };
 
   return (
     <article
@@ -254,7 +262,7 @@ Navbar.contextType = AppContext;
       searchArray: ''
     });
   }
-
+//
   handleSearchListClick(event) {
     this.setState({
       searchBox: `${event.target.getAttribute('data-country')},${event.target.getAttribute('data-city')}`,
@@ -273,7 +281,7 @@ Navbar.contextType = AppContext;
       visible: 'hidden'
     });
   }
-
+???
   handleSwitchingModal() {
     this.setState({
       modal: 'hidden',
