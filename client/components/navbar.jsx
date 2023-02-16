@@ -57,6 +57,21 @@ const Navbar = () => {
     setSearchArray([]);
   };
 
+  const handleOnMouseEnter = () => {
+    setVisible("drop-down-container");
+  };
+
+  const handleOnMouseLeave = () => {
+    setVisible("hidden");
+  };
+
+  const handleSwitchingModal = () => {
+    setModal("hidden");
+    setSignUpForm(false);
+    setSignInForm(false);
+    setVisible("hidden");
+  };
+
   return (
     <article
       className="navbar-container row"
@@ -251,8 +266,6 @@ Navbar.contextType = AppContext;
     }
   }
 
-  //
-
   handleSubmit(event) {
     event.preventDefault();
     const country = this.state.searchBox.split(',')[0];
@@ -262,7 +275,7 @@ Navbar.contextType = AppContext;
       searchArray: ''
     });
   }
-//
+
   handleSearchListClick(event) {
     this.setState({
       searchBox: `${event.target.getAttribute('data-country')},${event.target.getAttribute('data-city')}`,
