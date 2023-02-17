@@ -23,6 +23,8 @@ const App = () => {
   const [route, setRoute ] = useState(window.location.hash)
   const [logoutInfo, setLogoutInfo] = useState('hidden')
   const [locations, setLocations] = useState([])
+  const ThemeContext = createContext(null)
+
 
   useEffect(()=> {
       fetch("api/locations", {
@@ -36,20 +38,98 @@ const App = () => {
       })
     );
     window.addEventListener("hashchange", () => {
-      const newRoute = parseRoute(window.location.hash)
-      setRoute(newRoute)
+      //const newRoute = parseRoute(window.location.hash)
+      setRoute(parseRoute(window.location.hash));
     });
     const token = window.localStorage.getItem("TravelApp-token");
     const user = token ? decodeToken(token) : null;
     setUser({user})
     setIsAuthorize(true)
+    console.log('useEffect')
   },[])
 
+
+ const handleSignIn =(result) => {
+    const { user, token } = result;
+    window.localStorage.setItem("TravelApp-token", token);
+    setUser({user})
+  }
+
+  const handleLogoutWindow =()=> {
+    setLogoutInfo('logout-info')
+  }
+
+
+  const handleConfirmLogout =(event) =>{
+    const { route } = route
+    route.path = "";
+    window.localStorage.removeItem("TravelApp-token");
+    setUser(null)
+    setIsAuthorize(false)
+    setLogoutInfo('hidden')
+
+  }
+  const handleCancelLogout =() => {
+    setLogoutInfo('hidden')
+  }
+
+ const renderPage =()=> {
+
+    if (route.path === "") {
+      return <Home />;
+    }
+    if (route.path === "search-results") {
+      const country = route.params.get("country");
+      return <SearchResults country={country} />;
+    }
+    if (route.path === "trips") {
+      const tripId = Number(route.params.get("tripId"));
+      return <TripDetails tripId={tripId} />;
+    }
+    if (route.path === "sign-in") {
+      return <SignInForm />;
+    }
+    if (route.path === "sign-up") {
+      return <SignUpForm />;
+    }
+    if (route.path === "review-form") {
+      return <ReviewForm />;
+    }
+    if (route.path === "my-reviews") {
+      return <Reviews />;
+    }
+    if (route.path === "edit/trip") {
+      const tripId = Number(route.params.get("tripId"));
+      return <EditTrip tripId={tripId} />;
+    }
+    return <NotFound />;
+  }
+
+    const contextValue = {
+      locations,
+      user,
+      route,
+      handleLogoutWindow,
+      handleSignIn,
+      isAuthorize,
+      logoutInfo,
+      handleConfirmLogout,
+      handleCancelLogout,
+    };
+
+
+
+
+
+
   return (
+    <ThemeContext.Provider value = {contextValue}>
+      {renderPage()}
+    </ThemeContext.Provider>
 
   )
 }
-export class App extends React.Component {
+/* export class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -100,6 +180,8 @@ export class App extends React.Component {
     });
   }
 
+
+
   handleConfirmLogout(event) {
     const { route } = this.state;
     route.path = "";
@@ -149,6 +231,10 @@ export class App extends React.Component {
     return <NotFound />;
   }
 
+
+
+
+
   render() {
     const { user, route, isAuthorizing, logoutInfo, locations } = this.state;
     const {
@@ -174,7 +260,8 @@ export class App extends React.Component {
       </AppContext.Provider>
     );
   }
-}
+} */
+
 
 export default GoogleApiWrapper({
   apiKey: process.env.GOOGLE_MAPS_API_KEY,
