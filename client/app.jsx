@@ -23,7 +23,8 @@ const App = () => {
   const [route, setRoute] = useState(parseRoute(window.location.hash));
   const [logoutInfo, setLogoutInfo] = useState("hidden");
   const [locations, setLocations] = useState([]);
-  const AppDataContext = React.createContext(null);
+
+  const AppData = createContext();
 
   useEffect(() => {
     fetch("api/locations", {
@@ -99,7 +100,7 @@ const App = () => {
     return <NotFound />;
   };
 
-  const contextValue = useMemo(() => ({
+  const contextData = {
     locations,
     user,
     route,
@@ -109,12 +110,12 @@ const App = () => {
     logoutInfo,
     handleConfirmLogout,
     handleCancelLogout,
-  }),[]);
+  };
 
   return (
-    <AppDataContext.Provider value={contextValue}>
-      {renderPage()}
-    </AppDataContext.Provider>
+    <AppData.Provider value='whee'>
+      <Home />
+    </AppData.Provider>
   );
 };
 
@@ -254,8 +255,6 @@ export default GoogleApiWrapper({
     );
   }
 } */
-
-
 
 /* export class App extends React.Component {
   constructor(props) {

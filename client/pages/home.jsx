@@ -1,11 +1,11 @@
 import React, {useState, useEffect } from 'react';
 import Navbar from '../components/navbar';
-
 import { Carousel } from 'react-responsive-carousel';
 
 const Home = () => {
   const [imagesCarousel, setImagesCarousel] = useState([]);
   const [countriesCarousel, setCountriesCarousel] = useState([]);
+
 
   useEffect(() => {
     fetch('/api/images', {

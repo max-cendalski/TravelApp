@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 import SignUpForm from "../components/sign-up-form";
 import SignInForm from "../components/sign-in-form";
-import { useContext,useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import AppContext from "../lib/app-context";
 
 
@@ -13,8 +13,6 @@ const Navbar = () => {
   const [signUpForm, setSignUpForm] = useState(false);
   const [signInForm, setSignInForm] = useState(false);
   const [searchArray, setSearchArray] = useState([]);
-
-   const logout = useContext(AppDataContext)
 
 
   const handleChange = (event) => {
@@ -100,8 +98,6 @@ const Navbar = () => {
   const handleMyReviewsButton = () => {
     window.location.hash = "my-reviews";
   };
-
-
 
   return (
     <article className="navbar-container row" onMouseLeave={handleOnMouseLeave}>
@@ -235,8 +231,6 @@ const Navbar = () => {
     </article>
   );
 };
-
-
 
 //Navbar.contextType = AppContext;
 
