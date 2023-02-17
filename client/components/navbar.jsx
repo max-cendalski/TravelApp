@@ -1,7 +1,7 @@
 import React from "react";
 import SignUpForm from "../components/sign-up-form";
 import SignInForm from "../components/sign-in-form";
-import { useState, useEffect } from "react";
+import { useContext,useState, useEffect } from "react";
 import AppContext from "../lib/app-context";
 
 const Navbar = () => {
@@ -12,6 +12,7 @@ const Navbar = () => {
   const [signInForm, setSignInForm] = useState(false);
   const [searchArray, setSearchArray] = useState([]);
 
+
   const handleChange = (event) => {
     event.preventDefault();
     const letter = event.target.value;
@@ -20,7 +21,7 @@ const Navbar = () => {
     if (letter === "") {
       setSearchArray([]);
     } else {
-      this.context.locations.forEach((location) => {
+      AppContext.locations.forEach((location) => {
         if (
           location.country.includes(letter.toLowerCase()) ||
           location.city.includes(letter.toLowerCase)
@@ -96,11 +97,9 @@ const Navbar = () => {
     window.location.hash = "my-reviews";
   };
 
+  console.log('appcontext',AppContext)
   return (
-    <article
-      className="navbar-container row"
-      onMouseLeave={handleOnMouseLeave}
-    >
+    <article className="navbar-container row" onMouseLeave={handleOnMouseLeave}>
       <section className="navbar-search-box-container">
         <form onSubmit={handleSubmit}>
           <input
@@ -173,10 +172,7 @@ const Navbar = () => {
             </li>
           )}
           {AppContext.user && (
-            <li
-              className="my-reviews-link"
-              onClick={handleMyReviewsButton}
-            >
+            <li className="my-reviews-link" onClick={handleMyReviewsButton}>
               My Reviews
             </li>
           )}
@@ -203,7 +199,7 @@ const Navbar = () => {
           <section className="row">
             <SignUpForm
               handleSwitchingModal={handleSwitchingModal}
-              handleIsAuthorizing={handleIsAuthorizing}
+              handleIsAuthorizing={AppContext.handleIsAuthorizing}
             />
           </section>
         )}
@@ -211,7 +207,7 @@ const Navbar = () => {
           <section className="row">
             <SignInForm
               handleSwitchingModal={handleSwitchingModal}
-              handleIsAuthorizing={handleIsAuthorizing}
+              handleIsAuthorizing={AppContext.handleIsAuthorizing}
             />
           </section>
         )}
@@ -235,9 +231,11 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+
 
 Navbar.contextType = AppContext;
+
+export default Navbar;
 
 /* export default class Navbar extends React.Component {
   constructor(props) {
