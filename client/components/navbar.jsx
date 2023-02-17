@@ -82,6 +82,7 @@ const Navbar = () => {
     setSignInForm(!signInForm);
   };
 
+  // THIS NEEDS TO BE FIXED
   const handleLoginIcon = () => {
     setVisible(!visible);
     //list: 'drop-down-container'
@@ -98,14 +99,14 @@ const Navbar = () => {
   return (
     <article
       className="navbar-container row"
-      onMouseLeave={this.handleOnMouseLeave}
+      onMouseLeave={handleOnMouseLeave}
     >
       <section className="navbar-search-box-container">
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <input
             type="search"
-            value={this.state.searchBox}
-            onChange={this.handleChange}
+            value={searchBox}
+            onChange={handleChange}
             autoComplete="off"
             name="searchBox"
             placeholder="search for a country"
@@ -115,11 +116,11 @@ const Navbar = () => {
         </form>
         <section>
           <ul id="search-result-list">
-            {this.state.searchArray &&
-              this.state.searchArray.map((location, index) => {
+            {searchArray &&
+              searchArray.map((location, index) => {
                 return (
                   <li
-                    onClick={this.handleSearchListClick}
+                    onClick={handleSearchListClick}
                     className="search-result-list-item"
                     data-country={location.country}
                     data-city={location.city}
@@ -149,47 +150,47 @@ const Navbar = () => {
 
       <section
         className="navbar-login-icon-section"
-        onMouseEnter={this.handleOnMouseEnter}
+        onMouseEnter={handleOnMouseEnter}
       >
-        {this.context.user && (
+        {AppContext.user && (
           <p className="navbar-name-paragraph">
-            Hello, {this.context.user.username}
+            Hello, {AppContext.user.username}
           </p>
         )}
         <i className="fas fa-user icon-class" />
       </section>
 
-      <section className={this.state.visible}>
+      <section className={visible}>
         <ul className="drop-down-list">
-          {!this.context.user && (
-            <li className="sign-up-button" onClick={this.handleSignUp}>
+          {!AppContext.user && (
+            <li className="sign-up-button" onClick={handleSignUp}>
               Sign Up
             </li>
           )}
-          {!this.context.user && (
-            <li className="sign-in-button" onClick={this.handleSignInButton}>
+          {!AppContext.user && (
+            <li className="sign-in-button" onClick={handleSignInButton}>
               Sign In
             </li>
           )}
-          {this.context.user && (
+          {AppContext.user && (
             <li
               className="my-reviews-link"
-              onClick={this.handleMyReviewsButton}
+              onClick={handleMyReviewsButton}
             >
               My Reviews
             </li>
           )}
-          {this.context.user && (
+          {AppContext.user && (
             <li className="write-review-button">
               <a className="write-review-link" href="#review-form">
                 Write Review
               </a>
             </li>
           )}
-          {this.context.user && (
+          {AppContext.user && (
             <li
               className="logoutButton"
-              onClick={this.context.handleLogoutWindow}
+              onClick={AppContext.handleLogoutWindow}
             >
               Logout
             </li>
@@ -197,34 +198,34 @@ const Navbar = () => {
         </ul>
       </section>
 
-      <article className={this.state.modal}>
-        {this.state.signUpForm && (
+      <article className={modal}>
+        {signUpForm && (
           <section className="row">
             <SignUpForm
-              handleSwitchingModal={this.handleSwitchingModal}
-              handleIsAuthorizing={this.handleIsAuthorizing}
+              handleSwitchingModal={handleSwitchingModal}
+              handleIsAuthorizing={handleIsAuthorizing}
             />
           </section>
         )}
-        {this.state.signInForm && (
+        {signInForm && (
           <section className="row">
             <SignInForm
-              handleSwitchingModal={this.handleSwitchingModal}
-              handleIsAuthorizing={this.handleIsAuthorizing}
+              handleSwitchingModal={handleSwitchingModal}
+              handleIsAuthorizing={handleIsAuthorizing}
             />
           </section>
         )}
       </article>
-      <article className={this.context.logoutInfo}>
+      <article className={AppContext.logoutInfo}>
         <h2>Are you sure you want to logout?</h2>
         <button
-          onClick={this.context.handleConfirmLogout}
+          onClick={AppContext.handleConfirmLogout}
           className="app-button background-orange float-right"
         >
           Confirm
         </button>
         <button
-          onClick={this.context.handleCancelLogout}
+          onClick={AppContext.handleCancelLogout}
           className="app-button background-red"
         >
           Cancel
@@ -233,6 +234,9 @@ const Navbar = () => {
     </article>
   );
 };
+
+export default Navbar;
+
 Navbar.contextType = AppContext;
 
 /* export default class Navbar extends React.Component {
