@@ -12,7 +12,43 @@ import ReviewForm from "./pages/review-form.jsx";
 import Reviews from "./pages/reviews";
 import EditTrip from "./pages/edit-trip";
 import { GoogleApiWrapper } from "google-maps-react";
+import {useState,useEffect, createContext} from 'react';
 
+
+
+
+const App = () => {
+  const [user,setUser] = useState(null)
+  const [isAuthorize, setIsAuthorize] = useState(false)
+  const [route, setRoute ] = useState(window.location.hash)
+  const [logoutInfo, setLogoutInfo] = useState('hidden')
+  const [locations, setLocations] = useState([])
+
+  useEffect(()=> {
+      fetch("api/locations", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((response) =>
+      response.json().then((locations) => {
+        setLocations(locations)
+      })
+    );
+    window.addEventListener("hashchange", () => {
+      const newRoute = parseRoute(window.location.hash)
+      setRoute(newRoute)
+    });
+    const token = window.localStorage.getItem("TravelApp-token");
+    const user = token ? decodeToken(token) : null;
+    setUser({user})
+    setIsAuthorize(true)
+  },[])
+
+  return (
+
+  )
+}
 export class App extends React.Component {
   constructor(props) {
     super(props);
