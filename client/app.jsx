@@ -23,7 +23,7 @@ const App = () => {
   const [route, setRoute] = useState(parseRoute(window.location.hash));
   const [logoutInfo, setLogoutInfo] = useState("hidden");
   const [locations, setLocations] = useState([]);
-  const AppDataContext = createContext(null);
+  const AppDataContext = React.createContext(null);
 
   useEffect(() => {
     fetch("api/locations", {
@@ -44,8 +44,7 @@ const App = () => {
     const user = token ? decodeToken(token) : null;
     setUser({ user });
     setIsAuthorize(true);
-    console.log("appdatacontextAPP", AppDataContext);
-  }, [user]);
+  }, []);
 
   const handleSignIn = (result) => {
     const { user, token } = result;
@@ -73,7 +72,7 @@ const App = () => {
     if (route.path === "") {
       return <Home />;
     }
-    /* if (route.path === "search-results") {
+    if (route.path === "search-results") {
       const country = route.params.get("country");
       return <SearchResults country={country} />;
     }
@@ -96,7 +95,7 @@ const App = () => {
     if (route.path === "edit/trip") {
       const tripId = Number(route.params.get("tripId"));
       return <EditTrip tripId={tripId} />;
-    } */
+    }
     return <NotFound />;
   };
 
@@ -110,15 +109,19 @@ const App = () => {
     logoutInfo,
     handleConfirmLogout,
     handleCancelLogout,
-  }));
+  }),[]);
 
   return (
     <AppDataContext.Provider value={contextValue}>
-      <Home />
-      <Navbar />
+      {renderPage()}
     </AppDataContext.Provider>
   );
 };
+
+export default GoogleApiWrapper({
+  apiKey: process.env.GOOGLE_MAPS_API_KEY,
+})(App);
+
 /* export class App extends React.Component {
   constructor(props) {
     super(props);
@@ -252,9 +255,7 @@ const App = () => {
   }
 } */
 
-export default GoogleApiWrapper({
-  apiKey: process.env.GOOGLE_MAPS_API_KEY,
-})(App);
+
 
 /* export class App extends React.Component {
   constructor(props) {
