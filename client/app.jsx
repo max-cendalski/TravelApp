@@ -11,74 +11,69 @@ import TripDetails from "./pages/trip-details.jsx";
 import ReviewForm from "./pages/review-form.jsx";
 import Reviews from "./pages/reviews";
 import EditTrip from "./pages/edit-trip";
+
+import Navbar from "./components/navbar";
+
 import { GoogleApiWrapper } from "google-maps-react";
-import {useState,useEffect, createContext} from 'react';
-
-
-
+import { useState, useMemo, useEffect, createContext } from "react";
 
 const App = () => {
-  const [user,setUser] = useState(null)
-  const [isAuthorize, setIsAuthorize] = useState(false)
-  const [route, setRoute ] = useState(window.location.hash)
-  const [logoutInfo, setLogoutInfo] = useState('hidden')
-  const [locations, setLocations] = useState([])
-  const ThemeContext = createContext(null)
+  const [user, setUser] = useState(null);
+  const [isAuthorize, setIsAuthorize] = useState(false);
+  const [route, setRoute] = useState(parseRoute(window.location.hash));
+  const [logoutInfo, setLogoutInfo] = useState("hidden");
+  const [locations, setLocations] = useState([]);
+  const AppDataContext = createContext(null);
 
-
-  useEffect(()=> {
-      fetch("api/locations", {
+  useEffect(() => {
+    fetch("api/locations", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
     }).then((response) =>
       response.json().then((locations) => {
-        setLocations(locations)
+        setLocations(locations);
       })
     );
     window.addEventListener("hashchange", () => {
-      //const newRoute = parseRoute(window.location.hash)
-      setRoute(parseRoute(window.location.hash));
+      const newRoute = parseRoute(window.location.hash);
+      setRoute(newRoute);
     });
     const token = window.localStorage.getItem("TravelApp-token");
     const user = token ? decodeToken(token) : null;
-    setUser({user})
-    setIsAuthorize(true)
-    console.log('useEffect')
-  },[])
+    setUser({ user });
+    setIsAuthorize(true);
+    console.log("appdatacontextAPP", AppDataContext);
+  }, [user]);
 
-
- const handleSignIn =(result) => {
+  const handleSignIn = (result) => {
     const { user, token } = result;
     window.localStorage.setItem("TravelApp-token", token);
-    setUser({user})
-  }
+    setUser({ user });
+  };
 
-  const handleLogoutWindow =()=> {
-    setLogoutInfo('logout-info')
-  }
+  const handleLogoutWindow = () => {
+    setLogoutInfo("logout-info");
+  };
 
-
-  const handleConfirmLogout =(event) =>{
-    const { route } = route
+  const handleConfirmLogout = (event) => {
+    const { route } = route;
     route.path = "";
     window.localStorage.removeItem("TravelApp-token");
-    setUser(null)
-    setIsAuthorize(false)
-    setLogoutInfo('hidden')
+    setUser(null);
+    setIsAuthorize(false);
+    setLogoutInfo("hidden");
+  };
+  const handleCancelLogout = () => {
+    setLogoutInfo("hidden");
+  };
 
-  }
-  const handleCancelLogout =() => {
-    setLogoutInfo('hidden')
-  }
-
- const renderPage =()=> {
-
+  const renderPage = () => {
     if (route.path === "") {
       return <Home />;
     }
-    if (route.path === "search-results") {
+    /* if (route.path === "search-results") {
       const country = route.params.get("country");
       return <SearchResults country={country} />;
     }
@@ -101,34 +96,29 @@ const App = () => {
     if (route.path === "edit/trip") {
       const tripId = Number(route.params.get("tripId"));
       return <EditTrip tripId={tripId} />;
-    }
+    } */
     return <NotFound />;
-  }
+  };
 
-    const contextValue = {
-      locations,
-      user,
-      route,
-      handleLogoutWindow,
-      handleSignIn,
-      isAuthorize,
-      logoutInfo,
-      handleConfirmLogout,
-      handleCancelLogout,
-    };
-
-
-
-
-
+  const contextValue = useMemo(() => ({
+    locations,
+    user,
+    route,
+    handleLogoutWindow,
+    handleSignIn,
+    isAuthorize,
+    logoutInfo,
+    handleConfirmLogout,
+    handleCancelLogout,
+  }));
 
   return (
-    <ThemeContext.Provider value = {contextValue}>
-      {renderPage()}
-    </ThemeContext.Provider>
-
-  )
-}
+    <AppDataContext.Provider value={contextValue}>
+      <Home />
+      <Navbar />
+    </AppDataContext.Provider>
+  );
+};
 /* export class App extends React.Component {
   constructor(props) {
     super(props);
@@ -262,11 +252,9 @@ const App = () => {
   }
 } */
 
-
 export default GoogleApiWrapper({
   apiKey: process.env.GOOGLE_MAPS_API_KEY,
 })(App);
-
 
 /* export class App extends React.Component {
   constructor(props) {

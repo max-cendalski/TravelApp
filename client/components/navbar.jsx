@@ -2,7 +2,9 @@ import React from "react";
 import SignUpForm from "../components/sign-up-form";
 import SignInForm from "../components/sign-in-form";
 import { useContext,useState, useEffect } from "react";
-import AppContext from "../lib/app-context";
+//import AppContext from "../lib/app-context";
+
+
 
 const Navbar = () => {
   const [searchBox, setSearchBox] = useState("");
@@ -11,6 +13,9 @@ const Navbar = () => {
   const [signUpForm, setSignUpForm] = useState(false);
   const [signInForm, setSignInForm] = useState(false);
   const [searchArray, setSearchArray] = useState([]);
+
+
+  const logout = useContext(AppDataContext);
 
 
   const handleChange = (event) => {
@@ -96,8 +101,9 @@ const Navbar = () => {
   const handleMyReviewsButton = () => {
     window.location.hash = "my-reviews";
   };
+  console.log("logoutinfo", logoutInfo);
 
-  console.log('appcontext',AppContext)
+  console.log('appdataconte',AppDataContext)
   return (
     <article className="navbar-container row" onMouseLeave={handleOnMouseLeave}>
       <section className="navbar-search-box-container">
@@ -212,7 +218,7 @@ const Navbar = () => {
           </section>
         )}
       </article>
-      <article className={AppContext.logoutInfo}>
+      <article className={logoutInfo}>
         <h2>Are you sure you want to logout?</h2>
         <button
           onClick={AppContext.handleConfirmLogout}
@@ -233,7 +239,7 @@ const Navbar = () => {
 
 
 
-Navbar.contextType = AppContext;
+//Navbar.contextType = AppContext;
 
 export default Navbar;
 
