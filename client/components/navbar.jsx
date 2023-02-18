@@ -3,7 +3,7 @@ import SignUpForm from "../components/sign-up-form";
 import SignInForm from "../components/sign-in-form";
 import { useContext, useState, useEffect } from "react";
 import AppContext from "../lib/app-context";
-
+import {Context} from "../components/context";
 
 
 const Navbar = () => {
@@ -14,6 +14,9 @@ const Navbar = () => {
   const [signInForm, setSignInForm] = useState(false);
   const [searchArray, setSearchArray] = useState([]);
 
+  const dataFromContext = useContext(Context)
+
+  console.log('dataFrom',dataFromContext)
 
   const handleChange = (event) => {
     event.preventDefault();

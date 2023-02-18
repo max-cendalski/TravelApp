@@ -1,11 +1,13 @@
 import React, {useState, useEffect } from 'react';
 import Navbar from '../components/navbar';
 import { Carousel } from 'react-responsive-carousel';
+import {createContext, useContext} from 'react';
+import {Context} from '../components/context';
 
 const Home = () => {
   const [imagesCarousel, setImagesCarousel] = useState([]);
   const [countriesCarousel, setCountriesCarousel] = useState([]);
-
+  const testData = createContext(null)
 
   useEffect(() => {
     fetch('/api/images', {
@@ -29,10 +31,14 @@ const Home = () => {
       .catch(error => error(console.error('Error', error)));
   }, []);
 
+  const myValue = 'whee'
   if (!imagesCarousel) return null;
   return (
     <article>
-      <Navbar />
+      <Context.Provider value={myValue}>
+        <Navbar />
+      </Context.Provider>
+
       <Carousel
         autoPlay={true}
         interval={4500}
@@ -72,7 +78,6 @@ const Home = () => {
           <p className="carousel-country-name">{countriesCarousel[6]}</p>
           <img className="photo" src={imagesCarousel[6]} />
         </div>
-
       </Carousel>
     </article>
   );

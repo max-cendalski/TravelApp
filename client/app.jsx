@@ -24,7 +24,7 @@ const App = () => {
   const [logoutInfo, setLogoutInfo] = useState("hidden");
   const [locations, setLocations] = useState([]);
 
-  const AppData = createContext();
+  const AppData = createContext(null);
 
   useEffect(() => {
     fetch("api/locations", {
@@ -113,15 +113,17 @@ const App = () => {
   };
 
   return (
-    <AppData.Provider value='whee'>
+    <AppData.Provider value={contextData}>
       <Home />
     </AppData.Provider>
   );
 };
 
-export default GoogleApiWrapper({
+export default App;
+
+/* export default GoogleApiWrapper({
   apiKey: process.env.GOOGLE_MAPS_API_KEY,
-})(App);
+})(App); */
 
 /* export class App extends React.Component {
   constructor(props) {
