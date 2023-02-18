@@ -1,23 +1,22 @@
-import React, {useState, useEffect } from 'react';
-import Navbar from '../components/navbar';
-import { Carousel } from 'react-responsive-carousel';
-import {createContext, useContext} from 'react';
-import {Context} from '../components/context';
+import React, { useState, useEffect } from "react";
+import Navbar from "../components/navbar";
+import { Carousel } from "react-responsive-carousel";
+import { createContext, useContext } from "react";
 
 const Home = () => {
   const [imagesCarousel, setImagesCarousel] = useState([]);
   const [countriesCarousel, setCountriesCarousel] = useState([]);
-  const testData = createContext(null)
+  const testData = createContext(null);
 
   useEffect(() => {
-    fetch('/api/images', {
-      method: 'GET',
+    fetch("/api/images", {
+      method: "GET",
       headers: {
-        'Content-type': 'application/json'
-      }
+        "Content-type": "application/json",
+      },
     })
-      .then(response => response.json())
-      .then(result => {
+      .then((response) => response.json())
+      .then((result) => {
         const images = [];
         const countries = [];
 
@@ -28,17 +27,13 @@ const Home = () => {
         setImagesCarousel(images);
         setCountriesCarousel(countries);
       })
-      .catch(error => error(console.error('Error', error)));
+      .catch((error) => error(console.error("Error", error)));
   }, []);
 
-  const myValue = 'whee'
   if (!imagesCarousel) return null;
   return (
     <article>
-      <Context.Provider value={myValue}>
-        <Navbar />
-      </Context.Provider>
-
+      <Navbar />
       <Carousel
         autoPlay={true}
         interval={4500}
