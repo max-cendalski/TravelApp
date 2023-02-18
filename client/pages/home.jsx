@@ -6,7 +6,6 @@ import { createContext, useContext } from "react";
 const Home = () => {
   const [imagesCarousel, setImagesCarousel] = useState([]);
   const [countriesCarousel, setCountriesCarousel] = useState([]);
-  const testData = createContext(null);
 
   useEffect(() => {
     fetch("/api/images", {

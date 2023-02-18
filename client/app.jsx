@@ -11,8 +11,7 @@ import TripDetails from "./pages/trip-details.jsx";
 import ReviewForm from "./pages/review-form.jsx";
 import Reviews from "./pages/reviews";
 import EditTrip from "./pages/edit-trip";
-
-import Navbar from "./components/navbar";
+import {AppDataContext} from "./components/context";
 
 import { GoogleApiWrapper } from "google-maps-react";
 import { useState, useMemo, useEffect, createContext } from "react";
@@ -113,9 +112,9 @@ const App = () => {
   };
 
   return (
-    <AppData.Provider value={contextData}>
+    <AppDataContext.Provider value={contextData}>
       <Home />
-    </AppData.Provider>
+    </AppDataContext.Provider>
   );
 };
 

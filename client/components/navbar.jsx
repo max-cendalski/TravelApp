@@ -3,7 +3,7 @@ import SignUpForm from "../components/sign-up-form";
 import SignInForm from "../components/sign-in-form";
 import { useContext, useState, useEffect } from "react";
 import AppContext from "../lib/app-context";
-import {Context} from "../components/context";
+import {AppDataContext} from "../components/context";
 
 
 const Navbar = () => {
@@ -14,9 +14,7 @@ const Navbar = () => {
   const [signInForm, setSignInForm] = useState(false);
   const [searchArray, setSearchArray] = useState([]);
 
-  const dataFromContext = useContext(Context)
-
-  console.log('dataFrom',dataFromContext)
+ const myData = useContext(AppDataContext)
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -26,7 +24,7 @@ const Navbar = () => {
     if (letter === "") {
       setSearchArray([]);
     } else {
-      AppContext.locations.forEach((location) => {
+      myData.locations.forEach((location) => {
         if (
           location.country.includes(letter.toLowerCase()) ||
           location.city.includes(letter.toLowerCase)
