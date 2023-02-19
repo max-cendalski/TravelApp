@@ -173,19 +173,6 @@ const Navbar = () => {
               Sign In
             </li>
           )}
-
-
-
-
-
-
-
-
-
-
-
-
-
           {navbarContextData.user && (
             <li className="my-reviews-link" onClick={handleMyReviewsButton}>
               My Reviews
@@ -246,7 +233,6 @@ const Navbar = () => {
   );
 };
 
-//Navbar.contextType = AppContext;
 
 export default Navbar;
 
