@@ -11,7 +11,7 @@ import TripDetails from "./pages/trip-details.jsx";
 import ReviewForm from "./pages/review-form.jsx";
 import Reviews from "./pages/reviews";
 import EditTrip from "./pages/edit-trip";
-import {AppDataContext} from "./components/context";
+import { AppDataContext } from "./components/context";
 
 import { GoogleApiWrapper } from "google-maps-react";
 import { useState, useMemo, useEffect, createContext } from "react";
@@ -19,7 +19,7 @@ import { useState, useMemo, useEffect, createContext } from "react";
 const App = () => {
   const [user, setUser] = useState(null);
   const [isAuthorize, setIsAuthorize] = useState(false);
-  const [route, setRoute] = useState(parseRoute(window.location.hash));
+  const [route, setRoute] = useState("");
   const [logoutInfo, setLogoutInfo] = useState("hidden");
   const [locations, setLocations] = useState([]);
 
@@ -44,6 +44,7 @@ const App = () => {
     const user = token ? decodeToken(token) : null;
     setUser({ user });
     setIsAuthorize(true);
+    setRoute(parseRoute(window.location.hash));
   }, []);
 
   const handleSignIn = (result) => {
@@ -57,7 +58,6 @@ const App = () => {
   };
 
   const handleConfirmLogout = (event) => {
-    const { route } = route;
     route.path = "";
     window.localStorage.removeItem("TravelApp-token");
     setUser(null);
@@ -113,16 +113,14 @@ const App = () => {
 
   return (
     <AppDataContext.Provider value={contextData}>
-      <Home />
+      {renderPage()}
     </AppDataContext.Provider>
   );
 };
 
-export default App;
-
-/* export default GoogleApiWrapper({
+export default GoogleApiWrapper({
   apiKey: process.env.GOOGLE_MAPS_API_KEY,
-})(App); */
+})(App);
 
 /* export class App extends React.Component {
   constructor(props) {

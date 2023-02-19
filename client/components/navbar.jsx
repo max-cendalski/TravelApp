@@ -2,7 +2,6 @@ import React from 'react';
 import SignUpForm from "../components/sign-up-form";
 import SignInForm from "../components/sign-in-form";
 import { useContext, useState, useEffect } from "react";
-import AppContext from "../lib/app-context";
 import {AppDataContext} from "../components/context";
 
 
@@ -14,7 +13,7 @@ const Navbar = () => {
   const [signInForm, setSignInForm] = useState(false);
   const [searchArray, setSearchArray] = useState([]);
 
- const myData = useContext(AppDataContext)
+ const navbarContextData = useContext(AppDataContext)
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -24,17 +23,14 @@ const Navbar = () => {
     if (letter === "") {
       setSearchArray([]);
     } else {
-      myData.locations.forEach((location) => {
+      navbarContextData.locations.forEach((location) => {
         if (
           location.country.includes(letter.toLowerCase()) ||
           location.city.includes(letter.toLowerCase)
         ) {
           locationsArray.push(location);
           const filteredLocations = locationsArray.filter(
-            (location, index, array) =>
-              index ===
-              array.findIndex(
-                (item) =>
+            (location, index, array) =>index ===array.findIndex((item) =>
                   item.country === location.country &&
                   item.city === location.city
               )
@@ -82,9 +78,13 @@ const Navbar = () => {
   };
 
   const handleSignInButton = () => {
+    console.log('whe')
     setModal("modal-visible");
     setSignInForm(!signInForm);
   };
+
+
+
 
   // THIS NEEDS TO BE FIXED
   const handleLoginIcon = () => {
@@ -153,9 +153,9 @@ const Navbar = () => {
         className="navbar-login-icon-section"
         onMouseEnter={handleOnMouseEnter}
       >
-        {AppContext.user && (
+        {navbarContextData.user && (
           <p className="navbar-name-paragraph">
-            Hello, {AppContext.user.username}
+            Hello, {navbarContextData.user.username}
           </p>
         )}
         <i className="fas fa-user icon-class" />
@@ -163,32 +163,45 @@ const Navbar = () => {
 
       <section className={visible}>
         <ul className="drop-down-list">
-          {!AppContext.user && (
+          {!navbarContextData.user && (
             <li className="sign-up-button" onClick={handleSignUp}>
               Sign Up
             </li>
           )}
-          {!AppContext.user && (
+          {!navbarContextData.user && (
             <li className="sign-in-button" onClick={handleSignInButton}>
               Sign In
             </li>
           )}
-          {AppContext.user && (
+
+
+
+
+
+
+
+
+
+
+
+
+
+          {navbarContextData.user && (
             <li className="my-reviews-link" onClick={handleMyReviewsButton}>
               My Reviews
             </li>
           )}
-          {AppContext.user && (
+          {navbarContextData.user && (
             <li className="write-review-button">
               <a className="write-review-link" href="#review-form">
                 Write Review
               </a>
             </li>
           )}
-          {AppContext.user && (
+          {navbarContextData.user && (
             <li
               className="logoutButton"
-              onClick={AppContext.handleLogoutWindow}
+              onClick={navbarContextData.handleLogoutWindow}
             >
               Logout
             </li>
@@ -201,7 +214,7 @@ const Navbar = () => {
           <section className="row">
             <SignUpForm
               handleSwitchingModal={handleSwitchingModal}
-              handleIsAuthorizing={AppContext.handleIsAuthorizing}
+              handleIsAuthorizing={navbarContextData.handleIsAuthorizing}
             />
           </section>
         )}
@@ -209,21 +222,21 @@ const Navbar = () => {
           <section className="row">
             <SignInForm
               handleSwitchingModal={handleSwitchingModal}
-              handleIsAuthorizing={AppContext.handleIsAuthorizing}
+              handleIsAuthorizing={navbarContextData.handleIsAuthorizing}
             />
           </section>
         )}
       </article>
-      <article className={AppContext.logoutInfo}>
+      <article className={navbarContextData.logoutInfo}>
         <h2>Are you sure you want to logout?</h2>
         <button
-          onClick={AppContext.handleConfirmLogout}
+          onClick={navbarContextData.handleConfirmLogout}
           className="app-button background-orange float-right"
         >
           Confirm
         </button>
         <button
-          onClick={AppContext.handleCancelLogout}
+          onClick={navbarContextData.handleCancelLogout}
           className="app-button background-red"
         >
           Cancel
