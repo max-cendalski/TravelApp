@@ -37,19 +37,87 @@ const ReviewScore = (props) => {
           setAverageScore(totalScore)
           setScore(result)
         }
-
       });
-
-
   })
 
-
-  return (
-
-  )
+   const handleAddScore = (e) => {
+    e.preventDefault();
+    const score = {
+      userId: props.user,
+      tripId: props.tripId,
+      score: state.tripScore
+    };
+     const token = window.localStorage.getItem('TravelApp-token');
+    fetch(`/api/trips/score/${this.props.tripId}`, {
+      method: 'POST',
+      headers: {
+        'x-access-token': token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(score)
+    })
+      .then(response => response.json())
+      .then(result => {
+        const scoreArray = [...scoreData];
+        scoreArray.unshift(result.score);
+        let totalScore = 0;
+        if (scoreArray.length === 1) {
+          totalScore = scoreArray[0].score;
+        }
+        if (scoreArray.length > 1) {
+          for (let i = 0; i < scoreArray.length; i++) {
+            totalScore += scoreArray[i].score;
+          }
+          totalScore = Math.floor(totalScore / scoreArray.length);
+        }
+        setAverageScore(totalScore)
+        setUserScore(true)
+        setScore(scoreArray)
+      })
+    }
+    //ERROR?
+const handleChangeScore = (e)=> {
+  console.log('ev.',e.target.value)
 }
 
-export default class ReviewScore extends React.Component {
+  const handleScoreChange = (e) => {
+    this.setState({
+      tripScore: event.target.value
+    });
+  }
+  return (
+    <section className="review-score">
+      <h2>Review Score :</h2>
+      {!userScore ? (
+        <form onSubmit={handleAddScore}>
+          <p>
+            <strong>{averageScore} / 100</strong>
+          </p>
+          <p>
+            <input
+              onChange={handleScoreChange}
+              className="review-score-input"
+              type="number"
+              name="score"
+              max="100"
+            ></input>
+          </p>
+          <button type="submit" className="app-button">
+            Add Score
+          </button>
+        </form>
+      ) : (
+        <p>
+          <strong>{averageScore} / 100</strong>
+        </p>
+      )}
+    </section>
+  );
+}
+
+export default ReviewScore;
+
+/* export default class ReviewScore extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -159,3 +227,4 @@ export default class ReviewScore extends React.Component {
     );
   }
 }
+ */
