@@ -42,7 +42,7 @@ const App = () => {
     });
     const token = window.localStorage.getItem("TravelApp-token");
     const user = token ? decodeToken(token) : null;
-    setUser({ user });
+    setUser( user );
     setIsAuthorize(true);
     setRoute(parseRoute(window.location.hash));
   }, []);
@@ -50,7 +50,7 @@ const App = () => {
   const handleSignIn = (result) => {
     const { user, token } = result;
     window.localStorage.setItem("TravelApp-token", token);
-    setUser({ user });
+    setUser(user);
   };
 
   const handleLogoutWindow = () => {
