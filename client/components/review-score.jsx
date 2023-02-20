@@ -1,4 +1,54 @@
-import React from 'react';
+import {useState, useEffect} from 'react';
+
+
+const ReviewScore = (props) => {
+  const [scoreData, setScore] = useState([])
+  const [averageScore,setAverageScore] = useState(0)
+  const [userScore, setUserScore] = false;
+
+  useEffect(()=> {
+    const token = window.localStorage.getItem('TravelApp-token');
+    fetch(`/api/trips/score/${this.props.tripId}`, {
+      method: 'GET',
+      headers: {
+        'X-Access-Token': token,
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(result => {
+        if (props.loggedUsername === props.reviewAuthorName || result.some(item => item.userId === props.loggedUserId)) {
+          this.setState({
+            userScored: true
+          });
+        }
+        let totalScore = 0;
+        if (result.length === 0) return;
+        if (result.length > 1) {
+          for (let i = 0; i < result.length; i++) {
+            totalScore += result[i].score;
+          }
+          totalScore = Math.floor(totalScore / result.length);
+          setAverageScore(totalScore)
+          setUserScore(true)
+          setScore(result)
+        } else {
+          totalScore = result[0].score;
+          setAverageScore(totalScore)
+          setScore(result)
+        }
+
+      });
+
+
+  })
+
+
+  return (
+
+  )
+}
+
 export default class ReviewScore extends React.Component {
   constructor(props) {
     super(props);
