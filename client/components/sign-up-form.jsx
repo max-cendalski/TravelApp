@@ -25,7 +25,6 @@ const SignUpForm = (props) => {
       username: newUser.username.toLowerCase(),
       password: newUser.password
     };
-    console.log('userv',user)
      fetch("/api/auth/sign-up", {
       method: "POST",
       headers: {
