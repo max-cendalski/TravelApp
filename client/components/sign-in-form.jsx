@@ -22,9 +22,7 @@ const SignInForm = (props) => {
   };
 
   const handleSubmit = (e) => {
-
     e.preventDefault();
-    console.log('props:',props)
     const user = { username: userInfo.username, password: userInfo.password };
 
     fetch("/api/auth/sign-in", {

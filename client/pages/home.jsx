@@ -35,12 +35,12 @@ const Home = () => {
       <Navbar />
       <Carousel
         autoPlay={true}
-        interval={4500}
+        interval={5000}
         infiniteLoop={true}
         showThumbs={false}
         showIndicators={true}
         showStatus={false}
-        transitionTime={1600}
+        transitionTime={1700}
         dynamicHeight={false}
         swipeable={true}
       >
