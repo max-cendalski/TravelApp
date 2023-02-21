@@ -1,5 +1,123 @@
-import React from 'react';
-export default class ReviewScore extends React.Component {
+import {useState, useEffect} from 'react';
+
+
+const ReviewScore = (props) => {
+  const [scoreData, setScore] = useState([])
+  const [averageScore,setAverageScore] = useState(0)
+  const [userScore, setUserScore] = false;
+
+  useEffect(()=> {
+    const token = window.localStorage.getItem('TravelApp-token');
+    fetch(`/api/trips/score/${this.props.tripId}`, {
+      method: 'GET',
+      headers: {
+        'X-Access-Token': token,
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(result => {
+        if (props.loggedUsername === props.reviewAuthorName || result.some(item => item.userId === props.loggedUserId)) {
+          this.setState({
+            userScored: true
+          });
+        }
+        let totalScore = 0;
+        if (result.length === 0) return;
+        if (result.length > 1) {
+          for (let i = 0; i < result.length; i++) {
+            totalScore += result[i].score;
+          }
+          totalScore = Math.floor(totalScore / result.length);
+          setAverageScore(totalScore)
+          setUserScore(true)
+          setScore(result)
+        } else {
+          totalScore = result[0].score;
+          setAverageScore(totalScore)
+          setScore(result)
+        }
+      });
+  })
+
+   const handleAddScore = (e) => {
+    e.preventDefault();
+    const score = {
+      userId: props.user,
+      tripId: props.tripId,
+      score: state.tripScore
+    };
+     const token = window.localStorage.getItem('TravelApp-token');
+    fetch(`/api/trips/score/${this.props.tripId}`, {
+      method: 'POST',
+      headers: {
+        'x-access-token': token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(score)
+    })
+      .then(response => response.json())
+      .then(result => {
+        const scoreArray = [...scoreData];
+        scoreArray.unshift(result.score);
+        let totalScore = 0;
+        if (scoreArray.length === 1) {
+          totalScore = scoreArray[0].score;
+        }
+        if (scoreArray.length > 1) {
+          for (let i = 0; i < scoreArray.length; i++) {
+            totalScore += scoreArray[i].score;
+          }
+          totalScore = Math.floor(totalScore / scoreArray.length);
+        }
+        setAverageScore(totalScore)
+        setUserScore(true)
+        setScore(scoreArray)
+      })
+    }
+    //ERROR?
+const handleChangeScore = (e)=> {
+  console.log('ev.',e.target.value)
+}
+
+  const handleScoreChange = (e) => {
+    this.setState({
+      tripScore: event.target.value
+    });
+  }
+  return (
+    <section className="review-score">
+      <h2>Review Score :</h2>
+      {!userScore ? (
+        <form onSubmit={handleAddScore}>
+          <p>
+            <strong>{averageScore} / 100</strong>
+          </p>
+          <p>
+            <input
+              onChange={handleScoreChange}
+              className="review-score-input"
+              type="number"
+              name="score"
+              max="100"
+            ></input>
+          </p>
+          <button type="submit" className="app-button">
+            Add Score
+          </button>
+        </form>
+      ) : (
+        <p>
+          <strong>{averageScore} / 100</strong>
+        </p>
+      )}
+    </section>
+  );
+}
+
+export default ReviewScore;
+
+/* export default class ReviewScore extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -109,3 +227,4 @@ export default class ReviewScore extends React.Component {
     );
   }
 }
+ */
