@@ -1,6 +1,58 @@
 import React from 'react';
+import { useState, useE
+ } from 'react';
 
-export default class EditTrip extends React.Component {
+
+ const EditTrip = (props) => {
+
+  const [tripData, setTripData] = useState({
+      city: '',
+      thingsTodoScore: 0,
+      foodScore: 0,
+      peopleScore: 0,
+      transportScore: 0,
+      safetyScore: 0,
+      review: ''
+  })
+  useEffect(()=> {
+    const token = window.localStorage.getItem('TravelApp-token');
+    fetch(`/api/trips/${this.props.tripId}`, {
+      method: 'GET',
+      headers: {
+        'x-access-token': token,
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(trip => {
+        setTripData({trip})
+      })
+      .then(update => {
+        setTripData({
+          city: tripData.city,
+          //CHECK LATER
+          tripId: tripData.tripId,
+          mainPhotoUrl: tripData.mainPhotoUrl,
+          thingsTodoScore: tripData.thingsTodoScore,
+          foodScore: tripData.foodScore,
+          peopleScore: tripData.peopleScore,
+          transportScore: tripData.transportScore,
+          safetyScore: tripData.safetyScore,
+          review: tripData.review
+        })
+      });
+  })
+
+
+
+  return (
+      <article>What</article>
+
+  )
+ }
+
+ export default EditTrip;
+/* export default class EditTrip extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -187,3 +239,4 @@ export default class EditTrip extends React.Component {
     );
   }
 }
+ */
