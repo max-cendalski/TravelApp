@@ -1,6 +1,191 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-export default class EditTrip extends React.Component {
+const EditTrip = props => {
+  const [trip, setTrip] = useState(null);
+  const [tripToEdit, setTripToEdit] = useState({
+    city: '',
+    thingsTodoScore: 0,
+    foodScore: 0,
+    peopleScore: 0,
+    transportScore: 0,
+    safetyScore: 0,
+    review: ''
+  });
+
+  useEffect(() => {
+    const token = window.localStorage.getItem('TravelApp-token');
+    fetch(`/api/trips/${this.props.tripId}`, {
+      method: 'GET',
+      headers: {
+        'x-access-token': token,
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(trip => {
+        setTrip({ trip });
+      })
+      .then(update => {
+        setTripToEdit({
+          city: trip.city,
+          tripId: trip.tripId,
+          mainPhotoUrl: trip.mainPhotoUrl,
+          thingsTodoScore: trip.thingsTodoScore,
+          foodScore: trip.foodScore,
+          peopleScore: trip.peopleScore,
+          transportScore: trip.transportScore,
+          safetyScore: trip.safetyScore,
+          review: trip.review
+        });
+      });
+  });
+
+  const handleSubmitForm = e => {
+    e.preventDefault();
+    const token = window.localStorage.getItem('TravelApp-token');
+    const tripId = Number(props.tripId);
+    const editedTrip = {
+      city: tripToEdit.city,
+      tripId: props.tripId,
+      mainPhotoUrl: tripToEdit.mainPhotoUrl,
+      thingsTodoScore: tripToEdit.thingsTodoScore,
+      foodScore: tripToEdit.foodScore,
+      peopleScore: tripToEdit.peopleScore,
+      transportScore: tripToEdit.transportScore,
+      safetyScore: tripToEdit.safetyScore,
+      review: tripToEdit.review
+    };
+
+    fetch(`/api/edit/trip/${tripId}`, {
+      method: 'PATCH',
+      headers: {
+        'x-access-token': token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(editedTrip)
+    })
+      .then(response => response.json())
+      .then(result => {
+        result.country = trip.country;
+        result.username = trip.username;
+        setTrip({ result });
+        window.location.hash = `#trips?tripId=${this.props.tripId}`;
+      });
+  };
+
+  const handleChange = e => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setTripToEdit(prevData => ({
+      ...prevData,
+      [name]: value
+    }));
+  };
+
+  const handleCancelForm = () => {
+    window.location.hash = `#trips?tripId=${this.props.tripId}`;
+  };
+  if (!trip) return null;
+
+  return (
+    <article id="edit-trip" className="row horizontal">
+      <section className="image-container column-width50">
+        <img className="photo" src={trip.mainPhotoUrl} alt={trip.city}></img>
+      </section>
+      <form onSubmit={handleSubmitForm} className="edit-form column-width50">
+        <section className="column-width50">
+          <p className="label-input-container">
+            <label className="edit-score-label">City</label>
+            <input
+              onChange={handleChange}
+              className="edit-form-text-input float-right"
+              type="text"
+              defaultValue={trip.city}
+            ></input>
+          </p>
+          <p className="label-input-container">
+            <label className="edit-score-label">Things to Do</label>
+            <input
+              onChange={handleChange}
+              className="edit-form-text-input float-right"
+              type="number"
+              max="100"
+              defaultValue={trip.thingsTodoScore}
+              required
+            ></input>
+          </p>
+          <p className="label-input-container">
+            <label className="edit-score-label">Food</label>
+            <input
+              onChange={handleChange}
+              className="edit-form-text-input float-right"
+              type="number"
+              max="100"
+              defaultValue={trip.foodScore}
+              required
+            ></input>
+          </p>
+          <p className="label-input-container">
+            <label className="edit-score-label">People</label>
+            <input
+              onChange={handleChange}
+              className="edit-form-text-input float-right"
+              type="number"
+              max="100"
+              defaultValue={trip.peopleScore}
+              required
+            ></input>
+          </p>
+          <p className="label-input-container">
+            <label className="edit-score-label">Transport</label>
+            <input
+              onChange={handleChange}
+              className="edit-form-text-input float-right"
+              type="number"
+              max="100"
+              defaultValue={trip.transportScore}
+              required
+            ></input>
+          </p>
+          <p className="label-input-container">
+            <label className="edit-score-label">Safety</label>
+            <input
+              onChange={handleChange}
+              className="edit-form-text-input float-right"
+              type="number"
+              max="100"
+              defaultValue={trip.safetyScore}
+              required
+            ></input>
+          </p>
+        </section>
+        <textarea
+          onChange={handleChange}
+          defaultValue={trip.review}
+          className="form-textarea"
+          required
+        ></textarea>
+        <button
+          type="submit"
+          className="app-button background-orange float-right"
+        >
+          Submit
+        </button>
+        <button
+          type="button"
+          onClick={handleCancelForm}
+          className="app-button background-red"
+        >
+          Cancel
+        </button>
+      </form>
+    </article>
+  );
+};
+
+export default EditTrip;
+/* export default class EditTrip extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -187,3 +372,4 @@ export default class EditTrip extends React.Component {
     );
   }
 }
+ */
