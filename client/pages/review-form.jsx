@@ -1,8 +1,64 @@
 import React from 'react';
+import {useState} from 'react';
 import Navbar from '../components/navbar';
-import PlacesAutocomplete from 'react-places-autocomplete';
+import PlacesAutocomplete from 'react-places-autocomplete'
 
-export default class ReviewForm extends React.Component {
+
+
+
+
+const ReviewForm = () => {
+const [form, setForm] = useState({
+    country: '',
+      address: '',
+      city: '',
+      review: '',
+      thingsTodoScore: 0,
+      foodScore: 0,
+      peopleScore: 0,
+      transportScore: 0,
+      safetyScore: 0
+})
+
+  handleSubmit(e) {
+    e.preventDefault();
+    const formData = new FormData();
+    const token = window.localStorage.getItem('TravelApp-token');
+    formData.append('country', form.country);
+    formData.append('city',  form.city);
+    formData.append('image', this.fileInputRef.current.files[0]);
+    formData.append('review',  form.review);
+    formData.append('thingsTodoScore',  form.thingsTodoScore);
+    formData.append('foodScore',  form.foodScore);
+    formData.append('peopleScore',  form.peopleScore);
+    formData.append('transportScore', form.transportScore);
+    formData.append('safetyScore',  form.safetyScore);
+
+    fetch('/api/trips', {
+      method: 'POST',
+      headers: {
+        'x-access-token': token
+      },
+      body: formData
+    })
+      .then(response => response.json())
+      .then(result => {
+        window.location.hash = '#';
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }
+
+
+  return (
+
+
+  )
+}
+export default ReviewForm;
+
+/* export default class ReviewForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -211,3 +267,4 @@ export default class ReviewForm extends React.Component {
     );
   }
 }
+ */
