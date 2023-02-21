@@ -22,7 +22,7 @@ const ReviewForm = () => {
     e.preventDefault();
     const formData = new FormData();
     const token = window.localStorage.getItem("TravelApp-token");
-    const fileInputRef = React.createRef()
+    //const fileInputRef = React.createRef()
     formData.append("country", form.country);
     formData.append("city", form.city);
     //formData.append("image", fileInputRef.current.files[0]);
@@ -42,13 +42,12 @@ const ReviewForm = () => {
     })
       .then((response) => response.json())
       .then((result) => {
-        console.log('resul',result)
+        console.log('result',result)
         window.location.hash = "#";
       })
       .catch((error) => {
         console.error("Error:", error);
       });
-      console.log('form',form)
   };
 
   const handleChange = (address) => {
@@ -63,14 +62,9 @@ const ReviewForm = () => {
     });
   };
 
-/*   const handleTextarea = (e) => {
-    setForm({ review: e.target.value });
-  };
- */
   const handleChangeFormData = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    console.log('namevalue--',name,value)
     setForm((prevData) => ({
       ...prevData,
       [name]: value,
@@ -150,6 +144,7 @@ const ReviewForm = () => {
                 max="100"
                 type="number"
                 required
+                name="thingsTodoScore"
               ></input>
               <label className="review-score-label">Things To Do</label>
             </p>
@@ -160,6 +155,7 @@ const ReviewForm = () => {
                 max="100"
                 type="number"
                 required
+                name="foodScore"
               ></input>
               <label className="review-score-label">Food</label>
             </p>
@@ -170,6 +166,7 @@ const ReviewForm = () => {
                 max="100"
                 type="number"
                 required
+                name= "peopleScore"
               ></input>
               <label className="review-score-label">People</label>
             </p>
@@ -180,6 +177,7 @@ const ReviewForm = () => {
                 max="100"
                 type="number"
                 required
+                name="transportScore"
               ></input>
               <label className="review-score-label">Transport</label>
             </p>
@@ -191,6 +189,7 @@ const ReviewForm = () => {
                 max="100"
                 type="number"
                 required
+                name="safetyScore"
               ></input>
               <label className="review-score-label">Safety</label>
             </p>
