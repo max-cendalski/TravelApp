@@ -1,17 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../components/navbar';
 
-export default class SearchResults extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = ({
-      countries: [],
-      isLoading: true
-    });
-  }
+const SearchResults = props => {
+  const [countries, setCountries] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  componentDidMount() {
-    fetch(`/api/countries/${this.props.country}`, {
+  useEffect(() => {
+    fetch(`/api/countries/${props.country}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -19,71 +14,53 @@ export default class SearchResults extends React.Component {
     })
       .then(response => response.json())
       .then(result => {
-        this.setState({
-          countries: result,
-          isLoading: false
-        });
+        setCountries(result);
+        setIsLoading(false);
       })
       .catch(error => error(console.error('Error', error)));
-  }
+  }, [props]);
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.country === this.props.country) {
-      return;
-    }
-    fetch(`/api/countries/${this.props.country}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => response.json())
-      .then(result => {
-        this.setState({
-          countries: result
-        });
-      })
-      .catch(error => error(console.error('Error', error)));
-
-  }
-
-  render() {
-    if (this.state.isLoading === true) return null;
+  function Trip(props) {
+    const { tripId, country, city, username, mainPhotoUrl } = props.trip;
     return (
-     <article>
-      {(this.state.countries.length > 0)
-        ? (
-            <article>
-              <Navbar />
-              <section className='list-flex'>
-                {this.state.countries.map(trip =>
-                  <div className="image-item column-width50" key={trip.tripId}>
-                    <Trip trip={trip} />
-                  </div>)
-                }
-              </section>
-            </article>
-          )
-        : (
-          <article>
-            <Navbar />
-            <h1 className='nothing-found-msg'>Nothing Found!</h1>
-          </article>
-          )}
-    </article>
+      <a href={`#trips?tripId=${tripId}`}>
+        <section className="text-container">
+          <p className="country-name">
+            {country}-<span className="city-name">{city}</span>
+          </p>
+          <span className="city-name">@{username}</span>
+        </section>
+        <section className="image-container">
+          <img className="photo" src={mainPhotoUrl}></img>
+        </section>
+      </a>
     );
   }
-}
 
-function Trip(props) {
-  const { tripId, country, city, username, mainPhotoUrl } = props.trip;
+  if (isLoading) return null;
   return (
-    <a
-      href={`#trips?tripId=${tripId}`}>
-      <section className="text-container">
-      <p className='country-name'>{country}-<span className='city-name'>{city}</span></p>
-      <span className='city-name'>@{username}</span></section>
-      <section className='image-container'><img className="photo" src={mainPhotoUrl}></img></section>
-    </a>
+    <article>
+      {countries
+        ? (
+        <article>
+          <Navbar />
+          <section className="list-flex">
+            {countries.map(trip => (
+              <div className="image-item column-width50" key={trip.tripId}>
+                <Trip trip={trip} />
+              </div>
+            ))}
+          </section>
+        </article>
+          )
+        : (
+        <article>
+          <Navbar />
+          <h1 className="nothing-found-msg">Nothing Found!</h1>
+        </article>
+          )}
+    </article>
   );
-}
+};
+
+export default SearchResults;
