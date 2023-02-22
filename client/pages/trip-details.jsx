@@ -6,7 +6,7 @@ import ReviewScore from "../components/review-score";
 import MapComponent from "../components/map";
 import { AppDataContext } from "../components/context";
 
-const TripDetails = () => {
+const TripDetails = (props) => {
   const tripDetailsContext = useContext(AppDataContext);
   const [trip, setTrip] = useState(null);
   const [classes, setClasses] = useState({
@@ -16,7 +16,7 @@ const TripDetails = () => {
     addCommentButton: "app-button background-orange float-right",
     commentForm: "hidden",
   });
-  const [detailScores, setDetailScores] = useState({
+  const [details, setDetails] = useState({
     city: "",
     country: "",
     thingsTodoScore: 0,
@@ -25,14 +25,37 @@ const TripDetails = () => {
     transportScore: 0,
     safetyScore: 0,
     review: "",
-     comment: '',
-    comments: []
-
+    comment: "",
+    comments: [],
   });
-
   const [err, setErr] = useState(false);
   const [position, setPosition] = useState(null);
   const [redirect, setRedirect] = useState(false);
+
+  useEffect(()=> {
+       const token = window.localStorage.getItem("TravelApp-token");
+       Promise.all([
+         fetch(`/api/trips/${props.tripId}`, {
+           method: "GET",
+           headers: {
+             "x-access-token": token,
+             "Content-Type": "application/json",
+           },
+         })
+           .then((response) => response.json())
+           .then((trip) => setTrip({ trip })),
+         fetch(`/api/comments/${props.tripId}`, {
+           method: "GET",
+           headers: {
+             "x-access-token": token,
+             "Content-Type": "application/json",
+           },
+         })
+           .then((response) => response.json())
+           .then((comments) => setDetails({comments})),
+       ]).catch((error) => console.error("Error", error));
+
+  })
 
   return <article>whe</article>;
 };
