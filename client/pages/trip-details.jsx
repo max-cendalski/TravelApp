@@ -28,9 +28,9 @@ const TripDetails = (props) => {
     comment: "",
     comments: [],
   });
-  const [err, setErr] = useState(false);
-  const [position, setPosition] = useState(null);
-  const [redirect, setRedirect] = useState(false);
+  //const [err, setErr] = useState(false);
+  //const [position, setPosition] = useState(null);
+  //const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
     const token = window.localStorage.getItem("TravelApp-token");
@@ -43,7 +43,7 @@ const TripDetails = (props) => {
         },
       })
         .then((response) => response.json())
-        .then((trip) => setTrip(trip )),
+        .then((trip) => setTrip(trip)),
       fetch(`/api/comments/${props.tripId}`, {
         method: "GET",
         headers: {
@@ -90,12 +90,153 @@ const TripDetails = (props) => {
         result.username = trip.username;
 
         setTrip(result);
-        setClasses((editReviewContainer = "hidden"));
+        setClasses({ editReviewContainer: "hidden" });
         //   reviewContainer: "container",
       });
   };
 
-  return <article>whe</article>;
+  const handleCommentForm = (e) => {
+    e.preventDefault();
+    const content = {
+      content: comment,
+    };
+    const token = window.localStorage.getItem("TravelApp-token");
+    fetch(`/api/trips/comments/${props.tripId}`, {
+      method: "POST",
+      headers: {
+        "x-access-token": token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(content),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        result.comment.username = tripDetailsContext.user.username;
+        const comments = [...comments];
+        comments.unshift(result.comment);
+
+        setDetails({ comments, comment: "" });
+        setClasses({
+          addCommentButton: "app-button background-orange float-right",
+          commentForm: "hidden",
+        });
+      })
+      .catch((error) => {
+        console.error("Error :", error);
+      });
+  };
+
+  const handleAddComment = (e) => {
+    setClasses({
+      commentForm: "comment-form",
+      addCommentButton: "hidden",
+    });
+  };
+
+  const handleCommentTextarea = (e) => {
+    setDetails({ comment: e.target.value });
+  };
+
+  const handleCancelComment = (e) => {
+    e.preventDefault();
+    setClasses({
+      commentForm: "hidden",
+      comment: "",
+      addCommentButton: "app-button background-orange float-right",
+    });
+    setDetails({
+      comment: "",
+    });
+  };
+
+  if (!trip) return null;
+      const {
+        country,
+        city,
+        username,
+        mainPhotoUrl,
+        review,
+        thingsTodoScore,
+        foodScore,
+        peopleScore,
+        transportScore,
+        safetyScore,
+      } = trip;
+  return !tripDetailsContext.user ? (
+    <article>
+      <h1 className="nothing-found-msg">
+        You need to be logged in to see detail trip review!
+      </h1>
+    </article>
+  ) : (
+    <article>
+      <Navbar />
+      <article id={classes.idTripDetailsContainer} className={classes.tripDetailsContainer}>
+        <article id="name-location-scores-trip-details">
+          <section>
+            <h2 className="country-name">
+              {trip.country}-<span className="city-name">{trip.city}</span>
+            </h2>
+            <h3> @{username}</h3>
+          </section>
+          <section>
+            <ul>
+              <li className="score-text">Things to Do - {thingsTodoScore}</li>
+              <li className="score-text">Food - {foodScore}</li>
+              <li className="score-text">People - {peopleScore}</li>
+              <li className="score-text">Transport - {transportScore}</li>
+              <li className="score-text">Safety - {safetyScore}</li>
+            </ul>
+          </section>
+        </article>
+
+        <MapComponent city={city} country={country} />
+
+        <section id="main-photo-trip-details">
+          <img className="photo" src={mainPhotoUrl} alt={city}></img>
+        </section>
+
+        <article id="review-trip-details">
+          <p>{review}</p>
+        </article>
+
+        <section id="review-edit-button-trip-details">
+          {tripDetailsContext.user.username === username && (
+            <button
+              onClick={handleEditButton}
+              className="app-button background-orange"
+            >
+              Edit Review
+            </button>
+          )}
+        </section>
+
+        <section id="scores-trip-details">
+          <ReviewScore
+            tripId={props.tripId}
+            loggedUserId={tripDetailsContext.user.userId}
+            loggedUsername={tripDetailsContext.user.username}
+            reviewAuthorName={trip.username}
+          />
+        </section>
+
+        <section id="comments-trip-details">
+          <Comments
+            comments={details.comments}
+            loggedUser={tripDetailsContext.username}
+            author={trip.username}
+            handleAddComment={handleAddComment}
+            handleCommentForm={handleCommentForm}
+            addCommentButton={classes.addCommentButton}
+            commentForm={details.commentForm}
+            handleCommentTextarea={handleCommentTextarea}
+            handleCancelComment={handleCancelComment}
+            commentValue={details.comment}
+          />
+        </section>
+      </article>
+    </article>
+  );
 };
 
 export default TripDetails;

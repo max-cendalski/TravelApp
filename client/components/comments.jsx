@@ -1,6 +1,7 @@
 import React from 'react';
 
 export default function Comments(props) {
+  console.log('prop',props)
   return (
     <div>
       <h2>Comments</h2>

@@ -14,7 +14,7 @@ const EditTrip = props => {
 
   useEffect(() => {
     const token = window.localStorage.getItem('TravelApp-token');
-    fetch(`/api/trips/${this.props.tripId}`, {
+    fetch(`/api/trips/${props.tripId}`, {
       method: 'GET',
       headers: {
         'x-access-token': token,
@@ -23,14 +23,16 @@ const EditTrip = props => {
     })
       .then(response => response.json())
       .then(trip => {
-        setTrip({ trip });
+        console.log('trip',trip)
+        setTrip( trip );
       })
       .then(update => {
+        console.log('udpate',update)
         setTripToEdit({
-          city: trip.city,
-          tripId: trip.tripId,
-          mainPhotoUrl: trip.mainPhotoUrl,
-          thingsTodoScore: trip.thingsTodoScore,
+          city: update.city,
+          tripId: tripId,
+          mainPhotoUrl: mainPhotoUrl,
+          thingsTodoScore: thingsTodoScore,
           foodScore: trip.foodScore,
           peopleScore: trip.peopleScore,
           transportScore: trip.transportScore,
@@ -38,7 +40,7 @@ const EditTrip = props => {
           review: trip.review
         });
       });
-  });
+  },[]);
 
   const handleSubmitForm = e => {
     e.preventDefault();
@@ -55,7 +57,7 @@ const EditTrip = props => {
       safetyScore: tripToEdit.safetyScore,
       review: tripToEdit.review
     };
-
+    console.log('edit',editedTrip)
     fetch(`/api/edit/trip/${tripId}`, {
       method: 'PATCH',
       headers: {
@@ -69,7 +71,7 @@ const EditTrip = props => {
         result.country = trip.country;
         result.username = trip.username;
         setTrip({ result });
-        window.location.hash = `#trips?tripId=${this.props.tripId}`;
+        window.location.hash = `#trips?tripId=${props.tripId}`;
       });
   };
 
@@ -81,10 +83,11 @@ const EditTrip = props => {
       ...prevData,
       [name]: value
     }));
+    console.log('triptoEdit',tripToEdit)
   };
 
   const handleCancelForm = () => {
-    window.location.hash = `#trips?tripId=${this.props.tripId}`;
+    window.location.hash = `#trips?tripId=${props.tripId}`;
   };
   if (!trip) return null;
 
@@ -101,6 +104,7 @@ const EditTrip = props => {
               onChange={handleChange}
               className="edit-form-text-input float-right"
               type="text"
+              name="city"
               defaultValue={trip.city}
             ></input>
           </p>
@@ -111,6 +115,7 @@ const EditTrip = props => {
               className="edit-form-text-input float-right"
               type="number"
               max="100"
+              name="thingsTodoScore"
               defaultValue={trip.thingsTodoScore}
               required
             ></input>
@@ -122,6 +127,7 @@ const EditTrip = props => {
               className="edit-form-text-input float-right"
               type="number"
               max="100"
+              name="foodScore"
               defaultValue={trip.foodScore}
               required
             ></input>
@@ -133,6 +139,7 @@ const EditTrip = props => {
               className="edit-form-text-input float-right"
               type="number"
               max="100"
+              name="peopleScore"
               defaultValue={trip.peopleScore}
               required
             ></input>
@@ -144,6 +151,7 @@ const EditTrip = props => {
               className="edit-form-text-input float-right"
               type="number"
               max="100"
+              name="transportScore"
               defaultValue={trip.transportScore}
               required
             ></input>
@@ -155,6 +163,7 @@ const EditTrip = props => {
               className="edit-form-text-input float-right"
               type="number"
               max="100"
+              name="safetyScore"
               defaultValue={trip.safetyScore}
               required
             ></input>
@@ -164,6 +173,7 @@ const EditTrip = props => {
           onChange={handleChange}
           defaultValue={trip.review}
           className="form-textarea"
+          name="review"
           required
         ></textarea>
         <button
