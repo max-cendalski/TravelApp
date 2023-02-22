@@ -32,30 +32,68 @@ const TripDetails = (props) => {
   const [position, setPosition] = useState(null);
   const [redirect, setRedirect] = useState(false);
 
-  useEffect(()=> {
-       const token = window.localStorage.getItem("TravelApp-token");
-       Promise.all([
-         fetch(`/api/trips/${props.tripId}`, {
-           method: "GET",
-           headers: {
-             "x-access-token": token,
-             "Content-Type": "application/json",
-           },
-         })
-           .then((response) => response.json())
-           .then((trip) => setTrip({ trip })),
-         fetch(`/api/comments/${props.tripId}`, {
-           method: "GET",
-           headers: {
-             "x-access-token": token,
-             "Content-Type": "application/json",
-           },
-         })
-           .then((response) => response.json())
-           .then((comments) => setDetails({comments})),
-       ]).catch((error) => console.error("Error", error));
+  useEffect(() => {
+    const token = window.localStorage.getItem("TravelApp-token");
+    Promise.all([
+      fetch(`/api/trips/${props.tripId}`, {
+        method: "GET",
+        headers: {
+          "x-access-token": token,
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((trip) => setTrip(trip )),
+      fetch(`/api/comments/${props.tripId}`, {
+        method: "GET",
+        headers: {
+          "x-access-token": token,
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((comments) => setDetails({ comments })),
+    ]).catch((error) => console.error("Error", error));
+  }, []);
 
-  })
+  const handleEditButton = () => {
+    window.location.hash = `#edit/trip?tripId=${props.tripId}`;
+  };
+
+  const handleSubmitEditedForm = (e) => {
+    e.preventDefault();
+    const token = window.localStorage.getItem("TravelApp-token");
+    const editedTrip = {
+      city: details.city,
+      country: details.country,
+      tripId: props.tripId,
+      mainPhotoUrl: details.mainPhotoUrl,
+      thingsTodoScore: details.thingsTodoScore,
+      foodScore: details.foodScore,
+      peopleScore: details.peopleScore,
+      transportScore: details.transportScore,
+      safetyScore: details.safetyScore,
+      review: details.review,
+    };
+
+    fetch(`/api/reviews/${props.tripId}`, {
+      method: "PATCH",
+      headers: {
+        "x-access-token": token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(editedTrip),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        result.countryName = trip.countryName;
+        result.username = trip.username;
+
+        setTrip(result);
+        setClasses((editReviewContainer = "hidden"));
+        //   reviewContainer: "container",
+      });
+  };
 
   return <article>whe</article>;
 };
@@ -117,6 +155,8 @@ export default TripDetails;
   handleEditButton(event) {
     window.location.hash = `#edit/trip?tripId=${this.props.tripId}`;
   }
+
+
 
   handleSubmitEditedForm(event) {
     event.preventDefault();
