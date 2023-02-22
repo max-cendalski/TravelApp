@@ -1,11 +1,44 @@
-import React from 'react';
-import Navbar from '../components/navbar';
-import AppContext from '../lib/app-context';
-import Comments from '../components/comments';
-import ReviewScore from '../components/review-score';
-import MapComponent from '../components/map';
+import React, { useState, useEffect, useContext } from "react";
+import Navbar from "../components/navbar";
+//import AppContext from '../lib/app-context';
+import Comments from "../components/comments";
+import ReviewScore from "../components/review-score";
+import MapComponent from "../components/map";
+import { AppDataContext } from "../components/context";
 
-export default class TripDetails extends React.Component {
+const TripDetails = () => {
+  const tripDetailsContext = useContext(AppDataContext);
+  const [trip, setTrip] = useState(null);
+  const [classes, setClasses] = useState({
+    editReviewContainer: "hidden",
+    tripDetailsContainer: "container",
+    idTripDetailsContainer: "trip-details-container",
+    addCommentButton: "app-button background-orange float-right",
+    commentForm: "hidden",
+  });
+  const [detailScores, setDetailScores] = useState({
+    city: "",
+    country: "",
+    thingsTodoScore: 0,
+    foodScore: 0,
+    peopleScore: 0,
+    transportScore: 0,
+    safetyScore: 0,
+    review: "",
+     comment: '',
+    comments: []
+
+  });
+
+  const [err, setErr] = useState(false);
+  const [position, setPosition] = useState(null);
+  const [redirect, setRedirect] = useState(false);
+
+  return <article>whe</article>;
+};
+
+export default TripDetails;
+/* export default class TripDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -237,5 +270,5 @@ export default class TripDetails extends React.Component {
     );
   }
 }
-
-TripDetails.contextType = AppContext;
+ */
+//TripDetails.contextType = AppContext;
