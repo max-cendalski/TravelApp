@@ -223,7 +223,7 @@ const TripDetails = (props) => {
         <section id="comments-trip-details">
           <Comments
             comments={details.comments}
-            loggedUser={tripDetailsContext.username}
+            loggedUser={tripDetailsContext.user.username}
             author={trip.username}
             handleAddComment={handleAddComment}
             handleCommentForm={handleCommentForm}

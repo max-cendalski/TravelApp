@@ -1,26 +1,47 @@
-import React from 'react';
+import React from "react";
 
 export default function Comments(props) {
-  console.log('prop',props)
+  console.log('prospuser,',props, props.author)
   return (
     <div>
       <h2>Comments</h2>
-      <ul className='comments-list'>
-       {
-        props.comments.map((comment, index) => {
-          return <li className='comment-list-element' key={index + 1}><h4>@{comment.username}</h4><p>{comment.content}</p> </li>;
-        })
-      }
+      <ul className="comments-list">
+        {props.comments.map((comment, index) => {
+          return (
+            <li className="comment-list-element" key={index + 1}>
+              <h4>@{comment.username}</h4>
+              <p>{comment.content}</p>{" "}
+            </li>
+          );
+        })}
       </ul>
-      {
-       props.loggedUser !== props.author && <button onClick={props.handleAddComment} className={props.addCommentButton}>{props.user}Add Comment</button>
-      }
-      <form onSubmit={props.handleCommentForm} className={props.commentForm}>
-        <textarea className='comment-textarea' onChange={props.handleCommentTextarea} value={props.commentValue}required>
-        </textarea>
-        <button className='app-button background-orange float-right'>Submit</button>
-        <button onClick={props.handleCancelComment} className='app-button background-red'>Cancel</button>
-      </form>
+      {props.loggedUser !== props.author && (
+        <button
+          onClick={props.handleAddComment}
+          className={props.addCommentButton}
+        >
+         Add Comment
+        </button>
+      )}
+      {props.loggedUser !== props.author && (
+        <form onSubmit={props.handleCommentForm} className={props.commentForm}>
+          <textarea
+            className="comment-textarea"
+            onChange={props.handleCommentTextarea}
+            value={props.commentValue}
+            required
+          ></textarea>
+          <button className="app-button background-orange float-right">
+            Submit
+          </button>
+          <button
+            onClick={props.handleCancelComment}
+            className="app-button background-red"
+          >
+            Cancel
+          </button>
+        </form>
+      )}
     </div>
   );
 }
