@@ -13,9 +13,13 @@ const TripDetails = (props) => {
     editReviewContainer: "hidden",
     tripDetailsContainer: "container",
     idTripDetailsContainer: "trip-details-container",
+  });
+
+  const [commentsSection, setCommentsSection] = useState({
     addCommentButton: "app-button background-orange float-right",
     commentForm: "hidden",
   });
+
   const [details, setDetails] = useState({
     city: "",
     country: "",
@@ -26,11 +30,8 @@ const TripDetails = (props) => {
     safetyScore: 0,
     review: "",
     comment: "",
-    comments: [],
   });
-  //const [err, setErr] = useState(false);
-  //const [position, setPosition] = useState(null);
-  //const [redirect, setRedirect] = useState(false);
+  const [comments, setComments] = useState([])
 
   useEffect(() => {
     const token = window.localStorage.getItem("TravelApp-token");
@@ -52,7 +53,7 @@ const TripDetails = (props) => {
         },
       })
         .then((response) => response.json())
-        .then((comments) => setDetails({ comments })),
+        .then((comments) => setComments(comments)),
     ]).catch((error) => console.error("Error", error));
   }, []);
 
@@ -88,17 +89,16 @@ const TripDetails = (props) => {
       .then((result) => {
         result.countryName = trip.countryName;
         result.username = trip.username;
-
         setTrip(result);
         setClasses({ editReviewContainer: "hidden" });
-        //   reviewContainer: "container",
       });
   };
 
   const handleCommentForm = (e) => {
+    console.log('propsfromtripdeta',props)
     e.preventDefault();
     const content = {
-      content: comment,
+      content: '',
     };
     const token = window.localStorage.getItem("TravelApp-token");
     fetch(`/api/trips/comments/${props.tripId}`, {
@@ -114,8 +114,7 @@ const TripDetails = (props) => {
         result.comment.username = tripDetailsContext.user.username;
         const comments = [...comments];
         comments.unshift(result.comment);
-
-        setDetails({ comments, comment: "" });
+        console.log('result',result)
         setClasses({
           addCommentButton: "app-button background-orange float-right",
           commentForm: "hidden",
@@ -126,8 +125,8 @@ const TripDetails = (props) => {
       });
   };
 
-  const handleAddComment = (e) => {
-    setClasses({
+  const handleAddComment = () => {
+    setCommentsSection({
       commentForm: "comment-form",
       addCommentButton: "hidden",
     });
@@ -137,31 +136,27 @@ const TripDetails = (props) => {
     setDetails({ comment: e.target.value });
   };
 
-  const handleCancelComment = (e) => {
-    e.preventDefault();
-    setClasses({
+  const handleCancelComment = () => {
+    console.log("details.com", details);
+    setCommentsSection({
       commentForm: "hidden",
-      comment: "",
       addCommentButton: "app-button background-orange float-right",
-    });
-    setDetails({
-      comment: "",
     });
   };
 
   if (!trip) return null;
-      const {
-        country,
-        city,
-        username,
-        mainPhotoUrl,
-        review,
-        thingsTodoScore,
-        foodScore,
-        peopleScore,
-        transportScore,
-        safetyScore,
-      } = trip;
+  const {
+    country,
+    city,
+    username,
+    mainPhotoUrl,
+    review,
+    thingsTodoScore,
+    foodScore,
+    peopleScore,
+    transportScore,
+    safetyScore,
+  } = trip;
   return !tripDetailsContext.user ? (
     <article>
       <h1 className="nothing-found-msg">
@@ -171,7 +166,10 @@ const TripDetails = (props) => {
   ) : (
     <article>
       <Navbar />
-      <article id={classes.idTripDetailsContainer} className={classes.tripDetailsContainer}>
+      <article
+        className={classes.tripDetailsContainer}
+        id={classes.idTripDetailsContainer}
+      >
         <article id="name-location-scores-trip-details">
           <section>
             <h2 className="country-name">
@@ -189,17 +187,13 @@ const TripDetails = (props) => {
             </ul>
           </section>
         </article>
-
         <MapComponent city={city} country={country} />
-
         <section id="main-photo-trip-details">
           <img className="photo" src={mainPhotoUrl} alt={city}></img>
         </section>
-
         <article id="review-trip-details">
           <p>{review}</p>
         </article>
-
         <section id="review-edit-button-trip-details">
           {tripDetailsContext.user.username === username && (
             <button
@@ -210,7 +204,6 @@ const TripDetails = (props) => {
             </button>
           )}
         </section>
-
         <section id="scores-trip-details">
           <ReviewScore
             tripId={props.tripId}
@@ -219,16 +212,15 @@ const TripDetails = (props) => {
             reviewAuthorName={trip.username}
           />
         </section>
-
         <section id="comments-trip-details">
           <Comments
-            comments={details.comments}
+            comments={comments}
             loggedUser={tripDetailsContext.user.username}
             author={trip.username}
             handleAddComment={handleAddComment}
             handleCommentForm={handleCommentForm}
-            addCommentButton={classes.addCommentButton}
-            commentForm={details.commentForm}
+            addCommentButton={commentsSection.addCommentButton}
+            commentForm={commentsSection.commentForm}
             handleCommentTextarea={handleCommentTextarea}
             handleCancelComment={handleCancelComment}
             commentValue={details.comment}

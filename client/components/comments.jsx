@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function Comments(props) {
-  console.log('prospuser,',props, props.author)
   return (
     <div>
       <h2>Comments</h2>
@@ -20,28 +19,26 @@ export default function Comments(props) {
           onClick={props.handleAddComment}
           className={props.addCommentButton}
         >
-         Add Comment
+          Add Comment
         </button>
       )}
-      {props.loggedUser !== props.author && (
-        <form onSubmit={props.handleCommentForm} className={props.commentForm}>
-          <textarea
-            className="comment-textarea"
-            onChange={props.handleCommentTextarea}
-            value={props.commentValue}
-            required
-          ></textarea>
-          <button className="app-button background-orange float-right">
-            Submit
-          </button>
-          <button
-            onClick={props.handleCancelComment}
-            className="app-button background-red"
-          >
-            Cancel
-          </button>
-        </form>
-      )}
+
+      <form onSubmit={props.handleCommentForm} className={props.commentForm}>
+        <textarea
+          className="comment-textarea"
+          onChange={props.handleCommentTextarea}
+          value={props.commentValue}
+        ></textarea>
+        <button className="app-button background-orange float-right">
+          Submit
+        </button>
+        <button
+          onClick={props.handleCancelComment}
+          className="app-button background-red"
+        >
+          Cancel
+        </button>
+      </form>
     </div>
   );
 }
