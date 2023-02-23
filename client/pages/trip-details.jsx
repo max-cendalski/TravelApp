@@ -11,27 +11,17 @@ const TripDetails = (props) => {
   const [trip, setTrip] = useState(null);
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
-  const [classes, setClasses] = useState({
+/*   const [classes, setClasses] = useState({
     editReviewContainer: "hidden",
     tripDetailsContainer: "container",
     idTripDetailsContainer: "trip-details-container",
   });
-
+ */
   const [commentsSection, setCommentsSection] = useState({
     addCommentButton: "app-button background-orange float-right",
     commentForm: "hidden",
   });
 
-  const [details, setDetails] = useState({
-    city: "",
-    country: "",
-    thingsTodoScore: 0,
-    foodScore: 0,
-    peopleScore: 0,
-    transportScore: 0,
-    safetyScore: 0,
-    review: "",
-  });
 
   useEffect(() => {
     const token = window.localStorage.getItem("TravelApp-token");
@@ -61,39 +51,6 @@ const TripDetails = (props) => {
     window.location.hash = `#edit/trip?tripId=${props.tripId}`;
   };
 
-  const handleSubmitEditedForm = (e) => {
-    e.preventDefault();
-    const token = window.localStorage.getItem("TravelApp-token");
-    const editedTrip = {
-      city: details.city,
-      country: details.country,
-      tripId: props.tripId,
-      mainPhotoUrl: details.mainPhotoUrl,
-      thingsTodoScore: details.thingsTodoScore,
-      foodScore: details.foodScore,
-      peopleScore: details.peopleScore,
-      transportScore: details.transportScore,
-      safetyScore: details.safetyScore,
-      review: details.review,
-    };
-
-    fetch(`/api/reviews/${props.tripId}`, {
-      method: "PATCH",
-      headers: {
-        "x-access-token": token,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(editedTrip),
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        console.log("result--", result);
-        result.countryName = trip.countryName;
-        result.username = trip.username;
-        setTrip(result);
-        setClasses({ editReviewContainer: "hidden" });
-      });
-  };
 
   const handleCommentForm = (e) => {
     e.preventDefault();
@@ -168,8 +125,8 @@ const TripDetails = (props) => {
     <article>
       <Navbar />
       <article
-        className={classes.tripDetailsContainer}
-        id={classes.idTripDetailsContainer}
+        className="container"
+        id="trip-details-container"
       >
         <article id="name-location-scores-trip-details">
           <section>
@@ -224,7 +181,7 @@ const TripDetails = (props) => {
             commentForm={commentsSection.commentForm}
             handleCommentTextarea={handleCommentTextarea}
             handleCancelComment={handleCancelComment}
-            commentValue={details.comment}
+            commentValue={comment}
           />
         </section>
       </article>
