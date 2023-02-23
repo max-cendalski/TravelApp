@@ -9,6 +9,8 @@ import { AppDataContext } from "../components/context";
 const TripDetails = (props) => {
   const tripDetailsContext = useContext(AppDataContext);
   const [trip, setTrip] = useState(null);
+  const [comments, setComments] = useState([]);
+  const [comment, setComment] = useState("");
   const [classes, setClasses] = useState({
     editReviewContainer: "hidden",
     tripDetailsContainer: "container",
@@ -29,9 +31,7 @@ const TripDetails = (props) => {
     transportScore: 0,
     safetyScore: 0,
     review: "",
-    comment: "",
   });
-  const [comments, setComments] = useState([])
 
   useEffect(() => {
     const token = window.localStorage.getItem("TravelApp-token");
@@ -87,6 +87,7 @@ const TripDetails = (props) => {
     })
       .then((response) => response.json())
       .then((result) => {
+        console.log("result--", result);
         result.countryName = trip.countryName;
         result.username = trip.username;
         setTrip(result);
@@ -95,10 +96,9 @@ const TripDetails = (props) => {
   };
 
   const handleCommentForm = (e) => {
-    console.log('propsfromtripdeta',props)
     e.preventDefault();
     const content = {
-      content: '',
+      content: comment,
     };
     const token = window.localStorage.getItem("TravelApp-token");
     fetch(`/api/trips/comments/${props.tripId}`, {
@@ -112,20 +112,21 @@ const TripDetails = (props) => {
       .then((response) => response.json())
       .then((result) => {
         result.comment.username = tripDetailsContext.user.username;
-        const comments = [...comments];
-        comments.unshift(result.comment);
-        console.log('result',result)
-        setClasses({
+        const newComments = [...comments];
+        newComments.unshift(result.comment);
+        setComments(newComments);
+        setCommentsSection({
           addCommentButton: "app-button background-orange float-right",
           commentForm: "hidden",
         });
+        setComment("");
       })
       .catch((error) => {
         console.error("Error :", error);
       });
   };
 
-  const handleAddComment = () => {
+  const handleAddCommentButton = () => {
     setCommentsSection({
       commentForm: "comment-form",
       addCommentButton: "hidden",
@@ -133,11 +134,11 @@ const TripDetails = (props) => {
   };
 
   const handleCommentTextarea = (e) => {
-    setDetails({ comment: e.target.value });
+    setComment(e.target.value);
   };
 
-  const handleCancelComment = () => {
-    console.log("details.com", details);
+  const handleCancelComment = (e) => {
+    e.preventDefault();
     setCommentsSection({
       commentForm: "hidden",
       addCommentButton: "app-button background-orange float-right",
@@ -217,9 +218,9 @@ const TripDetails = (props) => {
             comments={comments}
             loggedUser={tripDetailsContext.user.username}
             author={trip.username}
-            handleAddComment={handleAddComment}
             handleCommentForm={handleCommentForm}
             addCommentButton={commentsSection.addCommentButton}
+            handleAddCommentButton={handleAddCommentButton}
             commentForm={commentsSection.commentForm}
             handleCommentTextarea={handleCommentTextarea}
             handleCancelComment={handleCancelComment}

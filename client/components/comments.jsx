@@ -16,7 +16,7 @@ export default function Comments(props) {
       </ul>
       {props.loggedUser !== props.author && (
         <button
-          onClick={props.handleAddComment}
+          onClick={props.handleAddCommentButton}
           className={props.addCommentButton}
         >
           Add Comment
