@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 const ReviewScore = (props) => {
   const [scoreData, setScore] = useState([]);
@@ -6,23 +6,23 @@ const ReviewScore = (props) => {
   const [userScore, setUserScore] = useState(false);
 
   useEffect(() => {
-    console.log('props',props)
-    const token = window.localStorage.getItem('TravelApp-token');
+    console.log("props", props);
+    const token = window.localStorage.getItem("TravelApp-token");
     fetch(`/api/trips/score/${props.tripId}`, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'X-Access-Token': token,
-        'Content-Type': 'application/json'
-      }
+        "X-Access-Token": token,
+        "Content-Type": "application/json",
+      },
     })
-      .then(response => response.json())
-      .then(result => {
-        console.log('result',result)
+      .then((response) => response.json())
+      .then((result) => {
+        console.log("result", result);
         if (
           props.loggedUsername === props.reviewAuthorName ||
-          result.some(item => item.userId === props.loggedUserId)
+          result.some((item) => item.userId === props.loggedUserId)
         ) {
-          setUserScore(true)
+          setUserScore(true);
         }
         let totalScore = 0;
         if (result.length === 0) return;
@@ -31,7 +31,7 @@ const ReviewScore = (props) => {
             totalScore += result[i].score;
           }
           totalScore = Math.floor(totalScore / result.length);
-          console.log('totalScore',totalScore)
+          console.log("totalScore", totalScore);
           setAverageScore(totalScore);
           setUserScore(true);
           setScore(result);
@@ -41,29 +41,29 @@ const ReviewScore = (props) => {
           setScore(result);
         }
       });
-  },[]);
+  }, []);
 
   // MIGHT NOT WORK
-  const handleAddScore = e => {
+  const handleAddScore = (e) => {
     e.preventDefault();
     const score = {
       userId: props.loggedUserId,
       tripId: props.tripId,
-      score: props.tripScore
+      score: props.tripScore,
     };
 
-    const token = window.localStorage.getItem('TravelApp-token');
-    console.log('scorev--',score)
- /*    fetch(`/api/trips/score/${props.tripId}`, {
-      method: 'POST',
+    const token = window.localStorage.getItem("TravelApp-token");
+    console.log("scorev--", score);
+    fetch(`/api/trips/score/${props.tripId}`, {
+      method: "POST",
       headers: {
-        'x-access-token': token,
-        'Content-Type': 'application/json'
+        "x-access-token": token,
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(score)
+      body: JSON.stringify(score),
     })
-      .then(response => response.json())
-      .then(result => {
+      .then((response) => response.json())
+      .then((result) => {
         const scoreArray = [...scoreData];
         scoreArray.unshift(result.score);
         let totalScore = 0;
@@ -79,16 +79,16 @@ const ReviewScore = (props) => {
         setAverageScore(totalScore);
         setUserScore(true);
         setScore(scoreArray);
-      }); */
+      });
   };
   // ERROR?
   /* const handleChangeScore = (e) => {
     console.log("ev.", e.target.value);
   }; */
 
-  const handleScoreChange = e => {
-    console.log('scoredate',scoreData)
-   /*  this.setState({
+  const handleScoreChange = (e) => {
+    console.log("scoredate", scoreData);
+    /*  this.setState({
       tripScore: event.target.value
     }); */
   };
@@ -96,8 +96,7 @@ const ReviewScore = (props) => {
   return (
     <section className="review-score">
       <h2>Review Score :</h2>
-      {!userScore
-        ? (
+      {!userScore ? (
         <form onSubmit={handleAddScore}>
           <p>
             <strong>{averageScore} / 100</strong>
@@ -115,12 +114,11 @@ const ReviewScore = (props) => {
             Add Score
           </button>
         </form>
-          )
-        : (
+      ) : (
         <p>
           <strong>{averageScore} / 100</strong>
         </p>
-          )}
+      )}
     </section>
   );
 };
