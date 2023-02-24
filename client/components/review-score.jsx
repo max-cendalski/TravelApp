@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 const ReviewScore = (props) => {
   const [score, setScore] = useState([]);
   const [averageScore, setAverageScore] = useState(0);
-  const [userScore, setUserScore] = useState(false);
+  const [userScoreStatus, setUserScoreStatus] = useState(false);
 
   useEffect(() => {
     console.log("props", props);
@@ -21,20 +21,19 @@ const ReviewScore = (props) => {
           props.loggedUsername === props.reviewAuthorName ||
           result.some((item) => item.userId === props.loggedUserId)
         ) {
-          setUserScore(true);
+          setUserScoreStatus(true);
         }
-        let averageScore = 0;
-        console.log('result',result)
         if (result.length === 0) return;
+        let averageScore = 0;
+        result.push({userId:10,tripId:3,score: 10})
         if (result.length > 1) {
           for (let i = 0; i < result.length; i++) {
             averageScore += result[i].score;
           }
           averageScore = Math.floor(averageScore / result.length);
           setAverageScore(averageScore);
-          setUserScore(true);
           setScore(result);
-        } else {
+        }  else {
           averageScore = result[0].score;
           setAverageScore(averageScore);
           setScore(result);
@@ -45,14 +44,14 @@ const ReviewScore = (props) => {
   // MIGHT NOT WORK
   const handleAddScore = (e) => {
     e.preventDefault();
-    const score = {
+    const scoreToSave = {
       userId: props.loggedUserId,
       tripId: props.tripId,
-      score: props.tripScore,
+      score
     };
 
     const token = window.localStorage.getItem("TravelApp-token");
-    console.log("scorev--", score);
+    console.log("scorev--", scoreToSave);
     /*  fetch(`/api/trips/score/${props.tripId}`, {
       method: "POST",
       headers: {
@@ -85,17 +84,15 @@ const ReviewScore = (props) => {
     console.log("ev.", e.target.value);
   }; */
 
-  const handleScoreChange = (e) => {
+  const handleScoreChange = e => {
     console.log("score", score);
-    /*  this.setState({
-      tripScore: event.target.value
-    }); */
+    setScore(e.target.value)
   };
 
   return (
     <section className="review-score">
       <h2>Review Score :</h2>
-      {!userScore ? (
+      {!userScoreStatus ? (
         <form onSubmit={handleAddScore}>
           <p>
             <strong>{averageScore} / 100</strong>
