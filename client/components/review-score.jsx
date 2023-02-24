@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-const ReviewScore = props => {
+const ReviewScore = (props) => {
   const [scoreData, setScore] = useState([]);
   const [averageScore, setAverageScore] = useState(0);
   const [userScore, setUserScore] = useState(false);
 
   useEffect(() => {
+    console.log('props',props)
     const token = window.localStorage.getItem('TravelApp-token');
     fetch(`/api/trips/score/${props.tripId}`, {
       method: 'GET',
@@ -16,6 +17,7 @@ const ReviewScore = props => {
     })
       .then(response => response.json())
       .then(result => {
+        console.log('result',result)
         if (
           props.loggedUsername === props.reviewAuthorName ||
           result.some(item => item.userId === props.loggedUserId)
@@ -29,6 +31,7 @@ const ReviewScore = props => {
             totalScore += result[i].score;
           }
           totalScore = Math.floor(totalScore / result.length);
+          console.log('totalScore',totalScore)
           setAverageScore(totalScore);
           setUserScore(true);
           setScore(result);
@@ -38,19 +41,20 @@ const ReviewScore = props => {
           setScore(result);
         }
       });
-  });
+  },[]);
 
   // MIGHT NOT WORK
   const handleAddScore = e => {
     e.preventDefault();
     const score = {
-      userId: props.user,
+      userId: props.loggedUserId,
       tripId: props.tripId,
       score: props.tripScore
     };
 
     const token = window.localStorage.getItem('TravelApp-token');
-    fetch(`/api/trips/score/${props.tripId}`, {
+    console.log('scorev--',score)
+ /*    fetch(`/api/trips/score/${props.tripId}`, {
       method: 'POST',
       headers: {
         'x-access-token': token,
@@ -75,7 +79,7 @@ const ReviewScore = props => {
         setAverageScore(totalScore);
         setUserScore(true);
         setScore(scoreArray);
-      });
+      }); */
   };
   // ERROR?
   /* const handleChangeScore = (e) => {
