@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const ReviewScore = (props) => {
-  const [scoreData, setScore] = useState([]);
+  const [score, setScore] = useState([]);
   const [averageScore, setAverageScore] = useState(0);
   const [userScore, setUserScore] = useState(false);
 
@@ -17,27 +17,26 @@ const ReviewScore = (props) => {
     })
       .then((response) => response.json())
       .then((result) => {
-        console.log("result", result);
         if (
           props.loggedUsername === props.reviewAuthorName ||
           result.some((item) => item.userId === props.loggedUserId)
         ) {
           setUserScore(true);
         }
-        let totalScore = 0;
+        let averageScore = 0;
+        console.log('result',result)
         if (result.length === 0) return;
         if (result.length > 1) {
           for (let i = 0; i < result.length; i++) {
-            totalScore += result[i].score;
+            averageScore += result[i].score;
           }
-          totalScore = Math.floor(totalScore / result.length);
-          console.log("totalScore", totalScore);
-          setAverageScore(totalScore);
+          averageScore = Math.floor(averageScore / result.length);
+          setAverageScore(averageScore);
           setUserScore(true);
           setScore(result);
         } else {
-          totalScore = result[0].score;
-          setAverageScore(totalScore);
+          averageScore = result[0].score;
+          setAverageScore(averageScore);
           setScore(result);
         }
       });
@@ -54,7 +53,7 @@ const ReviewScore = (props) => {
 
     const token = window.localStorage.getItem("TravelApp-token");
     console.log("scorev--", score);
-    fetch(`/api/trips/score/${props.tripId}`, {
+    /*  fetch(`/api/trips/score/${props.tripId}`, {
       method: "POST",
       headers: {
         "x-access-token": token,
@@ -64,7 +63,7 @@ const ReviewScore = (props) => {
     })
       .then((response) => response.json())
       .then((result) => {
-        const scoreArray = [...scoreData];
+        const scoreArray = [...score];
         scoreArray.unshift(result.score);
         let totalScore = 0;
         if (scoreArray.length === 1) {
@@ -79,7 +78,7 @@ const ReviewScore = (props) => {
         setAverageScore(totalScore);
         setUserScore(true);
         setScore(scoreArray);
-      });
+      }); */
   };
   // ERROR?
   /* const handleChangeScore = (e) => {
@@ -87,7 +86,7 @@ const ReviewScore = (props) => {
   }; */
 
   const handleScoreChange = (e) => {
-    console.log("scoredate", scoreData);
+    console.log("score", score);
     /*  this.setState({
       tripScore: event.target.value
     }); */
