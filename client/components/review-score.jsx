@@ -1,26 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-const ReviewScore = (props) => {
+const ReviewScore = props => {
   const [usersScores, setUsersScores] = useState([]);
   const [userScore, setUserScore] = useState(0);
   const [averageScore, setAverageScore] = useState(0);
   const [userScoreStatus, setUserScoreStatus] = useState(false);
 
   useEffect(() => {
-    console.log("props", props);
-    const token = window.localStorage.getItem("TravelApp-token");
+    const token = window.localStorage.getItem('TravelApp-token');
     fetch(`/api/trips/score/${props.tripId}`, {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "X-Access-Token": token,
-        "Content-Type": "application/json",
-      },
+        'X-Access-Token': token,
+        'Content-Type': 'application/json'
+      }
     })
-      .then((response) => response.json())
-      .then((result) => {
+      .then(response => response.json())
+      .then(result => {
         if (
           props.loggedUsername === props.reviewAuthorName ||
-          result.some((item) => item.userId === props.loggedUserId)
+          result.some(item => item.userId === props.loggedUserId)
         ) {
           setUserScoreStatus(true);
         }
@@ -41,44 +40,46 @@ const ReviewScore = (props) => {
       });
   }, []);
 
-
-  const handleAddScore = (e) => {
+  const handleAddScore = e => {
     e.preventDefault();
     const scoreToSave = {
       userId: props.loggedUserId,
       tripId: props.tripId,
-      score: Number(userScore),
+      score: Number(userScore)
     };
-    const token = window.localStorage.getItem("TravelApp-token");
+    const token = window.localStorage.getItem('TravelApp-token');
     fetch(`/api/trips/score/${props.tripId}`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "x-access-token": token,
-        "Content-Type": "application/json",
+        'x-access-token': token,
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(scoreToSave),
+      body: JSON.stringify(scoreToSave)
     })
-      .then((response) => response.json())
-      .then((result) => {
+      .then(response => response.json())
+      .then(result => {
         let totalScore = 0;
-        let newTotalScore = [...usersScores, scoreToSave];
-        newTotalScore.forEach((i) => totalScore = i.score + totalScore);
-        let newAverageScore = Math.floor(totalScore / newTotalScore.length);
+        const newTotalScore = [...usersScores, scoreToSave];
+        newTotalScore.forEach(i => {
+          totalScore = i.score + totalScore;
+        });
+
+        const newAverageScore = Math.floor(totalScore / newTotalScore.length);
         setAverageScore(newAverageScore);
         setUserScoreStatus(true);
         setUsersScores(newTotalScore);
       });
   };
 
-  const handleScoreChange = (e) => {
+  const handleScoreChange = e => {
     setUserScore(e.target.value);
   };
-  console.log("usersScores", usersScores);
 
   return (
     <section className="review-score">
       <h2>Review Score :</h2>
-      {!userScoreStatus ? (
+      {!userScoreStatus
+        ? (
         <form onSubmit={handleAddScore}>
           <p>
             <strong>{averageScore} / 100</strong>
@@ -96,11 +97,12 @@ const ReviewScore = (props) => {
             Add Score
           </button>
         </form>
-      ) : (
+          )
+        : (
         <p>
           <strong>{averageScore} / 100</strong>
         </p>
-      )}
+          )}
     </section>
   );
 };
