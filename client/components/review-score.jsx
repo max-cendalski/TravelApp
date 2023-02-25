@@ -37,6 +37,9 @@ const ReviewScore = props => {
           setAverageScore(averageScore);
           setUsersScores(result);
         }
+      })
+      .catch(error => {
+        console.error('Error :', error);
       });
   }, []);
 
@@ -47,6 +50,15 @@ const ReviewScore = props => {
       tripId: props.tripId,
       score: Number(userScore)
     };
+    let totalScore = 0;
+    const newTotalScore = [...usersScores, scoreToSave];
+    newTotalScore.forEach(i => {
+      totalScore = i.score + totalScore;
+    });
+    const newAverageScore = Math.floor(totalScore / newTotalScore.length);
+    setAverageScore(newAverageScore);
+    setUserScoreStatus(true);
+    setUsersScores(newTotalScore);
     const token = window.localStorage.getItem('TravelApp-token');
     fetch(`/api/trips/score/${props.tripId}`, {
       method: 'POST',
@@ -57,17 +69,8 @@ const ReviewScore = props => {
       body: JSON.stringify(scoreToSave)
     })
       .then(response => response.json())
-      .then(result => {
-        let totalScore = 0;
-        const newTotalScore = [...usersScores, scoreToSave];
-        newTotalScore.forEach(i => {
-          totalScore = i.score + totalScore;
-        });
-
-        const newAverageScore = Math.floor(totalScore / newTotalScore.length);
-        setAverageScore(newAverageScore);
-        setUserScoreStatus(true);
-        setUsersScores(newTotalScore);
+      .catch(error => {
+        console.error('Error :', error);
       });
   };
 
