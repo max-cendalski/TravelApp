@@ -220,7 +220,6 @@
 
 .app-button {
   border-radius: 5px;
-  padding: 0.2rem 1.2rem;
   margin-top: 1rem;
   background-color: rgb(240, 131, 52);
   color: white;
@@ -390,12 +389,12 @@ input::-webkit-inner-spin-button {
 }
 
 .comment-list-element > p {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .comment-textarea {
   margin-top: 2rem;
-  width: 100%;
+  width: 95%;
   height: 8rem;
   font-size: 1.1rem;
 }
@@ -490,7 +489,7 @@ input::-webkit-inner-spin-button {
 }
 
 #review-trip-details {
-  font-size: 1.125rem;
+  font-size: 1.165rem;
   line-height: 1.6rem;
   font-weight: 500;
   grid-column: 1/6;

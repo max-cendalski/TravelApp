@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
 const ReviewScore = props => {
-  const [scoreData, setScore] = useState([]);
+  const [usersScores, setUsersScores] = useState([]);
+  const [userScore, setUserScore] = useState(0);
   const [averageScore, setAverageScore] = useState(0);
-  const [userScore, setUserScore] = false;
+  const [userScoreStatus, setUserScoreStatus] = useState(false);
 
   useEffect(() => {
     const token = window.localStorage.getItem('TravelApp-token');
-    fetch(`/api/trips/score/${this.props.tripId}`, {
+    fetch(`/api/trips/score/${props.tripId}`, {
       method: 'GET',
       headers: {
         'X-Access-Token': token,
@@ -20,80 +21,67 @@ const ReviewScore = props => {
           props.loggedUsername === props.reviewAuthorName ||
           result.some(item => item.userId === props.loggedUserId)
         ) {
-          this.setState({
-            userScored: true
-          });
+          setUserScoreStatus(true);
         }
-        let totalScore = 0;
         if (result.length === 0) return;
+        let averageScore = 0;
         if (result.length > 1) {
           for (let i = 0; i < result.length; i++) {
-            totalScore += result[i].score;
+            averageScore += result[i].score;
           }
-          totalScore = Math.floor(totalScore / result.length);
-          setAverageScore(totalScore);
-          setUserScore(true);
-          setScore(result);
+          averageScore = Math.floor(averageScore / result.length);
+          setAverageScore(averageScore);
+          setUsersScores(result);
         } else {
-          totalScore = result[0].score;
-          setAverageScore(totalScore);
-          setScore(result);
+          averageScore = result[0].score;
+          setAverageScore(averageScore);
+          setUsersScores(result);
         }
+      })
+      .catch(error => {
+        console.error('Error :', error);
       });
-  });
+  }, []);
 
-  // MIGHT NOT WORK
   const handleAddScore = e => {
     e.preventDefault();
-    const score = {
-      userId: props.user,
+    const scoreToSave = {
+      userId: props.loggedUserId,
       tripId: props.tripId,
-      score: props.tripScore
+      score: Number(userScore)
     };
-
+    let totalScore = 0;
+    const newTotalScore = [...usersScores, scoreToSave];
+    newTotalScore.forEach(i => {
+      totalScore = i.score + totalScore;
+    });
+    const newAverageScore = Math.floor(totalScore / newTotalScore.length);
+    setAverageScore(newAverageScore);
+    setUserScoreStatus(true);
+    setUsersScores(newTotalScore);
     const token = window.localStorage.getItem('TravelApp-token');
-    fetch(`/api/trips/score/${this.props.tripId}`, {
+    fetch(`/api/trips/score/${props.tripId}`, {
       method: 'POST',
       headers: {
         'x-access-token': token,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(score)
+      body: JSON.stringify(scoreToSave)
     })
       .then(response => response.json())
-      .then(result => {
-        const scoreArray = [...scoreData];
-        scoreArray.unshift(result.score);
-        let totalScore = 0;
-        if (scoreArray.length === 1) {
-          totalScore = scoreArray[0].score;
-        }
-        if (scoreArray.length > 1) {
-          for (let i = 0; i < scoreArray.length; i++) {
-            totalScore += scoreArray[i].score;
-          }
-          totalScore = Math.floor(totalScore / scoreArray.length);
-        }
-        setAverageScore(totalScore);
-        setUserScore(true);
-        setScore(scoreArray);
+      .catch(error => {
+        console.error('Error :', error);
       });
   };
-  // ERROR?
-  /* const handleChangeScore = (e) => {
-    console.log("ev.", e.target.value);
-  }; */
 
   const handleScoreChange = e => {
-    this.setState({
-      tripScore: event.target.value
-    });
+    setUserScore(e.target.value);
   };
 
   return (
     <section className="review-score">
       <h2>Review Score :</h2>
-      {!userScore
+      {!userScoreStatus
         ? (
         <form onSubmit={handleAddScore}>
           <p>
