@@ -1,4 +1,5 @@
 require('dotenv/config');
+require("aws-sdk/lib/maintenance_mode_message").suppress = true;
 const staticMiddleware = require('./static-middleware');
 const pg = require('pg');
 const argon2 = require('argon2');
