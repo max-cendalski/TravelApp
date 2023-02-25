@@ -437,17 +437,29 @@ app.get("/api/my-reviews", (req, res, next) => {
     .catch((err) => next(err));
 });
 
- app.delete('/api/my-reviews/:tripId',(req,res,next) => {
-  const tripId = Number(req.params.tripId)
+app.delete("/api/my-reviews/:tripId", (req, res, next) => {
+  const tripId = Number(req.params.tripId);
   if (!Number.isInteger(tripId) || tripId <= 0) {
-     res.status(400).json({ error: 'tripId must be positive integer' });
+    res.status(400).json({ error: "tripId must be positive integer" });
     return;
   }
-    const sql = `
+  const sql = `
     delete from "trips"
     where "tripId" = $1
     `;
-    const params = [tripId]
-})
+  const params = [tripId];
+  db.query(sql, params).then((result) => {
+    console.log("result:", result);
+    console.log("resul.rows[0]:", result.rows[0]);
+    const trip = result.rows[0];
+    if (!trip) {
+      res.status(404).json({
+        error: `Cannot find trip with that tripId ${tripId}`,
+      });
+    } else {
+      res.status(204).send("success");
+    }
+  });
+});
 
 app.use(errorMiddleware);
