@@ -148,6 +148,21 @@
   border-radius: 2px;
 }
 
+.trash-container {
+  position: absolute;
+  background-color: white;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  color: black;
+  padding: 0.5rem;
+  border-radius: 2px;
+}
+
+.trash-container:hover {
+  color: rgb(225, 46, 46);
+}
+
 .detailed-text-container {
   margin-left: 2rem;
   margin-top: 2rem;

@@ -58,6 +58,10 @@ function Trip(props) {
           {country}-<span className="city-name">{city}</span>
         </p>
       </section>
+      <section className="trash-container">
+        <i className="fa-solid fa-trash fa-xl"></i>
+      </section>
+
       <section className="image-container">
         <img className="photo" src={mainPhotoUrl}></img>
       </section>
