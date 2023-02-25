@@ -52,15 +52,14 @@ const Reviews = () => {
 };
 
 function Trip(props) {
-
   const { tripId, country, city, mainPhotoUrl } = props.trip;
   return (
-    <a href={`#trips?tripId=${tripId}`}>
-      <section className="text-container">
+    <article>
+      <a href={`#trips?tripId=${tripId}`} className="text-container">
         <p className="country-name">
           {country}-<span className="city-name">{city}</span>
         </p>
-      </section>
+      </a>
       <section
         onClick={() => props.handleDeleteReview(tripId)}
         className="trash-container"
@@ -71,7 +70,7 @@ function Trip(props) {
       <section className="image-container">
         <img className="photo" src={mainPhotoUrl}></img>
       </section>
-    </a>
+    </article>
   );
 }
 

@@ -146,6 +146,7 @@
   cursor: pointer;
   color: black;
   border-radius: 2px;
+  text-decoration: none;
 }
 
 .trash-container {
