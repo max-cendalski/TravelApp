@@ -20,7 +20,7 @@ const ReviewForm = () => {
     e.preventDefault();
     const formData = new FormData();
     const token = window.localStorage.getItem('TravelApp-token');
-    formData.append('country', form.country);
+    formData.append('country', form.country.toLowerCase());
     formData.append('city', form.city);
     formData.append('image', selectedImage);
     formData.append('review', form.review);

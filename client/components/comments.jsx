@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function Comments(props) {
   return (
@@ -9,7 +9,7 @@ export default function Comments(props) {
           return (
             <li className="comment-list-element" key={index + 1}>
               <h4>@{comment.username}</h4>
-              <p>{comment.content}</p>{" "}
+              <p>{comment.content}</p>
             </li>
           );
         })}
