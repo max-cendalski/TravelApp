@@ -1,5 +1,5 @@
 require('dotenv/config');
-require("aws-sdk/lib/maintenance_mode_message").suppress = true;
+require('aws-sdk/lib/maintenance_mode_message').suppress = true;
 const staticMiddleware = require('./static-middleware');
 const pg = require('pg');
 const argon2 = require('argon2');
@@ -60,23 +60,21 @@ app.post('/api/auth/sign-up', (req, res, next) => {
     throw new ClientError(400, 'username and password are required fields');
   }
 
-  argon2
-    .hash(password)
-    .then(hashedPassword => {
-      const sql = `
+  argon2.hash(password).then(hashedPassword => {
+    const sql = `
         insert into "users" ("username", "password")
         values ($1, $2)
         on conflict ("username") do nothing
         returning *
     `;
-      const params = [username, hashedPassword];
-      db.query(sql, params)
-        .then(result => {
-          const { userId, username, createdAt } = result.rows[0];
-          res.status(201).json({ userId, username, createdAt });
-        })
-        .catch(err => next(err));
-    });
+    const params = [username, hashedPassword];
+    db.query(sql, params)
+      .then(result => {
+        const { userId, username, createdAt } = result.rows[0];
+        res.status(201).json({ userId, username, createdAt });
+      })
+      .catch(err => next(err));
+  });
 });
 
 app.post('/api/auth/sign-in', (req, res, next) => {
@@ -91,7 +89,8 @@ app.post('/api/auth/sign-in', (req, res, next) => {
      where "username" = $1
   `;
   const params = [username];
-  return db.query(sql, params)
+  return db
+    .query(sql, params)
     .then(result => {
       const [user] = result.rows;
       if (!username) {
@@ -142,10 +141,9 @@ app.get('/api/countries', (req, res, next) => {
     select "country"
     from "trips"
   `;
-  db.query(sql)
-    .then(result => {
-      res.json(result.rows);
-    });
+  db.query(sql).then(result => {
+    res.json(result.rows);
+  });
 });
 
 app.use(authorizationMiddleware);
@@ -227,8 +225,20 @@ app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
             values ($1,$2,$3,$4,$5,$6,$7,$8,$9, $10)
             returning *
             `;
-  const params = [req.user.userId, country, city, image, review, thingsTodoScore, foodScore, peopleScore, transportScore, safetyScore];
-  return db.query(sql, params)
+  const params = [
+    req.user.userId,
+    country,
+    city,
+    image,
+    review,
+    thingsTodoScore,
+    foodScore,
+    peopleScore,
+    transportScore,
+    safetyScore
+  ];
+  return db
+    .query(sql, params)
     .then(result => {
       const [review] = result.rows;
       res.status(201).json({ review });
@@ -263,7 +273,8 @@ app.post('/api/trips/comments/:tripId', (req, res, next) => {
             returning *
             `;
   const params = [content, userId, tripId];
-  return db.query(sql, params)
+  return db
+    .query(sql, params)
     .then(result => {
       const [comment] = result.rows;
       res.status(201).json({ comment });
@@ -298,7 +309,8 @@ app.post('/api/trips/score/:tripId', (req, res, next) => {
             returning *
   `;
   const params = [score, userId, tripId];
-  return db.query(sql, params)
+  return db
+    .query(sql, params)
     .then(result => {
       const [score] = result.rows;
       res.status(201).json({ score });
@@ -345,7 +357,15 @@ app.patch('/api/edit/trip/:tripId', (req, res, next) => {
     transportScore,
     safetyScore
   } = req.body;
-  if (!city || !review || !thingsTodoScore || !foodScore || !peopleScore || !transportScore || !safetyScore) {
+  if (
+    !city ||
+    !review ||
+    !thingsTodoScore ||
+    !foodScore ||
+    !peopleScore ||
+    !transportScore ||
+    !safetyScore
+  ) {
     res.status(400).json({
       error: 'missing data'
     });
@@ -363,7 +383,17 @@ app.patch('/api/edit/trip/:tripId', (req, res, next) => {
    where "tripId" = $8 AND "userId" = $9
    returning *
   `;
-  const params = [city, review, thingsTodoScore, foodScore, peopleScore, transportScore, safetyScore, tripId, userId];
+  const params = [
+    city,
+    review,
+    thingsTodoScore,
+    foodScore,
+    peopleScore,
+    transportScore,
+    safetyScore,
+    tripId,
+    userId
+  ];
   db.query(sql, params)
     .then(result => {
       const [updatedTrip] = result.rows;
@@ -405,6 +435,29 @@ app.get('/api/my-reviews', (req, res, next) => {
       res.json(result.rows);
     })
     .catch(err => next(err));
+});
+
+app.delete('/api/my-reviews/:tripId', (req, res, next) => {
+  const tripId = Number(req.params.tripId);
+  if (!Number.isInteger(tripId) || tripId <= 0) {
+    res.status(400).json({ error: 'tripId must be positive integer' });
+    return;
+  }
+  const sql = `
+    DELETE from "trips"
+    WHERE "tripId" = $1
+    `;
+  const params = [tripId];
+  db.query(sql, params).then(result => {
+    const trip = result.rows[0];
+    if (!trip) {
+      res.status(404).json({
+        error: `Cannot find trip with that tripId ${tripId}`
+      });
+    } else {
+      res.status(204).send('success');
+    }
+  });
 });
 
 app.use(errorMiddleware);

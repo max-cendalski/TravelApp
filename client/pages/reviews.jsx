@@ -18,8 +18,28 @@ const Reviews = () => {
       .then(result => {
         setMyReviews(result);
         setIsLoading(false);
+      })
+      .catch(error => {
+        console.error('Error :', error);
       });
   }, []);
+
+  const handleDeleteReview = id => {
+    const tripId = Number(id);
+    const token = window.localStorage.getItem('TravelApp-token');
+    setMyReviews(myReviews.filter(review => review.tripId !== id));
+    fetch(`/api/my-reviews/${tripId}`, {
+      method: 'DELETE',
+      headers: {
+        'x-access-token': token,
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .catch(error => {
+        console.error('Error :', error);
+      });
+  };
 
   if (isLoading) return null;
   return (
@@ -31,7 +51,7 @@ const Reviews = () => {
           <section className="list-flex">
             {myReviews.map(trip => (
               <div className="image-item column-width50" key={trip.tripId}>
-                <Trip trip={trip} />
+                <Trip trip={trip} handleDeleteReview={handleDeleteReview} />
               </div>
             ))}
           </section>
@@ -52,16 +72,23 @@ const Reviews = () => {
 function Trip(props) {
   const { tripId, country, city, mainPhotoUrl } = props.trip;
   return (
-    <a href={`#trips?tripId=${tripId}`}>
-      <section className="text-container">
+    <article>
+      <a href={`#trips?tripId=${tripId}`} className="text-container">
         <p className="country-name">
           {country}-<span className="city-name">{city}</span>
         </p>
+      </a>
+      <section
+        onClick={() => props.handleDeleteReview(tripId)}
+        className="trash-container"
+      >
+        <i className="fa-solid fa-trash fa-xl"></i>
       </section>
+
       <section className="image-container">
         <img className="photo" src={mainPhotoUrl}></img>
       </section>
-    </a>
+    </article>
   );
 }
 
