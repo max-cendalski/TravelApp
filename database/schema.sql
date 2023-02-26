@@ -69,22 +69,19 @@ CREATE TABLE "public"."tripScores" (
 	"userId" int NOT NULL,
 	"tripId" int NOT NULL,
 	"score" int NOT NULL
-
 ) WITH (
   OIDS=FALSE
 );
 
 
 
+ALTER TABLE "tripScores" ADD CONSTRAINT "tripScores_fk0" FOREIGN KEY("tripId") REFERENCES "trips"("tripId") ON DELETE CASCADE;
+ALTER TABLE "tripScores" ADD CONSTRAINT "tripScores_fk1" FOREIGN KEY("userId") REFERENCES "users"("userId") ON DELETE CASCADE;
 
-
-/* ALTER TABLE "comments" ADD CONSTRAINT "comments_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
-ALTER TABLE "comments" ADD CONSTRAINT "comments_fk1" FOREIGN KEY ("tripId") REFERENCES "trips"("tripId");
-
-ALTER TABLE "additionalPhotos" ADD CONSTRAINT "additionalPhotos_fk0" FOREIGN KEY ("tripId") REFERENCES "trips"("tripId");
+ALTER TABLE "comments" ADD CONSTRAINT "comments_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId") ON DELETE CASCADE;
+ALTER TABLE "comments" ADD CONSTRAINT "comments_fk1" FOREIGN KEY ("tripId") REFERENCES "trips"("tripId") ON DELETE CASCADE;
 
 ALTER TABLE "trips" ADD CONSTRAINT "trips_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
 
 
-ALTER TABLE "tripScores" ADD CONSTRAINT "tripScores_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
-ALTER TABLE "tripScores" ADD CONSTRAINT "tripScores_fk1" FOREIGN KEY ("tripId") REFERENCES "trips"("tripId"); */
+/*ALTER TABLE "additionalPhotos" ADD CONSTRAINT "additionalPhotos_fk0" FOREIGN KEY ("tripId") REFERENCES "trips"("tripId")*/
