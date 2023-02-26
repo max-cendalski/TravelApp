@@ -1,19 +1,19 @@
-require('dotenv/config');
-require('aws-sdk/lib/maintenance_mode_message').suppress = true;
-const staticMiddleware = require('./static-middleware');
-const pg = require('pg');
-const argon2 = require('argon2');
-const jwt = require('jsonwebtoken');
-const express = require('express');
-const errorMiddleware = require('./error-middleware');
-const authorizationMiddleware = require('./authorization-middleware');
-const uploadsMiddleware = require('./uploads-middleware');
-const ClientError = require('./client-error');
+require("dotenv/config");
+require("aws-sdk/lib/maintenance_mode_message").suppress = true;
+const staticMiddleware = require("./static-middleware");
+const pg = require("pg");
+const argon2 = require("argon2");
+const jwt = require("jsonwebtoken");
+const express = require("express");
+const errorMiddleware = require("./error-middleware");
+const authorizationMiddleware = require("./authorization-middleware");
+const uploadsMiddleware = require("./uploads-middleware");
+const ClientError = require("./client-error");
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
-    rejectUnauthorized: false
-  }
+    rejectUnauthorized: false,
+  },
 });
 
 const app = express();
@@ -27,20 +27,20 @@ app.listen(process.env.PORT, () => {
   console.log(`express server listening on port ${process.env.PORT}`);
 });
 
-app.get('/api/locations', (req, res, next) => {
+app.get("/api/locations", (req, res, next) => {
   const sql = `
   select "country",
          "city"
     from "trips"
               `;
   db.query(sql)
-    .then(result => {
+    .then((result) => {
       res.json(result.rows);
     })
-    .catch(err => next(err));
+    .catch((err) => next(err));
 });
 
-app.get('/api/images', (req, res, next) => {
+app.get("/api/images", (req, res, next) => {
   const sql = `
   select "mainPhotoUrl",
          "country",
@@ -48,19 +48,19 @@ app.get('/api/images', (req, res, next) => {
     from "trips"
          `;
   db.query(sql)
-    .then(result => {
+    .then((result) => {
       res.json(result.rows);
     })
-    .catch(err => next(err));
+    .catch((err) => next(err));
 });
 
-app.post('/api/auth/sign-up', (req, res, next) => {
+app.post("/api/auth/sign-up", (req, res, next) => {
   const { username, password } = req.body;
   if (!username || !password) {
-    throw new ClientError(400, 'username and password are required fields');
+    throw new ClientError(400, "username and password are required fields");
   }
 
-  argon2.hash(password).then(hashedPassword => {
+  argon2.hash(password).then((hashedPassword) => {
     const sql = `
         insert into "users" ("username", "password")
         values ($1, $2)
@@ -69,18 +69,18 @@ app.post('/api/auth/sign-up', (req, res, next) => {
     `;
     const params = [username, hashedPassword];
     db.query(sql, params)
-      .then(result => {
+      .then((result) => {
         const { userId, username, createdAt } = result.rows[0];
         res.status(201).json({ userId, username, createdAt });
       })
-      .catch(err => next(err));
+      .catch((err) => next(err));
   });
 });
 
-app.post('/api/auth/sign-in', (req, res, next) => {
+app.post("/api/auth/sign-in", (req, res, next) => {
   const { username, password } = req.body;
   if (!username || !password) {
-    throw new ClientError(401, 'invalid login');
+    throw new ClientError(401, "invalid login");
   }
   const sql = `
     select "userId",
@@ -91,31 +91,31 @@ app.post('/api/auth/sign-in', (req, res, next) => {
   const params = [username];
   return db
     .query(sql, params)
-    .then(result => {
+    .then((result) => {
       const [user] = result.rows;
       if (!username) {
-        throw new ClientError(401, 'invalid login');
+        throw new ClientError(401, "invalid login");
       }
       const { userId, password: hashedPassword } = user;
       argon2
         .verify(hashedPassword, password)
-        .then(isMatching => {
+        .then((isMatching) => {
           if (!isMatching) {
-            throw new ClientError(401, 'invalid login');
+            throw new ClientError(401, "invalid login");
           }
           const payload = { userId, username };
           const token = jwt.sign(payload, process.env.TOKEN_SECRET);
           res.json({ token, user: payload });
         })
-        .catch(err => next(err));
+        .catch((err) => next(err));
     })
-    .catch(err => next(err));
+    .catch((err) => next(err));
 });
 
-app.get('/api/countries/:country', (req, res, next) => {
+app.get("/api/countries/:country", (req, res, next) => {
   const country = req.params.country;
   if (!country) {
-    throw new ClientError(401, 'invalid input');
+    throw new ClientError(401, "invalid input");
   }
 
   const sql = `
@@ -130,28 +130,28 @@ app.get('/api/countries/:country', (req, res, next) => {
   `;
   const params = [country];
   db.query(sql, params)
-    .then(result => {
+    .then((result) => {
       res.json(result.rows);
     })
-    .catch(err => next(err));
+    .catch((err) => next(err));
 });
 
-app.get('/api/countries', (req, res, next) => {
+app.get("/api/countries", (req, res, next) => {
   const sql = `
     select "country"
     from "trips"
   `;
-  db.query(sql).then(result => {
+  db.query(sql).then((result) => {
     res.json(result.rows);
   });
 });
 
 app.use(authorizationMiddleware);
 
-app.get('/api/trips/:tripId', (req, res, next) => {
+app.get("/api/trips/:tripId", (req, res, next) => {
   const trip = Number(req.params.tripId);
   if (!trip) {
-    throw new ClientError(401, 'invalid tripId');
+    throw new ClientError(401, "invalid tripId");
   }
   const sql = `
   select "city",
@@ -170,16 +170,16 @@ app.get('/api/trips/:tripId', (req, res, next) => {
   `;
   const params = [trip];
   db.query(sql, params)
-    .then(result => {
+    .then((result) => {
       res.json(result.rows[0]);
     })
-    .catch(err => next(err));
+    .catch((err) => next(err));
 });
 
-app.get('/api/comments/:tripId', (req, res, next) => {
+app.get("/api/comments/:tripId", (req, res, next) => {
   const trip = Number(req.params.tripId);
   if (!trip) {
-    throw new ClientError(401, 'invalid tripId');
+    throw new ClientError(401, "invalid tripId");
   }
   const sql = `
   select "content",
@@ -190,13 +190,13 @@ app.get('/api/comments/:tripId', (req, res, next) => {
   `;
   const params = [trip];
   db.query(sql, params)
-    .then(result => {
+    .then((result) => {
       res.json(result.rows);
     })
-    .catch(err => next(err));
+    .catch((err) => next(err));
 });
 
-app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
+app.post("/api/trips", uploadsMiddleware, (req, res, next) => {
   const {
     country,
     city,
@@ -205,7 +205,7 @@ app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
     foodScore,
     peopleScore,
     transportScore,
-    safetyScore
+    safetyScore,
   } = req.body;
   const image = req.file.location;
   const sql = `
@@ -235,30 +235,30 @@ app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
     foodScore,
     peopleScore,
     transportScore,
-    safetyScore
+    safetyScore,
   ];
   return db
     .query(sql, params)
-    .then(result => {
+    .then((result) => {
       const [review] = result.rows;
       res.status(201).json({ review });
     })
-    .catch(err => next(err));
+    .catch((err) => next(err));
 });
 
-app.post('/api/trips/comments/:tripId', (req, res, next) => {
+app.post("/api/trips/comments/:tripId", (req, res, next) => {
   const tripId = Number(req.params.tripId);
   const { userId } = req.user;
   if (!Number.isInteger(tripId) || tripId < 1) {
     res.status(400).json({
-      error: 'tripId must be a positive integer'
+      error: "tripId must be a positive integer",
     });
     return;
   }
   const { content } = req.body;
   if (!content) {
     res.status(400).json({
-      error: 'missing content'
+      error: "missing content",
     });
     return;
   }
@@ -275,26 +275,26 @@ app.post('/api/trips/comments/:tripId', (req, res, next) => {
   const params = [content, userId, tripId];
   return db
     .query(sql, params)
-    .then(result => {
+    .then((result) => {
       const [comment] = result.rows;
       res.status(201).json({ comment });
     })
-    .catch(err => next(err));
+    .catch((err) => next(err));
 });
 
-app.post('/api/trips/score/:tripId', (req, res, next) => {
+app.post("/api/trips/score/:tripId", (req, res, next) => {
   const tripId = Number(req.params.tripId);
   const { userId } = req.user;
   if (!Number.isInteger(tripId) || tripId < 1) {
     res.status(400).json({
-      error: 'tripId must be a positive number'
+      error: "tripId must be a positive number",
     });
     return;
   }
   const { score } = req.body;
   if (!score) {
     res.status(400).json({
-      error: 'missing score'
+      error: "missing score",
     });
     return;
   }
@@ -311,18 +311,18 @@ app.post('/api/trips/score/:tripId', (req, res, next) => {
   const params = [score, userId, tripId];
   return db
     .query(sql, params)
-    .then(result => {
+    .then((result) => {
       const [score] = result.rows;
       res.status(201).json({ score });
     })
-    .catch(err => next(err));
+    .catch((err) => next(err));
 });
 
-app.get('/api/trips/score/:tripId', (req, res, next) => {
+app.get("/api/trips/score/:tripId", (req, res, next) => {
   const tripId = Number(req.params.tripId);
   if (!Number.isInteger(tripId) || tripId < 1) {
     res.status(400).json({
-      error: 'tripId must be a positive number'
+      error: "tripId must be a positive number",
     });
     return;
   }
@@ -333,18 +333,18 @@ app.get('/api/trips/score/:tripId', (req, res, next) => {
   `;
   const params = [tripId];
   db.query(sql, params)
-    .then(result => {
+    .then((result) => {
       res.json(result.rows);
     })
-    .catch(err => next(err));
+    .catch((err) => next(err));
 });
 
-app.patch('/api/edit/trip/:tripId', (req, res, next) => {
+app.patch("/api/edit/trip/:tripId", (req, res, next) => {
   const tripId = Number(req.params.tripId);
   const { userId } = req.user;
   if (!Number.isInteger(tripId) || tripId < 1) {
     res.status(400).json({
-      error: 'tripId must be a positive integer'
+      error: "tripId must be a positive integer",
     });
     return;
   }
@@ -355,7 +355,7 @@ app.patch('/api/edit/trip/:tripId', (req, res, next) => {
     foodScore,
     peopleScore,
     transportScore,
-    safetyScore
+    safetyScore,
   } = req.body;
   if (
     !city ||
@@ -367,7 +367,7 @@ app.patch('/api/edit/trip/:tripId', (req, res, next) => {
     !safetyScore
   ) {
     res.status(400).json({
-      error: 'missing data'
+      error: "missing data",
     });
     return;
   }
@@ -392,26 +392,26 @@ app.patch('/api/edit/trip/:tripId', (req, res, next) => {
     transportScore,
     safetyScore,
     tripId,
-    userId
+    userId,
   ];
   db.query(sql, params)
-    .then(result => {
+    .then((result) => {
       const [updatedTrip] = result.rows;
       if (!updatedTrip) {
         res.status(404).json({
-          error: `Cannot find trip with id: ${tripId}`
+          error: `Cannot find trip with id: ${tripId}`,
         });
       } else {
         res.json(updatedTrip);
       }
     })
-    .catch(err => next(err));
+    .catch((err) => next(err));
 });
 
-app.get('/api/my-reviews', (req, res, next) => {
+app.get("/api/my-reviews", (req, res, next) => {
   const { userId } = req.user;
   if (!userId) {
-    throw new ClientError(401, 'invalid userId');
+    throw new ClientError(401, "invalid userId");
   }
   const sql = `
     select  "tripId",
@@ -431,33 +431,40 @@ app.get('/api/my-reviews', (req, res, next) => {
       `;
   const params = [userId];
   db.query(sql, params)
-    .then(result => {
+    .then((result) => {
       res.json(result.rows);
     })
-    .catch(err => next(err));
+    .catch((err) => next(err));
 });
 
-app.delete('/api/my-reviews/:tripId', (req, res, next) => {
+app.delete("/api/my-reviews/:tripId", (req, res, next) => {
   const tripId = Number(req.params.tripId);
   if (!Number.isInteger(tripId) || tripId <= 0) {
-    res.status(400).json({ error: 'tripId must be positive integer' });
+    res.status(400).json({ error: "tripId must be positive integer" });
     return;
   }
   const sql = `
-    delete from "trips"
-    where "tripId" = $1
+   DELETE from "trips"
+   WHERE "tripId" = $1
     `;
   const params = [tripId];
-  db.query(sql, params).then(result => {
+  db.query(sql, params).then((result) => {
     const trip = result.rows[0];
     if (!trip) {
       res.status(404).json({
-        error: `Cannot find trip with that tripId ${tripId}`
+        error: `Cannot find trip with that tripId ${tripId}`,
       });
     } else {
-      res.status(204).send('success');
+      res.status(204).send("success");
     }
   });
 });
 
 app.use(errorMiddleware);
+
+
+
+
+
+
+	//CONSTRAINT "trips_pk" PRIMARY KEY ("tripId")
