@@ -149,6 +149,14 @@
   text-decoration: none;
 }
 
+.text-container:hover {
+  color: rgb(240, 131, 52);
+}
+
+.text-container:active {
+  transform: scale(1.1);
+}
+
 .trash-container {
   position: absolute;
   background-color: white;
@@ -162,6 +170,10 @@
 
 .trash-container:hover {
   color: rgb(225, 46, 46);
+}
+
+.trash-container:active {
+  transform: scale(1.2);
 }
 
 .detailed-text-container {
