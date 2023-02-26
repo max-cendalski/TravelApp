@@ -38,12 +38,10 @@ const ReviewForm = () => {
       body: formData
     })
       .then(response => response.json())
-      .then(result => {
-        window.location.hash = '#';
-      })
       .catch(error => {
         console.error('Error:', error);
       });
+    window.location.hash = '#';
   };
 
   const handleChange = address => {
@@ -163,7 +161,7 @@ const ReviewForm = () => {
                 max="100"
                 type="number"
                 required
-                name= "peopleScore"
+                name="peopleScore"
               ></input>
               <label className="review-score-label">People</label>
             </p>
@@ -200,7 +198,6 @@ const ReviewForm = () => {
               name="image"
               accept=".png, .jpg, .jpeg, .gif"
             />
-
           </section>
           <section id="review-form-textarea-section">
             <h3>Your review</h3>
