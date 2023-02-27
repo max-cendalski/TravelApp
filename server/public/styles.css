@@ -419,7 +419,7 @@ input::-webkit-inner-spin-button {
 
 .comment-trash-container {
   position: absolute;
-  right: 10px;
+  right: 5px;
   top: 0;
   cursor: pointer;
   color: black;
