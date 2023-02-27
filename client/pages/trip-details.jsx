@@ -1,101 +1,108 @@
-import React, { useState, useEffect, useContext } from 'react';
-import Navbar from '../components/navbar';
-import Comments from '../components/comments';
-import ReviewScore from '../components/review-score';
-import MapComponent from '../components/map';
-import { AppDataContext } from '../components/context';
+import React, { useState, useEffect, useContext } from "react";
+import Navbar from "../components/navbar";
+import Comments from "../components/comments";
+import ReviewScore from "../components/review-score";
+import MapComponent from "../components/map";
+import { AppDataContext } from "../components/context";
 
-const TripDetails = props => {
+const TripDetails = (props) => {
   const tripDetailsContext = useContext(AppDataContext);
   const [trip, setTrip] = useState(null);
   const [comments, setComments] = useState([]);
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
 
   const [commentsSection, setCommentsSection] = useState({
-    addCommentButton: 'app-button background-orange float-right',
-    commentForm: 'hidden'
+    addCommentButton: "app-button background-orange float-right",
+    commentForm: "hidden",
   });
 
   useEffect(() => {
-    const token = window.localStorage.getItem('TravelApp-token');
+    const token = window.localStorage.getItem("TravelApp-token");
     Promise.all([
       fetch(`/api/trips/${props.tripId}`, {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'x-access-token': token,
-          'Content-Type': 'application/json'
-        }
+          "x-access-token": token,
+          "Content-Type": "application/json",
+        },
       })
-        .then(response => response.json())
-        .then(trip => setTrip(trip)),
+        .then((response) => response.json())
+        .then((trip) => setTrip(trip)),
       fetch(`/api/comments/${props.tripId}`, {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'x-access-token': token,
-          'Content-Type': 'application/json'
-        }
+          "x-access-token": token,
+          "Content-Type": "application/json",
+        },
       })
-        .then(response => response.json())
-        .then(comments => setComments(comments))
-    ]).catch(error => console.error('Error', error));
+        .then((response) => response.json())
+        .then((comments) => setComments(comments)),
+    ]).catch((error) => console.error("Error", error));
   }, []);
 
   const handleEditButton = () => {
     window.location.hash = `#edit/trip?tripId=${props.tripId}`;
   };
 
-  const handleCommentForm = e => {
+  const handleCommentForm = (e) => {
     e.preventDefault();
     const content = {
-      content: comment
+      content: comment,
     };
-    const token = window.localStorage.getItem('TravelApp-token');
+    const token = window.localStorage.getItem("TravelApp-token");
     fetch(`/api/trips/comments/${props.tripId}`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'x-access-token': token,
-        'Content-Type': 'application/json'
+        "x-access-token": token,
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(content)
+      body: JSON.stringify(content),
     })
-      .then(response => response.json())
-      .then(result => {
+      .then((response) => response.json())
+      .then((result) => {
         result.comment.username = tripDetailsContext.user.username;
         const newComments = [...comments];
         newComments.unshift(result.comment);
         setComments(newComments);
         setCommentsSection({
-          addCommentButton: 'app-button background-orange float-right',
-          commentForm: 'hidden'
+          addCommentButton: "app-button background-orange float-right",
+          commentForm: "hidden",
         });
-        setComment('');
+        setComment("");
       })
-      .catch(error => {
-        console.error('Error :', error);
+      .catch((error) => {
+        console.error("Error :", error);
       });
   };
 
   const handleAddCommentButton = () => {
     setCommentsSection({
-      commentForm: 'comment-form',
-      addCommentButton: 'hidden'
+      commentForm: "comment-form",
+      addCommentButton: "hidden",
     });
   };
 
-  const handleCommentTextarea = e => {
+  const handleCommentTextarea = (e) => {
     setComment(e.target.value);
   };
 
-  const handleCancelComment = e => {
+  const handleCancelComment = (e) => {
     e.preventDefault();
     setCommentsSection({
-      commentForm: 'hidden',
-      addCommentButton: 'app-button background-orange float-right'
+      commentForm: "hidden",
+      addCommentButton: "app-button background-orange float-right",
     });
   };
-  const handleDeleteComment = e => {
-    console.log('whe')
-  }
+
+
+
+
+
+
+
+  const handleDeleteComment = (comment) => {
+    console.log('comment',comment)
+  };
 
   if (!trip) return null;
   const {
@@ -108,23 +115,18 @@ const TripDetails = props => {
     foodScore,
     peopleScore,
     transportScore,
-    safetyScore
+    safetyScore,
   } = trip;
-  return !tripDetailsContext.user
-    ? (
+  return !tripDetailsContext.user ? (
     <article>
       <h1 className="nothing-found-msg">
         You need to be logged in to see detail trip review!
       </h1>
     </article>
-      )
-    : (
+  ) : (
     <article>
       <Navbar />
-      <article
-        className="container"
-        id="trip-details-container"
-      >
+      <article className="container" id="trip-details-container">
         <article id="name-location-scores-trip-details">
           <section>
             <h2 className="country-name">
@@ -178,13 +180,13 @@ const TripDetails = props => {
             commentForm={commentsSection.commentForm}
             handleCommentTextarea={handleCommentTextarea}
             handleCancelComment={handleCancelComment}
-            handleDeleteComment = {handleDeleteComment}
+            handleDeleteComment={handleDeleteComment}
             commentValue={comment}
           />
         </section>
       </article>
     </article>
-      );
+  );
 };
 
 export default TripDetails;

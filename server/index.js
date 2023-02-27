@@ -182,7 +182,8 @@ app.get('/api/comments/:tripId', (req, res, next) => {
     throw new ClientError(401, 'invalid tripId');
   }
   const sql = `
-  select "content",
+  select "commentId",
+         "content",
          "u"."username"
     from "comments"
     join "users" as "u" using ("userId")
