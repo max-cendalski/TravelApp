@@ -9,6 +9,13 @@ export default function Comments(props) {
           return (
             <li className="comment-list-element" key={index + 1}>
               <h4>@{comment.username}</h4>
+              <section className="comment-user-container">
+                {comment.username === props.loggedUser && (
+                  <section className="comment-trash-container">
+                    <i className="fa-solid fa-trash"></i>
+                  </section>
+                )}
+              </section>
               <p>{comment.content}</p>
             </li>
           );
