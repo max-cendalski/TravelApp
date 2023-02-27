@@ -182,7 +182,8 @@ app.get('/api/comments/:tripId', (req, res, next) => {
     throw new ClientError(401, 'invalid tripId');
   }
   const sql = `
-  select "content",
+  select "commentId",
+         "content",
          "u"."username"
     from "comments"
     join "users" as "u" using ("userId")
@@ -452,7 +453,30 @@ app.delete('/api/my-reviews/:tripId', (req, res, next) => {
     const trip = result.rows[0];
     if (!trip) {
       res.status(404).json({
-        error: `Cannot find trip with that tripId ${tripId}`
+        error: `Cannot find trip with that Id ${tripId}`
+      });
+    } else {
+      res.status(204).send('success');
+    }
+  });
+});
+
+app.delete('/api/trips/:commentId', (req, res, next) => {
+  const commentId = Number(req.params.commentId);
+  if (!Number.isInteger(commentId) || commentId <= 0) {
+    res.status(400).json({ error: 'commentId must be positive integer' });
+    return;
+  }
+  const sql = `
+    DELETE from "comments"
+    WHERE "commentId" = $1
+    `;
+  const params = [commentId];
+  db.query(sql, params).then(result => {
+    const [comment] = result.rows;
+    if (!comment) {
+      res.status(404).json({
+        error: `Cannot find comment with that id ${commentId}`
       });
     } else {
       res.status(204).send('success');

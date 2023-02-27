@@ -1,15 +1,22 @@
-import React from "react";
+import React from 'react';
 
 export default function Comments(props) {
   return (
     <div>
       <h2>Comments</h2>
       <ul className="comments-list">
-        {props.comments.map((comment, index) => {
+        {props.comments.map((comment) => {
           return (
-            <li className="comment-list-element" key={index + 1}>
+            <li className="comment-list-element" key={comment.commentId}>
               <h4>@{comment.username}</h4>
-              <p>{comment.content}</p>{" "}
+              <section className="comment-user-container">
+                {comment.username === props.loggedUser && (
+                  <section onClick={()=> props.handleDeleteComment(comment.commentId)} className="comment-trash-container">
+                    <i className="fa-solid fa-trash"></i>
+                  </section>
+                )}
+              </section>
+              <p>{comment.content}</p>
             </li>
           );
         })}

@@ -94,6 +94,23 @@ const TripDetails = props => {
     });
   };
 
+  const handleDeleteComment = id => {
+    const commentId = Number(id);
+    const token = window.localStorage.getItem('TravelApp-token');
+    setComments(comments.filter(comment => comment.commentId !== id));
+    fetch(`/api/trips/${commentId}`, {
+      method: 'DELETE',
+      headers: {
+        'x-access-token': token,
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .catch(error => {
+        console.error('Error :', error);
+      });
+  };
+
   if (!trip) return null;
   const {
     country,
@@ -118,10 +135,7 @@ const TripDetails = props => {
     : (
     <article>
       <Navbar />
-      <article
-        className="container"
-        id="trip-details-container"
-      >
+      <article className="container" id="trip-details-container">
         <article id="name-location-scores-trip-details">
           <section>
             <h2 className="country-name">
@@ -175,6 +189,7 @@ const TripDetails = props => {
             commentForm={commentsSection.commentForm}
             handleCommentTextarea={handleCommentTextarea}
             handleCancelComment={handleCancelComment}
+            handleDeleteComment={handleDeleteComment}
             commentValue={comment}
           />
         </section>

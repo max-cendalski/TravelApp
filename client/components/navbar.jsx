@@ -13,8 +13,8 @@ const Navbar = () => {
 
   const navbarContextData = useContext(AppDataContext);
 
-  const handleChange = event => {
-    event.preventDefault();
+  const handleChange = e => {
+    e.preventDefault();
     const letter = event.target.value;
     setSearchBox(letter);
     const locationsArray = [];
@@ -39,8 +39,8 @@ const Navbar = () => {
     }
   };
 
-  const handleSubmit = event => {
-    event.preventDefault();
+  const handleSubmit = e => {
+    e.preventDefault();
     const country = searchBox.split(',')[0];
     window.location.hash = `#search-results?country=${country}`;
     setSearchBox('');
