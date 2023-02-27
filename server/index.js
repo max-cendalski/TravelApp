@@ -461,10 +461,10 @@ app.delete('/api/my-reviews/:tripId', (req, res, next) => {
   });
 });
 
-app.delete("/api/trips/:commentId", (req, res, next) => {
+app.delete('/api/trips/:commentId', (req, res, next) => {
   const commentId = Number(req.params.commentId);
   if (!Number.isInteger(commentId) || commentId <= 0) {
-    res.status(400).json({ error: "tripId must be positive integer" });
+    res.status(400).json({ error: 'commentId must be positive integer' });
     return;
   }
   const sql = `
@@ -472,14 +472,14 @@ app.delete("/api/trips/:commentId", (req, res, next) => {
     WHERE "commentId" = $1
     `;
   const params = [commentId];
-  db.query(sql, params).then((result) => {
-    const trip = result.rows[0];
-    if (!trip) {
+  db.query(sql, params).then(result => {
+    const [comment] = result.rows;
+    if (!comment) {
       res.status(404).json({
-        error: `Cannot find comment with that id ${commentId}`,
+        error: `Cannot find comment with that id ${commentId}`
       });
     } else {
-      res.status(204).send("success");
+      res.status(204).send('success');
     }
   });
 });
