@@ -100,8 +100,8 @@ const TripDetails = (props) => {
 
 
 
-  const handleDeleteComment = (comment) => {
-    console.log('comment',comment)
+  const handleDeleteComment = id => {
+    console.log('comment',id)
   };
 
   if (!trip) return null;
