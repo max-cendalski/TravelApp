@@ -93,6 +93,9 @@ const TripDetails = props => {
       addCommentButton: 'app-button background-orange float-right'
     });
   };
+  const handleDeleteComment = e => {
+    console.log('whe')
+  }
 
   if (!trip) return null;
   const {
@@ -175,6 +178,7 @@ const TripDetails = props => {
             commentForm={commentsSection.commentForm}
             handleCommentTextarea={handleCommentTextarea}
             handleCancelComment={handleCancelComment}
+            handleDeleteComment = {handleDeleteComment}
             commentValue={comment}
           />
         </section>
