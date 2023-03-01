@@ -24,10 +24,11 @@ const Reviews = () => {
       });
   }, []);
 
-  const handleDeleteReview = id => {
+  const handleDeleteReview = (id, mainPhotoUrl) => {
     const tripId = Number(id);
+    const mainPhoto = String(mainPhotoUrl);
     const token = window.localStorage.getItem('TravelApp-token');
-    setMyReviews(myReviews.filter(review => review.tripId !== id));
+    //setMyReviews(myReviews.filter(review => review.tripId !== id));
     fetch(`/api/my-reviews/${tripId}`, {
       method: 'DELETE',
       headers: {
@@ -79,7 +80,7 @@ function Trip(props) {
         </p>
       </a>
       <section
-        onClick={() => props.handleDeleteReview(tripId)}
+        onClick={() => props.handleDeleteReview(tripId,mainPhotoUrl)}
         className="trash-container"
       >
         <i className="fa-solid fa-trash fa-xl"></i>

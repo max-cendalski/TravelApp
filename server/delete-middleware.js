@@ -7,12 +7,14 @@ const s3 = new AWS.S3({
   Bucket: process.env.AWS_S3_BUCKET,
 });
 
-function deleteMiddleware() {
+function deleteMiddleware(params) {
   s3.deleteObject(
+
     { Bucket: "travelappmaxcenbucket", Key: "1677634862836.JPG" },
     (err, data) => {
       console.error(err);
       console.log(data);
+      console.log('paramassss-',params.mainPhoto);
     }
   );
 }
