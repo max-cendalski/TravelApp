@@ -16,7 +16,8 @@ const storage = multerS3({
   acl: 'public-read',
   key: (req, file, done) => {
     const fileExtension = path.extname(file.originalname);
-    const key = `${Date.now()}${fileExtension}`;
+    //const key = `${Date.now()}${fileExtension}`;
+    const key = `${file.originalname}${Date.now()}`;
     done(null, key);
   },
   contentType: (req, file, done) => {
@@ -30,3 +31,6 @@ const uploadsMiddleware = multer({
 }).single('image');
 
 module.exports = uploadsMiddleware;
+
+
+//https://travelappmaxcenbucket.s3.amazonaws.com/1677634457593.jpg
