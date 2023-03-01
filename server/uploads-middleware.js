@@ -11,6 +11,7 @@ const s3 = new S3({
 
 const storage = multerS3({
   s3: s3,
+  region: process.env.AWS_S3_REGION,
   bucket: process.env.AWS_S3_BUCKET,
   acl: 'public-read',
   key: (req, file, done) => {
