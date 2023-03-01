@@ -17,7 +17,7 @@ const storage = multerS3({
   key: (req, file, done) => {
     const fileExtension = path.extname(file.originalname);
     //const key = `${Date.now()}${fileExtension}`;
-    const key = `${file.originalname}${Date.now()}`;
+    const key = `${Date.now()}${file.originalname}`;
     done(null, key);
   },
   contentType: (req, file, done) => {
@@ -31,6 +31,3 @@ const uploadsMiddleware = multer({
 }).single('image');
 
 module.exports = uploadsMiddleware;
-
-
-//https://travelappmaxcenbucket.s3.amazonaws.com/1677634457593.jpg

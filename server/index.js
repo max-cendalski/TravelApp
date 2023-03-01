@@ -1,6 +1,6 @@
 require("dotenv/config");
 require("aws-sdk/lib/maintenance_mode_message").suppress = true;
-const S3 = require("aws-sdk/clients/s3");
+
 const staticMiddleware = require("./static-middleware");
 const pg = require("pg");
 const argon2 = require("argon2");
@@ -9,6 +9,7 @@ const express = require("express");
 const errorMiddleware = require("./error-middleware");
 const authorizationMiddleware = require("./authorization-middleware");
 const uploadsMiddleware = require("./uploads-middleware");
+const deleteMiddleware = require("./delete-middleware");
 const ClientError = require("./client-error");
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -16,6 +17,7 @@ const db = new pg.Pool({
     rejectUnauthorized: false,
   },
 });
+
 
 const app = express();
 app.use(staticMiddleware);
@@ -439,20 +441,8 @@ app.get("/api/my-reviews", (req, res, next) => {
     .catch((err) => next(err));
 });
 
-app.delete("/api/my-reviews/:tripId", (req, res, next) => {
-  const s3 = new AWS.S3({
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    Bucket: process.env.AWS_S3_BUCKET,
-  });
+app.delete("/api/my-reviews/:tripId",deleteMiddleware, (req, res, next) => {
 
-  s3.deleteObject(
-    { Bucket: "travelappmaxcenbucket", Key: "George1.jpg.jpg" },
-    (err, data) => {
-      console.error(err);
-      console.log(data);
-    }
-  );
   const tripId = Number(req.params.tripId);
   if (!Number.isInteger(tripId) || tripId <= 0) {
     res.status(400).json({ error: "tripId must be positive integer" });
