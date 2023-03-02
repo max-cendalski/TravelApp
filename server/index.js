@@ -440,7 +440,7 @@ app.get("/api/my-reviews", (req, res, next) => {
     .catch((err) => next(err));
 });
 
-app.delete("/api/my-reviews/:tripId/:mainPhoto", (req, res, next) => {
+app.delete("/api/my-reviews/:tripId/:mainPhoto",deleteMiddleware, (req, res, next) => {
   console.log("reqparams--", req.params);
   const tripId = Number(req.params.tripId)
   const mainPhoto = req.params.mainPhoto;
