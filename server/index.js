@@ -225,7 +225,7 @@ app.post("/api/trips", uploadsMiddleware, (req, res, next) => {
               "transportScore",
               "safetyScore"
             )
-            values ($1,$2,$3,$4,$5,$6,$7,$8,$9, $10)
+            values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
             returning *
             `;
   const params = [
@@ -440,18 +440,21 @@ app.get("/api/my-reviews", (req, res, next) => {
     .catch((err) => next(err));
 });
 
-app.delete("/api/my-reviews/:tripId", (req, res, next) => {
-  const tripId = Number(req.params.tripId);
-  console.log("tripId", tripId);
-  const sql = `
+app.delete("/api/my-reviews/:tripId/:mainPhoto", (req, res, next) => {
+  console.log("reqparams--", req.params);
+  const tripId = Number(req.params.tripId)
+  const mainPhoto = req.params.mainPhoto;
+
+  /*   const sql = `
     select  "mainPhotoUrl"
         from "trips"
       where "tripId" = $1
-      `;
-      const params = [tripId]
+      `; */
+  //const params = [tripId];
+  console.log("tirpid--",parseInt(Number(tripId)));
+
   db.query(sql, params).then((result) => {
-    const trip = result.rows[0]
-    console.log('trip',trip.mainPhotoUrl)
+    const trip = result.rows[0];
     if (!trip) {
       res.status(404).json({
         error: `Cannot find trip with that Id ${tripId}`,
@@ -480,6 +483,7 @@ app.delete("/api/my-reviews/:tripId", (req, res, next) => {
       res.status(204).send("success");
     }
   }); */
+
 });
 
 app.delete("/api/trips/:commentId", (req, res, next) => {

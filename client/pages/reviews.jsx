@@ -24,12 +24,12 @@ const Reviews = () => {
       });
   }, []);
 
-  const handleDeleteReview = (id, mainPhotoUrl) => {
-    const tripId = Number(id);
-    const mainPhoto = String(mainPhotoUrl);
+  const handleDeleteReview = (id, city) => {
+    const tripId = Number(id)
+    const mainPhoto = city + 13543223
     const token = window.localStorage.getItem('TravelApp-token');
     //setMyReviews(myReviews.filter(review => review.tripId !== id));
-    fetch(`/api/my-reviews/${tripId}`, {
+    fetch(`/api/my-reviews/${tripId}/${mainPhoto}`, {
       method: 'DELETE',
       headers: {
         'x-access-token': token,
@@ -37,6 +37,7 @@ const Reviews = () => {
       }
     })
       .then(response => response.json())
+      .then(result => console.log('resultfromfetch:',result))
       .catch(error => {
         console.error('Error :', error);
       });
@@ -80,7 +81,7 @@ function Trip(props) {
         </p>
       </a>
       <section
-        onClick={() => props.handleDeleteReview(tripId,mainPhotoUrl)}
+        onClick={() => props.handleDeleteReview(tripId,city)}
         className="trash-container"
       >
         <i className="fa-solid fa-trash fa-xl"></i>
