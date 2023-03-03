@@ -450,11 +450,11 @@ app.get("/api/my-reviews", (req, res, next) => {
 });
 
 app.delete("/api/my-reviews/:tripId/:mainPhoto", (req, res, next) => {
-  console.log("reqparams--", req.params);
   const tripId = Number(req.params.tripId);
   const mainPhoto = req.params.mainPhoto;
   console.log("mainphoto", mainPhoto);
-  function deleteMiddleware() {
+
+  function deleteFile() {
     s3.deleteObject(
       { Bucket: "travelappmaxcenbucket", Key: mainPhoto },
       (err, data) => {
@@ -463,26 +463,7 @@ app.delete("/api/my-reviews/:tripId/:mainPhoto", (req, res, next) => {
       }
     );
   }
-  deleteMiddleware();
-
-  /*   const sql = `
-    select  "mainPhotoUrl"
-        from "trips"
-      where "tripId" = $1
-      `;
-  //const params = [tripId];
-  console.log("tirpid--",parseInt(Number(tripId)));
-
-  db.query(sql, params).then((result) => {
-    const trip = result.rows[0];
-    if (!trip) {
-      res.status(404).json({
-        error: `Cannot find trip with that Id ${tripId}`,
-      });
-    } else {
-      res.status(204).send("success");
-    }
-  });*/
+  deleteFile();
 
   if (!Number.isInteger(tripId) || tripId <= 0) {
     res.status(400).json({ error: "tripId must be positive integer" });
