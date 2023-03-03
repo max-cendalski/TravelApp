@@ -18,6 +18,7 @@ const storage = multerS3({
     const fileExtension = path.extname(file.originalname);
     const key = `${Date.now()}-${file.originalname}`;
     //const key = `${file.originalname}${Date.now()}`;
+    console.log("file", storage.key);
     done(null, key);
   },
   contentType: (req, file, done) => {
