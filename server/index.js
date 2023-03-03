@@ -1,6 +1,9 @@
 require("dotenv/config");
 require("aws-sdk/lib/maintenance_mode_message").suppress = true;
 
+const AWS = require("aws-sdk");
+const S3 = require("aws-sdk/clients/s3");
+
 const staticMiddleware = require("./static-middleware");
 const pg = require("pg");
 const argon2 = require("argon2");
@@ -16,6 +19,12 @@ const db = new pg.Pool({
   ssl: {
     rejectUnauthorized: false,
   },
+});
+
+const s3 = new AWS.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  Bucket: process.env.AWS_S3_BUCKET,
 });
 
 const app = express();
@@ -440,16 +449,27 @@ app.get("/api/my-reviews", (req, res, next) => {
     .catch((err) => next(err));
 });
 
-app.delete("/api/my-reviews/:tripId/:mainPhoto",deleteMiddleware, (req, res, next) => {
+app.delete("/api/my-reviews/:tripId/:mainPhoto", (req, res, next) => {
   console.log("reqparams--", req.params);
-  const tripId = Number(req.params.tripId)
+  const tripId = Number(req.params.tripId);
   const mainPhoto = req.params.mainPhoto;
+  console.log("mainphoto", mainPhoto);
+  function deleteMiddleware() {
+    s3.deleteObject(
+      { Bucket: "travelappmaxcenbucket", Key: mainPhoto },
+      (err, data) => {
+        console.error(err);
+        console.log(data);
+      }
+    );
+  }
+  deleteMiddleware();
 
   /*   const sql = `
     select  "mainPhotoUrl"
         from "trips"
       where "tripId" = $1
-      `; */
+      `;
   //const params = [tripId];
   console.log("tirpid--",parseInt(Number(tripId)));
 
@@ -462,17 +482,17 @@ app.delete("/api/my-reviews/:tripId/:mainPhoto",deleteMiddleware, (req, res, nex
     } else {
       res.status(204).send("success");
     }
-  });
+  });*/
 
-  /*  if (!Number.isInteger(tripId) || tripId <= 0) {
+  if (!Number.isInteger(tripId) || tripId <= 0) {
     res.status(400).json({ error: "tripId must be positive integer" });
     return;
-  } */
-  /*  const sql = `
+  }
+  const sql = `
     DELETE from "trips"
     WHERE "tripId" = $1
-    `; */
-  /*  const params = [tripId];
+    `;
+  const params = [tripId];
   db.query(sql, params).then((result) => {
     const trip = result.rows[0];
     if (!trip) {
@@ -482,8 +502,7 @@ app.delete("/api/my-reviews/:tripId/:mainPhoto",deleteMiddleware, (req, res, nex
     } else {
       res.status(204).send("success");
     }
-  }); */
-
+  });
 });
 
 app.delete("/api/trips/:commentId", (req, res, next) => {

@@ -7,7 +7,7 @@ const s3 = new AWS.S3({
   Bucket: process.env.AWS_S3_BUCKET,
 });
 
-function deleteMiddleware(mainPhoto) {
+function deleteMiddleware() {
   s3.deleteObject(
     { Bucket: "travelappmaxcenbucket", Key: "1677634862836.JPG" },
     (err, data) => {
