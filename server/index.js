@@ -454,7 +454,7 @@ app.delete("/api/my-reviews/:tripId/:mainPhoto", (req, res, next) => {
   const mainPhoto = req.params.mainPhoto;
   console.log("mainphoto", mainPhoto);
 
-  function deleteFile() {
+   (function deleteFile() {
     s3.deleteObject(
       { Bucket: "travelappmaxcenbucket", Key: mainPhoto },
       (err, data) => {
@@ -462,8 +462,8 @@ app.delete("/api/my-reviews/:tripId/:mainPhoto", (req, res, next) => {
         console.log(data);
       }
     );
-  }
-  deleteFile();
+  })()
+
 
   if (!Number.isInteger(tripId) || tripId <= 0) {
     res.status(400).json({ error: "tripId must be positive integer" });

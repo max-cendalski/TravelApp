@@ -69,7 +69,7 @@ const Reviews = () => {
 };
 
 function Trip(props) {
-  const { tripId, country, city, mainPhotoUrl } = props.trip;
+  const { tripId, country, city, mainPhotoUrl, handleDeleteReview } = props.trip;
   return (
     <article>
       <a href={`#trips?tripId=${tripId}`} className="text-container">
