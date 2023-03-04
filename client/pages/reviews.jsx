@@ -87,7 +87,6 @@ function Trip(props) {
       >
         <i className="fa-solid fa-trash fa-xl"></i>
       </section>
-
       <section className="image-container">
         <img className="photo" src={mainPhotoUrl}></img>
       </section>
