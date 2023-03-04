@@ -27,7 +27,7 @@ const Reviews = () => {
   const handleDeleteReview = (id, mainPhotoUrl) => {
     const tripId = Number(id);
     const token = window.localStorage.getItem('TravelApp-token');
-    const fileToRemove = mainPhotoUrl.slice(47);
+    const fileToRemove = mainPhotoUrl.split('amazonaws.com/')[1];
 
     setMyReviews(myReviews.filter(review => review.tripId !== id));
     fetch(`/api/my-reviews/${tripId}/${fileToRemove}`, {
@@ -72,8 +72,7 @@ const Reviews = () => {
 };
 
 function Trip(props) {
-  const { tripId, country, city, mainPhotoUrl } =
-    props.trip;
+  const { tripId, country, city, mainPhotoUrl } = props.trip;
   return (
     <article>
       <a href={`#trips?tripId=${tripId}`} className="text-container">
