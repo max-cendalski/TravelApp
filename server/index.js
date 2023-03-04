@@ -449,21 +449,19 @@ app.get("/api/my-reviews", (req, res, next) => {
     .catch((err) => next(err));
 });
 
-app.delete("/api/my-reviews/:tripId/:mainPhoto", (req, res, next) => {
+app.delete("/api/my-reviews/:tripId/:fileToRemove", (req, res, next) => {
   const tripId = Number(req.params.tripId);
-  const mainPhoto = req.params.mainPhoto;
-  console.log("mainphoto", mainPhoto);
+  const fileToRemove = req.params.fileToRemove;
 
-   (function deleteFile() {
+  (function deleteFile() {
     s3.deleteObject(
-      { Bucket: "travelappmaxcenbucket", Key: mainPhoto },
+      { Bucket: "travelappmaxcenbucket", Key: fileToRemove },
       (err, data) => {
         console.error(err);
         console.log(data);
       }
     );
-  })()
-
+  })();
 
   if (!Number.isInteger(tripId) || tripId <= 0) {
     res.status(400).json({ error: "tripId must be positive integer" });

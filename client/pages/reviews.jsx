@@ -24,12 +24,16 @@ const Reviews = () => {
       });
   }, []);
 
-  const handleDeleteReview = (id, city) => {
+  const handleDeleteReview = (id, mainPhotoUrl) => {
     const tripId = Number(id);
     const mainPhoto = "1677815189975-t1.jpg";
     const token = window.localStorage.getItem("TravelApp-token");
+    console.log("mainPhoto", mainPhotoUrl);
+    const fileToRemove = mainPhotoUrl.slice(47);
+    console.log("fileToRemove", fileToRemove);
+
     setMyReviews(myReviews.filter((review) => review.tripId !== id));
-    fetch(`/api/my-reviews/${tripId}/${mainPhoto}`, {
+    fetch(`/api/my-reviews/${tripId}/${fileToRemove}`, {
       method: "DELETE",
       headers: {
         "x-access-token": token,
@@ -69,7 +73,8 @@ const Reviews = () => {
 };
 
 function Trip(props) {
-  const { tripId, country, city, mainPhotoUrl, handleDeleteReview } = props.trip;
+  const { tripId, country, city, mainPhotoUrl, handleDeleteReview } =
+    props.trip;
   return (
     <article>
       <a href={`#trips?tripId=${tripId}`} className="text-container">
@@ -78,7 +83,7 @@ function Trip(props) {
         </p>
       </a>
       <section
-        onClick={() => props.handleDeleteReview(tripId, city)}
+        onClick={() => props.handleDeleteReview(tripId, mainPhotoUrl)}
         className="trash-container"
       >
         <i className="fa-solid fa-trash fa-xl"></i>
