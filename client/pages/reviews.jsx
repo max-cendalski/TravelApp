@@ -24,11 +24,13 @@ const Reviews = () => {
       });
   }, []);
 
-  const handleDeleteReview = id => {
+  const handleDeleteReview = (id, mainPhotoUrl) => {
     const tripId = Number(id);
     const token = window.localStorage.getItem('TravelApp-token');
+    const fileToRemove = mainPhotoUrl.split('amazonaws.com/')[1];
+
     setMyReviews(myReviews.filter(review => review.tripId !== id));
-    fetch(`/api/my-reviews/${tripId}`, {
+    fetch(`/api/my-reviews/${tripId}/${fileToRemove}`, {
       method: 'DELETE',
       headers: {
         'x-access-token': token,
@@ -79,12 +81,11 @@ function Trip(props) {
         </p>
       </a>
       <section
-        onClick={() => props.handleDeleteReview(tripId)}
+        onClick={() => props.handleDeleteReview(tripId, mainPhotoUrl)}
         className="trash-container"
       >
         <i className="fa-solid fa-trash fa-xl"></i>
       </section>
-
       <section className="image-container">
         <img className="photo" src={mainPhotoUrl}></img>
       </section>

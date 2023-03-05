@@ -1,32 +1,31 @@
-import React, { useState, useEffect } from "react";
-import Navbar from "../components/navbar";
-import { Carousel } from "react-responsive-carousel";
-import { createContext, useContext } from "react";
+import React, { useState, useEffect } from 'react';
+import Navbar from '../components/navbar';
+import { Carousel } from 'react-responsive-carousel';
 
 const Home = () => {
   const [imagesCarousel, setImagesCarousel] = useState([]);
   const [countriesCarousel, setCountriesCarousel] = useState([]);
 
   useEffect(() => {
-    fetch("/api/images", {
-      method: "GET",
+    fetch('/api/images', {
+      method: 'GET',
       headers: {
-        "Content-type": "application/json",
-      },
+        'Content-type': 'application/json'
+      }
     })
-      .then((response) => response.json())
-      .then((result) => {
+      .then(response => response.json())
+      .then(result => {
         const images = [];
         const countries = [];
 
-        for (let i = 0; i < 7; i++) {
+        for (let i = 0; i < 3; i++) {
           images.push(result[i].mainPhotoUrl);
           countries.push(result[i].country);
         }
         setImagesCarousel(images);
         setCountriesCarousel(countries);
       })
-      .catch((error) => error(console.error("Error", error)));
+      .catch(error => error(console.error('Error', error)));
   }, []);
 
   if (!imagesCarousel) return null;
@@ -56,7 +55,14 @@ const Home = () => {
           <p className="carousel-country-name">{countriesCarousel[2]}</p>
           <img className="photo" src={imagesCarousel[2]} />
         </div>
-        <div className="image-home">
+      </Carousel>
+    </article>
+  );
+};
+
+export default Home;
+
+/*   <div className="image-home">
           <p className="carousel-country-name">{countriesCarousel[3]}</p>
           <img className="photo" src={imagesCarousel[3]} />
         </div>
@@ -71,10 +77,4 @@ const Home = () => {
         <div className="image-home">
           <p className="carousel-country-name">{countriesCarousel[6]}</p>
           <img className="photo" src={imagesCarousel[6]} />
-        </div>
-      </Carousel>
-    </article>
-  );
-};
-
-export default Home;
+        </div> */

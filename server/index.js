@@ -1,5 +1,7 @@
 require('dotenv/config');
 require('aws-sdk/lib/maintenance_mode_message').suppress = true;
+
+const AWS = require('aws-sdk');
 const staticMiddleware = require('./static-middleware');
 const pg = require('pg');
 const argon2 = require('argon2');
@@ -223,7 +225,7 @@ app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
               "transportScore",
               "safetyScore"
             )
-            values ($1,$2,$3,$4,$5,$6,$7,$8,$9, $10)
+            values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
             returning *
             `;
   const params = [
@@ -438,8 +440,24 @@ app.get('/api/my-reviews', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.delete('/api/my-reviews/:tripId', (req, res, next) => {
+app.delete('/api/my-reviews/:tripId/:fileToRemove', (req, res, next) => {
+  const s3 = new AWS.S3({
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    Bucket: process.env.AWS_S3_BUCKET
+  });
   const tripId = Number(req.params.tripId);
+  const fileToRemove = req.params.fileToRemove;
+
+  (function deleteFile() {
+    s3.deleteObject(
+      { Bucket: 'travelappmaxcenbucket', Key: fileToRemove },
+      (err, data) => {
+        console.error(err);
+      }
+    );
+  })();
+
   if (!Number.isInteger(tripId) || tripId <= 0) {
     res.status(400).json({ error: 'tripId must be positive integer' });
     return;

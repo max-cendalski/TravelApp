@@ -11,11 +11,14 @@ const s3 = new S3({
 
 const storage = multerS3({
   s3: s3,
+  region: process.env.AWS_S3_REGION,
   bucket: process.env.AWS_S3_BUCKET,
   acl: 'public-read',
   key: (req, file, done) => {
     const fileExtension = path.extname(file.originalname);
-    const key = `${Date.now()}${fileExtension}`;
+    const key = `${Date.now()}-${file.originalname}`;
+    //const key = `${file.originalname}${Date.now()}`;
+    console.log("file", storage.key);
     done(null, key);
   },
   contentType: (req, file, done) => {

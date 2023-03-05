@@ -14,7 +14,7 @@ const ReviewForm = () => {
     transportScore: 0,
     safetyScore: 0
   });
-  const [selectedImage, setSelectedImage] = useState();
+  const [selectedImage, setSelectedImage] = useState({});
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -29,7 +29,6 @@ const ReviewForm = () => {
     formData.append('peopleScore', form.peopleScore);
     formData.append('transportScore', form.transportScore);
     formData.append('safetyScore', form.safetyScore);
-
     fetch('/api/trips', {
       method: 'POST',
       headers: {
