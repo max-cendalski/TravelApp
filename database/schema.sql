@@ -18,7 +18,6 @@ CREATE TABLE "public"."users" (
 );
 
 
-
 CREATE TABLE "public"."comments" (
 	"commentId" serial NOT NULL,
 	"content" TEXT NOT NULL,
