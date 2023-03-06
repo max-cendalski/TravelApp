@@ -5,7 +5,7 @@ const Time = ({ date }) => {
   const dateToReneder = format(new Date(Number(date)), 'PP');
   return (
     <article>
-      <p className="date-paragraph">created: {dateToReneder}</p>
+      <p className="date-paragraph">{dateToReneder}</p>
     </article>
   );
 };
