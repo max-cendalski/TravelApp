@@ -3,6 +3,7 @@ import Navbar from '../components/navbar';
 import Comments from '../components/comments';
 import ReviewScore from '../components/review-score';
 import MapComponent from '../components/map';
+import Time from '../components/date';
 import { AppDataContext } from '../components/context';
 
 const TripDetails = props => {
@@ -142,6 +143,7 @@ const TripDetails = props => {
               {trip.country}-<span className="city-name">{trip.city}</span>
             </h2>
             <h3> @{username}</h3>
+            <Time date={trip.created} />
           </section>
           <section>
             <ul>
