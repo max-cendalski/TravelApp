@@ -3,7 +3,7 @@ import Navbar from '../components/navbar';
 import { Carousel } from 'react-responsive-carousel';
 
 const Home = () => {
-  const [imagesCarousel, setImagesCarousel] = useState([]);
+  const [imagesCarousel, setImagesCarousel] = useState(null);
   const [countriesCarousel, setCountriesCarousel] = useState([]);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const Home = () => {
         const images = [];
         const countries = [];
 
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 6; i++) {
           images.push(result[i].mainPhotoUrl);
           countries.push(result[i].country);
         }
@@ -28,7 +28,7 @@ const Home = () => {
       .catch(error => error(console.error('Error', error)));
   }, []);
 
-  if (!imagesCarousel) return null;
+  if (!imagesCarousel) return <Navbar />;
   return (
     <article>
       <Navbar />
@@ -61,20 +61,3 @@ const Home = () => {
 };
 
 export default Home;
-
-/*   <div className="image-home">
-          <p className="carousel-country-name">{countriesCarousel[3]}</p>
-          <img className="photo" src={imagesCarousel[3]} />
-        </div>
-        <div className="image-home">
-          <p className="carousel-country-name">{countriesCarousel[4]}</p>
-          <img className="photo" src={imagesCarousel[4]} />
-        </div>
-        <div className="image-home">
-          <p className="carousel-country-name">{countriesCarousel[5]}</p>
-          <img className="photo" src={imagesCarousel[5]} />
-        </div>
-        <div className="image-home">
-          <p className="carousel-country-name">{countriesCarousel[6]}</p>
-          <img className="photo" src={imagesCarousel[6]} />
-        </div> */
