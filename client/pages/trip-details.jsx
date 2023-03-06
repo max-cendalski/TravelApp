@@ -110,6 +110,7 @@ const TripDetails = props => {
         console.error('Error :', error);
       });
   };
+  console.log('trip',trip)
 
   if (!trip) return null;
   const {

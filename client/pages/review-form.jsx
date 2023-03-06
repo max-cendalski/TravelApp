@@ -1,74 +1,76 @@
-import React, { useState } from 'react';
-import Navbar from '../components/navbar';
-import PlacesAutocomplete from 'react-places-autocomplete';
+import React, { useState } from "react";
+import Navbar from "../components/navbar";
+import PlacesAutocomplete from "react-places-autocomplete";
 
 const ReviewForm = () => {
   const [form, setForm] = useState({
-    country: '',
-    address: '',
-    city: '',
-    review: '',
+    country: "",
+    address: "",
+    city: "",
+    review: "",
     thingsTodoScore: 0,
     foodScore: 0,
     peopleScore: 0,
     transportScore: 0,
-    safetyScore: 0
+    safetyScore: 0,
   });
   const [selectedImage, setSelectedImage] = useState({});
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    let date = Date.now()
     const formData = new FormData();
-    const token = window.localStorage.getItem('TravelApp-token');
-    formData.append('country', form.country.toLowerCase());
-    formData.append('city', form.city);
-    formData.append('image', selectedImage);
-    formData.append('review', form.review);
-    formData.append('thingsTodoScore', form.thingsTodoScore);
-    formData.append('foodScore', form.foodScore);
-    formData.append('peopleScore', form.peopleScore);
-    formData.append('transportScore', form.transportScore);
-    formData.append('safetyScore', form.safetyScore);
-    fetch('/api/trips', {
-      method: 'POST',
+    const token = window.localStorage.getItem("TravelApp-token");
+    formData.append("country", form.country.toLowerCase());
+    formData.append("city", form.city);
+    formData.append("image", selectedImage);
+    formData.append("review", form.review);
+    formData.append("thingsTodoScore", form.thingsTodoScore);
+    formData.append("foodScore", form.foodScore);
+    formData.append("peopleScore", form.peopleScore);
+    formData.append("transportScore", form.transportScore);
+    formData.append("safetyScore", form.safetyScore);
+    formData.append("created", date);
+    fetch("/api/trips", {
+      method: "POST",
       headers: {
-        'x-access-token': token
+        "x-access-token": token,
       },
-      body: formData
+      body: formData,
     })
-      .then(response => response.json())
-      .catch(error => {
-        console.error('Error:', error);
+      .then((response) => response.json())
+      .catch((error) => {
+        console.error("Error:", error);
       });
-    window.location.hash = '#';
+    window.location.hash = "#";
   };
 
-  const handleChange = address => {
+  const handleChange = (address) => {
     const locationString = address;
-    const locationArray = locationString.split(',');
+    const locationArray = locationString.split(",");
     const city = locationArray[0];
     const country = locationArray[locationArray.length - 1].trim();
     setForm({
       country,
       city,
-      address
+      address,
     });
   };
 
-  const handleChangeFormData = e => {
+  const handleChangeFormData = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setForm(prevData => ({
+    setForm((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleCancelTripReview = () => {
-    window.location.hash = '#';
+    window.location.hash = "#";
   };
 
-  const changeImage = e => {
+  const changeImage = (e) => {
     setSelectedImage(e.target.files[0]);
   };
   return (
@@ -82,7 +84,7 @@ const ReviewForm = () => {
                 getInputProps,
                 suggestions,
                 getSuggestionItemProps,
-                loading
+                loading,
               }) => (
                 <section id="places-autocomplete-section">
                   <label className="review-score-label">Your Location</label>
@@ -92,8 +94,8 @@ const ReviewForm = () => {
                       name="location"
                       required
                       {...getInputProps({
-                        placeholder: 'type city and country',
-                        className: 'location-search-input'
+                        placeholder: "type city and country",
+                        className: "location-search-input",
                       })}
                     />
                   </p>
@@ -101,20 +103,20 @@ const ReviewForm = () => {
                     {loading && <div>Loading...</div>}
                     {suggestions.map((suggestion, index) => {
                       const className = suggestion.active
-                        ? 'suggestion-item--active'
-                        : 'suggestion-item';
+                        ? "suggestion-item--active"
+                        : "suggestion-item";
                       const style = suggestion.active
                         ? {
-                            backgroundColor: '#1c861c',
-                            cursor: 'pointer',
-                            color: '#ffffff'
+                            backgroundColor: "#1c861c",
+                            cursor: "pointer",
+                            color: "#ffffff",
                           }
-                        : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                        : { backgroundColor: "#ffffff", cursor: "pointer" };
                       return (
                         <div
                           {...getSuggestionItemProps(suggestion, {
                             className,
-                            style
+                            style,
                           })}
                           key={index + 1}
                         >

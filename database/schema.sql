@@ -55,6 +55,7 @@ CREATE TABLE "public"."trips" (
 	"peopleScore" int NOT NULL default 0,
 	"transportScore" int NOT NULL default 0,
 	"safetyScore" int NOT NULL default 0,
+	"created" TEXT NOT NULL,
 	"createdAt" timestamptz NOT NULL default now(),
   CONSTRAINT "trips_pk" PRIMARY KEY ("tripId")
 ) WITH (

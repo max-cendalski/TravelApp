@@ -16,7 +16,7 @@ const storage = multerS3({
   acl: 'public-read',
   key: (req, file, done) => {
     const fileExtension = path.extname(file.originalname);
-    const key = `${file.originalname}-${Date.now()}-${fileExtension}`;
+    const key = `${file.originalname}${Date.now()}${fileExtension}`;
     done(null, key);
   },
   contentType: (req, file, done) => {
