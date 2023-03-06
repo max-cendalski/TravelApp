@@ -18,7 +18,7 @@ const Home = () => {
         const images = [];
         const countries = [];
 
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 6; i++) {
           images.push(result[i].mainPhotoUrl);
           countries.push(result[i].country);
         }
@@ -28,7 +28,7 @@ const Home = () => {
       .catch(error => error(console.error('Error', error)));
   }, []);
 
-  if (!imagesCarousel) return null;
+  if (!imagesCarousel) return <Navbar />;
   return (
     <article>
       <Navbar />
