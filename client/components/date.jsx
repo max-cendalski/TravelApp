@@ -3,7 +3,7 @@ import { format } from "date-fns";
 
 // date: format(new Date(), "PP"),
 
-const Time = () => {
+const Time = ({date}) => {
 
   return (
     <article>Time</article>

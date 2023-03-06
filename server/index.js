@@ -125,7 +125,8 @@ app.get("/api/countries/:country", (req, res, next) => {
          "country",
          "tripId",
          "mainPhotoUrl",
-         "u"."username"
+         "u"."username",
+         "created"
     from "trips"
     join "users" as "u" using ("userId")
    where "country" = $1

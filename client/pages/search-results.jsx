@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/navbar';
+import Time from '../components/date';
 
 const SearchResults = props => {
   const [countries, setCountries] = useState([]);
@@ -21,7 +22,7 @@ const SearchResults = props => {
   }, [props]);
 
   function Trip(props) {
-    const { tripId, country, city, username, mainPhotoUrl } = props.trip;
+    const { tripId, country, city, username, mainPhotoUrl, created } = props.trip;
     return (
       <a href={`#trips?tripId=${tripId}`}>
         <section className="text-container">
@@ -29,6 +30,7 @@ const SearchResults = props => {
             {country}-<span className="city-name">{city}</span>
           </p>
           <span className="city-name">@{username}</span>
+          <Time date={date}/>
         </section>
         <section className="image-container">
           <img className="photo" src={mainPhotoUrl}></img>
