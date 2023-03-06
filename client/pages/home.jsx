@@ -3,7 +3,7 @@ import Navbar from '../components/navbar';
 import { Carousel } from 'react-responsive-carousel';
 
 const Home = () => {
-  const [imagesCarousel, setImagesCarousel] = useState([]);
+  const [imagesCarousel, setImagesCarousel] = useState(null);
   const [countriesCarousel, setCountriesCarousel] = useState([]);
 
   useEffect(() => {

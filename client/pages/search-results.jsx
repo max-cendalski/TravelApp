@@ -22,7 +22,8 @@ const SearchResults = props => {
   }, [props]);
 
   function Trip(props) {
-    const { tripId, country, city, username, mainPhotoUrl, created } = props.trip;
+    const { tripId, country, city, username, mainPhotoUrl, created } =
+      props.trip;
     return (
       <a href={`#trips?tripId=${tripId}`}>
         <section className="text-container">
@@ -30,7 +31,7 @@ const SearchResults = props => {
             {country}-<span className="city-name">{city}</span>
           </p>
           <span className="city-name">@{username}</span>
-          <Time date={date}/>
+          <Time date={created} />
         </section>
         <section className="image-container">
           <img className="photo" src={mainPhotoUrl}></img>

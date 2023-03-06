@@ -1,12 +1,12 @@
 import React from 'react';
-import { format } from "date-fns";
+import { format } from 'date-fns';
 
-// date: format(new Date(), "PP"),
-
-const Time = ({date}) => {
-
+const Time = ({ date }) => {
+  const dateToReneder = format(new Date(Number(date)), 'PP');
   return (
-    <article>Time</article>
+    <article>
+      <p className="date-paragraph">created: {dateToReneder}</p>
+    </article>
   );
 };
 

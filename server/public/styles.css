@@ -631,6 +631,15 @@ input::-webkit-inner-spin-button {
   font-style: italic;
 }
 
+/* TIME */
+.date-paragraph {
+  font-style: italic;
+  font-size: 0.675rem;
+  padding-block: 0.125rem;
+  margin-inline-start: 0;
+  font-weight: 600;
+}
+
 .invisible {
   visibility: hidden;
 }
