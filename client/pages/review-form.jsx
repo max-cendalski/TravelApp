@@ -31,6 +31,7 @@ const ReviewForm = () => {
     formData.append("transportScore", form.transportScore);
     formData.append("safetyScore", form.safetyScore);
     formData.append("created", date);
+
     fetch("/api/trips", {
       method: "POST",
       headers: {
@@ -42,7 +43,7 @@ const ReviewForm = () => {
       .catch((error) => {
         console.error("Error:", error);
       });
-    window.location.hash = "#";
+    window.location.hash = "my-reviews";
   };
 
   const handleChange = (address) => {
