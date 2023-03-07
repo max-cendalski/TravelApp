@@ -41,7 +41,8 @@ const App = () => {
     setUser(user);
     setIsAuthorize(true);
     setRoute(parseRoute(window.location.hash));
-  }, []);
+    console.log('whee')
+  }, [route.path]);
 
   const handleSignIn = result => {
     const { user, token } = result;

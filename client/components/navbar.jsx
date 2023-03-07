@@ -42,9 +42,10 @@ const Navbar = () => {
   const handleSubmit = e => {
     e.preventDefault();
     const country = searchBox.split(',')[0];
-    window.location.hash = `#search-results?country=${country}`;
     setSearchBox('');
     setSearchArray('');
+    window.location.hash = `#search-results?country=${country}`;
+
   };
   const handleSearchListClick = event => {
     setSearchBox(

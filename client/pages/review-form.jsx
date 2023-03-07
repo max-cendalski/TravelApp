@@ -18,7 +18,7 @@ const ReviewForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let date = Date.now()
+    let date = Date.now();
     const formData = new FormData();
     const token = window.localStorage.getItem("TravelApp-token");
     formData.append("country", form.country.toLowerCase());
