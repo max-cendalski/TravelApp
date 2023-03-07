@@ -67,7 +67,7 @@ const ReviewForm = () => {
   };
 
   const handleCancelTripReview = () => {
-    window.location.hash = "#";
+    window.location.hash = "my-reviews";
   };
 
   const changeImage = (e) => {
