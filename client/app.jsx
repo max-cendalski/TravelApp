@@ -54,12 +54,14 @@ const App = () => {
     setLogoutInfo('logout-info');
   };
 
-  const handleConfirmLogout = event => {
-    route.path = '';
+  const handleConfirmLogout = e => {
+    e.preventDefault()
     window.localStorage.removeItem('TravelApp-token');
     setUser(null);
     setIsAuthorize(false);
     setLogoutInfo('hidden');
+    window.location.hash = "#";
+
   };
   const handleCancelLogout = () => {
     setLogoutInfo('hidden');
