@@ -48,6 +48,7 @@ const App = () => {
     const { user, token } = result;
     window.localStorage.setItem('TravelApp-token', token);
     setUser(user);
+    window.location.reload()
   };
 
   const handleLogoutWindow = () => {
