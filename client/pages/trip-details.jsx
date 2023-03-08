@@ -156,8 +156,8 @@ const TripDetails = props => {
           </section>
         </article>
         <Weather location={trip} />
-        <MapComponent city={city} country={country} />
 
+        <MapComponent city={city} country={country} />
         <section id="main-photo-trip-details">
           <img className="photo" src={mainPhotoUrl} alt={city}></img>
         </section>

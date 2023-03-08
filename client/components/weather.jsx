@@ -8,7 +8,7 @@ const Weather = ({location}) => {
 
 
   return (
-    <article className='weather-container'>
+    <article id='weather-container'>
       <p>{location.city}</p>
       <p>66 &deg F</p>
     </article>

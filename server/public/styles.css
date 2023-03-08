@@ -505,6 +505,10 @@ input::-webkit-inner-spin-button {
   grid-template-rows: 20rem 20rem auto auto auto 5rem;
 }
 
+#weather-container {
+  position: absolute;
+}
+
 #name-location-scores-trip-details {
   margin-top: 2rem;
   grid-column: 1/3;
