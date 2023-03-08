@@ -41,14 +41,13 @@ const App = () => {
     setUser(user);
     setIsAuthorize(true);
     setRoute(parseRoute(window.location.hash));
-    console.log('whee')
   }, [route.path]);
 
   const handleSignIn = result => {
     const { user, token } = result;
     window.localStorage.setItem('TravelApp-token', token);
     setUser(user);
-    window.location.reload()
+    window.location.reload();
   };
 
   const handleLogoutWindow = () => {
@@ -56,13 +55,12 @@ const App = () => {
   };
 
   const handleConfirmLogout = e => {
-    e.preventDefault()
+    e.preventDefault();
     window.localStorage.removeItem('TravelApp-token');
     setUser(null);
     setIsAuthorize(false);
     setLogoutInfo('hidden');
-    window.location.hash = "#";
-
+    window.location.hash = '#';
   };
   const handleCancelLogout = () => {
     setLogoutInfo('hidden');
