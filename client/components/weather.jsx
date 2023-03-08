@@ -1,17 +1,18 @@
-import React{useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 
-const Weather = () => {
+const Weather = ({location}) => {
 
-  useEffect(()=> {
+ /*  useEffect(()=> {
     const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
-  })
+  }) */
 
 
   return (
-    <article>
-      <p>66&deg</p>
+    <article className='weather-container'>
+      <p>{location.city}</p>
+      <p>66 &deg F</p>
     </article>
-  )
+  );
 }
 
 

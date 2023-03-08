@@ -4,6 +4,7 @@ import Comments from '../components/comments';
 import ReviewScore from '../components/review-score';
 import MapComponent from '../components/map';
 import Time from '../components/date';
+import Weather from '../components/weather';
 import { AppDataContext } from '../components/context';
 
 const TripDetails = props => {
@@ -125,16 +126,14 @@ const TripDetails = props => {
     transportScore,
     safetyScore
   } = trip;
-  return !tripDetailsContext.user
-    ? (
+  return !tripDetailsContext.user ? (
     <article>
-    <Navbar />
+      <Navbar />
       <h1 className="nothing-found-msg">
         You need to be logged in to see detail trip review!
       </h1>
     </article>
-      )
-    : (
+  ) : (
     <article>
       <Navbar />
       <article className="container" id="trip-details-container">
@@ -156,7 +155,9 @@ const TripDetails = props => {
             </ul>
           </section>
         </article>
+        <Weather location={trip} />
         <MapComponent city={city} country={country} />
+
         <section id="main-photo-trip-details">
           <img className="photo" src={mainPhotoUrl} alt={city}></img>
         </section>
@@ -198,7 +199,7 @@ const TripDetails = props => {
         </section>
       </article>
     </article>
-      );
+  );
 };
 
 export default TripDetails;
