@@ -128,6 +128,7 @@ const TripDetails = props => {
   return !tripDetailsContext.user
     ? (
     <article>
+    <Navbar />
       <h1 className="nothing-found-msg">
         You need to be logged in to see detail trip review!
       </h1>

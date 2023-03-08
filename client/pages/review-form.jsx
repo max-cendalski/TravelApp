@@ -18,7 +18,7 @@ const ReviewForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let date = Date.now()
+    let date = Date.now();
     const formData = new FormData();
     const token = window.localStorage.getItem("TravelApp-token");
     formData.append("country", form.country.toLowerCase());
@@ -31,6 +31,7 @@ const ReviewForm = () => {
     formData.append("transportScore", form.transportScore);
     formData.append("safetyScore", form.safetyScore);
     formData.append("created", date);
+
     fetch("/api/trips", {
       method: "POST",
       headers: {
@@ -42,7 +43,7 @@ const ReviewForm = () => {
       .catch((error) => {
         console.error("Error:", error);
       });
-    window.location.hash = "#";
+    window.location.hash = "my-reviews";
   };
 
   const handleChange = (address) => {
@@ -67,7 +68,7 @@ const ReviewForm = () => {
   };
 
   const handleCancelTripReview = () => {
-    window.location.hash = "#";
+    window.location.hash = "my-reviews";
   };
 
   const changeImage = (e) => {

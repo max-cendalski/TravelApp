@@ -1,37 +1,40 @@
-import React, { useContext, useState } from 'react';
-import SignUpForm from '../components/sign-up-form';
-import SignInForm from '../components/sign-in-form';
-import { AppDataContext } from '../components/context';
+import React, { useContext, useState } from "react";
+import SignUpForm from "../components/sign-up-form";
+import SignInForm from "../components/sign-in-form";
+import { AppDataContext } from "../components/context";
 
 const Navbar = () => {
-  const [searchBox, setSearchBox] = useState('');
-  const [visible, setVisible] = useState('hidden');
-  const [modal, setModal] = useState('hidden');
+  const [searchBox, setSearchBox] = useState("");
+  const [visible, setVisible] = useState("hidden");
+  const [modal, setModal] = useState("hidden");
   const [signUpForm, setSignUpForm] = useState(false);
   const [signInForm, setSignInForm] = useState(false);
   const [searchArray, setSearchArray] = useState([]);
 
   const navbarContextData = useContext(AppDataContext);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     e.preventDefault();
     const letter = event.target.value;
     setSearchBox(letter);
     const locationsArray = [];
-    if (letter === '') {
+    if (letter === "") {
       setSearchArray([]);
     } else {
-      navbarContextData.locations.forEach(location => {
+      navbarContextData.locations.forEach((location) => {
         if (
           location.country.includes(letter.toLowerCase()) ||
           location.city.includes(letter.toLowerCase)
         ) {
           locationsArray.push(location);
           const filteredLocations = locationsArray.filter(
-            (location, index, array) => index === array.findIndex(item =>
-              item.country === location.country &&
+            (location, index, array) =>
+              index ===
+              array.findIndex(
+                (item) =>
+                  item.country === location.country &&
                   item.city === location.city
-            )
+              )
           );
           setSearchArray(filteredLocations);
         }
@@ -39,49 +42,49 @@ const Navbar = () => {
     }
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const country = searchBox.split(',')[0];
+    const country = searchBox.split(",")[0];
+    setSearchBox("");
+    setSearchArray("");
     window.location.hash = `#search-results?country=${country}`;
-    setSearchBox('');
-    setSearchArray('');
   };
-  const handleSearchListClick = event => {
+  const handleSearchListClick = (event) => {
     setSearchBox(
-      `${event.target.getAttribute('data-country')},${event.target.getAttribute(
-        'data-city'
+      `${event.target.getAttribute("data-country")},${event.target.getAttribute(
+        "data-city"
       )}`
     );
     setSearchArray([]);
   };
 
   const handleOnMouseEnter = () => {
-    setVisible('drop-down-container');
+    setVisible("drop-down-container");
   };
 
   const handleOnMouseLeave = () => {
-    setVisible('hidden');
+    setVisible("hidden");
   };
 
   const handleSwitchModal = () => {
-    setModal('hidden');
+    setModal("hidden");
     setSignUpForm(false);
     setSignInForm(false);
-    setVisible('hidden');
+    setVisible("hidden");
   };
 
   const handleSignUp = () => {
-    setModal('modal-visible');
+    setModal("modal-visible");
     setSignUpForm(!signUpForm);
   };
 
   const handleSignInButton = () => {
-    setModal('modal-visible');
+    setModal("modal-visible");
     setSignInForm(!signInForm);
   };
 
   const handleMyReviewsButton = () => {
-    window.location.hash = 'my-reviews';
+    window.location.hash = "my-reviews";
   };
 
   return (
