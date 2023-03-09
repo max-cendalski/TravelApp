@@ -154,8 +154,8 @@ const TripDetails = (props) => {
             Country: {trip.country.toUpperCase()}
           </h3>
           <h3 className="name-location-element">City: {trip.city}</h3>
-          <h3 className="name-location-element">Current temp: 80&deg; F</h3>
-          <h3 className="name-location-element">Weather: Clear sky</h3>
+
+          <Weather location={trip}/>
         </section>
         <section id="scores-trip-details">
           <ul>
