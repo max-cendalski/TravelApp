@@ -12,6 +12,7 @@ const TripDetails = props => {
   const [trip, setTrip] = useState(null);
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState('');
+  const [overallScore, setOverallScore] = useState(0)
 
   const [commentsSection, setCommentsSection] = useState({
     addCommentButton: 'app-button background-orange float-right',
@@ -29,7 +30,10 @@ const TripDetails = props => {
         }
       })
         .then(response => response.json())
-        .then(trip => setTrip(trip)),
+        .then(trip => {
+          setTrip(trip)
+          setOverallScore((trip.thingsTodoScore + trip.foodScore + trip.peopleScore + trip.transportScore + trip.safetyScore) / 5)
+        }),
       fetch(`/api/comments/${props.tripId}`, {
         method: 'GET',
         headers: {
@@ -138,13 +142,13 @@ const TripDetails = props => {
       <Navbar />
       <article className="container" id="trip-details-container">
         <section id="name-location-container">
-          <h2 className="country-name">
-            {trip.country}-<span className="city-name">{trip.city}</span>
-          </h2>
-          <h3> @{username}</h3>
+          <h3>Review by @{username}</h3>
           <Time date={trip.created} />
+          <h3>Country: {trip.country.toUpperCase()} </h3>
+          <h3>City: {trip.city}</h3>
+          <h3>Current temp: 80&deg; F</h3>
+          <h3>Weather: Clear sky</h3>
         </section>
-        <Weather location={trip} />
         <section id="name-location-scores-trip-details">
           <section>
             <ul>
@@ -153,6 +157,9 @@ const TripDetails = props => {
               <li className="score-text">People - {peopleScore}</li>
               <li className="score-text">Transport - {transportScore}</li>
               <li className="score-text">Safety - {safetyScore}</li>
+              <li className="overall-score">
+                Overall trip score: {overallScore}
+              </li>
             </ul>
           </section>
         </section>
@@ -203,3 +210,6 @@ const TripDetails = props => {
 };
 
 export default TripDetails;
+
+//      <Weather location={trip} />;
+//<Time date={trip.created} />

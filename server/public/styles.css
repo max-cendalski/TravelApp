@@ -506,7 +506,8 @@ input::-webkit-inner-spin-button {
 }
 
 #name-location-container {
-  grid-column: 1/2;
+  margin-block-start: 2rem;
+  grid-column: 1/1;
   grid-row: 1/2;
 }
 
