@@ -505,14 +505,18 @@ input::-webkit-inner-spin-button {
   grid-template-rows: 20rem 20rem auto auto auto 5rem;
 }
 
+#name-location-container {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+
 #weather-container {
-  position: absolute;
+  grid-column: 1/2;
+  grid-row: 1/2;
 }
 
 #name-location-scores-trip-details {
-  margin-top: 2rem;
-  grid-column: 1/3;
-  grid-row: 1/2;
+
 }
 
 #name-location-scores-trip-details h2 {

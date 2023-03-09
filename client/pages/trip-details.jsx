@@ -137,14 +137,15 @@ const TripDetails = props => {
     <article>
       <Navbar />
       <article className="container" id="trip-details-container">
-        <article id="name-location-scores-trip-details">
-          <section>
-            <h2 className="country-name">
-              {trip.country}-<span className="city-name">{trip.city}</span>
-            </h2>
-            <h3> @{username}</h3>
-            <Time date={trip.created} />
-          </section>
+        <section id="name-location-container">
+          <h2 className="country-name">
+            {trip.country}-<span className="city-name">{trip.city}</span>
+          </h2>
+          <h3> @{username}</h3>
+          <Time date={trip.created} />
+        </section>
+        <Weather location={trip} />
+        <section id="name-location-scores-trip-details">
           <section>
             <ul>
               <li className="score-text">Things to Do - {thingsTodoScore}</li>
@@ -154,8 +155,7 @@ const TripDetails = props => {
               <li className="score-text">Safety - {safetyScore}</li>
             </ul>
           </section>
-        </article>
-        <Weather location={trip} />
+        </section>
 
         <MapComponent city={city} country={country} />
         <section id="main-photo-trip-details">
