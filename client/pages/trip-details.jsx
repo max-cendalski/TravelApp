@@ -1,119 +1,126 @@
-import React, { useState, useEffect, useContext } from 'react';
-import Navbar from '../components/navbar';
-import Comments from '../components/comments';
-import ReviewScore from '../components/review-score';
-import MapComponent from '../components/map';
-import Time from '../components/date';
-import Weather from '../components/weather';
-import { AppDataContext } from '../components/context';
+import React, { useState, useEffect, useContext } from "react";
+import Navbar from "../components/navbar";
+import Comments from "../components/comments";
+import ReviewScore from "../components/review-score";
+import MapComponent from "../components/map";
+import Time from "../components/date";
+import Weather from "../components/weather";
+import { AppDataContext } from "../components/context";
 
-const TripDetails = props => {
+const TripDetails = (props) => {
   const tripDetailsContext = useContext(AppDataContext);
   const [trip, setTrip] = useState(null);
   const [comments, setComments] = useState([]);
-  const [comment, setComment] = useState('');
-  const [overallScore, setOverallScore] = useState(0)
+  const [comment, setComment] = useState("");
+  const [overallScore, setOverallScore] = useState(0);
 
   const [commentsSection, setCommentsSection] = useState({
-    addCommentButton: 'app-button background-orange float-right',
-    commentForm: 'hidden'
+    addCommentButton: "app-button background-orange float-right",
+    commentForm: "hidden",
   });
 
   useEffect(() => {
-    const token = window.localStorage.getItem('TravelApp-token');
+    const token = window.localStorage.getItem("TravelApp-token");
     Promise.all([
       fetch(`/api/trips/${props.tripId}`, {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'x-access-token': token,
-          'Content-Type': 'application/json'
-        }
+          "x-access-token": token,
+          "Content-Type": "application/json",
+        },
       })
-        .then(response => response.json())
-        .then(trip => {
-          setTrip(trip)
-          setOverallScore((trip.thingsTodoScore + trip.foodScore + trip.peopleScore + trip.transportScore + trip.safetyScore) / 5)
+        .then((response) => response.json())
+        .then((trip) => {
+          setTrip(trip);
+          setOverallScore(
+            (trip.thingsTodoScore +
+              trip.foodScore +
+              trip.peopleScore +
+              trip.transportScore +
+              trip.safetyScore) /
+              5
+          );
         }),
       fetch(`/api/comments/${props.tripId}`, {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'x-access-token': token,
-          'Content-Type': 'application/json'
-        }
+          "x-access-token": token,
+          "Content-Type": "application/json",
+        },
       })
-        .then(response => response.json())
-        .then(comments => setComments(comments))
-    ]).catch(error => console.error('Error', error));
+        .then((response) => response.json())
+        .then((comments) => setComments(comments)),
+    ]).catch((error) => console.error("Error", error));
   }, []);
 
   const handleEditButton = () => {
     window.location.hash = `#edit/trip?tripId=${props.tripId}`;
   };
 
-  const handleCommentForm = e => {
+  const handleCommentForm = (e) => {
     e.preventDefault();
     const content = {
-      content: comment
+      content: comment,
     };
-    const token = window.localStorage.getItem('TravelApp-token');
+    const token = window.localStorage.getItem("TravelApp-token");
     fetch(`/api/trips/comments/${props.tripId}`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'x-access-token': token,
-        'Content-Type': 'application/json'
+        "x-access-token": token,
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(content)
+      body: JSON.stringify(content),
     })
-      .then(response => response.json())
-      .then(result => {
+      .then((response) => response.json())
+      .then((result) => {
         result.comment.username = tripDetailsContext.user.username;
         const newComments = [...comments];
         newComments.unshift(result.comment);
         setComments(newComments);
         setCommentsSection({
-          addCommentButton: 'app-button background-orange float-right',
-          commentForm: 'hidden'
+          addCommentButton: "app-button background-orange float-right",
+          commentForm: "hidden",
         });
-        setComment('');
+        setComment("");
       })
-      .catch(error => {
-        console.error('Error :', error);
+      .catch((error) => {
+        console.error("Error :", error);
       });
   };
 
   const handleAddCommentButton = () => {
     setCommentsSection({
-      commentForm: 'comment-form',
-      addCommentButton: 'hidden'
+      commentForm: "comment-form",
+      addCommentButton: "hidden",
     });
   };
 
-  const handleCommentTextarea = e => {
+  const handleCommentTextarea = (e) => {
     setComment(e.target.value);
   };
 
-  const handleCancelComment = e => {
+  const handleCancelComment = (e) => {
     e.preventDefault();
     setCommentsSection({
-      commentForm: 'hidden',
-      addCommentButton: 'app-button background-orange float-right'
+      commentForm: "hidden",
+      addCommentButton: "app-button background-orange float-right",
     });
   };
 
-  const handleDeleteComment = id => {
+  const handleDeleteComment = (id) => {
     const commentId = Number(id);
-    const token = window.localStorage.getItem('TravelApp-token');
-    setComments(comments.filter(comment => comment.commentId !== id));
+    const token = window.localStorage.getItem("TravelApp-token");
+    setComments(comments.filter((comment) => comment.commentId !== id));
     fetch(`/api/trips/${commentId}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
-        'x-access-token': token,
-        'Content-Type': 'application/json'
-      }
+        "x-access-token": token,
+        "Content-Type": "application/json",
+      },
     })
-      .then(response => response.json())
-      .catch(error => {
-        console.error('Error :', error);
+      .then((response) => response.json())
+      .catch((error) => {
+        console.error("Error :", error);
       });
   };
 
@@ -128,7 +135,7 @@ const TripDetails = props => {
     foodScore,
     peopleScore,
     transportScore,
-    safetyScore
+    safetyScore,
   } = trip;
   return !tripDetailsContext.user ? (
     <article>
@@ -142,26 +149,25 @@ const TripDetails = props => {
       <Navbar />
       <article className="container" id="trip-details-container">
         <section id="name-location-container">
-          <h3>Review by @{username}</h3>
-          <Time date={trip.created} />
-          <h3>Country: {trip.country.toUpperCase()} </h3>
-          <h3>City: {trip.city}</h3>
-          <h3>Current temp: 80&deg; F</h3>
-          <h3>Weather: Clear sky</h3>
+          <h3 className="name-location-element-user">Review by @{username}</h3>
+          <h3 className="name-location-element">
+            Country: {trip.country.toUpperCase()}
+          </h3>
+          <h3 className="name-location-element">City: {trip.city}</h3>
+          <h3 className="name-location-element">Current temp: 80&deg; F</h3>
+          <h3 className="name-location-element">Weather: Clear sky</h3>
         </section>
-        <section id="name-location-scores-trip-details">
-          <section>
-            <ul>
-              <li className="score-text">Things to Do - {thingsTodoScore}</li>
-              <li className="score-text">Food - {foodScore}</li>
-              <li className="score-text">People - {peopleScore}</li>
-              <li className="score-text">Transport - {transportScore}</li>
-              <li className="score-text">Safety - {safetyScore}</li>
-              <li className="overall-score">
-                Overall trip score: {overallScore}
-              </li>
-            </ul>
-          </section>
+        <section id="scores-trip-details">
+          <ul>
+            <li className="score-text">Things to Do - {thingsTodoScore}</li>
+            <li className="score-text">Food - {foodScore}</li>
+            <li className="score-text">People - {peopleScore}</li>
+            <li className="score-text">Transport - {transportScore}</li>
+            <li className="score-text">Safety - {safetyScore}</li>
+            <li className="overall-score">
+              Overall trip score: {overallScore}/100
+            </li>
+          </ul>
         </section>
 
         <MapComponent city={city} country={country} />
@@ -170,6 +176,7 @@ const TripDetails = props => {
         </section>
         <article id="review-trip-details">
           <p>{review}</p>
+          <Time date={trip.created} />
         </article>
         <section id="review-edit-button-trip-details">
           {tripDetailsContext.user.username === username && (
@@ -181,7 +188,7 @@ const TripDetails = props => {
             </button>
           )}
         </section>
-        <section id="scores-trip-details">
+        <section id="users-score-trip-details">
           <ReviewScore
             tripId={props.tripId}
             loggedUserId={tripDetailsContext.user.userId}
