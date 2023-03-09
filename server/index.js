@@ -21,6 +21,7 @@ const db = new pg.Pool({
 const app = express();
 app.use(staticMiddleware);
 
+
 const jsonMiddleware = express.json();
 app.use(jsonMiddleware);
 
