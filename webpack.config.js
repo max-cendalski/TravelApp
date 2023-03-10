@@ -1,9 +1,9 @@
-require('dotenv/config');
-const webpack = require('webpack');
-const path = require('path');
+require("dotenv/config");
+const webpack = require("webpack");
+const path = require("path");
 
-const clientPath = path.join(__dirname, 'client');
-const serverPublicPath = path.join(__dirname, 'server/public');
+const clientPath = path.join(__dirname, "client");
+const serverPublicPath = path.join(__dirname, "server/public");
 
 module.exports = {
   resolve: {
@@ -45,12 +45,11 @@ module.exports = {
     hints: false,
   },
   plugins: [
-    new webpack.EnvironmentPlugin(
-      ["GOOGLE_MAPS_API_KEY"],
-      new webpack.DefinePlugin({
-        "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
-        // ...
-      })
-    ),
+    new webpack.EnvironmentPlugin(["GOOGLE_MAPS_API_KEY"]),
+    new webpack.DefinePlugin({
+      "process.env.REACT_APP_WEATHER_API_KEY": JSON.stringify(
+        process.env.REACT_APP_WEATHER_API_KEY
+      ),
+    }),
   ],
 };

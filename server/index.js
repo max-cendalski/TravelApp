@@ -1,5 +1,7 @@
 require("dotenv/config");
 require("aws-sdk/lib/maintenance_mode_message").suppress = true;
+console.log("process form index:", process.env);
+const NODE_ENV = process.env.NODE_ENV;
 
 const AWS = require("aws-sdk");
 const staticMiddleware = require("./static-middleware");
@@ -20,7 +22,6 @@ const db = new pg.Pool({
 
 const app = express();
 app.use(staticMiddleware);
-
 
 const jsonMiddleware = express.json();
 app.use(jsonMiddleware);
@@ -212,7 +213,7 @@ app.post("/api/trips", uploadsMiddleware, (req, res, next) => {
     peopleScore,
     transportScore,
     safetyScore,
-    created
+    created,
   } = req.body;
   const image = req.file.location;
   const sql = `
@@ -244,7 +245,7 @@ app.post("/api/trips", uploadsMiddleware, (req, res, next) => {
     peopleScore,
     transportScore,
     safetyScore,
-    created
+    created,
   ];
   return db
     .query(sql, params)
@@ -364,7 +365,7 @@ app.patch("/api/edit/trip/:tripId", (req, res, next) => {
     foodScore,
     peopleScore,
     transportScore,
-    safetyScore
+    safetyScore,
   } = req.body;
   if (
     !city ||
@@ -401,7 +402,7 @@ app.patch("/api/edit/trip/:tripId", (req, res, next) => {
     transportScore,
     safetyScore,
     tripId,
-    userId
+    userId,
   ];
   db.query(sql, params)
     .then((result) => {

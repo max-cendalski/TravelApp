@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 
-const Weather = ({ country, city}) => {
 
-    useEffect(()=> {
 
-    const weatherApiKey = process.env.NODE_ENV.REACT_APP_WEATHER_API_KEY;
+const Weather = ({ country, city }) => {
+/*   useEffect(() => {
+    const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
+    console.log("we", weatherApiKey);
     //console.log(geocodeByAddress(country, city))
-  })
+  }); */
+    const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
+
 
   return (
     <article id="weather-container">
@@ -18,7 +21,6 @@ const Weather = ({ country, city}) => {
 };
 
 export default Weather;
-
 
 /*   const handleSelect = (address) => {
     const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
