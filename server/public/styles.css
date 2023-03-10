@@ -200,7 +200,7 @@ ul {
 .overall-score {
   padding-block-start: 2rem;
   font-weight: 800;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-style: italic;
 }
 
@@ -530,9 +530,9 @@ input::-webkit-inner-spin-button {
 }
 
 .name-location-element-user {
-  padding-block-end: 0.5rem;
+  padding-block-end: 0.8rem;
   font-style: oblique;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
 }
 
 #scores-trip-details {

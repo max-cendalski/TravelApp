@@ -1,22 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 
+const Weather = ({ location }) => {
+  const [locationData, setLocationData] = useState(null);
 
-
-const Weather = ({ country, city }) => {
-/*   useEffect(() => {
+  useEffect(() => {
     const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
-    console.log("we", weatherApiKey);
-    //console.log(geocodeByAddress(country, city))
-  }); */
-    const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
-
-
+    geocodeByAddress(location.country, location.city)
+      .then((results) => getLatLng(results[0]))
+      .then((latLng) => {
+        fetch(
+          `https://api.openweathermap.org/data/3.0/onecall?lat=${latLng.lat}&lon=${latLng.lng}&units=imperial&appid=${weatherApiKey}`
+        )
+          .then((res) => res.json())
+          .then((data) => setLocationData(data))
+          .catch((error) => console.error("Error", error));
+      });
+  },[]);
+  console.log(locationData)
   return (
-    <article id="weather-container">
-      <h3 className="name-location-element">Current temp: 80&deg; F</h3>
-      <h3 className="name-location-element">Weather: Clear sky</h3>
+    locationData && (
+      <article id="weather-container">
+      <h3 className="name-location-element">Current temp: {locationData.current.temp}&deg; F</h3>
+      <h3 className="name-location-element">Weather: {locationData.current.weather[0].description}</h3>
     </article>
+    )
   );
 };
 
