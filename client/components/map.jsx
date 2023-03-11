@@ -18,9 +18,10 @@ export function MapComponent(props) {
     }
     window.addEventListener('resize', handleResize);
     if (screenWidth < 660) {
-      containerStyle.width = '60%';
-      containerStyle.top = '4rem';
-      containerStyle.left = '38%';
+      containerStyle.width = '96%';
+      containerStyle.top = '25rem';
+      containerStyle.left = '2%';
+      containerStyle.right = '2%';
       containerStyle.height = '20rem';
     }
     if (screenWidth > 660) {

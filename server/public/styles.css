@@ -826,7 +826,7 @@ input::-webkit-inner-spin-button {
 
   #main-photo-trip-details {
     grid-column: 1/6;
-    grid-row: 2/3;
+    grid-row: 3/3;
   }
 
   #name-location-scores-trip-details ul {
@@ -869,5 +869,4 @@ input::-webkit-inner-spin-button {
     top: 12%;
     left: 23%;
   }
-}
 }
