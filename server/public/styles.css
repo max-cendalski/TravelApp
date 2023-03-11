@@ -850,7 +850,7 @@ input::-webkit-inner-spin-button {
 
   #users-score-trip-details {
     margin-inline-start: 0.2rem;
-    grid-column: 1/2;
+    grid-column: 1/4;
     grid-row: 5;
     font-size: 0.9rem;
   }
