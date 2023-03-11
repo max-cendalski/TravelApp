@@ -1,36 +1,36 @@
-import React, { useState, useEffect, useContext } from "react";
-import Navbar from "../components/navbar";
-import Comments from "../components/comments";
-import ReviewScore from "../components/review-score";
-import MapComponent from "../components/map";
-import Time from "../components/date";
-import Weather from "../components/weather";
-import { AppDataContext } from "../components/context";
+import React, { useState, useEffect, useContext } from 'react';
+import Navbar from '../components/navbar';
+import Comments from '../components/comments';
+import ReviewScore from '../components/review-score';
+import MapComponent from '../components/map';
+import Time from '../components/date';
+import Weather from '../components/weather';
+import { AppDataContext } from '../components/context';
 
-const TripDetails = (props) => {
+const TripDetails = props => {
   const tripDetailsContext = useContext(AppDataContext);
   const [trip, setTrip] = useState(null);
   const [comments, setComments] = useState([]);
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useState('');
   const [overallScore, setOverallScore] = useState(0);
 
   const [commentsSection, setCommentsSection] = useState({
-    addCommentButton: "app-button background-orange float-right",
-    commentForm: "hidden",
+    addCommentButton: 'app-button background-orange float-right',
+    commentForm: 'hidden'
   });
 
   useEffect(() => {
-    const token = window.localStorage.getItem("TravelApp-token");
+    const token = window.localStorage.getItem('TravelApp-token');
     Promise.all([
       fetch(`/api/trips/${props.tripId}`, {
-        method: "GET",
+        method: 'GET',
         headers: {
-          "x-access-token": token,
-          "Content-Type": "application/json",
-        },
+          'x-access-token': token,
+          'Content-Type': 'application/json'
+        }
       })
-        .then((response) => response.json())
-        .then((trip) => {
+        .then(response => response.json())
+        .then(trip => {
           setTrip(trip);
           setOverallScore(
             (trip.thingsTodoScore +
@@ -42,85 +42,85 @@ const TripDetails = (props) => {
           );
         }),
       fetch(`/api/comments/${props.tripId}`, {
-        method: "GET",
+        method: 'GET',
         headers: {
-          "x-access-token": token,
-          "Content-Type": "application/json",
-        },
+          'x-access-token': token,
+          'Content-Type': 'application/json'
+        }
       })
-        .then((response) => response.json())
-        .then((comments) => setComments(comments)),
-    ]).catch((error) => console.error("Error", error));
+        .then(response => response.json())
+        .then(comments => setComments(comments))
+    ]).catch(error => console.error('Error', error));
   }, []);
 
   const handleEditButton = () => {
     window.location.hash = `#edit/trip?tripId=${props.tripId}`;
   };
 
-  const handleCommentForm = (e) => {
+  const handleCommentForm = e => {
     e.preventDefault();
     const content = {
-      content: comment,
+      content: comment
     };
-    const token = window.localStorage.getItem("TravelApp-token");
+    const token = window.localStorage.getItem('TravelApp-token');
     fetch(`/api/trips/comments/${props.tripId}`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "x-access-token": token,
-        "Content-Type": "application/json",
+        'x-access-token': token,
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(content),
+      body: JSON.stringify(content)
     })
-      .then((response) => response.json())
-      .then((result) => {
+      .then(response => response.json())
+      .then(result => {
         result.comment.username = tripDetailsContext.user.username;
         const newComments = [...comments];
         newComments.unshift(result.comment);
         setComments(newComments);
         setCommentsSection({
-          addCommentButton: "app-button background-orange float-right",
-          commentForm: "hidden",
+          addCommentButton: 'app-button background-orange float-right',
+          commentForm: 'hidden'
         });
-        setComment("");
+        setComment('');
       })
-      .catch((error) => {
-        console.error("Error :", error);
+      .catch(error => {
+        console.error('Error :', error);
       });
   };
 
   const handleAddCommentButton = () => {
     setCommentsSection({
-      commentForm: "comment-form",
-      addCommentButton: "hidden",
+      commentForm: 'comment-form',
+      addCommentButton: 'hidden'
     });
   };
 
-  const handleCommentTextarea = (e) => {
+  const handleCommentTextarea = e => {
     setComment(e.target.value);
   };
 
-  const handleCancelComment = (e) => {
+  const handleCancelComment = e => {
     e.preventDefault();
     setCommentsSection({
-      commentForm: "hidden",
-      addCommentButton: "app-button background-orange float-right",
+      commentForm: 'hidden',
+      addCommentButton: 'app-button background-orange float-right'
     });
   };
 
-  const handleDeleteComment = (id) => {
+  const handleDeleteComment = id => {
     const commentId = Number(id);
-    const token = window.localStorage.getItem("TravelApp-token");
-    setComments(comments.filter((comment) => comment.commentId !== id));
+    const token = window.localStorage.getItem('TravelApp-token');
+    setComments(comments.filter(comment => comment.commentId !== id));
     fetch(`/api/trips/${commentId}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
-        "x-access-token": token,
-        "Content-Type": "application/json",
-      },
+        'x-access-token': token,
+        'Content-Type': 'application/json'
+      }
     })
-      .then((response) => response.json())
-      .catch((error) => {
-        console.error("Error :", error);
+      .then(response => response.json())
+      .catch(error => {
+        console.error('Error :', error);
       });
   };
 
@@ -135,16 +135,18 @@ const TripDetails = (props) => {
     foodScore,
     peopleScore,
     transportScore,
-    safetyScore,
+    safetyScore
   } = trip;
-  return !tripDetailsContext.user ? (
+  return !tripDetailsContext.user
+    ? (
     <article>
       <Navbar />
       <h1 className="nothing-found-msg">
         You need to be logged in to see detail trip review!
       </h1>
     </article>
-  ) : (
+      )
+    : (
     <article>
       <Navbar />
       <article className="container" id="trip-details-container">
@@ -165,7 +167,7 @@ const TripDetails = (props) => {
             <li className="score-text">Transport - {transportScore}</li>
             <li className="score-text">Safety - {safetyScore}</li>
             <li className="overall-score">
-              Overall trip score: {overallScore} / 100
+              Overall trip score: {Math.floor(overallScore)} / 100
             </li>
           </ul>
         </section>
@@ -213,10 +215,10 @@ const TripDetails = (props) => {
         </section>
       </article>
     </article>
-  );
+      );
 };
 
 export default TripDetails;
 
 //      <Weather location={trip} />;
-//<Time date={trip.created} />
+// <Time date={trip.created} />
