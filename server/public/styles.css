@@ -526,7 +526,7 @@ input::-webkit-inner-spin-button {
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: 20rem 20rem auto auto 2rem auto;
+  grid-template-rows: 20rem 20rem auto auto 2rem auto auto;
 }
 
 #name-location-container {
@@ -603,9 +603,10 @@ input::-webkit-inner-spin-button {
 }
 
 #comments-trip-details {
-  margin: 0 1rem;
-  grid-column: 1/6;
-  grid-row: 6/auto;
+  margin-block-start: 0.5rem;
+  margin-inline-start: 0.1rem;
+  grid-column: 1/5;
+  grid-row: 5/auto;
 }
 
 #edit-trip {
@@ -842,13 +843,14 @@ input::-webkit-inner-spin-button {
     margin-inline-end: 0.1rem;
     display: grid;
     grid-gap: 0.5rem;
+    align-items: start;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: 16rem 20rem 16rem auto auto auto;
   }
 
   #users-score-trip-details {
     margin-inline-start: 0.2rem;
-    grid-column: 1/4;
+    grid-column: 1/2;
     grid-row: 5;
     font-size: 0.9rem;
   }
