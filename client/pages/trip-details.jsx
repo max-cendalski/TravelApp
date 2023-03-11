@@ -157,7 +157,7 @@ const TripDetails = props => {
           </h3>
           <h3 className="name-location-element">City: {trip.city}</h3>
 
-          <Weather location={trip}/>
+          <Weather location={trip} />
         </section>
         <section id="scores-trip-details">
           <ul>

@@ -19,7 +19,7 @@ export function MapComponent(props) {
     window.addEventListener('resize', handleResize);
     if (screenWidth < 660) {
       containerStyle.width = '96%';
-      containerStyle.top = '21rem';
+      containerStyle.top = '20rem';
       containerStyle.left = '2%';
       containerStyle.right = '2%';
       containerStyle.height = '20rem';

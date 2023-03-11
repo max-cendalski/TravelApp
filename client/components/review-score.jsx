@@ -85,7 +85,7 @@ const ReviewScore = ({
 
   return (
     <section>
-      <h2 className='review-score-header'>Review Score :</h2>
+      <h2 className="review-score-header">Review Score :</h2>
       {!userScoreStatus
         ? (
         <form onSubmit={handleAddScore}>
@@ -107,9 +107,7 @@ const ReviewScore = ({
         </form>
           )
         : (
-        <h2 className='average-review-score'>
-           {averageScore} / 100
-        </h2>
+        <h2 className="average-review-score">{averageScore} / 100</h2>
           )}
     </section>
   );
