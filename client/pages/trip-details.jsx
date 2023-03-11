@@ -167,7 +167,7 @@ const TripDetails = props => {
             <li className="score-text">Transport - {transportScore}</li>
             <li className="score-text">Safety - {safetyScore}</li>
             <li className="overall-score">
-              Overall trip score: {Math.floor(overallScore)} / 100
+              Overall score: {Math.floor(overallScore)} / 100
             </li>
           </ul>
         </section>

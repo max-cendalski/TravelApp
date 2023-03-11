@@ -3,7 +3,7 @@ import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 
 const Weather = ({ location }) => {
   const [locationData, setLocationData] = useState(null);
-
+/*
   useEffect(() => {
     const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
     geocodeByAddress(location.city, location.country)
@@ -16,7 +16,7 @@ const Weather = ({ location }) => {
           .then(data => setLocationData(data))
           .catch(error => console.error('Error', error));
       });
-  }, []);
+  }, []); */
   return (
     locationData && (
       <article id="weather-container">
