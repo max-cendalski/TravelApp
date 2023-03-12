@@ -261,7 +261,8 @@ ul {
 
 .app-button {
   border-radius: 5px;
-  margin-top: 1rem;
+  margin-block-start: 1rem;
+  margin-block-end: 1rem;
   background-color: rgb(240, 131, 52);
   color: white;
   border: none;
@@ -457,6 +458,10 @@ input::-webkit-inner-spin-button {
   font-size: 1.1rem;
 }
 
+.comment-form {
+  width: 100%;
+}
+
 .comment-textarea {
   width: 100%;
   height: 8rem;
@@ -610,8 +615,9 @@ input::-webkit-inner-spin-button {
 
 #comments-trip-details {
   margin-block-start: 0.5rem;
-  margin-inline-start: 0.1rem;
-  grid-column: 1/5;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  grid-column: 1/6;
   grid-row: 5/auto;
 }
 
@@ -929,5 +935,4 @@ input::-webkit-inner-spin-button {
     top: 12%;
     left: 23%;
   }
-}
 }
