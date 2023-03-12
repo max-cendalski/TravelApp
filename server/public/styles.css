@@ -344,6 +344,7 @@ input::-webkit-inner-spin-button {
 
 .review-score-input {
   width: 3rem;
+  height: 1.8rem;
   margin-right: 0.5rem;
 }
 
@@ -499,7 +500,7 @@ input::-webkit-inner-spin-button {
 }
 
 .review-score-header {
-  display: inline-block;
+  display: inline;
   margin-inline-end: 0.5rem;
 }
 
@@ -543,6 +544,11 @@ input::-webkit-inner-spin-button {
 .name-location-element-user {
   padding-block-end: 0.7rem;
   font-style: oblique;
+  font-size: 1.4rem;
+}
+
+.review-score-form-element {
+  display: inline;
   font-size: 1.4rem;
 }
 
@@ -843,7 +849,6 @@ input::-webkit-inner-spin-button {
     margin-inline-end: 0.1rem;
     display: grid;
     grid-gap: 0.5rem;
-    align-items: start;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: 16rem 20rem 16rem auto auto auto;
   }
@@ -924,4 +929,5 @@ input::-webkit-inner-spin-button {
     top: 12%;
     left: 23%;
   }
+}
 }
