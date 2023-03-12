@@ -575,20 +575,6 @@ input::-webkit-inner-spin-button {
   grid-column: 1/3;
 }
 
-/* NOT NEEDED */
-
-/* #name-location-scores-trip-details ul {
-  padding-top: 0.5rem;
-  padding-left: 0;
-  list-style: none;
-  background-color: rgb(251, 251, 251);
-}
- */
-
-/* #name-location-scores-trip-details li {
-  padding-top: 0.5rem;
-}
- */
 #main-photo-trip-details {
   width: 100%;
   grid-column: 3/6;
