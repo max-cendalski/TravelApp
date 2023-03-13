@@ -4,6 +4,7 @@ import Comments from '../components/comments';
 import ReviewScore from '../components/review-score';
 import MapComponent from '../components/map';
 import Time from '../components/date';
+import Weather from '../components/weather';
 import { AppDataContext } from '../components/context';
 
 const TripDetails = props => {
@@ -11,6 +12,7 @@ const TripDetails = props => {
   const [trip, setTrip] = useState(null);
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState('');
+  const [overallScore, setOverallScore] = useState(0);
 
   const [commentsSection, setCommentsSection] = useState({
     addCommentButton: 'app-button background-orange float-right',
@@ -28,7 +30,17 @@ const TripDetails = props => {
         }
       })
         .then(response => response.json())
-        .then(trip => setTrip(trip)),
+        .then(trip => {
+          setTrip(trip);
+          setOverallScore(
+            (trip.thingsTodoScore +
+              trip.foodScore +
+              trip.peopleScore +
+              trip.transportScore +
+              trip.safetyScore) /
+              5
+          );
+        }),
       fetch(`/api/comments/${props.tripId}`, {
         method: 'GET',
         headers: {
@@ -128,7 +140,7 @@ const TripDetails = props => {
   return !tripDetailsContext.user
     ? (
     <article>
-    <Navbar />
+      <Navbar />
       <h1 className="nothing-found-msg">
         You need to be logged in to see detail trip review!
       </h1>
@@ -138,30 +150,35 @@ const TripDetails = props => {
     <article>
       <Navbar />
       <article className="container" id="trip-details-container">
-        <article id="name-location-scores-trip-details">
-          <section>
-            <h2 className="country-name">
-              {trip.country}-<span className="city-name">{trip.city}</span>
-            </h2>
-            <h3> @{username}</h3>
-            <Time date={trip.created} />
-          </section>
-          <section>
-            <ul>
-              <li className="score-text">Things to Do - {thingsTodoScore}</li>
-              <li className="score-text">Food - {foodScore}</li>
-              <li className="score-text">People - {peopleScore}</li>
-              <li className="score-text">Transport - {transportScore}</li>
-              <li className="score-text">Safety - {safetyScore}</li>
-            </ul>
-          </section>
-        </article>
+        <section id="name-location-container">
+          <h3 className="name-location-element-user">Review by @{username}</h3>
+          <h3 className="name-location-element">
+            Country: {trip.country.toUpperCase()}
+          </h3>
+          <h3 className="name-location-element">City: {trip.city}</h3>
+
+          <Weather location={trip} />
+        </section>
+        <section id="scores-trip-details">
+          <ul>
+            <li className="score-text">Things to Do - {thingsTodoScore}</li>
+            <li className="score-text">Food - {foodScore}</li>
+            <li className="score-text">People - {peopleScore}</li>
+            <li className="score-text">Transport - {transportScore}</li>
+            <li className="score-text">Safety - {safetyScore}</li>
+            <li className="overall-score">
+              Overall score: {Math.floor(overallScore)} / 100
+            </li>
+          </ul>
+        </section>
+
         <MapComponent city={city} country={country} />
         <section id="main-photo-trip-details">
           <img className="photo" src={mainPhotoUrl} alt={city}></img>
         </section>
         <article id="review-trip-details">
           <p>{review}</p>
+          <Time date={trip.created} />
         </article>
         <section id="review-edit-button-trip-details">
           {tripDetailsContext.user.username === username && (
@@ -173,7 +190,7 @@ const TripDetails = props => {
             </button>
           )}
         </section>
-        <section id="scores-trip-details">
+        <section id="users-score-trip-details">
           <ReviewScore
             tripId={props.tripId}
             loggedUserId={tripDetailsContext.user.userId}
@@ -202,3 +219,6 @@ const TripDetails = props => {
 };
 
 export default TripDetails;
+
+//      <Weather location={trip} />;
+// <Time date={trip.created} />
