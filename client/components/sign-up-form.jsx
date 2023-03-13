@@ -20,7 +20,7 @@ const SignUpForm = props => {
   const handleSubmit = e => {
     e.preventDefault();
     const user = {
-      username: newUser.username.toLowerCase(),
+      username: newUser.username,
       password: newUser.password
     };
     fetch('/api/auth/sign-up', {
