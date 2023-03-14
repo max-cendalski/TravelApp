@@ -1,64 +1,65 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from 'react';
 
-const SignUpForm = (props) => {
+const SignUpForm = props => {
   const [newUser, setNewUser] = useState({
-    username: "",
-    password: "",
+    username: '',
+    password: ''
   });
-  const [userExiststMsg, setUserExistsMsg] = useState("hidden");
-  const [incorrectLoginMsg, setIncorrectLoginMsg] = useState("hidden");
+  const [userExiststMsg, setUserExistsMsg] = useState('hidden');
+  const [incorrectLoginMsg, setIncorrectLoginMsg] = useState('hidden');
 
-  const handleChange = (e) => {
-    if (e.target.name === "username") {
-      function checkLetters(input) {
-        let letters = /^[A-Za-z]+$/;
-        if (input.match(letters) || input === "") {
-          setIncorrectLoginMsg("hidden");
-          setUserExistsMsg("hidden");
-        } else {
-          setIncorrectLoginMsg("incorrect-username-msg");
-        }
+  const handleChange = e => {
+    function checkLetters(input) {
+      const letters = /^[A-Za-z]+$/;
+      if (input.match(letters) || input === '') {
+        setIncorrectLoginMsg('hidden');
+        setUserExistsMsg('hidden');
+      } else {
+        setIncorrectLoginMsg('incorrect-username-msg');
       }
+    }
+
+    if (e.target.name === 'username') {
       checkLetters(e.target.value);
     }
     const name = e.target.name;
     const value = e.target.value;
 
-    setNewUser((prevData) => ({
+    setNewUser(prevData => ({
       ...prevData,
-      [name]: value,
+      [name]: value
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
-    const checkUsername = (newUser) => {
-      let letters = /^[A-Za-z]+$/;
+    const checkUsername = newUser => {
+      const letters = /^[A-Za-z]+$/;
       if (!newUser.username.match(letters)) {
-        setIncorrectLoginMsg("incorrect-username-msg");
+        setIncorrectLoginMsg('incorrect-username-msg');
       } else {
         const user = {
           username: newUser.username,
-          password: newUser.password,
+          password: newUser.password
         };
-        fetch("/api/auth/sign-up", {
-          method: "POST",
+        fetch('/api/auth/sign-up', {
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json'
           },
-          body: JSON.stringify(user),
+          body: JSON.stringify(user)
         })
-          .then((response) => response.json())
-          .then((result) => {
+          .then(response => response.json())
+          .then(result => {
             if (result.error) {
-              setUserExistsMsg("incorrect-username-msg");
+              setUserExistsMsg('incorrect-username-msg');
             } else {
-              window.location.hash = "";
+              window.location.hash = '';
               props.handleSwitchingModal();
             }
           })
-          .catch((error) => {
-            console.error("Error", error.message);
+          .catch(error => {
+            console.error('Error', error.message);
           });
       }
     };
