@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const SignUpForm = props => {
+const SignUpForm = ({ handleSwitchingModal }) => {
   const [newUser, setNewUser] = useState({
     username: '',
     password: ''
@@ -10,7 +10,7 @@ const SignUpForm = props => {
 
   const handleChange = e => {
     function checkLetters(input) {
-      const letters = /^[A-Za-z]+$/;
+      const letters = /^[a-z]+$/;
       if (input.match(letters) || input === '') {
         setIncorrectLoginMsg('hidden');
         setUserExistsMsg('hidden');
@@ -34,7 +34,7 @@ const SignUpForm = props => {
   const handleSubmit = e => {
     e.preventDefault();
     const checkUsername = newUser => {
-      const letters = /^[A-Za-z]+$/;
+      const letters = /^[a-z]+$/;
       if (!newUser.username.match(letters)) {
         setIncorrectLoginMsg('incorrect-username-msg');
       } else {
@@ -55,7 +55,7 @@ const SignUpForm = props => {
               setUserExistsMsg('incorrect-username-msg');
             } else {
               window.location.hash = '';
-              props.handleSwitchingModal();
+              handleSwitchingModal();
             }
           })
           .catch(error => {
@@ -72,7 +72,7 @@ const SignUpForm = props => {
         User with that username already exists!
       </section>
       <section className={incorrectLoginMsg}>
-        Username can contains only letters
+        Username can contains only lower case letters
       </section>
       <section className="sign-form">
         <form onSubmit={handleSubmit} name="signUpForm">
@@ -114,7 +114,7 @@ const SignUpForm = props => {
           </button>
           <button
             className="app-button background-red"
-            onClick={props.handleSwitchingModal}
+            onClick={handleSwitchingModal}
           >
             Cancel
           </button>
