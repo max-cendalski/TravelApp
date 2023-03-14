@@ -1,47 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-const SignUpForm = props => {
+const SignUpForm = (props) => {
   const [newUser, setNewUser] = useState({
-    username: '',
-    password: ''
+    username: "",
+    password: "",
   });
-  const [userExiststMsg, setUserExistsMsg] = useState('invisible');
+  const [userExiststMsg, setUserExistsMsg] = useState("invisible");
+  const [incorrectLoginMsg, setIncorrectLoginMsg] = useState("invisible");
 
-  const handleChange = e => {
+  const handleChange = (e) => {
+    console.log(newUser.username.length)
+    let letters = /^[A-Za-z]+$/;
+    function checkLetters(input) {
+      if ((input.match(letters)) || (input.length === 0 )) {
+        setIncorrectLoginMsg("hidden");
+      } else {
+        setIncorrectLoginMsg("incorrect-login-msg");
+      }
+    }
+    checkLetters(e.target.value);
+
     const name = e.target.name;
     const value = e.target.value;
 
-    setNewUser(prevData => ({
+    setNewUser((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const user = {
       username: newUser.username,
-      password: newUser.password
+      password: newUser.password,
     };
-    fetch('/api/auth/sign-up', {
-      method: 'POST',
+    console.log('user',user)
+  /*   fetch("/api/auth/sign-up", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(user)
+      body: JSON.stringify(user),
     })
-      .then(response => response.json())
-      .then(result => {
+      .then((response) => response.json())
+      .then((result) => {
         if (result.error) {
-          setUserExistsMsg('row');
+          setUserExistsMsg("row");
         } else {
-          window.location.hash = '';
+          window.location.hash = "";
           props.handleSwitchingModal();
         }
       })
-      .catch(error => {
-        console.error('Error', error.message);
-      });
+      .catch((error) => {
+        console.error("Error", error.message);
+      }); */
   };
 
   return (
@@ -50,6 +63,9 @@ const SignUpForm = props => {
         <h1 className="username-exists-msg">
           User with that username already exists!
         </h1>
+      </section>
+      <section className={incorrectLoginMsg}>
+        Username can contains only letters and max two numbers
       </section>
       <form className="sign-form" onSubmit={handleSubmit} name="signUpForm">
         <p>
@@ -66,7 +82,7 @@ const SignUpForm = props => {
           />
         </p>
         <p className="password-notification">
-          username must me be at least 3 characters long
+          username must me be at least 4 characters long
         </p>
         <p>
           <input

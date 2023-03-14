@@ -665,6 +665,13 @@ input::-webkit-inner-spin-button {
   color: white;
 }
 
+.incorrect-login-msg {
+  text-align: center;
+  font-size: 1.4rem;
+  margin-top: 2rem;
+  color: white;
+}
+
 .password-notification {
   color: white;
   font-size: 0.8rem;
