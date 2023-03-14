@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const SignUpForm = (props) => {
   const [newUser, setNewUser] = useState({
@@ -9,18 +9,18 @@ const SignUpForm = (props) => {
   const [incorrectLoginMsg, setIncorrectLoginMsg] = useState("hidden");
 
   const handleChange = (e) => {
-    let letters = /^[A-Za-z,0-9]+$/;
-    function checkLetters(input) {
-      if (input.match(letters) || input.length === 0) {
-        setIncorrectLoginMsg("hidden");
-        setUserExistsMsg("hidden")
-        console.log(newUser.username);
-      } else {
-        setIncorrectLoginMsg("incorrect-username-msg");
+    if (e.target.name === "username") {
+      function checkLetters(input) {
+        let letters = /^[A-Za-z]+$/;
+        if (input.match(letters) || input === "") {
+          setIncorrectLoginMsg("hidden");
+          setUserExistsMsg("hidden");
+        } else {
+          setIncorrectLoginMsg("incorrect-username-msg");
+        }
       }
+      checkLetters(e.target.value);
     }
-    checkLetters(e.target.value);
-
     const name = e.target.name;
     const value = e.target.value;
 
@@ -32,16 +32,39 @@ const SignUpForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    function checkUsername(userData) {
-      console.log('userDate',userData)
-
-    }
-    checkUsername(newUser);
-    const user = {
-      username: newUser.username,
-      password: newUser.password,
+    let checkUsername = (newUser) => {
+      let letters = /^[A-Za-z]+$/;
+      if (!newUser.username.match(letters)) {
+        setIncorrectLoginMsg("incorrect-username-msg");
+      } else {
+        const user = {
+          username: newUser.username,
+          password: newUser.password,
+        };
+        fetch("/api/auth/sign-up", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(user),
+        })
+          .then((response) => response.json())
+          .then((result) => {
+            if (result.error) {
+              setUserExistsMsg("incorrect-username-msg");
+            } else {
+              window.location.hash = "";
+              props.handleSwitchingModal();
+            }
+          })
+          .catch((error) => {
+            console.error("Error", error.message);
+          });
+      }
     };
-       fetch("/api/auth/sign-up", {
+    checkUsername(newUser);
+
+    /*      fetch("/api/auth/sign-up", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -59,7 +82,7 @@ const SignUpForm = (props) => {
       })
       .catch((error) => {
         console.error("Error", error.message);
-      });
+      }); */
   };
 
   return (
@@ -68,7 +91,7 @@ const SignUpForm = (props) => {
         User with that username already exists!
       </section>
       <section className={incorrectLoginMsg}>
-        Username can contains only letters and maximum two numbers
+        Username can contains only letters
       </section>
       <section className="sign-form">
         <form onSubmit={handleSubmit} name="signUpForm">
