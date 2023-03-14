@@ -15,7 +15,7 @@ const SignUpForm = (props) => {
         setIncorrectLoginMsg("hidden");
         console.log(newUser.username);
       } else {
-        setIncorrectLoginMsg("incorrect-login-msg");
+        setIncorrectLoginMsg("incorrect-username-msg");
       }
     }
     checkLetters(e.target.value);
@@ -31,7 +31,10 @@ const SignUpForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    function checkUsername(userData) {}
+    function checkUsername(userData) {
+      console.log('userDate',userData)
+
+    }
     checkUsername(newUser);
     const user = {
       username: newUser.username,
@@ -47,7 +50,7 @@ const SignUpForm = (props) => {
       .then((response) => response.json())
       .then((result) => {
         if (result.error) {
-          setUserExistsMsg("row");
+          setUserExistsMsg("incorrect-username-msg");
         } else {
           window.location.hash = "";
           props.handleSwitchingModal();
