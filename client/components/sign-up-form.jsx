@@ -13,6 +13,7 @@ const SignUpForm = (props) => {
     function checkLetters(input) {
       if (input.match(letters) || input.length === 0) {
         setIncorrectLoginMsg("hidden");
+        setUserExistsMsg("hidden")
         console.log(newUser.username);
       } else {
         setIncorrectLoginMsg("incorrect-username-msg");
@@ -40,7 +41,7 @@ const SignUpForm = (props) => {
       username: newUser.username,
       password: newUser.password,
     };
-    /*   fetch("/api/auth/sign-up", {
+       fetch("/api/auth/sign-up", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -58,7 +59,7 @@ const SignUpForm = (props) => {
       })
       .catch((error) => {
         console.error("Error", error.message);
-      }); */
+      });
   };
 
   return (
