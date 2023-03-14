@@ -231,7 +231,7 @@ ul {
 }
 
 .sign-form {
-  margin-top: 2rem;
+  margin-top: 6rem;
   width: 24rem;
 }
 
@@ -659,16 +659,22 @@ input::-webkit-inner-spin-button {
 }
 
 .username-exists-msg {
+  position: absolute;
   text-align: center;
+  top: 2rem;
+  left: 0;
+  right: 0;
   font-size: 1.4rem;
-  margin-top: 2rem;
   color: white;
 }
 
 .incorrect-login-msg {
+  position: absolute;
   text-align: center;
+  top: 2rem;
+  left: 0;
+  right: 0;
   font-size: 1.4rem;
-  margin-top: 2rem;
   color: white;
 }
 
