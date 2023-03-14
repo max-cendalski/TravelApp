@@ -7,7 +7,7 @@ const SignInForm = props => {
     username: '',
     password: ''
   });
-  const [errroMsg, setErrorMsg] = useState('invisible');
+  const [errroMsg, setErrorMsg] = useState('hidden');
 
   const handleChange = e => {
     const name = e.target.name;
@@ -33,7 +33,7 @@ const SignInForm = props => {
       .then(response => response.json())
       .then(result => {
         if (result.error) {
-          setErrorMsg('row');
+          setErrorMsg('incorrect-username-msg');
         } else {
           SingInContextData.handleSignIn(result);
           window.location.hash = '';
@@ -48,7 +48,7 @@ const SignInForm = props => {
   return (
     <article>
       <section className={errroMsg}>
-        <h1 className="username-exists-msg">Incorrect username or password!</h1>
+        <p className="username-exists-msg">Incorrect username or password!</p>
       </section>
       <form className="sign-form" onSubmit={handleSubmit} name="signInForm">
         <p>

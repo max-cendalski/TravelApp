@@ -585,6 +585,7 @@ input::-webkit-inner-spin-button {
 #review-trip-details {
   font-size: 1.165rem;
   line-height: 1.6rem;
+  margin-inline-start: 0.3rem;
   font-weight: 500;
   grid-column: 1/6;
   grid-row: 3/3;
