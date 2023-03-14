@@ -32,7 +32,7 @@ const SignUpForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let checkUsername = (newUser) => {
+    const checkUsername = (newUser) => {
       let letters = /^[A-Za-z]+$/;
       if (!newUser.username.match(letters)) {
         setIncorrectLoginMsg("incorrect-username-msg");
@@ -63,26 +63,6 @@ const SignUpForm = (props) => {
       }
     };
     checkUsername(newUser);
-
-    /*      fetch("/api/auth/sign-up", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        if (result.error) {
-          setUserExistsMsg("incorrect-username-msg");
-        } else {
-          window.location.hash = "";
-          props.handleSwitchingModal();
-        }
-      })
-      .catch((error) => {
-        console.error("Error", error.message);
-      }); */
   };
 
   return (
