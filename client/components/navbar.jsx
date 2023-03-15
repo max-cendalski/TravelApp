@@ -18,7 +18,7 @@ const Navbar = () => {
 
   const handleChange = (e) => {
     e.preventDefault();
-    console.log('loc',navbarContextData.locations)
+    console.log("loc", navbarContextData.locations);
     const letter = event.target.value;
     setSearchBox(letter);
     const locationsArray = [];
@@ -106,8 +106,19 @@ const Navbar = () => {
   };
   const handleArrowKeys = (e) => {
     console.log("e.key", e.key);
-    //ArrowUp, ArrowDown
-    console.log('searc',searchArray)
+    counter = 0
+    if (e.key == 'ArrowUp') {
+      console.log('whee')
+    }
+    if (e.key == 'ArrowDown') {
+      counter++
+      searchArray[0].focus = true
+    }
+
+
+
+
+    console.log("searc", searchArray);
   };
 
   return (
@@ -134,9 +145,12 @@ const Navbar = () => {
                   <li
                     onClick={handleSearchListClick}
                     key={location.tripId}
-                    className={`location.country !== 'poland' ? search-result-list-item-focus : 'hidden'`}
-                  >
-                    {location.country}, {location.city}
+                    className={`${
+                      location.focus === true
+                        ? "search-result-list-item-focus"
+                        : "search-result-list-item"
+                    }`}
+                    >{location.country}, {location.city}
                   </li>
                 );
               })}

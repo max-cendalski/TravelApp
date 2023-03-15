@@ -635,6 +635,10 @@ input::-webkit-inner-spin-button {
   color: white;
 }
 
+.search-result-list-item {
+  padding: 0.4rem 0.5rem;
+}
+
 .search-result-list-item-focus {
   cursor: pointer;
   background-color: rgb(28, 134, 28);
