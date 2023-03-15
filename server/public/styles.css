@@ -635,6 +635,12 @@ input::-webkit-inner-spin-button {
   color: white;
 }
 
+.search-result-list-item-focus {
+  cursor: pointer;
+  background-color: rgb(28, 134, 28);
+  color: white;
+}
+
 .logged-in-error {
   margin: 1rem auto;
   text-align: center;

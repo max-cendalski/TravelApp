@@ -1,28 +1,31 @@
-import React, { useContext, useState } from 'react';
-import SignUpForm from '../components/sign-up-form';
-import SignInForm from '../components/sign-in-form';
-import { AppDataContext } from '../components/context';
+import React, { useContext, useState } from "react";
+import SignUpForm from "../components/sign-up-form";
+import SignInForm from "../components/sign-in-form";
+import { AppDataContext } from "../components/context";
 
 const Navbar = () => {
-  const [searchBox, setSearchBox] = useState('');
-  const [visible, setVisible] = useState('hidden');
-  const [logoutInfo, setLogoutInfo] = useState('hidden');
-  const [modal, setModal] = useState('hidden');
+  const [searchBox, setSearchBox] = useState("");
+  const [visible, setVisible] = useState("hidden");
+  const [logoutInfo, setLogoutInfo] = useState("hidden");
+  const [modal, setModal] = useState("hidden");
   const [signUpForm, setSignUpForm] = useState(false);
   const [signInForm, setSignInForm] = useState(false);
   const [searchArray, setSearchArray] = useState([]);
 
+  //const [searchResultList, setSearchResultList] = useState("search-result-list-item-focus");
+
   const navbarContextData = useContext(AppDataContext);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     e.preventDefault();
+    console.log('loc',navbarContextData.locations)
     const letter = event.target.value;
     setSearchBox(letter);
     const locationsArray = [];
-    if (letter === '') {
+    if (letter === "") {
       setSearchArray([]);
     } else {
-      navbarContextData.locations.forEach(location => {
+      navbarContextData.locations.forEach((location) => {
         if (
           location.country.includes(letter.toLowerCase()) ||
           location.city.includes(letter.toLowerCase)
@@ -32,7 +35,7 @@ const Navbar = () => {
             (location, index, array) =>
               index ===
               array.findIndex(
-                item =>
+                (item) =>
                   item.country === location.country &&
                   item.city === location.city
               )
@@ -43,63 +46,68 @@ const Navbar = () => {
     }
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const country = searchBox.split(',')[0];
-    setSearchBox('');
-    setSearchArray('');
+    const country = searchBox.split(",")[0];
+    setSearchBox("");
+    setSearchArray("");
     window.location.hash = `#search-results?country=${country}`;
   };
-  const handleSearchListClick = event => {
+  const handleSearchListClick = (event) => {
     setSearchBox(
-      `${event.target.getAttribute('data-country')},${event.target.getAttribute(
-        'data-city'
+      `${event.target.getAttribute("data-country")},${event.target.getAttribute(
+        "data-city"
       )}`
     );
     setSearchArray([]);
   };
 
   const handleOnMouseEnter = () => {
-    setVisible('drop-down-container');
+    setVisible("drop-down-container");
   };
 
   const handleOnMouseLeave = () => {
-    setVisible('hidden');
+    setVisible("hidden");
   };
 
   const handleSwitchModal = () => {
-    setModal('hidden');
+    setModal("hidden");
     setSignUpForm(false);
     setSignInForm(false);
-    setVisible('hidden');
+    setVisible("hidden");
   };
 
   const handleSignUp = () => {
-    setModal('modal-visible');
+    setModal("modal-visible");
     setSignUpForm(!signUpForm);
   };
 
   const handleSignInButton = () => {
-    setModal('modal-visible');
+    setModal("modal-visible");
     setSignInForm(!signInForm);
   };
 
   const handleMyReviewsButton = () => {
-    setVisible('hidden');
-    window.location.hash = 'my-reviews';
+    setVisible("hidden");
+    window.location.hash = "my-reviews";
   };
 
   const handleLoginIconClick = () => {
-    setVisible('drop-down-container');
+    setVisible("drop-down-container");
   };
 
   const handleLogoutWindow = () => {
-    setVisible('hidden');
-    setLogoutInfo('logout-info');
+    setVisible("hidden");
+    setLogoutInfo("logout-info");
   };
 
   const handleCancelLogout = () => {
-    setLogoutInfo('hidden');
+    setLogoutInfo("hidden");
+  };
+  const handleArrowKeys = (e) => {
+    console.log("e.key", e.key);
+    //ArrowUp, ArrowDown
+    console.log('searc',searchArray)
   };
 
   return (
@@ -113,6 +121,7 @@ const Navbar = () => {
             autoComplete="off"
             name="searchBox"
             placeholder="search for a country"
+            onKeyDown={handleArrowKeys}
             required
           />
           <button className="submit-search-button">Submit</button>
@@ -120,14 +129,12 @@ const Navbar = () => {
         <section>
           <ul id="search-result-list">
             {searchArray &&
-              searchArray.map((location, index) => {
+              searchArray.map((location) => {
                 return (
                   <li
                     onClick={handleSearchListClick}
-                    className="search-result-list-item"
-                    data-country={location.country}
-                    data-city={location.city}
-                    key={index}
+                    key={location.tripId}
+                    className={`location.country !== 'poland' ? search-result-list-item-focus : 'hidden'`}
                   >
                     {location.country}, {location.city}
                   </li>
@@ -189,10 +196,7 @@ const Navbar = () => {
             </li>
           )}
           {navbarContextData.user && (
-            <li
-              className="logoutButton"
-              onClick={handleLogoutWindow}
-            >
+            <li className="logoutButton" onClick={handleLogoutWindow}>
               Logout
             </li>
           )}
