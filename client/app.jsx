@@ -18,7 +18,6 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [isAuthorize, setIsAuthorize] = useState(false);
   const [route, setRoute] = useState('');
-  const [logoutInfo, setLogoutInfo] = useState('hidden');
   const [locations, setLocations] = useState([]);
 
   useEffect(() => {
@@ -50,20 +49,12 @@ const App = () => {
     window.location.reload();
   };
 
-  const handleLogoutWindow = () => {
-    setLogoutInfo('logout-info');
-  };
-
   const handleConfirmLogout = e => {
     e.preventDefault();
     window.localStorage.removeItem('TravelApp-token');
     setUser(null);
     setIsAuthorize(false);
-    setLogoutInfo('hidden');
     window.location.hash = '#';
-  };
-  const handleCancelLogout = () => {
-    setLogoutInfo('hidden');
   };
 
   const renderPage = () => {
@@ -101,12 +92,9 @@ const App = () => {
     locations,
     user,
     route,
-    handleLogoutWindow,
     handleSignIn,
     isAuthorize,
-    logoutInfo,
-    handleConfirmLogout,
-    handleCancelLogout
+    handleConfirmLogout
   };
 
   return (
