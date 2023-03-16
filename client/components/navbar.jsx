@@ -11,6 +11,7 @@ const Navbar = () => {
   const [signUpForm, setSignUpForm] = useState(false);
   const [signInForm, setSignInForm] = useState(false);
   const [searchArray, setSearchArray] = useState([]);
+  const [counter, setCounter] = useState(0);
 
   //const [searchResultList, setSearchResultList] = useState("search-result-list-item-focus");
 
@@ -104,23 +105,22 @@ const Navbar = () => {
   const handleCancelLogout = () => {
     setLogoutInfo("hidden");
   };
+
   const handleArrowKeys = (e) => {
     console.log("e.key", e.key);
-    counter = 0
-    if (e.key == 'ArrowUp') {
-      console.log('whee')
+    let updatedSearchArray = [...searchArray];
+    if ((e.key == "ArrowUp") && (counter > 0)) {
+      setCounter(counter - 1)
+      updatedSearchArray[counter].focus = true;
     }
-    if (e.key == 'ArrowDown') {
-      counter++
-      searchArray[0].focus = true
+    if ((e.key == "ArrowDown") && (counter < updatedSearchArray.length))  {
+      setCounter(counter + 1);
+      updatedSearchArray[counter].focus = true;
     }
-
-
-
-
-    console.log("searc", searchArray);
+    console.log("searc", updatedSearchArray);
+    setSearchArray(updatedSearchArray);
+    console.log('counter',counter)
   };
-
   return (
     <article className="navbar-container row" onMouseLeave={handleOnMouseLeave}>
       <section className="navbar-search-box-container">
@@ -150,7 +150,8 @@ const Navbar = () => {
                         ? "search-result-list-item-focus"
                         : "search-result-list-item"
                     }`}
-                    >{location.country}, {location.city}
+                  >
+                    {location.country}, {location.city}
                   </li>
                 );
               })}
