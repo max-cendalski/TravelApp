@@ -47,16 +47,12 @@ const Navbar = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const country = searchBox.split(",")[0];
-    let test = searchArray.some((item) => item.country === country);
-    if (test === true) {
-      console.log('whee')
-      window.location.hash = `#search-results?country=${country}`;
+    //let test = searchArray.some((item) => item.country === country);
 
-    } else {
-     console.log('no-whehe')
-    }
- setSearchBox("");
- setSearchArray("");
+    window.location.hash = `#search-results?country=${country}`;
+
+    setSearchBox("");
+    setSearchArray("");
   };
   const handleSearchListClick = (e) => {
     const country = searchBox.split(",")[0];
@@ -69,7 +65,6 @@ const Navbar = () => {
     window.location.hash = `#search-results?country=${e.target.getAttribute(
       "data-country"
     )}`;
-    console.log("e.target.value", e.target);
   };
 
   const handleOnMouseEnter = () => {

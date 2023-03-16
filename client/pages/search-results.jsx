@@ -1,24 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import Navbar from '../components/navbar';
-import Time from '../components/date';
+import React, { useState, useEffect } from "react";
+import Navbar from "../components/navbar";
+import Time from "../components/date";
 
-const SearchResults = props => {
+const SearchResults = (props) => {
   const [countries, setCountries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetch(`/api/countries/${props.country}`, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json'
-      }
+        "Content-Type": "application/json",
+      },
     })
-      .then(response => response.json())
-      .then(result => {
-        setCountries(result);
-        setIsLoading(false);
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.length > 0) {
+          setCountries(result);
+          setIsLoading(false);
+        } else {
+          setCountries([]);
+        }
       })
-      .catch(error => error(console.error('Error', error)));
+      .catch((error) => error(console.error("Error", error)));
+    console.log("countries", countries);
   }, [props]);
 
   function Trip(props) {
@@ -43,25 +48,23 @@ const SearchResults = props => {
   if (isLoading) return null;
   return (
     <article>
-      {countries
-        ? (
+      {(countries.length > 0) ? (
         <article>
           <Navbar />
           <section className="list-flex">
-            {countries.map(trip => (
+            {countries.map((trip) => (
               <div className="image-item column-width50" key={trip.tripId}>
                 <Trip trip={trip} />
               </div>
             ))}
           </section>
         </article>
-          )
-        : (
+      ) : (
         <article>
           <Navbar />
           <h1 className="nothing-found-msg">Nothing Found!</h1>
         </article>
-          )}
+      )}
     </article>
   );
 };
