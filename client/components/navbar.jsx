@@ -19,7 +19,6 @@ const Navbar = () => {
 
   const handleChange = (e) => {
     e.preventDefault();
-    console.log("loc", navbarContextData.locations);
     const letter = event.target.value;
     setSearchBox(letter);
     const locationsArray = [];
@@ -107,19 +106,23 @@ const Navbar = () => {
   };
 
   const handleArrowKeys = (e) => {
-    console.log("e.key", e.key);
     let updatedSearchArray = [...searchArray];
-    if ((e.key == "ArrowUp") && (counter > 0)) {
-      setCounter(counter - 1)
-      updatedSearchArray[counter].focus = true;
+    var loc = {};
+    if (e.key == "ArrowUp" && counter > 0) {
+      setCounter(counter - 1);
     }
-    if ((e.key == "ArrowDown") && (counter < updatedSearchArray.length))  {
+    if (e.key == "ArrowDown" && counter < updatedSearchArray.length) {
       setCounter(counter + 1);
-      updatedSearchArray[counter].focus = true;
     }
-    console.log("searc", updatedSearchArray);
+    updatedSearchArray.map((location, index) => {
+      console.log("index,counter", index, counter);
+      index === counter
+        ? (updatedSearchArray[counter].focus = true)
+        : (updatedSearchArray[counter].focus = false);
+    });
+    console.log("counter", counter);
+    console.log("updateSe", updatedSearchArray);
     setSearchArray(updatedSearchArray);
-    console.log('counter',counter)
   };
   return (
     <article className="navbar-container row" onMouseLeave={handleOnMouseLeave}>
