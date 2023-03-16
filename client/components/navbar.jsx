@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import SignUpForm from "../components/sign-up-form";
 import SignInForm from "../components/sign-in-form";
 import { AppDataContext } from "../components/context";
@@ -105,25 +105,6 @@ const Navbar = () => {
     setLogoutInfo("hidden");
   };
 
-  const handleArrowKeys = (e) => {
-    let updatedSearchArray = [...searchArray];
-    var loc = {};
-    if (e.key == "ArrowUp" && counter > 0) {
-      setCounter(counter - 1);
-    }
-    if (e.key == "ArrowDown" && counter < updatedSearchArray.length) {
-      setCounter(counter + 1);
-    }
-    updatedSearchArray.map((location, index) => {
-      console.log("index,counter", index, counter);
-      index === counter
-        ? (updatedSearchArray[counter].focus = true)
-        : (updatedSearchArray[counter].focus = false);
-    });
-    console.log("counter", counter);
-    console.log("updateSe", updatedSearchArray);
-    setSearchArray(updatedSearchArray);
-  };
   return (
     <article className="navbar-container row" onMouseLeave={handleOnMouseLeave}>
       <section className="navbar-search-box-container">
@@ -135,7 +116,6 @@ const Navbar = () => {
             autoComplete="off"
             name="searchBox"
             placeholder="search for a country"
-            onKeyDown={handleArrowKeys}
             required
           />
           <button className="submit-search-button">Submit</button>
@@ -147,12 +127,10 @@ const Navbar = () => {
                 return (
                   <li
                     onClick={handleSearchListClick}
+                    className="search-result-list-item"
+                    data-country={location.country}
+                    data-city={location.city}
                     key={location.tripId}
-                    className={`${
-                      location.focus === true
-                        ? "search-result-list-item-focus"
-                        : "search-result-list-item"
-                    }`}
                   >
                     {location.country}, {location.city}
                   </li>
