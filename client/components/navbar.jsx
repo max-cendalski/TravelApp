@@ -47,10 +47,7 @@ const Navbar = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const country = searchBox.split(",")[0];
-    //let test = searchArray.some((item) => item.country === country);
-
     window.location.hash = `#search-results?country=${country}`;
-
     setSearchBox("");
     setSearchArray("");
   };
