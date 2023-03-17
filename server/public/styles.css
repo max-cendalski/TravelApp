@@ -688,6 +688,20 @@ input::-webkit-inner-spin-button {
   font-weight: 600;
 }
 
+.test-class {
+  position: absolute;
+  text-align: center;
+  border-radius: 5px;
+  top: 6rem;
+  left: 0;
+  right: 0;
+  width: 20rem;
+  padding: 2rem;
+  font-size: 2rem;
+  color: black;
+  background-color: white;
+}
+
 .invisible {
   visibility: hidden;
 }

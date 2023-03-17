@@ -13,10 +13,14 @@ const Navbar = () => {
   const [searchArray, setSearchArray] = useState([]);
   const [counter, setCounter] = useState(0);
 
+  const [test, setTest] = useState('hidden')
+
   const navbarContextData = useContext(AppDataContext);
 
   const handleChange = (e) => {
     e.preventDefault();
+    setTest("hidden");
+
     const letter = event.target.value;
     setSearchBox(letter);
     const locationsArray = [];
@@ -47,9 +51,16 @@ const Navbar = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const country = searchBox.split(",")[0];
-    window.location.hash = `#search-results?country=${country}`;
-    setSearchBox("");
-    setSearchArray("");
+    if (!searchArray.some((location)=> location.country === country)) {
+       setTest("test-class");
+       setTimeout(()=> {
+        setTest('hidden')
+       },1500)
+    } else {
+        setSearchBox("");
+        setSearchArray("");
+        window.location.hash = `#search-results?country=${country}`;
+    }
   };
   const handleSearchListClick = (e) => {
     const country = searchBox.split(",")[0];
@@ -235,6 +246,10 @@ const Navbar = () => {
           Cancel
         </button>
       </article>
+      <article className={test}>
+          <h1>Nothing Found!</h1>
+        </article>
+
     </article>
   );
 };

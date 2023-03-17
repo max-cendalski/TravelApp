@@ -20,6 +20,7 @@ const SearchResults = (props) => {
           setIsLoading(false);
         } else {
           setCountries([]);
+
         }
       })
       .catch((error) => error(console.error("Error", error)));
@@ -48,7 +49,7 @@ const SearchResults = (props) => {
   if (isLoading) return null;
   return (
     <article>
-      {(countries.length > 0) ? (
+      {countries.length > 0 ? (
         <article>
           <Navbar />
           <section className="list-flex">
