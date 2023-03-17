@@ -130,6 +130,7 @@ const TripDetails = props => {
     city,
     username,
     mainPhotoUrl,
+    title,
     review,
     thingsTodoScore,
     foodScore,
@@ -153,7 +154,7 @@ const TripDetails = props => {
         <section id="name-location-container">
           <h3 className="name-location-element-user">Review by @{username}</h3>
           <h3 className="name-location-element">
-            Country: {trip.country.toUpperCase()}
+            Country: {trip.country}
           </h3>
           <h3 className="name-location-element">City: {trip.city}</h3>
 
@@ -177,6 +178,7 @@ const TripDetails = props => {
           <img className="photo" src={mainPhotoUrl} alt={city}></img>
         </section>
         <article id="review-trip-details">
+          <h1>{title}</h1>
           <p>{review}</p>
           <Time date={trip.created} />
         </article>
