@@ -693,6 +693,7 @@ input::-webkit-inner-spin-button {
   position: absolute;
   text-align: center;
   border-radius: 5px;
+  border: 1px solid black;
   top: 6rem;
   left: 0;
   right: 0;
