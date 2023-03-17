@@ -623,6 +623,7 @@ input::-webkit-inner-spin-button {
   background-color: white;
   width: 11rem;
   padding-left: 0;
+  border: 1px solid rgb(240, 131, 52);
 }
 
 #search-result-list li {
@@ -688,7 +689,7 @@ input::-webkit-inner-spin-button {
   font-weight: 600;
 }
 
-.test-class {
+.location-not-found-msg {
   position: absolute;
   text-align: center;
   border-radius: 5px;

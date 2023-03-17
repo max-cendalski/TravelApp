@@ -1,33 +1,30 @@
-import React, { useContext, useState, useEffect } from "react";
-import SignUpForm from "../components/sign-up-form";
-import SignInForm from "../components/sign-in-form";
-import { AppDataContext } from "../components/context";
+import React, { useContext, useState } from 'react';
+import SignUpForm from '../components/sign-up-form';
+import SignInForm from '../components/sign-in-form';
+import { AppDataContext } from '../components/context';
 
 const Navbar = () => {
-  const [searchBox, setSearchBox] = useState("");
-  const [visible, setVisible] = useState("hidden");
-  const [logoutInfo, setLogoutInfo] = useState("hidden");
-  const [modal, setModal] = useState("hidden");
+  const [searchBox, setSearchBox] = useState('');
+  const [visible, setVisible] = useState('hidden');
+  const [logoutInfo, setLogoutInfo] = useState('hidden');
+  const [modal, setModal] = useState('hidden');
   const [signUpForm, setSignUpForm] = useState(false);
   const [signInForm, setSignInForm] = useState(false);
   const [searchArray, setSearchArray] = useState([]);
-  const [counter, setCounter] = useState(0);
-
-  const [test, setTest] = useState('hidden')
+  const [locNotFoundMsg, setLocNotFoundMsg] = useState('hidden');
 
   const navbarContextData = useContext(AppDataContext);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     e.preventDefault();
-    setTest("hidden");
-
+    setLocNotFoundMsg('hidden');
     const letter = event.target.value;
     setSearchBox(letter);
     const locationsArray = [];
-    if (letter === "") {
+    if (letter === '') {
       setSearchArray([]);
     } else {
-      navbarContextData.locations.forEach((location) => {
+      navbarContextData.locations.forEach(location => {
         if (
           location.country.includes(letter.toLowerCase()) ||
           location.city.includes(letter.toLowerCase)
@@ -37,7 +34,7 @@ const Navbar = () => {
             (location, index, array) =>
               index ===
               array.findIndex(
-                (item) =>
+                item =>
                   item.country === location.country &&
                   item.city === location.city
               )
@@ -48,74 +45,74 @@ const Navbar = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
-    const country = searchBox.split(",")[0];
-    if (!searchArray.some((location)=> location.country === country)) {
-       setTest("test-class");
-       setTimeout(()=> {
-        setTest('hidden')
-       },1500)
+    const country = searchBox.split(',')[0];
+    if (!searchArray.some(location => location.country === country)) {
+      setLocNotFoundMsg('location-not-found-msg');
+      setTimeout(() => {
+        setLocNotFoundMsg('hidden');
+      }, 1500);
     } else {
-        setSearchBox("");
-        setSearchArray("");
-        window.location.hash = `#search-results?country=${country}`;
+      setSearchBox('');
+      setSearchArray('');
+      window.location.hash = `#search-results?country=${country}`;
     }
   };
-  const handleSearchListClick = (e) => {
-    const country = searchBox.split(",")[0];
+
+  const handleSearchListClick = e => {
     setSearchBox(
-      `${e.target.getAttribute("data-country")},${e.target.getAttribute(
-        "data-city"
+      `${e.target.getAttribute('data-country')},${e.target.getAttribute(
+        'data-city'
       )}`
     );
     setSearchArray([]);
     window.location.hash = `#search-results?country=${e.target.getAttribute(
-      "data-country"
+      'data-country'
     )}`;
   };
 
   const handleOnMouseEnter = () => {
-    setVisible("drop-down-container");
+    setVisible('drop-down-container');
   };
 
   const handleOnMouseLeave = () => {
-    setVisible("hidden");
+    setVisible('hidden');
   };
 
   const handleSwitchModal = () => {
-    setModal("hidden");
+    setModal('hidden');
     setSignUpForm(false);
     setSignInForm(false);
-    setVisible("hidden");
+    setVisible('hidden');
   };
 
   const handleSignUp = () => {
-    setModal("modal-visible");
+    setModal('modal-visible');
     setSignUpForm(!signUpForm);
   };
 
   const handleSignInButton = () => {
-    setModal("modal-visible");
+    setModal('modal-visible');
     setSignInForm(!signInForm);
   };
 
   const handleMyReviewsButton = () => {
-    setVisible("hidden");
-    window.location.hash = "my-reviews";
+    setVisible('hidden');
+    window.location.hash = 'my-reviews';
   };
 
   const handleLoginIconClick = () => {
-    setVisible("drop-down-container");
+    setVisible('drop-down-container');
   };
 
   const handleLogoutWindow = () => {
-    setVisible("hidden");
-    setLogoutInfo("logout-info");
+    setVisible('hidden');
+    setLogoutInfo('logout-info');
   };
 
   const handleCancelLogout = () => {
-    setLogoutInfo("hidden");
+    setLogoutInfo('hidden');
   };
 
   return (
@@ -136,7 +133,7 @@ const Navbar = () => {
         <section>
           <ul id="search-result-list">
             {searchArray &&
-              searchArray.map((location) => {
+              searchArray.map(location => {
                 return (
                   <li
                     onClick={handleSearchListClick}
@@ -246,10 +243,9 @@ const Navbar = () => {
           Cancel
         </button>
       </article>
-      <article className={test}>
-          <h1>Nothing Found!</h1>
-        </article>
-
+      <article className={locNotFoundMsg}>
+        <h1>Nothing Found</h1>
+      </article>
     </article>
   );
 };
