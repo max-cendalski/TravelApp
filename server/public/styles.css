@@ -623,6 +623,7 @@ input::-webkit-inner-spin-button {
   background-color: white;
   width: 11rem;
   padding-left: 0;
+  border: 1px solid rgb(240, 131, 52);
 }
 
 #search-result-list li {
@@ -633,6 +634,10 @@ input::-webkit-inner-spin-button {
   cursor: pointer;
   background-color: rgb(28, 134, 28);
   color: white;
+}
+
+.search-result-list-item {
+  padding: 0.4rem 0.5rem;
 }
 
 .logged-in-error {
@@ -682,6 +687,20 @@ input::-webkit-inner-spin-button {
   padding-block: 0.175rem;
   margin-inline-start: 0;
   font-weight: 600;
+}
+
+.location-not-found-msg {
+  position: absolute;
+  text-align: center;
+  border-radius: 5px;
+  top: 6rem;
+  left: 0;
+  right: 0;
+  width: 20rem;
+  padding: 2rem;
+  font-size: 2rem;
+  color: black;
+  background-color: white;
 }
 
 .invisible {
@@ -775,13 +794,13 @@ input::-webkit-inner-spin-button {
   }
 
   .navbar-search-box-container {
-    flex-basis: 70%;
+    flex-basis: 60%;
     margin-left: 0.2rem;
   }
 
   .navbar-login-icon-section {
-    display: inline-block;
-    flex-basis: 5%;
+    cursor: pointer;
+    flex-basis: 15%;
   }
 
   .navbar-login-icon-section i {

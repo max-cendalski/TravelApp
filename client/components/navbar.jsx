@@ -1,27 +1,31 @@
-import React, { useContext, useState } from "react";
-import SignUpForm from "../components/sign-up-form";
-import SignInForm from "../components/sign-in-form";
-import { AppDataContext } from "../components/context";
+import React, { useContext, useState } from 'react';
+import SignUpForm from '../components/sign-up-form';
+import SignInForm from '../components/sign-in-form';
+import { AppDataContext } from '../components/context';
 
 const Navbar = () => {
-  const [searchBox, setSearchBox] = useState("");
-  const [visible, setVisible] = useState("hidden");
-  const [modal, setModal] = useState("hidden");
+  const [searchBox, setSearchBox] = useState('');
+  const [visible, setVisible] = useState('hidden');
+  const [logoutInfo, setLogoutInfo] = useState('hidden');
+  const [modal, setModal] = useState('hidden');
   const [signUpForm, setSignUpForm] = useState(false);
   const [signInForm, setSignInForm] = useState(false);
   const [searchArray, setSearchArray] = useState([]);
-
+  const [locNotFoundMsg, setLocNotFoundMsg] = useState('hidden');
+  const [searchListContainer, setSearchListContainer] = useState('hidden');
   const navbarContextData = useContext(AppDataContext);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     e.preventDefault();
+    setLocNotFoundMsg('hidden');
+    setSearchListContainer('hidden');
     const letter = event.target.value;
     setSearchBox(letter);
     const locationsArray = [];
-    if (letter === "") {
+    if (letter === '') {
       setSearchArray([]);
     } else {
-      navbarContextData.locations.forEach((location) => {
+      navbarContextData.locations.forEach(location => {
         if (
           location.country.includes(letter.toLowerCase()) ||
           location.city.includes(letter.toLowerCase)
@@ -31,60 +35,86 @@ const Navbar = () => {
             (location, index, array) =>
               index ===
               array.findIndex(
-                (item) =>
+                item =>
                   item.country === location.country &&
                   item.city === location.city
               )
           );
           setSearchArray(filteredLocations);
+          setSearchListContainer('search-result-list');
         }
       });
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
-    const country = searchBox.split(",")[0];
-    setSearchBox("");
-    setSearchArray("");
-    window.location.hash = `#search-results?country=${country}`;
+    const country = searchBox.split(',')[0];
+    if (!searchArray.some(location => location.country === country)) {
+      setLocNotFoundMsg('location-not-found-msg');
+      setTimeout(() => {
+        setLocNotFoundMsg('hidden');
+      }, 1500);
+    } else {
+      setSearchBox('');
+      setSearchArray('');
+      window.location.hash = `#search-results?country=${country}`;
+    }
   };
-  const handleSearchListClick = (event) => {
+
+  const handleSearchListClick = e => {
     setSearchBox(
-      `${event.target.getAttribute("data-country")},${event.target.getAttribute(
-        "data-city"
+      `${e.target.getAttribute('data-country')},${e.target.getAttribute(
+        'data-city'
       )}`
     );
     setSearchArray([]);
+    window.location.hash = `#search-results?country=${e.target.getAttribute(
+      'data-country'
+    )}`;
   };
 
   const handleOnMouseEnter = () => {
-    setVisible("drop-down-container");
+    setVisible('drop-down-container');
   };
 
   const handleOnMouseLeave = () => {
-    setVisible("hidden");
+    setVisible('hidden');
   };
 
   const handleSwitchModal = () => {
-    setModal("hidden");
+    setModal('hidden');
     setSignUpForm(false);
     setSignInForm(false);
-    setVisible("hidden");
+    setVisible('hidden');
   };
 
   const handleSignUp = () => {
-    setModal("modal-visible");
+    setModal('modal-visible');
     setSignUpForm(!signUpForm);
   };
 
   const handleSignInButton = () => {
-    setModal("modal-visible");
+    setModal('modal-visible');
     setSignInForm(!signInForm);
   };
 
   const handleMyReviewsButton = () => {
-    window.location.hash = "my-reviews";
+    setVisible('hidden');
+    window.location.hash = 'my-reviews';
+  };
+
+  const handleLoginIconClick = () => {
+    setVisible('drop-down-container');
+  };
+
+  const handleLogoutWindow = () => {
+    setVisible('hidden');
+    setLogoutInfo('logout-info');
+  };
+
+  const handleCancelLogout = () => {
+    setLogoutInfo('hidden');
   };
 
   return (
@@ -103,16 +133,17 @@ const Navbar = () => {
           <button className="submit-search-button">Submit</button>
         </form>
         <section>
-          <ul id="search-result-list">
+          <ul id={searchListContainer}>
             {searchArray &&
-              searchArray.map((location, index) => {
+              searchArray.map(location => {
                 return (
                   <li
                     onClick={handleSearchListClick}
                     className="search-result-list-item"
                     data-country={location.country}
                     data-city={location.city}
-                    key={index}
+                    key={location.tripId}
+                    name={searchBox}
                   >
                     {location.country}, {location.city}
                   </li>
@@ -139,6 +170,7 @@ const Navbar = () => {
       <section
         className="navbar-login-icon-section"
         onMouseEnter={handleOnMouseEnter}
+        onClick={handleLoginIconClick}
       >
         {navbarContextData.user && (
           <p className="navbar-name-paragraph">
@@ -173,10 +205,7 @@ const Navbar = () => {
             </li>
           )}
           {navbarContextData.user && (
-            <li
-              className="logoutButton"
-              onClick={navbarContextData.handleLogoutWindow}
-            >
+            <li className="logoutButton" onClick={handleLogoutWindow}>
               Logout
             </li>
           )}
@@ -201,7 +230,7 @@ const Navbar = () => {
           </section>
         )}
       </article>
-      <article className={navbarContextData.logoutInfo}>
+      <article className={logoutInfo}>
         <h2>Are you sure you want to logout?</h2>
         <button
           onClick={navbarContextData.handleConfirmLogout}
@@ -210,11 +239,14 @@ const Navbar = () => {
           Confirm
         </button>
         <button
-          onClick={navbarContextData.handleCancelLogout}
+          onClick={handleCancelLogout}
           className="app-button background-red"
         >
           Cancel
         </button>
+      </article>
+      <article className={locNotFoundMsg}>
+        <h1>Nothing Found</h1>
       </article>
     </article>
   );

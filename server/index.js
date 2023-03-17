@@ -32,7 +32,8 @@ app.listen(process.env.PORT, () => {
 app.get('/api/locations', (req, res, next) => {
   const sql = `
   select "country",
-         "city"
+         "city",
+         "tripId"
     from "trips"
               `;
   db.query(sql)
