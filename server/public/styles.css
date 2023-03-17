@@ -538,6 +538,7 @@ input::-webkit-inner-spin-button {
 }
 
 .name-location-element {
+  font-size: 1.1rem;
   padding-block-end: 0.5rem;
   font-weight: 500;
 }
@@ -574,7 +575,7 @@ input::-webkit-inner-spin-button {
 
 #review-trip-details {
   font-size: 1.165rem;
-  line-height: 1.6rem;
+  line-height: 1.8rem;
   margin-inline-start: 0.3rem;
   font-weight: 500;
   grid-column: 1/6;
@@ -888,8 +889,6 @@ input::-webkit-inner-spin-button {
     padding-inline-start: 0.2rem;
     padding-inline-end: 0.2rem;
     font-size: 1.165rem;
-    line-height: 1.6rem;
-    font-weight: 500;
     grid-column: 1/5;
     grid-row: 4/5;
   }

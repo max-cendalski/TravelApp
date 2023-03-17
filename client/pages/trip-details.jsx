@@ -221,6 +221,3 @@ const TripDetails = props => {
 };
 
 export default TripDetails;
-
-//      <Weather location={trip} />;
-// <Time date={trip.created} />

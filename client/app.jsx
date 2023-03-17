@@ -28,8 +28,7 @@ const App = () => {
       }
     }).then(response =>
       response.json().then(locations => {
-        locations.forEach(location => location.focus = false)
-        console.log('lcoa',locations)
+        locations.forEach(location => (location.focus = false));
         setLocations(locations);
       })
     );
