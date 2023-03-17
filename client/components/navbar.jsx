@@ -12,12 +12,13 @@ const Navbar = () => {
   const [signInForm, setSignInForm] = useState(false);
   const [searchArray, setSearchArray] = useState([]);
   const [locNotFoundMsg, setLocNotFoundMsg] = useState('hidden');
-
+  const [searchListContainer, setSearchListContainer] = useState('hidden');
   const navbarContextData = useContext(AppDataContext);
 
   const handleChange = e => {
     e.preventDefault();
     setLocNotFoundMsg('hidden');
+    setSearchListContainer('hidden');
     const letter = event.target.value;
     setSearchBox(letter);
     const locationsArray = [];
@@ -40,6 +41,7 @@ const Navbar = () => {
               )
           );
           setSearchArray(filteredLocations);
+          setSearchListContainer('search-result-list');
         }
       });
     }
@@ -131,7 +133,7 @@ const Navbar = () => {
           <button className="submit-search-button">Submit</button>
         </form>
         <section>
-          <ul id="search-result-list">
+          <ul id={searchListContainer}>
             {searchArray &&
               searchArray.map(location => {
                 return (
