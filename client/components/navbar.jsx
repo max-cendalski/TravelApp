@@ -10,7 +10,7 @@ const Navbar = () => {
   const [modal, setModal] = useState('hidden');
   const [signUpForm, setSignUpForm] = useState(false);
   const [signInForm, setSignInForm] = useState(false);
-  const [searchArray, setSearchArray] = useState([]);
+  const [searchedLocations, setSearchedLocations] = useState([]);
   const [locNotFoundMsg, setLocNotFoundMsg] = useState('hidden');
   const [searchListContainer, setSearchListContainer] = useState('hidden');
   const navbarContextData = useContext(AppDataContext);
@@ -21,28 +21,20 @@ const Navbar = () => {
     setSearchListContainer('hidden');
     const letter = event.target.value;
     setSearchBox(letter);
-    const locationsArray = [];
+
     if (letter === '') {
-      setSearchArray([]);
+      setSearchListContainer('hidden');
+      setSearchedLocations([]);
     } else {
-      navbarContextData.locations.forEach(location => {
-        if (
-          location.country.includes(letter.toLowerCase())
-        ) {
-          locationsArray.push(location);
-          const filteredLocations = locationsArray.filter(
-            (location, index, array) =>
-              index ===
-              array.findIndex(
-                item =>
-                  item.country === location.country &&
-                  item.city === location.city
-              )
-          );
-          setSearchArray(filteredLocations);
+      const searchedCountry = [];
+      navbarContextData.locations.forEach((item, index) => {
+        if (item.country.toLowerCase().includes(letter.toLowerCase())) {
+          searchedCountry.push(item);
+          setSearchedLocations(searchedCountry);
           setSearchListContainer('search-result-list');
         } else {
-          setSearchListContainer('search-result-list');
+          setSearchedLocations([]);
+          setSearchListContainer('hidden');
         }
       });
     }
@@ -51,14 +43,14 @@ const Navbar = () => {
   const handleSubmit = e => {
     e.preventDefault();
     const country = searchBox.split(',')[0];
-    if (!searchArray.some(location => location.country === country)) {
+    if (!searchedLocations.some(location => location.country === country)) {
       setLocNotFoundMsg('location-not-found-msg');
       setTimeout(() => {
         setLocNotFoundMsg('hidden');
       }, 1500);
     } else {
       setSearchBox('');
-      setSearchArray('');
+      setSearchedLocations('');
       window.location.hash = `#search-results?country=${country}`;
     }
   };
@@ -69,7 +61,7 @@ const Navbar = () => {
         'data-city'
       )}`
     );
-    setSearchArray([]);
+    setSearchedLocations([]);
     window.location.hash = `#search-results?country=${e.target.getAttribute(
       'data-country'
     )}`;
@@ -135,8 +127,8 @@ const Navbar = () => {
         </form>
         <section>
           <ul id={searchListContainer}>
-            {searchArray &&
-              searchArray.map(location => {
+            {searchedLocations &&
+              searchedLocations.map(location => {
                 return (
                   <li
                     onClick={handleSearchListClick}
