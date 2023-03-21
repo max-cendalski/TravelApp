@@ -7,6 +7,7 @@ const ReviewForm = () => {
     country: '',
     address: '',
     city: '',
+    title: '',
     review: '',
     thingsTodoScore: 0,
     foodScore: 0,
@@ -24,6 +25,7 @@ const ReviewForm = () => {
     formData.append('country', form.country.toLowerCase());
     formData.append('city', form.city);
     formData.append('image', selectedImage);
+    formData.append('title', form.title);
     formData.append('review', form.review);
     formData.append('thingsTodoScore', form.thingsTodoScore);
     formData.append('foodScore', form.foodScore);
@@ -200,6 +202,15 @@ const ReviewForm = () => {
               name="image"
               accept=".png, .jpg, .jpeg, .gif"
             />
+          </section>
+          <section>
+            <h3>Review Title</h3>
+            <input
+              onChange={handleChangeFormData}
+              type="text"
+              name="title"
+              required
+            ></input>
           </section>
           <section id="review-form-textarea-section">
             <h3>Your review</h3>

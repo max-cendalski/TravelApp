@@ -49,6 +49,7 @@ CREATE TABLE "public"."trips" (
   "country" TEXT NOT NULL,
 	"city" TEXT NOT NULL,
 	"mainPhotoUrl" TEXT NOT NULL default 'url',
+  "title" TEXT NOT NULL,
 	"review" TEXT NOT NULL,
 	"thingsTodoScore" int NOT NULL default 0,
 	"foodScore" int NOT NULL default 0,

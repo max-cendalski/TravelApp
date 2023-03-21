@@ -161,6 +161,7 @@ app.get('/api/trips/:tripId', (req, res, next) => {
   select "city",
          "country",
          "mainPhotoUrl",
+         "title",
          "review",
          "thingsTodoScore",
          "foodScore",
@@ -206,6 +207,7 @@ app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
   const {
     country,
     city,
+    title,
     review,
     thingsTodoScore,
     foodScore,
@@ -222,6 +224,7 @@ app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
               "country",
               "city",
               "mainPhotoUrl",
+              "title",
               "review",
               "thingsTodoScore",
               "foodScore",
@@ -230,7 +233,7 @@ app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
               "safetyScore",
               "created"
             )
-            values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)
+            values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11, $12)
             returning *
             `;
   const params = [
@@ -238,6 +241,7 @@ app.post('/api/trips', uploadsMiddleware, (req, res, next) => {
     country,
     city,
     image,
+    title,
     review,
     thingsTodoScore,
     foodScore,
@@ -359,6 +363,7 @@ app.patch('/api/edit/trip/:tripId', (req, res, next) => {
   }
   const {
     city,
+    title,
     review,
     thingsTodoScore,
     foodScore,
@@ -368,6 +373,7 @@ app.patch('/api/edit/trip/:tripId', (req, res, next) => {
   } = req.body;
   if (
     !city ||
+    !title ||
     !review ||
     !thingsTodoScore ||
     !foodScore ||
@@ -383,17 +389,19 @@ app.patch('/api/edit/trip/:tripId', (req, res, next) => {
   const sql = `
   update "trips"
      set "city" = $1,
-         "review" = $2,
-         "thingsTodoScore" = $3,
-         "foodScore" = $4,
-         "peopleScore" = $5,
-         "transportScore" = $6,
-         "safetyScore" = $7
-   where "tripId" = $8 AND "userId" = $9
+         "title" = $2
+         "review" = $3,
+         "thingsTodoScore" = $4,
+         "foodScore" = $5,
+         "peopleScore" = $6,
+         "transportScore" = $7,
+         "safetyScore" = $8
+   where "tripId" = $9 AND "userId" = $10
    returning *
   `;
   const params = [
     city,
+    title,
     review,
     thingsTodoScore,
     foodScore,
@@ -427,6 +435,7 @@ app.get('/api/my-reviews', (req, res, next) => {
             "city",
             "country",
             "mainPhotoUrl",
+            "title",
             "review",
             "thingsTodoScore",
             "foodScore",
