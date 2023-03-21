@@ -27,8 +27,7 @@ const Navbar = () => {
     } else {
       navbarContextData.locations.forEach(location => {
         if (
-          location.country.includes(letter.toLowerCase()) ||
-          location.city.includes(letter.toLowerCase)
+          location.country.includes(letter.toLowerCase())
         ) {
           locationsArray.push(location);
           const filteredLocations = locationsArray.filter(
@@ -41,6 +40,8 @@ const Navbar = () => {
               )
           );
           setSearchArray(filteredLocations);
+          setSearchListContainer('search-result-list');
+        } else {
           setSearchListContainer('search-result-list');
         }
       });
