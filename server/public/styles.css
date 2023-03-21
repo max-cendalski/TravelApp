@@ -23,6 +23,7 @@ ul {
   top: 15%;
   left: 2rem;
   border-radius: 2px;
+  text-transform: capitalize;
 }
 
 .control-arrow {
