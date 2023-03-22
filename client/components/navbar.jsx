@@ -15,12 +15,16 @@ const Navbar = () => {
   const [searchListContainer, setSearchListContainer] = useState("hidden");
   const navbarContextData = useContext(AppDataContext);
 
+
+  useEffect(()=> {
+
+  },[searchBox])
+
   const handleChange = (e) => {
     e.preventDefault();
     setLocNotFoundMsg("hidden");
     setSearchListContainer("hidden");
     var chars = e.target.value;
-    console.log("chars", chars);
     setSearchBox(chars);
     if (chars == "") {
       setSearchListContainer("hidden");
@@ -36,12 +40,12 @@ const Navbar = () => {
         setSearchListContainer("search-result-list");
         setSearchedLocations(searchedCountries);
       } else {
-        console.log('searchbox',searchBox)
-        console.log('searchcountries',searchedCountries)
+
         setSearchListContainer("hidden");
         setSearchedLocations(searchedCountries);
       }
     }
+
   };
 
   const handleSubmit = (e) => {
