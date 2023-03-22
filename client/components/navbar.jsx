@@ -1,117 +1,116 @@
-import React, { useContext, useState } from "react";
-import SignUpForm from "../components/sign-up-form";
-import SignInForm from "../components/sign-in-form";
-import { AppDataContext } from "../components/context";
+import React, { useContext, useState } from 'react';
+import SignUpForm from '../components/sign-up-form';
+import SignInForm from '../components/sign-in-form';
+import { AppDataContext } from '../components/context';
 
 const Navbar = () => {
-  const [searchBox, setSearchBox] = useState("");
-  const [visible, setVisible] = useState("hidden");
-  const [logoutInfo, setLogoutInfo] = useState("hidden");
-  const [modal, setModal] = useState("hidden");
+  const [searchBox, setSearchBox] = useState('');
+  const [visible, setVisible] = useState('hidden');
+  const [logoutInfo, setLogoutInfo] = useState('hidden');
+  const [modal, setModal] = useState('hidden');
   const [signUpForm, setSignUpForm] = useState(false);
   const [signInForm, setSignInForm] = useState(false);
   const [searchedLocations, setSearchedLocations] = useState([]);
-  const [locNotFoundMsg, setLocNotFoundMsg] = useState("hidden");
-  const [searchListContainer, setSearchListContainer] = useState("hidden");
+  const [locNotFoundMsg, setLocNotFoundMsg] = useState('hidden');
+  const [searchListContainer, setSearchListContainer] = useState('hidden');
   const navbarContextData = useContext(AppDataContext);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     e.preventDefault();
-    setLocNotFoundMsg("hidden");
-    setSearchListContainer("hidden");
-    var chars = e.target.value;
+    setLocNotFoundMsg('hidden');
+    setSearchListContainer('hidden');
+    const chars = e.target.value;
     setSearchBox(chars);
-    if (chars === "") {
-      setSearchListContainer("hidden");
+    if (chars === '') {
+      setSearchListContainer('hidden');
       setSearchedLocations([]);
     } else {
-      var searchedCountries = navbarContextData.locations.filter((item) => {
+      const searchedCountries = navbarContextData.locations.filter(item => {
         return item.country.toLowerCase().includes(chars.toLowerCase());
       });
       setSearchedLocations(searchedCountries);
       if (searchedCountries) {
-        setSearchListContainer("search-result-list");
+        setSearchListContainer('search-result-list');
         setSearchedLocations(searchedCountries);
       } else {
-        setSearchListContainer("hidden");
+        setSearchListContainer('hidden');
         setSearchedLocations(searchedCountries);
       }
     }
-    console.log("searchedLocations", searchedLocations);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
-    const country = searchBox.split(",")[0];
-    if (!searchedLocations.some((location) => location.country === country)) {
-      setLocNotFoundMsg("location-not-found-msg");
+    const country = searchBox.split(',')[0];
+    if (!searchedLocations.some(location => location.country === country)) {
+      setLocNotFoundMsg('location-not-found-msg');
       setTimeout(() => {
-        setLocNotFoundMsg("hidden");
+        setLocNotFoundMsg('hidden');
       }, 1500);
     } else {
-      setSearchBox("");
-      setSearchedLocations("");
-      setSearchListContainer("hidden");
+      setSearchBox('');
+      setSearchedLocations('');
+      setSearchListContainer('hidden');
       window.location.hash = `#search-results?country=${country.trim()}`;
     }
   };
 
-  const handleSearchListClick = (e) => {
-    e.preventDefault()
-  /*   setSearchBox(
+  const handleSearchListClick = e => {
+    e.preventDefault();
+    /*   setSearchBox(
       `${e.target.getAttribute("data-country")},${e.target.getAttribute(
         "data-city"
       )}`
     ); */
     setSearchedLocations([]);
     window.location.hash = `#search-results?country=${e.target.getAttribute(
-      "data-country"
+      'data-country'
     )}`;
-    setSearchBox("");
-    setSearchListContainer("hidden");
+    setSearchBox('');
+    setSearchListContainer('hidden');
   };
 
   const handleOnMouseEnter = () => {
-    setVisible("drop-down-container");
+    setVisible('drop-down-container');
   };
 
   const handleOnMouseLeave = () => {
-    setVisible("hidden");
+    setVisible('hidden');
   };
 
   const handleSwitchModal = () => {
-    setModal("hidden");
+    setModal('hidden');
     setSignUpForm(false);
     setSignInForm(false);
-    setVisible("hidden");
+    setVisible('hidden');
   };
 
   const handleSignUp = () => {
-    setModal("modal-visible");
+    setModal('modal-visible');
     setSignUpForm(!signUpForm);
   };
 
   const handleSignInButton = () => {
-    setModal("modal-visible");
+    setModal('modal-visible');
     setSignInForm(!signInForm);
   };
 
   const handleMyReviewsButton = () => {
-    setVisible("hidden");
-    window.location.hash = "my-reviews";
+    setVisible('hidden');
+    window.location.hash = 'my-reviews';
   };
 
   const handleLoginIconClick = () => {
-    setVisible("drop-down-container");
+    setVisible('drop-down-container');
   };
 
   const handleLogoutWindow = () => {
-    setVisible("hidden");
-    setLogoutInfo("logout-info");
+    setVisible('hidden');
+    setLogoutInfo('logout-info');
   };
 
   const handleCancelLogout = () => {
-    setLogoutInfo("hidden");
+    setLogoutInfo('hidden');
   };
 
   return (
@@ -132,7 +131,7 @@ const Navbar = () => {
         <section>
           <ul id={searchListContainer}>
             {searchedLocations &&
-              searchedLocations.map((location) => {
+              searchedLocations.map(location => {
                 return (
                   <li
                     onClick={handleSearchListClick}
