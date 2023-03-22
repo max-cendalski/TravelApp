@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import SignUpForm from "../components/sign-up-form";
 import SignInForm from "../components/sign-in-form";
 import { AppDataContext } from "../components/context";
@@ -21,26 +21,18 @@ const Navbar = () => {
     setSearchListContainer("hidden");
     var chars = e.target.value;
     setSearchBox(chars);
-    if (chars == "") {
+    if (chars === "") {
       setSearchListContainer("hidden");
       setSearchedLocations([]);
     } else {
       var searchedCountries = navbarContextData.locations.filter((item) => {
         return item.country.toLowerCase().includes(chars.toLowerCase());
       });
-      console.log("searchCountr", searchedCountries);
       setSearchedLocations(searchedCountries);
-      /*  navbarContextData.locations.forEach((item) => {
-        if (item.country.toLowerCase().includes(searchBox.toLowerCase())) {
-          console.log('item',item)
-          searchedCountries.push(item);
-        }
-      }); */
       if (searchedCountries) {
         setSearchListContainer("search-result-list");
         setSearchedLocations(searchedCountries);
       } else {
-        console.log("wheeee");
         setSearchListContainer("hidden");
         setSearchedLocations(searchedCountries);
       }
