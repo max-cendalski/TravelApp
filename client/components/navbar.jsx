@@ -16,9 +16,6 @@ const Navbar = () => {
   const navbarContextData = useContext(AppDataContext);
 
 
-  useEffect(()=> {
-
-  },[searchBox])
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -30,27 +27,31 @@ const Navbar = () => {
       setSearchListContainer("hidden");
       setSearchedLocations([]);
     } else {
-      var searchedCountries = [];
-      navbarContextData.locations.forEach((item) => {
-        if (item.country.includes(searchBox)) {
+      var searchedCountries = navbarContextData.locations.filter(item => {
+        return item.country.toLowerCase().includes(searchBox.toLowerCase())
+      })
+      console.log('searchCountr',searchedCountries)
+     /*  navbarContextData.locations.forEach((item) => {
+        if (item.country.toLowerCase().includes(searchBox.toLowerCase())) {
+          console.log('item',item)
           searchedCountries.push(item);
         }
-      });
-      if (searchedCountries.length) {
+      }); */
+   /*    if (searchedCountries.length) {
         setSearchListContainer("search-result-list");
         setSearchedLocations(searchedCountries);
       } else {
-
+        console.log('wheeee')
         setSearchListContainer("hidden");
         setSearchedLocations(searchedCountries);
-      }
+      } */
     }
-
+    console.log('searchedLocations',searchedLocations)
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const country = searchBox.split(",")[0];
+    const country = searchBox.split(",")[0]
     if (!searchedLocations.some((location) => location.country === country)) {
       setLocNotFoundMsg("location-not-found-msg");
       setTimeout(() => {
