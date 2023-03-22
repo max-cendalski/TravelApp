@@ -57,11 +57,6 @@ const Navbar = () => {
 
   const handleSearchListClick = e => {
     e.preventDefault();
-    /*   setSearchBox(
-      `${e.target.getAttribute("data-country")},${e.target.getAttribute(
-        "data-city"
-      )}`
-    ); */
     setSearchedLocations([]);
     window.location.hash = `#search-results?country=${e.target.getAttribute(
       'data-country'
