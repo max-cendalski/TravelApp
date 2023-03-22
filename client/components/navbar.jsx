@@ -15,8 +15,6 @@ const Navbar = () => {
   const [searchListContainer, setSearchListContainer] = useState("hidden");
   const navbarContextData = useContext(AppDataContext);
 
-
-
   const handleChange = (e) => {
     e.preventDefault();
     setLocNotFoundMsg("hidden");
@@ -27,31 +25,32 @@ const Navbar = () => {
       setSearchListContainer("hidden");
       setSearchedLocations([]);
     } else {
-      var searchedCountries = navbarContextData.locations.filter(item => {
-        return item.country.toLowerCase().includes(searchBox.toLowerCase())
-      })
-      console.log('searchCountr',searchedCountries)
-     /*  navbarContextData.locations.forEach((item) => {
+      var searchedCountries = navbarContextData.locations.filter((item) => {
+        return item.country.toLowerCase().includes(chars.toLowerCase());
+      });
+      console.log("searchCountr", searchedCountries);
+      setSearchedLocations(searchedCountries);
+      /*  navbarContextData.locations.forEach((item) => {
         if (item.country.toLowerCase().includes(searchBox.toLowerCase())) {
           console.log('item',item)
           searchedCountries.push(item);
         }
       }); */
-   /*    if (searchedCountries.length) {
+      if (searchedCountries) {
         setSearchListContainer("search-result-list");
         setSearchedLocations(searchedCountries);
       } else {
-        console.log('wheeee')
+        console.log("wheeee");
         setSearchListContainer("hidden");
         setSearchedLocations(searchedCountries);
-      } */
+      }
     }
-    console.log('searchedLocations',searchedLocations)
+    console.log("searchedLocations", searchedLocations);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const country = searchBox.split(",")[0]
+    const country = searchBox.split(",")[0];
     if (!searchedLocations.some((location) => location.country === country)) {
       setLocNotFoundMsg("location-not-found-msg");
       setTimeout(() => {
@@ -66,15 +65,18 @@ const Navbar = () => {
   };
 
   const handleSearchListClick = (e) => {
-    setSearchBox(
+    e.preventDefault()
+  /*   setSearchBox(
       `${e.target.getAttribute("data-country")},${e.target.getAttribute(
         "data-city"
       )}`
-    );
+    ); */
     setSearchedLocations([]);
     window.location.hash = `#search-results?country=${e.target.getAttribute(
       "data-country"
     )}`;
+    setSearchBox("");
+    setSearchListContainer("hidden");
   };
 
   const handleOnMouseEnter = () => {
