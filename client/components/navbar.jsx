@@ -10,7 +10,7 @@ const Navbar = () => {
   const [modal, setModal] = useState('hidden');
   const [signUpForm, setSignUpForm] = useState(false);
   const [signInForm, setSignInForm] = useState(false);
-  const [searchArray, setSearchArray] = useState([]);
+  const [searchedLocations, setSearchedLocations] = useState([]);
   const [locNotFoundMsg, setLocNotFoundMsg] = useState('hidden');
   const [searchListContainer, setSearchListContainer] = useState('hidden');
   const navbarContextData = useContext(AppDataContext);
@@ -19,59 +19,50 @@ const Navbar = () => {
     e.preventDefault();
     setLocNotFoundMsg('hidden');
     setSearchListContainer('hidden');
-    const letter = event.target.value;
-    setSearchBox(letter);
-    const locationsArray = [];
-    if (letter === '') {
-      setSearchArray([]);
+    const chars = e.target.value;
+    setSearchBox(chars);
+    if (chars === '') {
+      setSearchListContainer('hidden');
+      setSearchedLocations([]);
     } else {
-      navbarContextData.locations.forEach(location => {
-        if (
-          location.country.includes(letter.toLowerCase()) ||
-          location.city.includes(letter.toLowerCase)
-        ) {
-          locationsArray.push(location);
-          const filteredLocations = locationsArray.filter(
-            (location, index, array) =>
-              index ===
-              array.findIndex(
-                item =>
-                  item.country === location.country &&
-                  item.city === location.city
-              )
-          );
-          setSearchArray(filteredLocations);
-          setSearchListContainer('search-result-list');
-        }
+      const searchedCountries = navbarContextData.locations.filter(item => {
+        return item.country.toLowerCase().includes(chars.toLowerCase());
       });
+      setSearchedLocations(searchedCountries);
+      if (searchedCountries) {
+        setSearchListContainer('search-result-list');
+        setSearchedLocations(searchedCountries);
+      } else {
+        setSearchListContainer('hidden');
+        setSearchedLocations(searchedCountries);
+      }
     }
   };
 
   const handleSubmit = e => {
     e.preventDefault();
     const country = searchBox.split(',')[0];
-    if (!searchArray.some(location => location.country === country)) {
+    if (!searchedLocations.some(location => location.country === country)) {
       setLocNotFoundMsg('location-not-found-msg');
       setTimeout(() => {
         setLocNotFoundMsg('hidden');
       }, 1500);
     } else {
       setSearchBox('');
-      setSearchArray('');
-      window.location.hash = `#search-results?country=${country}`;
+      setSearchedLocations('');
+      setSearchListContainer('hidden');
+      window.location.hash = `#search-results?country=${country.trim()}`;
     }
   };
 
   const handleSearchListClick = e => {
-    setSearchBox(
-      `${e.target.getAttribute('data-country')},${e.target.getAttribute(
-        'data-city'
-      )}`
-    );
-    setSearchArray([]);
+    e.preventDefault();
+    setSearchedLocations([]);
     window.location.hash = `#search-results?country=${e.target.getAttribute(
       'data-country'
     )}`;
+    setSearchBox('');
+    setSearchListContainer('hidden');
   };
 
   const handleOnMouseEnter = () => {
@@ -134,8 +125,8 @@ const Navbar = () => {
         </form>
         <section>
           <ul id={searchListContainer}>
-            {searchArray &&
-              searchArray.map(location => {
+            {searchedLocations &&
+              searchedLocations.map(location => {
                 return (
                   <li
                     onClick={handleSearchListClick}
