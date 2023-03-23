@@ -26,9 +26,9 @@ ul {
   text-transform: capitalize;
 }
 
-.control-arrow {
+/* .control-arrow {
   top: 4rem !important;
-}
+} */
 
 .navbar-container {
   position: fixed;
@@ -263,7 +263,7 @@ ul {
   color: white;
   border: none;
   height: 2rem;
-  letter-spacing: 3px;
+  letter-spacing: 4px;
   font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
@@ -743,10 +743,6 @@ input::-webkit-inner-spin-button {
     margin: 0 0.2rem;
     padding-top: 4rem;
     height: 50vh;
-  }
-
-  .control-arrow {
-    top: 3rem !important;
   }
 
   .edit-form {
