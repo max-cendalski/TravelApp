@@ -256,7 +256,7 @@ ul {
 }
 
 .app-button {
-  border-radius: 5px;
+  border-radius: 7px;
   margin-block-start: 1rem;
   margin-block-end: 1rem;
   padding-inline-start: 1rem;
@@ -729,7 +729,7 @@ input::-webkit-inner-spin-button {
 
   .logout-info {
     padding: 0.5rem;
-    width: 75%;
+    width: 80%;
   }
 
   .country-name {
