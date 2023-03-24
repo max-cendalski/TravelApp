@@ -502,7 +502,6 @@ input::-webkit-inner-spin-button {
 
 .review-score-header {
   display: inline;
-  margin-inline-end: 0.5rem;
 }
 
 .average-review-score {
@@ -576,12 +575,21 @@ input::-webkit-inner-spin-button {
 }
 
 #review-trip-details {
-  font-size: 1.165rem;
-  line-height: 1.8rem;
-  margin-inline-start: 0.3rem;
-  font-weight: 500;
   grid-column: 1/6;
   grid-row: 3/3;
+}
+
+.review-title {
+  font-size: 1.3rem;
+  margin-block-start: 0.6rem;
+  margin-block-end: 0.3rem;
+}
+
+.review-paragraph {
+  font-weight: 400;
+  white-space: pre-line;
+  line-height: 1.5;
+  font-size: 1.2rem;
 }
 
 #review-edit-button-trip-details {
@@ -886,7 +894,6 @@ input::-webkit-inner-spin-button {
   #review-trip-details {
     padding-inline-start: 0.2rem;
     padding-inline-end: 0.2rem;
-    font-size: 1.165rem;
     grid-column: 1/5;
     grid-row: 4/5;
   }
