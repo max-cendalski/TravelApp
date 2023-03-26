@@ -747,10 +747,6 @@ input::-webkit-inner-spin-button {
     height: 50vh;
   }
 
-  .control-arrow {
-    top: 3rem !important;
-  }
-
   .edit-form {
     padding: 0.5rem;
   }
