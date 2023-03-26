@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 const ReviewScore = ({
   loggedUsername,
   reviewAuthorName,
   loggedUserId,
-  tripId,
+  tripId
 }) => {
   const [usersScores, setUsersScores] = useState([]);
   const [userScore, setUserScore] = useState(0);
@@ -12,19 +12,19 @@ const ReviewScore = ({
   const [userScoreStatus, setUserScoreStatus] = useState(false);
 
   useEffect(() => {
-    const token = window.localStorage.getItem("TravelApp-token");
+    const token = window.localStorage.getItem('TravelApp-token');
     fetch(`/api/trips/score/${tripId}`, {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "X-Access-Token": token,
-        "Content-Type": "application/json",
-      },
+        'X-Access-Token': token,
+        'Content-Type': 'application/json'
+      }
     })
-      .then((response) => response.json())
-      .then((result) => {
+      .then(response => response.json())
+      .then(result => {
         if (
           loggedUsername === reviewAuthorName ||
-          result.some((item) => item.userId === loggedUserId)
+          result.some(item => item.userId === loggedUserId)
         ) {
           setUserScoreStatus(true);
         }
@@ -43,50 +43,51 @@ const ReviewScore = ({
           setUsersScores(result);
         }
       })
-      .catch((error) => {
-        console.error("Error :", error);
+      .catch(error => {
+        console.error('Error :', error);
       });
   }, []);
 
-  const handleAddScore = (e) => {
+  const handleAddScore = e => {
     e.preventDefault();
     const scoreToSave = {
       userId: loggedUserId,
       tripId: tripId,
-      score: Number(userScore),
+      score: Number(userScore)
     };
     let totalScore = 0;
     const newTotalScore = [...usersScores, scoreToSave];
-    newTotalScore.forEach((i) => {
+    newTotalScore.forEach(i => {
       totalScore = i.score + totalScore;
     });
     const newAverageScore = Math.floor(totalScore / newTotalScore.length);
     setAverageScore(newAverageScore);
     setUserScoreStatus(true);
     setUsersScores(newTotalScore);
-    const token = window.localStorage.getItem("TravelApp-token");
+    const token = window.localStorage.getItem('TravelApp-token');
     fetch(`/api/trips/score/${tripId}`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "x-access-token": token,
-        "Content-Type": "application/json",
+        'x-access-token': token,
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(scoreToSave),
+      body: JSON.stringify(scoreToSave)
     })
-      .then((response) => response.json())
-      .catch((error) => {
-        console.error("Error :", error);
+      .then(response => response.json())
+      .catch(error => {
+        console.error('Error :', error);
       });
   };
 
-  const handleScoreChange = (e) => {
+  const handleScoreChange = e => {
     setUserScore(e.target.value);
   };
 
   return (
     <section>
-      <h2 className="review-score-header">Review Score :</h2>
-      {!userScoreStatus ? (
+      <h2 className="review-score-header">Review Score : </h2>
+      {!userScoreStatus
+        ? (
         <form onSubmit={handleAddScore}>
           <p className="review-score-form-element">
             <input
@@ -101,9 +102,10 @@ const ReviewScore = ({
             Add Score
           </button>
         </form>
-      ) : (
+          )
+        : (
         <h2 className="average-review-score">{averageScore} / 100</h2>
-      )}
+          )}
     </section>
   );
 };
