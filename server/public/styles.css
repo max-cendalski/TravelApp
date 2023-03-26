@@ -116,6 +116,7 @@ ul {
 }
 
 .navbar-name-paragraph {
+  text-transform: capitalize;
   display: inline-block;
   text-align: end;
   width: 85%;
