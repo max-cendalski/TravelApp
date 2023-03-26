@@ -153,9 +153,7 @@ const TripDetails = props => {
       <article className="container" id="trip-details-container">
         <section id="name-location-container">
           <h3 className="name-location-element-user">Review by @{username}</h3>
-          <h3 className="name-location-element">
-            Country: {trip.country}
-          </h3>
+          <h3 className="name-location-element">Country: {trip.country}</h3>
           <h3 className="name-location-element">City: {trip.city}</h3>
 
           <Weather location={trip} />
@@ -179,8 +177,9 @@ const TripDetails = props => {
         </section>
         <article id="review-trip-details">
           <h1 className="review-paragraph-title">{title}</h1>
-          <p className="review-paragraph">{review}</p>
           <Time date={trip.created} />
+
+          <p className="review-paragraph">{review}</p>
         </article>
         <section id="review-edit-button-trip-details">
           {tripDetailsContext.user.username === username && (

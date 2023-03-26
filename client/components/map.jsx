@@ -18,10 +18,10 @@ export function MapComponent(props) {
     }
     window.addEventListener('resize', handleResize);
     if (screenWidth < 660) {
-      containerStyle.width = '96%';
+      containerStyle.width = '98%';
       containerStyle.top = '20rem';
-      containerStyle.left = '2%';
-      containerStyle.right = '2%';
+      containerStyle.left = '1%';
+      containerStyle.right = '1%';
       containerStyle.height = '20rem';
     }
     if (screenWidth > 660) {
