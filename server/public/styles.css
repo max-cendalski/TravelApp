@@ -577,13 +577,20 @@ input::-webkit-inner-spin-button {
 }
 
 #review-trip-details {
-  white-space: pre-line;
-  font-size: 1.165rem;
-  line-height: 1.8rem;
   margin-inline-start: 0.3rem;
-  font-weight: 500;
   grid-column: 1/6;
   grid-row: 3/3;
+}
+
+.review-paragraph-title {
+  font-size: 1.3rem;
+}
+
+.review-paragraph {
+  white-space: pre-line;
+  font-size: 1.265rem;
+  line-height: 1.8rem;
+  font-weight: 500;
 }
 
 #review-edit-button-trip-details {
@@ -888,7 +895,6 @@ input::-webkit-inner-spin-button {
   #review-trip-details {
     padding-inline-start: 0.2rem;
     padding-inline-end: 0.2rem;
-    font-size: 1.165rem;
     grid-column: 1/5;
     grid-row: 4/5;
   }
