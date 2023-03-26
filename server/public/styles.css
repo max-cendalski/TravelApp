@@ -116,6 +116,7 @@ ul {
 }
 
 .navbar-name-paragraph {
+  text-transform: capitalize;
   display: inline-block;
   text-align: end;
   width: 85%;
@@ -576,6 +577,7 @@ input::-webkit-inner-spin-button {
 }
 
 #review-trip-details {
+  white-space: pre-line;
   font-size: 1.165rem;
   line-height: 1.8rem;
   margin-inline-start: 0.3rem;
