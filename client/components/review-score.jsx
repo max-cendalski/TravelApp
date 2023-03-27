@@ -82,30 +82,29 @@ const ReviewScore = ({
   const handleScoreChange = (e) => {
     setUserScore(e.target.value);
   };
-
+  console.log('avera',averageScore)
   return (
-
-      <section className="average-score-section">
-        <h2 className="review-score-header">Review Score: </h2>
-        {!userScoreStatus ? (
-          <form className="review-score-input-form" onSubmit={handleAddScore}>
-            <p>
-              <input
-                onChange={handleScoreChange}
-                className="review-score-input"
-                type="number"
-                name="score"
-                max="100"
-              ></input>
-            </p>
-            <button type="submit" className="add-score-button">
+    <section className="average-score-section">
+      <h2 className="review-score-header">Review Score: {averageScore} / 100</h2>
+      {!userScoreStatus && (
+        <form onSubmit={handleAddScore} className="review-score-form-element">
+          <p className="add-score-button">
+            <input
+              onChange={handleScoreChange}
+              type="number"
+              name="score"
+              className="review-score-input"
+              max="100"
+            ></input>
+          </p>
+          <p className="add-score-button">
+            <button type="submit" className="app-button">
               Add Score
             </button>
-          </form>
-        ) : (
-          <h2>{averageScore} / 100</h2>
-        )}
-      </section>
+          </p>
+        </form>
+      )}
+    </section>
   );
 };
 

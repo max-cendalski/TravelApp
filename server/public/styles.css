@@ -342,7 +342,7 @@ input::-webkit-inner-spin-button {
 
 .review-score-input {
   display: inline;
-  width: 3rem;
+  width: 2rem;
   height: 1.8rem;
   margin-right: 0.5rem;
 }
@@ -514,20 +514,21 @@ input::-webkit-inner-spin-button {
 
 #users-score-trip-details {
   margin-inline-start: 0;
-  grid-column: 1/3;
+  grid-column: 1/4;
   grid-row: 5;
 }
 
-.average-score-section {
-  display: flex;
-}
-
 .review-score-header {
+  display: inline;
   margin-inline-end: 0.5rem;
 }
 
 .edit-review-button {
   margin-block-start: 0;
+}
+
+.add-score-button {
+  display: inline;
 }
 
 #name-location-container {
@@ -553,8 +554,6 @@ input::-webkit-inner-spin-button {
 .review-score-form-element {
   display: inline;
   font-size: 1.4rem;
-  grid-row: 4;
-  grid-column: 3/4;
 }
 
 #scores-trip-details {
@@ -874,12 +873,13 @@ input::-webkit-inner-spin-button {
   #users-score-trip-details {
     margin-block-start: 0.2rem;
     margin-inline-start: 0;
-    grid-column: 1/3;
-    grid-row: 6;
+    grid-column: 1/5;
+    grid-row: 5;
     font-size: 0.9rem;
   }
 
   .review-score-header {
+    display: inline;
     margin-inline-end: 0.2rem;
   }
 
