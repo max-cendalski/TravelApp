@@ -518,10 +518,6 @@ input::-webkit-inner-spin-button {
   grid-row: 5;
 }
 
-#review-score-container {
-  grid-row: 6;
-}
-
 .average-score-section {
   display: flex;
 }
@@ -875,7 +871,7 @@ input::-webkit-inner-spin-button {
     margin-block-start: 0.2rem;
     margin-inline-start: 0;
     grid-column: 1/3;
-    grid-row: 5;
+    grid-row: 6;
     font-size: 0.9rem;
   }
 
@@ -930,7 +926,7 @@ input::-webkit-inner-spin-button {
   #comments-trip-details {
     margin: 0 0.125rem;
     grid-column: 1/6;
-    grid-row: 6/auto;
+    grid-row: 7;
   }
 }
 

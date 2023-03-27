@@ -84,7 +84,7 @@ const ReviewScore = ({
   };
 
   return (
-    <article id="review-score-container">
+
       <section className="average-score-section">
         <h2 className="review-score-header">Review Score: </h2>
         {!userScoreStatus ? (
@@ -106,7 +106,6 @@ const ReviewScore = ({
           <h2>{averageScore} / 100</h2>
         )}
       </section>
-    </article>
   );
 };
 
