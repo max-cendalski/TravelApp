@@ -84,27 +84,29 @@ const ReviewScore = ({
   };
 
   return (
-    <section>
-      <h2 className="review-score-header">Review Score :</h2>
-      {!userScoreStatus ? (
-        <form onSubmit={handleAddScore}>
-          <p className="review-score-form-element">
-            <input
-              onChange={handleScoreChange}
-              className="review-score-input"
-              type="number"
-              name="score"
-              max="100"
-            ></input>
-          </p>
-          <button type="submit" className="app-button">
-            Add Score
-          </button>
-        </form>
-      ) : (
-        <h2 className="average-review-score">{averageScore} / 100</h2>
-      )}
-    </section>
+    <article id="review-score-container">
+      <section className="average-score-section">
+        <h2 className="review-score-header">Review Score: </h2>
+        {!userScoreStatus ? (
+          <form className="review-score-input-form" onSubmit={handleAddScore}>
+            <p>
+              <input
+                onChange={handleScoreChange}
+                className="review-score-input"
+                type="number"
+                name="score"
+                max="100"
+              ></input>
+            </p>
+            <button type="submit" className="add-score-button">
+              Add Score
+            </button>
+          </form>
+        ) : (
+          <h2>{averageScore} / 100</h2>
+        )}
+      </section>
+    </article>
   );
 };
 
