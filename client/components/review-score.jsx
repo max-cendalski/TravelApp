@@ -85,7 +85,9 @@ const ReviewScore = ({
   console.log('avera',averageScore)
   return (
     <section className="average-score-section">
-      <h2 className="review-score-header">Review Score: {averageScore} / 100</h2>
+      <h2 className="review-score-header">
+        Review Score: {averageScore} / 100
+      </h2>
       {!userScoreStatus && (
         <form onSubmit={handleAddScore} className="review-score-form-element">
           <p className="add-score-button">
@@ -98,7 +100,7 @@ const ReviewScore = ({
             ></input>
           </p>
           <p className="add-score-button">
-            <button type="submit" className="app-button">
+            <button type="submit" className="app-button add-score-button">
               Add Score
             </button>
           </p>
