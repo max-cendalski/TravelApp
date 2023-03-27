@@ -185,7 +185,7 @@ const TripDetails = props => {
           {tripDetailsContext.user.username === username && (
             <button
               onClick={handleEditButton}
-              className="app-button background-orange"
+              className="app-button edit-review-button background-orange"
             >
               Edit Review
             </button>

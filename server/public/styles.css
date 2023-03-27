@@ -526,6 +526,10 @@ input::-webkit-inner-spin-button {
   margin-inline-end: 0.5rem;
 }
 
+.edit-review-button {
+  margin-block-start: 0;
+}
+
 #name-location-container {
   margin-inline-start: 0;
   margin-block-start: 0.5rem;
