@@ -1,31 +1,31 @@
-import React, { useState, useEffect } from "react";
-import Navbar from "../components/navbar";
-import Time from "../components/date";
+import React, { useState, useEffect } from 'react';
+import Navbar from '../components/navbar';
+import Time from '../components/date';
 
 const Reviews = () => {
   const [myReviews, setMyReviews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem("TravelApp-token");
+    const token = localStorage.getItem('TravelApp-token');
 
     let reviewsLoaded = true;
-    fetch("/api/my-reviews", {
-      method: "GET",
+    fetch('/api/my-reviews', {
+      method: 'GET',
       headers: {
-        "X-Access-Token": token,
-        "Content-Type": "application/json",
-      },
+        'X-Access-Token': token,
+        'Content-Type': 'application/json'
+      }
     })
-      .then((response) => response.json())
-      .then((result) => {
+      .then(response => response.json())
+      .then(result => {
         if (reviewsLoaded) {
           setMyReviews(result);
           setIsLoading(false);
         }
       })
-      .catch((error) => {
-        console.error("Error :", error);
+      .catch(error => {
+        console.error('Error :', error);
       });
 
     return () => {
@@ -35,45 +35,47 @@ const Reviews = () => {
 
   const handleDeleteReview = (id, mainPhotoUrl) => {
     const tripId = Number(id);
-    const token = window.localStorage.getItem("TravelApp-token");
-    const fileToRemove = mainPhotoUrl.split("amazonaws.com/")[1];
+    const token = window.localStorage.getItem('TravelApp-token');
+    const fileToRemove = mainPhotoUrl.split('amazonaws.com/')[1];
 
-    setMyReviews(myReviews.filter((review) => review.tripId !== id));
+    setMyReviews(myReviews.filter(review => review.tripId !== id));
     fetch(`/api/my-reviews/${tripId}/${fileToRemove}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
-        "x-access-token": token,
-        "Content-Type": "application/json",
-      },
+        'x-access-token': token,
+        'Content-Type': 'application/json'
+      }
     })
-      .then((response) => response.json())
-      .catch((error) => {
-        console.error("Error :", error);
+      .then(response => response.json())
+      .catch(error => {
+        console.error('Error :', error);
       });
   };
 
   if (isLoading) return null;
   return (
     <article>
-      {myReviews.length > 0 ? (
+      {myReviews.length > 0
+        ? (
         <article>
           <Navbar />
           <section className="list-flex">
-            {myReviews.map((trip) => (
+            {myReviews.map(trip => (
               <div className="image-item column-width50" key={trip.tripId}>
                 <Trip trip={trip} handleDeleteReview={handleDeleteReview} />
               </div>
             ))}
           </section>
         </article>
-      ) : (
+          )
+        : (
         <article>
           <Navbar />
           <h1 className="nothing-found-msg">
-            You don &apos;t have any reviews!
+            You don&apos;t have any reviews!
           </h1>
         </article>
-      )}
+          )}
     </article>
   );
 };

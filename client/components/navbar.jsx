@@ -92,7 +92,7 @@ const Navbar = () => {
 
   const handleMyReviewsButton = () => {
     setVisible('hidden');
-    window.location.hash = 'my-reviews';
+    window.location.hash = '#my-reviews';
   };
 
   const handleLoginIconClick = () => {
