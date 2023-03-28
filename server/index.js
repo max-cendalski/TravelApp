@@ -389,7 +389,7 @@ app.patch('/api/edit/trip/:tripId', (req, res, next) => {
   const sql = `
   update "trips"
      set "city" = $1,
-         "title" = $2
+         "title" = $2,
          "review" = $3,
          "thingsTodoScore" = $4,
          "foodScore" = $5,
