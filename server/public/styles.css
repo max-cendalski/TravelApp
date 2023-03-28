@@ -514,14 +514,11 @@ input::-webkit-inner-spin-button {
   grid-row: 5;
 }
 
-.review-score-header {
-  display: inline;
-  margin-inline-end: 0.5rem;
-}
-
 .edit-review-button {
   margin-block-start: 0;
   margin-block-end: 0;
+  padding-inline-start: 0.5rem;
+  padding-inline-end: 0.5rem;
 }
 
 .add-score-button {
@@ -876,8 +873,6 @@ input::-webkit-inner-spin-button {
   }
 
   .review-score-header {
-    display: inline;
-    margin-inline-end: 0.2rem;
     font-size: 1.3rem;
   }
 

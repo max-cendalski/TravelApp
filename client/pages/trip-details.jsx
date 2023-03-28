@@ -187,7 +187,7 @@ const TripDetails = props => {
               onClick={handleEditButton}
               className="app-button edit-review-button background-orange"
             >
-              Edit Review
+              Edit
             </button>
           )}
         </section>
