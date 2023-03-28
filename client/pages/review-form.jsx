@@ -4,9 +4,6 @@ import PlacesAutocomplete from 'react-places-autocomplete';
 
 const ReviewForm = () => {
   const [form, setForm] = useState({
-    country: '',
-    address: '',
-    city: '',
     title: '',
     review: '',
     thingsTodoScore: 0,
@@ -16,14 +13,19 @@ const ReviewForm = () => {
     safetyScore: 0
   });
   const [selectedImage, setSelectedImage] = useState({});
+  const [location, setLocation] = useState({
+    country: '',
+    address: '',
+    city: ''
+  });
 
   const handleSubmit = e => {
     e.preventDefault();
     const date = Date.now();
     const formData = new FormData();
     const token = window.localStorage.getItem('TravelApp-token');
-    formData.append('country', form.country.toLowerCase());
-    formData.append('city', form.city);
+    formData.append('country', location.country.toLowerCase());
+    formData.append('city', location.city);
     formData.append('image', selectedImage);
     formData.append('title', form.title);
     formData.append('review', form.review);
@@ -45,6 +47,7 @@ const ReviewForm = () => {
       .catch(error => {
         console.error('Error:', error);
       });
+
     window.location.hash = 'my-reviews';
   };
 
@@ -53,7 +56,7 @@ const ReviewForm = () => {
     const locationArray = locationString.split(',');
     const city = locationArray[0];
     const country = locationArray[locationArray.length - 1].trim();
-    setForm({
+    setLocation({
       country,
       city,
       address
@@ -75,15 +78,17 @@ const ReviewForm = () => {
   };
 
   const changeImage = e => {
+    e.preventDefault();
     setSelectedImage(e.target.files[0]);
   };
+
   return (
     <div className="container">
       <Navbar />
       <article id="review-form-container">
         <form onSubmit={handleSubmit} name="reviewForm">
           <section id="places-autocomplete">
-            <PlacesAutocomplete value={form.address} onChange={handleChange}>
+            <PlacesAutocomplete value={location.address} onChange={handleChange}>
               {({
                 getInputProps,
                 suggestions,

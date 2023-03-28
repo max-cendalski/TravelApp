@@ -10,7 +10,6 @@ const ReviewScore = ({
   const [userScore, setUserScore] = useState(0);
   const [averageScore, setAverageScore] = useState(0);
   const [userScoreStatus, setUserScoreStatus] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const token = window.localStorage.getItem('TravelApp-token');
@@ -28,7 +27,6 @@ const ReviewScore = ({
           result.some(item => item.userId === loggedUserId)
         ) {
           setUserScoreStatus(true);
-          setIsLoading(false);
         }
         if (result.length === 0) return;
         let averageScore = 0;
@@ -85,7 +83,6 @@ const ReviewScore = ({
     setUserScore(e.target.value);
   };
 
-  if (isLoading) return null;
   return (
     <section className="average-score-section">
       <h2 className="review-score-header">
