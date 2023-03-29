@@ -131,6 +131,16 @@ const EditTrip = props => {
               required
             ></input>
           </p>
+          <p className="label-input-container">
+            <label className="edit-score-label">City</label>
+            <input
+              onChange={handleChange}
+              className="edit-form-text-input float-right"
+              type="text"
+              name="title"
+              defaultValue={trip.title}
+            ></input>
+          </p>
         </section>
         <textarea
           onChange={handleChange}
