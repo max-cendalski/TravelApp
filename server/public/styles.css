@@ -26,9 +26,9 @@ ul {
   text-transform: capitalize;
 }
 
-.control-arrow {
+/* .control-arrow {
   top: 4rem !important;
-}
+} */
 
 .navbar-container {
   position: fixed;
@@ -257,14 +257,14 @@ ul {
 }
 
 .app-button {
-  border-radius: 5px;
+  border-radius: 7px;
   margin-block-start: 1rem;
-  margin-block-end: 1rem;
-  background-color: rgb(240, 131, 52);
+  padding-inline-start: 1rem;
+  padding-inline-end: 1rem;
   color: white;
   border: none;
   height: 2rem;
-  letter-spacing: 3px;
+  letter-spacing: 4px;
   font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
@@ -722,7 +722,7 @@ input::-webkit-inner-spin-button {
 
   .logout-info {
     padding: 0.5rem;
-    width: 75%;
+    width: 80%;
   }
 
   .country-name {
