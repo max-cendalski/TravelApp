@@ -522,8 +522,6 @@ input::-webkit-inner-spin-button {
 .edit-review-button {
   margin-block-start: 0;
   margin-block-end: 0;
-  padding-inline-start: 0.5rem;
-  padding-inline-end: 0.5rem;
 }
 
 #name-location-container {

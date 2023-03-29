@@ -19,9 +19,6 @@ const ReviewForm = () => {
     city: ''
   });
 
-  // const canSave = [...Object.values(formData)].every(Boolean);
-
-  const canSave = true;
   const handleSubmit = e => {
     e.preventDefault();
     const date = Date.now();
@@ -50,7 +47,6 @@ const ReviewForm = () => {
       .catch(error => {
         console.error('Error:', error);
       });
-
     window.location.hash = 'my-reviews';
   };
 
@@ -230,14 +226,12 @@ const ReviewForm = () => {
             <textarea
               className="form-textarea"
               onChange={handleChangeFormData}
+              type="text"
               rows="20"
               name="review"
               required
             ></textarea>
-            <button
-              className="app-button background-orange float-right"
-              disabled={!canSave}
-            >
+            <button className="app-button background-orange float-right">
               Confirm
             </button>
             <button
