@@ -19,6 +19,9 @@ const ReviewForm = () => {
     city: ''
   });
 
+  // const canSave = [...Object.values(formData)].every(Boolean);
+
+  const canSave = true;
   const handleSubmit = e => {
     e.preventDefault();
     const date = Date.now();
@@ -88,7 +91,10 @@ const ReviewForm = () => {
       <article id="review-form-container">
         <form onSubmit={handleSubmit} name="reviewForm">
           <section id="places-autocomplete">
-            <PlacesAutocomplete value={location.address} onChange={handleChange}>
+            <PlacesAutocomplete
+              value={location.address}
+              onChange={handleChange}
+            >
               {({
                 getInputProps,
                 suggestions,
@@ -207,6 +213,7 @@ const ReviewForm = () => {
               type="file"
               name="image"
               accept=".png, .jpg, .jpeg, .gif"
+              required
             />
           </section>
           <section>
@@ -227,7 +234,10 @@ const ReviewForm = () => {
               name="review"
               required
             ></textarea>
-            <button className="app-button background-orange float-right">
+            <button
+              className="app-button background-orange float-right"
+              disabled={!canSave}
+            >
               Confirm
             </button>
             <button
