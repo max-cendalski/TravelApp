@@ -212,7 +212,7 @@ const ReviewForm = () => {
               required
             />
           </section>
-          <section>
+          <section className="review-form-title">
             <h3>Review Title</h3>
             <input
               onChange={handleChangeFormData}

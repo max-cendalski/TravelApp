@@ -493,6 +493,10 @@ input::-webkit-inner-spin-button {
   margin-top: 1rem;
 }
 
+.review-form-title {
+  margin-block-start: 1rem;
+}
+
 #review-form-textarea-section textarea {
   width: 100%;
 }
