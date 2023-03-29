@@ -97,8 +97,8 @@ const ReviewScore = ({
               max="100"
             ></input>
           </p>
-          <p className="add-score-button">
-            <button type="submit" className="app-button add-score-button">
+          <p className="review-score-form-element">
+            <button type="submit" className="app-button background-orange">
               Add Score
             </button>
           </p>
