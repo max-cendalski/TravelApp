@@ -92,20 +92,20 @@ const ReviewScore = ({
           <p className="review-score-form-element">
             <input
               onChange={handleScoreChange}
-              className="review-score-input"
               type="number"
               name="score"
+              className="review-score-input"
               max="100"
             ></input>
           </p>
-          <button type="submit" className="app-button">
-            Add Score
-          </button>
+          <p className="add-score-button">
+            <button type="submit" className="app-button add-score-button">
+              Add Score
+            </button>
+          </p>
         </form>
-          )
-        : (
-        <h2 className="average-review-score">{averageScore} / 100</h2>
-          )}
+      )}
+
     </section>
   );
 };

@@ -3,7 +3,7 @@ import React from 'react';
 export default function Comments(props) {
   return (
     <div>
-      <h2>Comments</h2>
+      <h2 className='comments-header'>Comments</h2>
       <ul className="comments-list">
         {props.comments.map((comment) => {
           return (
