@@ -347,6 +347,10 @@ input::-webkit-inner-spin-button {
   margin-right: 0.5rem;
 }
 
+.review-score-form-element {
+  display: inline;
+}
+
 .review-form-label {
   display: inline-block;
   margin-bottom: 0.3rem;
@@ -520,10 +524,6 @@ input::-webkit-inner-spin-button {
   margin-block-end: 0;
   padding-inline-start: 0.5rem;
   padding-inline-end: 0.5rem;
-}
-
-.add-score-button {
-  display: inline;
 }
 
 #name-location-container {

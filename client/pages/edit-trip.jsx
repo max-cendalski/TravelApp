@@ -1,37 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-const EditTrip = (props) => {
+const EditTrip = props => {
   const [trip, setTrip] = useState(null);
 
   useEffect(() => {
-    const token = window.localStorage.getItem("TravelApp-token");
+    const token = window.localStorage.getItem('TravelApp-token');
     fetch(`/api/trips/${props.tripId}`, {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "x-access-token": token,
-        "Content-Type": "application/json",
-      },
+        'x-access-token': token,
+        'Content-Type': 'application/json'
+      }
     })
-      .then((response) => response.json())
-      .then((trip) => setTrip(trip))
-      .catch((error) => console.error("Error", error));
+      .then(response => response.json())
+      .then(trip => setTrip(trip))
+      .catch(error => console.error('Error', error));
   }, []);
 
-  const handleSubmitForm = (e) => {
+  const handleSubmitForm = e => {
     e.preventDefault();
-    const token = window.localStorage.getItem("TravelApp-token");
+    const token = window.localStorage.getItem('TravelApp-token');
     const tripId = Number(props.tripId);
 
-    fetch(`/api/edit/trip/${props.tripId}`, {
-      method: "PATCH",
+    fetch(`/api/edit/trip/${tripId}`, {
+      method: 'PATCH',
       headers: {
-        "x-access-token": token,
-        "Content-Type": "application/json",
+        'x-access-token': token,
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(trip),
+      body: JSON.stringify(trip)
     })
-      .then((response) => response.json())
-      .then((result) => {
+      .then(response => response.json())
+      .then(result => {
         result.country = trip.country;
         result.username = trip.username;
         setTrip(result);
@@ -39,13 +39,13 @@ const EditTrip = (props) => {
       });
   };
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const name = e.target.name;
     const value = e.target.value;
 
-    setTrip((prevData) => ({
+    setTrip(prevData => ({
       ...prevData,
-      [name]: value,
+      [name]: value
     }));
   };
 
@@ -129,6 +129,16 @@ const EditTrip = (props) => {
               name="safetyScore"
               defaultValue={trip.safetyScore}
               required
+            ></input>
+          </p>
+          <p className="label-input-container">
+            <label className="edit-score-label">City</label>
+            <input
+              onChange={handleChange}
+              className="edit-form-text-input float-right"
+              type="text"
+              name="title"
+              defaultValue={trip.title}
             ></input>
           </p>
         </section>

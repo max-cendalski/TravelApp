@@ -85,9 +85,8 @@ const ReviewScore = ({
 
   return (
     <section>
-      <h2 className="review-score-header">Review Score : </h2>
-      {!userScoreStatus
-        ? (
+      <h2 className="review-score-header">Review Score: {averageScore} / 100</h2>
+      {!userScoreStatus && (
         <form onSubmit={handleAddScore}>
           <p className="review-score-form-element">
             <input
@@ -98,14 +97,13 @@ const ReviewScore = ({
               max="100"
             ></input>
           </p>
-          <p className="add-score-button">
-            <button type="submit" className="app-button add-score-button">
+          <p className="review-score-form-element">
+            <button type="submit" className="app-button background-orange">
               Add Score
             </button>
           </p>
         </form>
       )}
-
     </section>
   );
 };
