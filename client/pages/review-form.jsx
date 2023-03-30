@@ -47,7 +47,6 @@ const ReviewForm = () => {
       .catch(error => {
         console.error('Error:', error);
       });
-
     window.location.hash = 'my-reviews';
   };
 
@@ -88,7 +87,10 @@ const ReviewForm = () => {
       <article id="review-form-container">
         <form onSubmit={handleSubmit} name="reviewForm">
           <section id="places-autocomplete">
-            <PlacesAutocomplete value={location.address} onChange={handleChange}>
+            <PlacesAutocomplete
+              value={location.address}
+              onChange={handleChange}
+            >
               {({
                 getInputProps,
                 suggestions,
@@ -186,7 +188,6 @@ const ReviewForm = () => {
               ></input>
               <label className="review-score-label">Transport</label>
             </p>
-
             <p>
               <input
                 className="review-score-input"
@@ -207,9 +208,10 @@ const ReviewForm = () => {
               type="file"
               name="image"
               accept=".png, .jpg, .jpeg, .gif"
+              required
             />
           </section>
-          <section>
+          <section className="review-form-title">
             <h3>Review Title</h3>
             <input
               onChange={handleChangeFormData}
@@ -223,6 +225,7 @@ const ReviewForm = () => {
             <textarea
               className="form-textarea"
               onChange={handleChangeFormData}
+              type="text"
               rows="20"
               name="review"
               required

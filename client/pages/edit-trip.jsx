@@ -132,7 +132,7 @@ const EditTrip = props => {
             ></input>
           </p>
           <p className="label-input-container">
-            <label className="edit-score-label">City</label>
+            <label className="edit-score-label">Title</label>
             <input
               onChange={handleChange}
               className="edit-form-text-input float-right"

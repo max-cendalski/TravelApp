@@ -43,21 +43,20 @@ const App = () => {
     setUser(user);
     setIsAuthorize(true);
     setRoute(parseRoute(window.location.hash));
-  }, [route.path]);
+  }, [route.path, isAuthorize]);
 
   const handleSignIn = result => {
     const { user, token } = result;
     window.localStorage.setItem('TravelApp-token', token);
+    setIsAuthorize(true);
     setUser(user);
-    // window.location.reload();
+    window.location.hash = '';
   };
 
   const handleConfirmLogout = e => {
-    e.preventDefault();
     window.localStorage.removeItem('TravelApp-token');
     setUser(null);
-    setIsAuthorize(false);
-    window.location.hash = '#';
+    window.location.hash = '';
   };
 
   const renderPage = () => {
