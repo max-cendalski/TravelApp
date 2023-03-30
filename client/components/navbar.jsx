@@ -221,7 +221,7 @@ const Navbar = () => {
           </section>
         )}
       </article>
-      <article className={logoutInfo}>
+      {<article className={logoutInfo} onClick={handleCancelLogout}>
         <h2>Are you sure you want to logout?</h2>
         <button
           onClick={navbarContextData.handleConfirmLogout}
@@ -236,6 +236,7 @@ const Navbar = () => {
           Cancel
         </button>
       </article>
+      }
       <article className={locNotFoundMsg}>
         <h1>Nothing Found</h1>
       </article>

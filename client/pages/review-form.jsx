@@ -188,7 +188,6 @@ const ReviewForm = () => {
               ></input>
               <label className="review-score-label">Transport</label>
             </p>
-
             <p>
               <input
                 className="review-score-input"
