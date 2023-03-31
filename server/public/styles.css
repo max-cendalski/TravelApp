@@ -855,8 +855,8 @@ input::-webkit-inner-spin-button {
   }
 
   #trip-details-container {
-    margin-inline-start: 0.6rem;
-    margin-inline-end: 0.6rem;
+    margin-inline-start: 0.5rem;
+    margin-inline-end: 0.5rem;
     display: grid;
     grid-gap: 0.5rem;
     grid-template-columns: repeat(4, 1fr);
@@ -864,7 +864,7 @@ input::-webkit-inner-spin-button {
   }
 
   #users-score-trip-details {
-    margin-block-start: 0.2rem;
+    margin-block-start: 0.5rem;
     margin-inline-start: 0;
     grid-column: 1/5;
     grid-row: 6;
