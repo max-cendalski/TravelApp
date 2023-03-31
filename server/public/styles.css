@@ -509,7 +509,8 @@ input::-webkit-inner-spin-button {
 }
 
 #trip-details-container {
-  padding-top: 4rem;
+  padding-block-start: 4rem;
+  padding-block-end: 2rem;
   margin: 0 2rem;
   display: grid;
   grid-gap: 1rem;
