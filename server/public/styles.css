@@ -875,6 +875,18 @@ input::-webkit-inner-spin-button {
     font-size: 1.3rem;
   }
 
+  .review-paragraph-title {
+    margin-block-start: 0.5rem;
+    font-size: 1.1rem;
+  }
+
+  .review-paragraph {
+    white-space: pre-line;
+    font-size: 1rem;
+    line-height: 1.6rem;
+    font-weight: 500;
+  }
+
   #review-edit-button-trip-details {
     margin-inline-end: 0.2rem;
     grid-row: 5;
