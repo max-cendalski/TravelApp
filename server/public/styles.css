@@ -578,7 +578,7 @@ input::-webkit-inner-spin-button {
   font-size: 1.3rem;
 } */
 
-.review-header {
+.review-title {
   font-size: 1.4rem;
   margin-top: 1rem;
 }
@@ -887,7 +887,7 @@ input::-webkit-inner-spin-button {
     margin-block-start: 0.5rem;
     font-size: 1.1rem;
   } */
-  .review-header {
+  .review-title {
     font-size: 1.2rem;
   }
 

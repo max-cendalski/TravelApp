@@ -179,7 +179,7 @@ const TripDetails = props => {
           <img className="photo" src={mainPhotoUrl} alt={city}></img>
         </section>
         <article id="review-trip-details">
-          <h2 className="review-header">{title}</h2>
+          <h2 className="review-title">{title}</h2>
           <Time date={trip.created} />
           <p className="review-paragraph">{review}</p>
         </article>
