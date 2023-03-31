@@ -573,14 +573,19 @@ input::-webkit-inner-spin-button {
   grid-row: 3/3;
 }
 
-.review-paragraph-title {
+/* .review-paragraph-title {
   margin-block-start: 0.5rem;
   font-size: 1.3rem;
+} */
+
+.review-header {
+  font-size: 1.4rem;
+  margin-top: 1rem;
 }
 
 .review-paragraph {
   white-space: pre-line;
-  font-size: 1.265rem;
+  font-size: 1.2rem;
   line-height: 1.6rem;
   font-weight: 500;
 }
@@ -843,6 +848,10 @@ input::-webkit-inner-spin-button {
     grid-row: 1;
   }
 
+  #trip-details-name-location-score-container {
+    display: flex;
+  }
+
   #scores-trip-details {
     margin-block-start: 2rem;
     grid-column: 3/5;
@@ -850,7 +859,6 @@ input::-webkit-inner-spin-button {
   }
 
   .overall-score {
-    padding-block-start: 2rem;
     font-size: 1.2rem;
   }
 
@@ -875,9 +883,12 @@ input::-webkit-inner-spin-button {
     font-size: 1.3rem;
   }
 
-  .review-paragraph-title {
+  /*   .review-paragraph-title {
     margin-block-start: 0.5rem;
     font-size: 1.1rem;
+  } */
+  .review-header {
+    font-size: 1.2rem;
   }
 
   .review-paragraph {
@@ -909,6 +920,7 @@ input::-webkit-inner-spin-button {
   }
 
   .name-location-element-user {
+    width: 100%;
     font-size: 1.2rem;
   }
 
@@ -921,7 +933,7 @@ input::-webkit-inner-spin-button {
     grid-row: 3/3;
   }
 
-  #name-location-scores-trip-details ul {
+  /*   #name-location-scores-trip-details ul {
     list-style: none;
     background-color: rgb(251, 251, 251);
     padding: 0;
@@ -934,7 +946,7 @@ input::-webkit-inner-spin-button {
   #name-location-scores-trip-details h3 {
     padding-bottom: 1rem;
   }
-
+ */
   #comments-trip-details {
     grid-column: 1/6;
     grid-row: 7/auto;
