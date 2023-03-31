@@ -855,8 +855,8 @@ input::-webkit-inner-spin-button {
   }
 
   #trip-details-container {
-    margin-inline-start: 0.2rem;
-    margin-inline-end: 0.2rem;
+    margin-inline-start: 0.6rem;
+    margin-inline-end: 0.6rem;
     display: grid;
     grid-gap: 0.5rem;
     grid-template-columns: repeat(4, 1fr);
