@@ -291,6 +291,16 @@ ul {
   letter-spacing: 2px;
 }
 
+input[type="file"]::file-selector-button {
+  cursor: pointer;
+  background-color: rgb(28, 134, 28);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.9rem;
+}
+
 .drop-down-container {
   background-color: rgb(112, 110, 110);
   position: absolute;
