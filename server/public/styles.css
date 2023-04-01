@@ -731,7 +731,21 @@ input::-webkit-inner-spin-button {
 
   .logout-info {
     padding: 0.5rem;
-    width: 80%;
+    width: 75%;
+  }
+
+  .logout-info-text {
+    font-size: 0.8rem;
+  }
+
+  .app-button {
+    color: white;
+    border: none;
+    height: 1.8rem;
+    letter-spacing: 3px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
   }
 
   .country-name {
