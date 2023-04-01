@@ -114,7 +114,7 @@ const Navbar = () => {
         <form onSubmit={handleSubmit}>
           <input
             type="search"
-            className='search-window'
+            className='search-country-window'
             value={searchBox}
             onChange={handleChange}
             autoComplete="off"
@@ -123,7 +123,7 @@ const Navbar = () => {
             required
           />
           <button className="submit-search-button">
-            <i className="fa-solid fa-magnifying-glass"></i>
+            <i className="fa-solid fa-magnifying-glass fa-lg"></i>
           </button>
         </form>
         <section>
