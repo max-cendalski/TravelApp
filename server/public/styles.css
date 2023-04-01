@@ -603,11 +603,6 @@ input::-webkit-inner-spin-button {
   grid-row: 3/3;
 }
 
-/* .review-paragraph-title {
-  margin-block-start: 0.5rem;
-  font-size: 1.3rem;
-} */
-
 .review-title {
   font-size: 1.4rem;
   margin-top: 1rem;
@@ -893,6 +888,10 @@ input::-webkit-inner-spin-button {
     padding: 1rem 0;
   }
 
+  .form-textarea {
+    font-size: 0.9rem;
+  }
+
   #name-location-container {
     margin-inline-start: 0.2rem;
     margin-block-start: 0;
@@ -935,10 +934,6 @@ input::-webkit-inner-spin-button {
     font-size: 1.3rem;
   }
 
-  /*   .review-paragraph-title {
-    margin-block-start: 0.5rem;
-    font-size: 1.1rem;
-  } */
   .review-title {
     font-size: 1.2rem;
   }
@@ -958,6 +953,15 @@ input::-webkit-inner-spin-button {
 
   .comments-header {
     font-size: 1.3rem;
+  }
+
+  .edit-score-label {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .edit-form-text-input {
+    font-size: 1rem;
   }
 
   #review-form-container form {
