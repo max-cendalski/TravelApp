@@ -17,9 +17,14 @@ const Home = () => {
       .then(result => {
         const images = [];
         const countries = [];
-        for (let i = 0; i < 6; i++) {
-          images.push(result[i].mainPhotoUrl);
-          countries.push(result[i].country);
+        const indexes = [];
+        while (indexes.length < 6) {
+          const counter = Math.floor(Math.random(result.lengt) * 6);
+          if (!indexes.includes(counter)) {
+            images.push(result[counter].mainPhotoUrl);
+            countries.push(result[counter].country);
+            indexes.push(counter);
+          }
         }
         setImagesCarousel(images);
         setCountriesCarousel(countries);

@@ -26,9 +26,10 @@ ul {
   text-transform: capitalize;
 }
 
-/* .control-arrow {
+/* CONTROL ARROW FOR CAROUSEL API */
+.control-arrow {
   top: 4rem !important;
-} */
+}
 
 .navbar-container {
   position: fixed;
