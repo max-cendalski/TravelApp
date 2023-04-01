@@ -905,6 +905,7 @@ input::-webkit-inner-spin-button {
 
   #scores-trip-details {
     margin-block-start: 2rem;
+    margin-inline-start: 1rem;
     grid-column: 3/5;
     grid-row: 1/2;
   }
