@@ -31,7 +31,7 @@ const Navbar = () => {
       setSearchedLocations(searchedCountries);
       if (searchedCountries) {
         setSearchListContainer('search-result-list');
-        setSearchedLocations(searchedCountries);
+        setSearchedLocations(searchedCountries.slice(0, 8));
       } else {
         setSearchListContainer('hidden');
         setSearchedLocations(searchedCountries);

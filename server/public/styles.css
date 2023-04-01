@@ -62,6 +62,7 @@ section {
 
 .search-country-window {
   padding: 5px;
+  width: 13rem;
   border: 1px solid rgb(130, 128, 128);
   border-radius: 5px 0 0 5px;
   outline: none;
@@ -649,9 +650,10 @@ input::-webkit-inner-spin-button {
   position: absolute;
   list-style: none;
   background-color: white;
-  width: 11rem;
+  width: 13rem;
   padding-left: 0;
   border: 1px solid rgb(240, 131, 52);
+  border-top: none;
 }
 
 #search-result-list li {
@@ -817,13 +819,21 @@ input::-webkit-inner-spin-button {
     display: none;
   }
 
+  .search-country-window {
+    width: 11rem;
+  }
+
+  #search-result-list {
+    width: 11rem;
+  }
+
   .navbar-app-home {
     display: none;
   }
 
   .navbar-app-mobile {
     display: inline-block;
-    flex-basis: 20%;
+    flex-basis: 10%;
   }
 
   .navbar-app-mobile a {
@@ -839,7 +849,7 @@ input::-webkit-inner-spin-button {
 
   .navbar-login-icon-section {
     cursor: pointer;
-    flex-basis: 15%;
+    flex-basis: 20%;
   }
 
   .navbar-login-icon-section i {
