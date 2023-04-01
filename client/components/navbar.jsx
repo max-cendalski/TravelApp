@@ -171,7 +171,7 @@ const Navbar = () => {
             Hello, {navbarContextData.user.username}
           </p>
         )}
-        <i className="fas fa-user icon-class" />
+        <i className="fas fa-user"/>
       </section>
 
       <section className={visible}>

@@ -128,18 +128,14 @@ section {
 .navbar-login-icon-section {
   cursor: pointer;
   flex-basis: 33%;
-}
-
-.icon-class {
-  float: right;
-  margin-right: 2rem;
-  width: 5%;
+  padding: 1rem 0;
 }
 
 .navbar-name-paragraph {
   text-transform: capitalize;
   display: inline-block;
   text-align: end;
+  padding-inline-end: 1rem;
   width: 85%;
 }
 
@@ -800,6 +796,10 @@ input::-webkit-inner-spin-button {
     padding: 0.5rem;
   }
 
+  .photo {
+    border-radius: 0;
+  }
+
   .carousel-country-name {
     left: 0;
     top: 17%;
@@ -844,17 +844,12 @@ input::-webkit-inner-spin-button {
 
   .navbar-search-box-container {
     flex-basis: 60%;
-    margin-left: 0.2rem;
+    margin-inline-start: 0.2rem;
   }
 
   .navbar-login-icon-section {
-    cursor: pointer;
-    flex-basis: 20%;
-  }
-
-  .navbar-login-icon-section i {
-    float: right;
-    margin-right: 1rem;
+    flex-basis: 10%;
+    text-align: end;
   }
 
   .drop-down-container {
@@ -993,20 +988,6 @@ input::-webkit-inner-spin-button {
     grid-row: 3/3;
   }
 
-  /*   #name-location-scores-trip-details ul {
-    list-style: none;
-    background-color: rgb(251, 251, 251);
-    padding: 0;
-  }
-
-  #name-location-scores-trip-details li {
-    font-size: 1rem;
-  }
-
-  #name-location-scores-trip-details h3 {
-    padding-bottom: 1rem;
-  }
- */
   #comments-trip-details {
     grid-column: 1/6;
     grid-row: 7/auto;
