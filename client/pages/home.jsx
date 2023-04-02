@@ -15,11 +15,13 @@ const Home = () => {
     })
       .then(response => response.json())
       .then(result => {
-        const images = [];
-        const countries = [];
-        const indexes = [];
-        while (indexes.length < 6) {
-          const counter = Math.floor(Math.random(result.lengt) * 6);
+        console.log('resul',result)
+        var images = [];
+        var countries = [];
+        var indexes = [];
+        while (indexes.length < 3) {
+          let counter = Math.floor(Math.random(6) * 6);
+          console.log('counterv,',counter)
           if (!indexes.includes(counter)) {
             images.push(result[counter].mainPhotoUrl);
             countries.push(result[counter].country);
