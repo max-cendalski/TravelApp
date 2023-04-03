@@ -153,12 +153,12 @@ const TripDetails = props => {
       <article className="container" id="trip-details-container">
         <section id="name-location-container">
           <p className="name-location-element-user">Review by @{username}</p>
-          <p className="name-location-element">Country: {trip.country}</p>
-          <p className="name-location-element">City: {trip.city}</p>
+          <p className="name-location-element">{trip.country}</p>
+          <p className="name-location-element">{trip.city}</p>
 
           <Weather location={trip} />
         </section>
-        <section id="scores-trip-details">
+        <section id="scores-trip-details-container">
           <ul>
             <li className="score-text">Things to Do - {thingsTodoScore}</li>
             <li className="score-text">Food - {foodScore}</li>
@@ -166,7 +166,7 @@ const TripDetails = props => {
             <li className="score-text">Transport - {transportScore}</li>
             <li className="score-text">Safety - {safetyScore}</li>
             <li className="overall-score">
-              Overall: {Math.floor(overallScore)} / 100
+              Overall: {Math.floor(overallScore)}/100
             </li>
           </ul>
         </section>
