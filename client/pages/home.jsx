@@ -5,8 +5,6 @@ import { Carousel } from "react-responsive-carousel";
 const Home = () => {
   const [imagesCarousel, setImagesCarousel] = useState(null);
 
-  const [tes, setTes] = useState([]);
-
   useEffect(() => {
     fetch("/api/images", {
       method: "GET",
@@ -27,11 +25,7 @@ const Home = () => {
               indexes.pop();
             }
           }
-          console.log('imagesToSave',imagesToRender)
-          indexes.forEach((ele) => {
-            imagesToRender.push(result[ele])
-          });
-          console.log('imagev,',imagesToRender)
+          indexes.forEach(ele => imagesToRender.push(result[ele]));
           setImagesCarousel(imagesToRender)
         }
         generateImages()

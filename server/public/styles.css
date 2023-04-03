@@ -128,7 +128,8 @@ section {
 .navbar-login-icon-section {
   cursor: pointer;
   flex-basis: 33%;
-  padding: 1rem 0;
+  margin-inline-end: 2rem;
+  text-align: end;
 }
 
 .navbar-name-paragraph {
