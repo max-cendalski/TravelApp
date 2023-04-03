@@ -128,7 +128,8 @@ section {
 .navbar-login-icon-section {
   cursor: pointer;
   flex-basis: 33%;
-  padding: 1rem 0;
+  margin-inline-end: 2rem;
+  text-align: end;
 }
 
 .navbar-name-paragraph {
@@ -203,12 +204,6 @@ section {
 .score-container {
   margin-top: 1rem;
   margin-left: 1rem;
-}
-
-.score-text {
-  font-size: 1.1rem;
-  padding-block-end: 0.5rem;
-  font-weight: 400;
 }
 
 .overall-score {
@@ -363,7 +358,7 @@ input::-webkit-inner-spin-button {
 
 .review-score-label {
   font-size: 1.125rem;
-  font-weight: 700;
+  font-weight: 500;
   margin-right: 0.5rem;
 }
 
@@ -576,6 +571,13 @@ input::-webkit-inner-spin-button {
   font-style: oblique;
   font-size: 1.4rem;
   grid-column: 1/4;
+  font-weight: 600;
+}
+
+.score-text {
+  font-size: 1.1rem;
+  padding-block-end: 0.5rem;
+  font-weight: 400;
 }
 
 #scores-trip-details {
@@ -845,6 +847,7 @@ input::-webkit-inner-spin-button {
   .navbar-login-icon-section {
     flex-basis: 10%;
     text-align: end;
+    margin-inline-end: 0.5rem;
   }
 
   .drop-down-container {
@@ -905,7 +908,7 @@ input::-webkit-inner-spin-button {
 
   #scores-trip-details {
     margin-block-start: 2rem;
-    margin-inline-start: 1rem;
+    margin-inline-start: 1.4rem;
     grid-column: 3/5;
     grid-row: 1/2;
   }
@@ -933,6 +936,12 @@ input::-webkit-inner-spin-button {
 
   .review-score-header {
     font-size: 1.3rem;
+  }
+
+  .review-score-label {
+    font-size: 1.065rem;
+    font-weight: 500;
+    margin-right: 0.5rem;
   }
 
   .review-title {
