@@ -1,7 +1,7 @@
 set client_min_messages to warning;
 
 -- `drop schema` INSTANTLY ERASES EVERYTHING.
-drop schema "public" cascade;
+/* drop schema "public" cascade;
 
 create schema "public";
 
@@ -80,7 +80,7 @@ CREATE TABLE "public"."tripScores" (
 ALTER TABLE "comments" ADD CONSTRAINT "comments_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId") ON DELETE CASCADE;
 ALTER TABLE "comments" ADD CONSTRAINT "comments_fk1" FOREIGN KEY ("tripId") REFERENCES "trips"("tripId") ON DELETE CASCADE;
 
-ALTER TABLE "trips" ADD CONSTRAINT "trips_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
+ALTER TABLE "trips" ADD CONSTRAINT "trips_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId"); */
 
 
 /*ALTER TABLE "additionalPhotos" ADD CONSTRAINT "additionalPhotos_fk0" FOREIGN KEY ("tripId") REFERENCES "trips"("tripId")*/
