@@ -903,7 +903,7 @@ input::-webkit-inner-spin-button {
   }
 
   #scores-trip-details-container {
-    margin-inline-start: 1.6rem;
+    margin-inline-start: 1.2rem;
     margin-block-start: 2.08rem;
     grid-column: 3/5;
     grid-row: 1/2;
