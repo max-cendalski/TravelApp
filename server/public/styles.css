@@ -847,6 +847,7 @@ input::-webkit-inner-spin-button {
   .navbar-login-icon-section {
     flex-basis: 10%;
     text-align: end;
+    margin-inline-end: 0.5rem;
   }
 
   .drop-down-container {
@@ -935,6 +936,12 @@ input::-webkit-inner-spin-button {
 
   .review-score-header {
     font-size: 1.3rem;
+  }
+
+  .review-score-label {
+    font-size: 1.065rem;
+    font-weight: 500;
+    margin-right: 0.5rem;
   }
 
   .review-title {
