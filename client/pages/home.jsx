@@ -18,7 +18,7 @@ const Home = () => {
         const images = [];
         const countries = [];
         const indexes = [];
-        while (indexes.length < 3) {
+        while (indexes.length < 6) {
           const counter = Math.floor(Math.random(6) * 6);
           if (!indexes.includes(counter)) {
             images.push(result[counter].mainPhotoUrl);
