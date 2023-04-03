@@ -15,6 +15,8 @@ const Home = () => {
     })
       .then(response => response.json())
       .then(result => {
+        console.log("result", result);
+
         const images = [];
         const countries = [];
         const indexes = [];
@@ -28,6 +30,7 @@ const Home = () => {
             indexes.pop();
           }
         }
+        console.log('index',indexes)
         setImagesCarousel(images);
         setCountriesCarousel(countries);
       })

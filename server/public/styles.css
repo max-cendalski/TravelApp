@@ -205,12 +205,6 @@ section {
   margin-left: 1rem;
 }
 
-.score-text {
-  font-size: 1.1rem;
-  padding-block-end: 0.5rem;
-  font-weight: 400;
-}
-
 .overall-score {
   padding-block-start: 2rem;
   font-weight: 600;
@@ -576,6 +570,13 @@ input::-webkit-inner-spin-button {
   font-style: oblique;
   font-size: 1.4rem;
   grid-column: 1/4;
+  font-weight: 600;
+}
+
+.score-text {
+  font-size: 1.1rem;
+  padding-block-end: 0.5rem;
+  font-weight: 400;
 }
 
 #scores-trip-details {
@@ -905,7 +906,7 @@ input::-webkit-inner-spin-button {
 
   #scores-trip-details {
     margin-block-start: 2rem;
-    margin-inline-start: 1rem;
+    margin-inline-start: 1.4rem;
     grid-column: 3/5;
     grid-row: 1/2;
   }
