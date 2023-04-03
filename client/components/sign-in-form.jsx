@@ -36,7 +36,6 @@ const SignInForm = props => {
           setErrorMsg('incorrect-username-msg');
         } else {
           SingInContextData.handleSignIn(result);
-          window.location.hash = '';
           props.handleSwitchingModal();
         }
       })

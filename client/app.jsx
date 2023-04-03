@@ -50,7 +50,7 @@ const App = () => {
     window.localStorage.setItem('TravelApp-token', token);
     setIsAuthorize(true);
     setUser(user);
-    window.location.hash = '';
+    window.location.reload();
   };
 
   const handleConfirmLogout = e => {

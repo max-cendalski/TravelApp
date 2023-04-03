@@ -219,22 +219,3 @@ const TripDetails = props => {
 };
 
 export default TripDetails;
-
-/*     <section id="name-location-container">
-          <h3 className="name-location-element-user">Review by @{username}</h3>
-          <h3 className="name-location-element">Country: {trip.country}</h3>
-          <h3 className="name-location-element">City: {trip.city}</h3>
-
-          <Weather location={trip} />
-        </section>
-        <section id="scores-trip-details">
-          <ul>
-            <li className="score-text">Things to Do - {thingsTodoScore}</li>
-            <li className="score-text">Food - {foodScore}</li>
-            <li className="score-text">People - {peopleScore}</li>
-            <li className="score-text">Transport - {transportScore}</li>
-            <li className="score-text">Safety - {safetyScore}</li>
-            <li className="overall-score">
-              Overall: {Math.floor(overallScore)} / 100
-            </li>
-          </ul> */
