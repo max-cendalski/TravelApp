@@ -166,7 +166,7 @@ const TripDetails = props => {
             <li className="score-text">Transport - {transportScore}</li>
             <li className="score-text">Safety - {safetyScore}</li>
             <li className="overall-score">
-              Overall score: {Math.floor(overallScore)} / 100
+              Overall: {Math.floor(overallScore)} / 100
             </li>
           </ul>
         </section>
@@ -176,7 +176,7 @@ const TripDetails = props => {
           <img className="photo" src={mainPhotoUrl} alt={city}></img>
         </section>
         <article id="review-trip-details">
-          <h2 className="review-header">{title}</h2>
+          <h2 className="review-title">{title}</h2>
           <Time date={trip.created} />
           <p className="review-paragraph">{review}</p>
         </article>
@@ -219,3 +219,22 @@ const TripDetails = props => {
 };
 
 export default TripDetails;
+
+/*     <section id="name-location-container">
+          <h3 className="name-location-element-user">Review by @{username}</h3>
+          <h3 className="name-location-element">Country: {trip.country}</h3>
+          <h3 className="name-location-element">City: {trip.city}</h3>
+
+          <Weather location={trip} />
+        </section>
+        <section id="scores-trip-details">
+          <ul>
+            <li className="score-text">Things to Do - {thingsTodoScore}</li>
+            <li className="score-text">Food - {foodScore}</li>
+            <li className="score-text">People - {peopleScore}</li>
+            <li className="score-text">Transport - {transportScore}</li>
+            <li className="score-text">Safety - {safetyScore}</li>
+            <li className="overall-score">
+              Overall: {Math.floor(overallScore)} / 100
+            </li>
+          </ul> */

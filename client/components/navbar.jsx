@@ -31,7 +31,7 @@ const Navbar = () => {
       setSearchedLocations(searchedCountries);
       if (searchedCountries) {
         setSearchListContainer('search-result-list');
-        setSearchedLocations(searchedCountries);
+        setSearchedLocations(searchedCountries.slice(0, 8));
       } else {
         setSearchListContainer('hidden');
         setSearchedLocations(searchedCountries);
@@ -114,6 +114,7 @@ const Navbar = () => {
         <form onSubmit={handleSubmit}>
           <input
             type="search"
+            className='search-country-window'
             value={searchBox}
             onChange={handleChange}
             autoComplete="off"
@@ -121,7 +122,9 @@ const Navbar = () => {
             placeholder="search for a country"
             required
           />
-          <button className="submit-search-button">Submit</button>
+          <button className="submit-search-button">
+            <i className="fa-solid fa-magnifying-glass fa-lg"></i>
+          </button>
         </form>
         <section>
           <ul id={searchListContainer}>
@@ -168,7 +171,7 @@ const Navbar = () => {
             Hello, {navbarContextData.user.username}
           </p>
         )}
-        <i className="fas fa-user icon-class" />
+        <i className="fas fa-user"/>
       </section>
 
       <section className={visible}>
@@ -221,21 +224,22 @@ const Navbar = () => {
           </section>
         )}
       </article>
-      {<article className={logoutInfo} onClick={handleCancelLogout}>
-        <h2>Are you sure you want to logout?</h2>
-        <button
-          onClick={navbarContextData.handleConfirmLogout}
-          className="app-button background-orange float-right"
-        >
-          Confirm
-        </button>
-        <button
-          onClick={handleCancelLogout}
-          className="app-button background-red"
-        >
-          Cancel
-        </button>
-      </article>
+      {
+        <article className={logoutInfo} onClick={handleCancelLogout}>
+          <h2 className="logout-info-text">Are you sure you want to logout?</h2>
+          <button
+            onClick={navbarContextData.handleConfirmLogout}
+            className="app-button background-orange float-right"
+          >
+            Confirm
+          </button>
+          <button
+            onClick={handleCancelLogout}
+            className="app-button background-red"
+          >
+            Cancel
+          </button>
+        </article>
       }
       <article className={locNotFoundMsg}>
         <h1>Nothing Found</h1>

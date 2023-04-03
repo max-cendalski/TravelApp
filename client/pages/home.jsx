@@ -1,30 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import Navbar from '../components/navbar';
-import { Carousel } from 'react-responsive-carousel';
+import React, { useState, useEffect } from "react";
+import Navbar from "../components/navbar";
+import { Carousel } from "react-responsive-carousel";
 
 const Home = () => {
   const [imagesCarousel, setImagesCarousel] = useState(null);
   const [countriesCarousel, setCountriesCarousel] = useState([]);
 
   useEffect(() => {
-    fetch('/api/images', {
-      method: 'GET',
+    fetch("/api/images", {
+      method: "GET",
       headers: {
-        'Content-type': 'application/json'
-      }
+        "Content-type": "application/json",
+      },
     })
-      .then(response => response.json())
-      .then(result => {
-        const images = [];
-        const countries = [];
-        for (let i = 0; i < 6; i++) {
-          images.push(result[i].mainPhotoUrl);
-          countries.push(result[i].country);
+      .then((response) => response.json())
+      .then((result) => {
+        console.log("resul", result);
+        var images = [];
+        var countries = [];
+        var indexes = [];
+        while(indexes.length < 3) {
+          let counter = Math.floor(Math.random(6) * 6);
+          if (!indexes.includes(counter)) {
+            images.push(result[counter].mainPhotoUrl);
+            countries.push(result[counter].country);
+            indexes.push(counter);
+          } else {
+            indexes.pop()
+          }
         }
-        setImagesCarousel(images);
-        setCountriesCarousel(countries);
+
+        /*   setImagesCarousel(images);
+        setCountriesCarousel(countries); */
       })
-      .catch(error => error(console.error('Error', error)));
+      .catch((error) => error(console.error("Error", error)));
   }, []);
 
   if (!imagesCarousel) return <Navbar />;
