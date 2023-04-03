@@ -16,24 +16,6 @@ const Home = () => {
     })
       .then((response) => response.json())
       .then((result) => {
-        console.log("result", result);
-        /*
-        const images = [];
-        const countries = [];
-        const indexes = [];
-        while (indexes.length < 6) {
-          const counter = Math.floor(Math.random(6) * 6);
-          if (!indexes.includes(counter)) {
-            images.push(result[counter].mainPhotoUrl);
-            countries.push(result[counter].country);
-            indexes.push(counter);
-          } else {
-            indexes.pop();
-          }
-        }
-        console.log('index',indexes)
-        setImagesCarousel(images);
-        setCountriesCarousel(countries); */
         function generateImages() {
           let indexes = [];
           let imagesToRender = [];
@@ -53,18 +35,6 @@ const Home = () => {
           setImagesCarousel(imagesToRender)
         }
         generateImages()
-
-        /*   for (var i = 0; i < 4; i++) {
-          let counter = Math.floor(Math.random(6) * 6);
-          let obj = {};
-          console.log('co9unter',counter)
-          if (!indexes.includes(counter)) {
-            indexes.push(counter);
-          } else {
-            indexes.pop();
-            i--
-          }
-        } */
       })
       .catch((error) => error(console.error("Error", error)));
   }, []);
