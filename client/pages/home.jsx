@@ -4,7 +4,6 @@ import { Carousel } from "react-responsive-carousel";
 
 const Home = () => {
   const [imagesCarousel, setImagesCarousel] = useState(null);
-  const [countriesCarousel, setCountriesCarousel] = useState([]);
 
   const [tes, setTes] = useState([]);
 
@@ -35,23 +34,37 @@ const Home = () => {
         console.log('index',indexes)
         setImagesCarousel(images);
         setCountriesCarousel(countries); */
-        const indexes = [];
-        var tempArray = [];
-        for (var i = 0; i < 4; i++) {
+        function generateImages() {
+          let indexes = [];
+          let imagesToRender = [];
+          while (indexes.length < 6) {
+            let counter = Math.floor(Math.random(6) * 6);
+            if (!indexes.includes(counter)) {
+              indexes.push(counter);
+            } else {
+              indexes.pop();
+            }
+          }
+          console.log('imagesToSave',imagesToRender)
+          indexes.forEach((ele) => {
+            imagesToRender.push(result[ele])
+          });
+          console.log('imagev,',imagesToRender)
+          setImagesCarousel(imagesToRender)
+        }
+        generateImages()
+
+        /*   for (var i = 0; i < 4; i++) {
           let counter = Math.floor(Math.random(6) * 6);
           let obj = {};
           console.log('co9unter',counter)
           if (!indexes.includes(counter)) {
             indexes.push(counter);
-            obj.country = result[counter].country;
-            obj.mainPhotoUrl = result[counter].mainPhotoUrl;
-            tempArray.push(obj);
           } else {
             indexes.pop();
             i--
           }
-        }
-        console.log("indexes", tempArray);
+        } */
       })
       .catch((error) => error(console.error("Error", error)));
   }, []);
@@ -72,28 +85,40 @@ const Home = () => {
         swipeable={true}
       >
         <div className="image-home">
-          <p className="carousel-country-name">{countriesCarousel[0]}</p>
-          <img className="photo" src={imagesCarousel[0]} />
+          <p className="carousel-country-name">
+            {imagesCarousel[0].country}
+          </p>
+          <img className="photo" src={imagesCarousel[0].mainPhotoUrl} />
         </div>
         <div className="image-home">
-          <p className="carousel-country-name">{countriesCarousel[1]}</p>
-          <img className="photo" src={imagesCarousel[1]} />
+          <p className="carousel-country-name">
+            {imagesCarousel[1].country}
+          </p>
+          <img className="photo" src={imagesCarousel[1].mainPhotoUrl} />
         </div>
         <div className="image-home">
-          <p className="carousel-country-name">{countriesCarousel[2]}</p>
-          <img className="photo" src={imagesCarousel[2]} />
+          <p className="carousel-country-name">
+            {imagesCarousel[2].country}
+          </p>
+          <img className="photo" src={imagesCarousel[2].mainPhotoUrl} />
         </div>
         <div className="image-home">
-          <p className="carousel-country-name">{countriesCarousel[3]}</p>
-          <img className="photo" src={imagesCarousel[3]} />
+          <p className="carousel-country-name">
+            {imagesCarousel[3].country}
+          </p>
+          <img className="photo" src={imagesCarousel[3].mainPhotoUrl} />
         </div>
         <div className="image-home">
-          <p className="carousel-country-name">{countriesCarousel[4]}</p>
-          <img className="photo" src={imagesCarousel[4]} />
+          <p className="carousel-country-name">
+            {imagesCarousel[4].country}
+          </p>
+          <img className="photo" src={imagesCarousel[4].mainPhotoUrl} />
         </div>
         <div className="image-home">
-          <p className="carousel-country-name">{countriesCarousel[5]}</p>
-          <img className="photo" src={imagesCarousel[5]} />
+          <p className="carousel-country-name">
+            {imagesCarousel[5].country}
+          </p>
+          <img className="photo" src={imagesCarousel[5].mainPhotoUrl} />
         </div>
       </Carousel>
     </article>
