@@ -1,22 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import Navbar from '../components/navbar';
-import { Carousel } from 'react-responsive-carousel';
+import React, { useState, useEffect } from "react";
+import Navbar from "../components/navbar";
+import { Carousel } from "react-responsive-carousel";
 
 const Home = () => {
   const [imagesCarousel, setImagesCarousel] = useState(null);
   const [countriesCarousel, setCountriesCarousel] = useState([]);
 
-  useEffect(() => {
-    fetch('/api/images', {
-      method: 'GET',
-      headers: {
-        'Content-type': 'application/json'
-      }
-    })
-      .then(response => response.json())
-      .then(result => {
-        console.log("result", result);
+  const [tes, setTes] = useState([]);
 
+  useEffect(() => {
+    fetch("/api/images", {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        console.log("result", result);
+        /*
         const images = [];
         const countries = [];
         const indexes = [];
@@ -32,9 +34,26 @@ const Home = () => {
         }
         console.log('index',indexes)
         setImagesCarousel(images);
-        setCountriesCarousel(countries);
+        setCountriesCarousel(countries); */
+        const indexes = [];
+        var tempArray = [];
+        for (var i = 0; i < 4; i++) {
+          let counter = Math.floor(Math.random(6) * 6);
+          let obj = {};
+          console.log('co9unter',counter)
+          if (!indexes.includes(counter)) {
+            indexes.push(counter);
+            obj.country = result[counter].country;
+            obj.mainPhotoUrl = result[counter].mainPhotoUrl;
+            tempArray.push(obj);
+          } else {
+            indexes.pop();
+            i--
+          }
+        }
+        console.log("indexes", tempArray);
       })
-      .catch(error => error(console.error('Error', error)));
+      .catch((error) => error(console.error("Error", error)));
   }, []);
 
   if (!imagesCarousel) return <Navbar />;
