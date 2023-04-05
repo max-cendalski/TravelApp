@@ -14,7 +14,7 @@ const Home = () => {
     })
       .then((response) => response.json())
       .then((result) => {
-        console.log('result',result)
+        console.log("result", result);
         function generateImages() {
           let indexes = [];
           let imagesToRender = [];
@@ -26,17 +26,28 @@ const Home = () => {
               indexes.pop();
             }
           }
-          indexes.forEach(ele => imagesToRender.push(result[ele]));
-          setImagesCarousel(imagesToRender)
+          indexes.forEach((ele) => imagesToRender.push(result[ele]));
+          setImagesCarousel(imagesToRender);
         }
-        generateImages()
+        generateImages();
       })
       .catch((error) => error(console.error("Error", error)));
   }, []);
 
   const handleCountryClick = (e) => {
-    console.log('whe',e.target.innerText)
-  }
+    let country = e.target.innerText.toLowerCase()
+    fetch(`/api/countries/${country}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        console.log("result", result);
+      })
+      .catch((error) => error(console.error("Error", error)));
+  };
 
   if (!imagesCarousel) return <Navbar />;
   return (
@@ -66,19 +77,27 @@ const Home = () => {
           <img className="photo" src={imagesCarousel[1].mainPhotoUrl} />
         </div>
         <div className="image-home">
-          <p className="carousel-country-name">{imagesCarousel[2].country}</p>
+          <p className="carousel-country-name" onClick={handleCountryClick}>
+            {imagesCarousel[2].country}
+          </p>
           <img className="photo" src={imagesCarousel[2].mainPhotoUrl} />
         </div>
         <div className="image-home">
-          <p className="carousel-country-name">{imagesCarousel[3].country}</p>
+          <p className="carousel-country-name" onClick={handleCountryClick}>
+            {imagesCarousel[3].country}
+          </p>
           <img className="photo" src={imagesCarousel[3].mainPhotoUrl} />
         </div>
         <div className="image-home">
-          <p className="carousel-country-name">{imagesCarousel[4].country}</p>
+          <p className="carousel-country-name" onClick={handleCountryClick}>
+            {imagesCarousel[4].country}
+          </p>
           <img className="photo" src={imagesCarousel[4].mainPhotoUrl} />
         </div>
         <div className="image-home">
-          <p className="carousel-country-name">{imagesCarousel[5].country}</p>
+          <p className="carousel-country-name" onClick={handleCountryClick}>
+            {imagesCarousel[5].country}
+          </p>
           <img className="photo" src={imagesCarousel[5].mainPhotoUrl} />
         </div>
       </Carousel>

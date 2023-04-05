@@ -402,7 +402,7 @@ input::-webkit-inner-spin-button {
   box-shadow: 5px 5px 5px 5px rgb(28, 27, 27);
 }
 
-.logout-info h2 {
+.logout-info-text {
   text-align: center;
   width: 100%;
   margin-bottom: 30px;
@@ -759,7 +759,7 @@ input::-webkit-inner-spin-button {
   }
 
   .logout-info-text {
-    font-size: 0.8rem;
+    font-size: 1.3rem;
   }
 
   .app-button {
