@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/navbar";
 import { Carousel } from "react-responsive-carousel";
+import SearchResult from "../pages/search-results";
+import { useContext } from "react";
+import { AppDataContext } from "../components/context";
 
 const Home = () => {
   const [imagesCarousel, setImagesCarousel] = useState(null);
+  const [country, setTestCountry] = useState("");
+  const [countryBoolean, setCountryBoolean] = useState(false);
 
   useEffect(() => {
     fetch("/api/images", {
@@ -35,18 +40,8 @@ const Home = () => {
   }, []);
 
   const handleCountryClick = (e) => {
-    let country = e.target.innerText.toLowerCase()
-    fetch(`/api/countries/${country}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        console.log("result", result);
-      })
-      .catch((error) => error(console.error("Error", error)));
+    let country = e.target.innerText.toLowerCase();
+    window.location.hash = `search-results?country=${country}`;
   };
 
   if (!imagesCarousel) return <Navbar />;

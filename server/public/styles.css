@@ -759,7 +759,7 @@ input::-webkit-inner-spin-button {
   }
 
   .logout-info-text {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
 
   .app-button {
@@ -796,6 +796,7 @@ input::-webkit-inner-spin-button {
   }
 
   .carousel-country-name {
+    cursor: pointer;
     left: 0;
     top: 17%;
   }
