@@ -1,46 +1,40 @@
-import React, { useState, useEffect } from "react";
-import Navbar from "../components/navbar";
-import { Carousel } from "react-responsive-carousel";
-import SearchResult from "../pages/search-results";
-import { useContext } from "react";
-import { AppDataContext } from "../components/context";
+import React, { useState, useEffect } from 'react';
+import Navbar from '../components/navbar';
+import { Carousel } from 'react-responsive-carousel';
 
 const Home = () => {
   const [imagesCarousel, setImagesCarousel] = useState(null);
-  const [country, setTestCountry] = useState("");
-  const [countryBoolean, setCountryBoolean] = useState(false);
 
   useEffect(() => {
-    fetch("/api/images", {
-      method: "GET",
+    fetch('/api/images', {
+      method: 'GET',
       headers: {
-        "Content-type": "application/json",
-      },
+        'Content-type': 'application/json'
+      }
     })
-      .then((response) => response.json())
-      .then((result) => {
-        console.log("result", result);
+      .then(response => response.json())
+      .then(result => {
         function generateImages() {
-          let indexes = [];
-          let imagesToRender = [];
+          const indexes = [];
+          const imagesToRender = [];
           while (indexes.length < 6) {
-            let counter = Math.floor(Math.random(6) * 6);
+            const counter = Math.floor(Math.random(6) * 6);
             if (!indexes.includes(counter)) {
               indexes.push(counter);
             } else {
               indexes.pop();
             }
           }
-          indexes.forEach((ele) => imagesToRender.push(result[ele]));
+          indexes.forEach(ele => imagesToRender.push(result[ele]));
           setImagesCarousel(imagesToRender);
         }
         generateImages();
       })
-      .catch((error) => error(console.error("Error", error)));
+      .catch(error => error(console.error('Error', error)));
   }, []);
 
-  const handleCountryClick = (e) => {
-    let country = e.target.innerText.toLowerCase();
+  const handleCountryClick = e => {
+    const country = e.target.innerText.toLowerCase();
     window.location.hash = `search-results?country=${country}`;
   };
 
