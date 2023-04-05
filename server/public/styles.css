@@ -34,6 +34,7 @@ section {
   left: 2rem;
   border-radius: 2px;
   text-transform: capitalize;
+  cursor: pointer;
 }
 
 /* CONTROL ARROW FOR CAROUSEL API */
@@ -796,7 +797,6 @@ input::-webkit-inner-spin-button {
   }
 
   .carousel-country-name {
-    cursor: pointer;
     left: 0;
     top: 17%;
   }

@@ -33,7 +33,7 @@ const Home = () => {
       .catch(error => error(console.error('Error', error)));
   }, []);
 
-  const handleCountryClick = e => {
+  const handleCountryParagraphClick = e => {
     const country = e.target.innerText.toLowerCase();
     window.location.hash = `search-results?country=${country}`;
   };
@@ -54,37 +54,37 @@ const Home = () => {
         swipeable={true}
       >
         <div className="image-home">
-          <p className="carousel-country-name" onClick={handleCountryClick}>
+          <p className="carousel-country-name" onClick={handleCountryParagraphClick}>
             {imagesCarousel[0].country}
           </p>
           <img className="photo" src={imagesCarousel[0].mainPhotoUrl} />
         </div>
         <div className="image-home">
-          <p className="carousel-country-name" onClick={handleCountryClick}>
+          <p className="carousel-country-name" onClick={handleCountryParagraphClick}>
             {imagesCarousel[1].country}
           </p>
           <img className="photo" src={imagesCarousel[1].mainPhotoUrl} />
         </div>
         <div className="image-home">
-          <p className="carousel-country-name" onClick={handleCountryClick}>
+          <p className="carousel-country-name" onClick={handleCountryParagraphClick}>
             {imagesCarousel[2].country}
           </p>
           <img className="photo" src={imagesCarousel[2].mainPhotoUrl} />
         </div>
         <div className="image-home">
-          <p className="carousel-country-name" onClick={handleCountryClick}>
+          <p className="carousel-country-name" onClick={handleCountryParagraphClick}>
             {imagesCarousel[3].country}
           </p>
           <img className="photo" src={imagesCarousel[3].mainPhotoUrl} />
         </div>
         <div className="image-home">
-          <p className="carousel-country-name" onClick={handleCountryClick}>
+          <p className="carousel-country-name" onClick={handleCountryParagraphClick}>
             {imagesCarousel[4].country}
           </p>
           <img className="photo" src={imagesCarousel[4].mainPhotoUrl} />
         </div>
         <div className="image-home">
-          <p className="carousel-country-name" onClick={handleCountryClick}>
+          <p className="carousel-country-name" onClick={handleCountryParagraphClick}>
             {imagesCarousel[5].country}
           </p>
           <img className="photo" src={imagesCarousel[5].mainPhotoUrl} />
