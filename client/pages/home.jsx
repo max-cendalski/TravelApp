@@ -14,6 +14,7 @@ const Home = () => {
     })
       .then((response) => response.json())
       .then((result) => {
+        console.log('result',result)
         function generateImages() {
           let indexes = [];
           let imagesToRender = [];
@@ -33,6 +34,10 @@ const Home = () => {
       .catch((error) => error(console.error("Error", error)));
   }, []);
 
+  const handleCountryClick = (e) => {
+    console.log('whe',e.target.innerText)
+  }
+
   if (!imagesCarousel) return <Navbar />;
   return (
     <article>
@@ -49,39 +54,31 @@ const Home = () => {
         swipeable={true}
       >
         <div className="image-home">
-          <p className="carousel-country-name">
+          <p className="carousel-country-name" onClick={handleCountryClick}>
             {imagesCarousel[0].country}
           </p>
           <img className="photo" src={imagesCarousel[0].mainPhotoUrl} />
         </div>
         <div className="image-home">
-          <p className="carousel-country-name">
+          <p className="carousel-country-name" onClick={handleCountryClick}>
             {imagesCarousel[1].country}
           </p>
           <img className="photo" src={imagesCarousel[1].mainPhotoUrl} />
         </div>
         <div className="image-home">
-          <p className="carousel-country-name">
-            {imagesCarousel[2].country}
-          </p>
+          <p className="carousel-country-name">{imagesCarousel[2].country}</p>
           <img className="photo" src={imagesCarousel[2].mainPhotoUrl} />
         </div>
         <div className="image-home">
-          <p className="carousel-country-name">
-            {imagesCarousel[3].country}
-          </p>
+          <p className="carousel-country-name">{imagesCarousel[3].country}</p>
           <img className="photo" src={imagesCarousel[3].mainPhotoUrl} />
         </div>
         <div className="image-home">
-          <p className="carousel-country-name">
-            {imagesCarousel[4].country}
-          </p>
+          <p className="carousel-country-name">{imagesCarousel[4].country}</p>
           <img className="photo" src={imagesCarousel[4].mainPhotoUrl} />
         </div>
         <div className="image-home">
-          <p className="carousel-country-name">
-            {imagesCarousel[5].country}
-          </p>
+          <p className="carousel-country-name">{imagesCarousel[5].country}</p>
           <img className="photo" src={imagesCarousel[5].mainPhotoUrl} />
         </div>
       </Carousel>
