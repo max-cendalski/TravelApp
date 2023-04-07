@@ -4,21 +4,9 @@ import { Carousel } from 'react-responsive-carousel';
 
 const Home = () => {
   const [imagesCarousel, setImagesCarousel] = useState(null);
-  const [welcomeMsg, setWelcomeMsg] = useState('');
 
   useEffect(() => {
-    (function getTime() {
-      const hour = new Date().getHours();
-      if ((hour > 1) && (hour < 6)) {
-        setWelcomeMsg('Hello');
-      } else if (hour < 12) {
-        setWelcomeMsg('Good morning');
-      } else if (hour < 19) {
-        setImagesCarousel('Good afternoon');
-      } else {
-        setWelcomeMsg('Good evening');
-      }
-    })();
+
     fetch('/api/images', {
       method: 'GET',
       headers: {
@@ -54,7 +42,7 @@ const Home = () => {
   if (!imagesCarousel) return <Navbar />;
   return (
     <article>
-      <Navbar welcomeMsg={welcomeMsg}/>
+      <Navbar />
       <Carousel
         autoPlay={true}
         interval={6000}
