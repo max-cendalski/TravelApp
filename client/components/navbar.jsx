@@ -114,7 +114,7 @@ const Navbar = ({ welcomeMsg }) => {
         <form onSubmit={handleSubmit}>
           <input
             type="search"
-            className='search-country-window'
+            className="search-country-window"
             value={searchBox}
             onChange={handleChange}
             autoComplete="off"
@@ -166,12 +166,18 @@ const Navbar = ({ welcomeMsg }) => {
         onMouseEnter={handleOnMouseEnter}
         onClick={handleLoginIconClick}
       >
-        {navbarContextData.user && (
-          <p className="navbar-name-paragraph">
-            {welcomeMsg}, {navbarContextData.user.username}
-          </p>
-        )}
-        <i className="fas fa-user"/>
+        {navbarContextData.user
+          ? (
+          <section>
+            <p className="navbar-name-paragraph">
+              {welcomeMsg}, {navbarContextData.user.username}
+            </p>
+            <i className="fas fa-user" />
+          </section>
+            )
+          : (
+          <i className="fas fa-bars"></i>
+            )}
       </section>
 
       <section className={visible}>
