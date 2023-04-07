@@ -19,7 +19,7 @@ const Navbar = () => {
   useEffect(() => {
     (function getTime() {
       const hour = new Date().getHours();
-      if (hour > 1 && hour < 6) {
+      if ((hour > 1) && (hour < 6)) {
         setWelcomeMsg('Hello');
       } else if (hour < 12) {
         setWelcomeMsg('Good morning');
