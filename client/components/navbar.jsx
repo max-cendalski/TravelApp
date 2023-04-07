@@ -3,7 +3,7 @@ import SignUpForm from '../components/sign-up-form';
 import SignInForm from '../components/sign-in-form';
 import { AppDataContext } from '../components/context';
 
-const Navbar = () => {
+const Navbar = ({ welcomeMsg }) => {
   const [searchBox, setSearchBox] = useState('');
   const [visible, setVisible] = useState('hidden');
   const [logoutInfo, setLogoutInfo] = useState('hidden');
@@ -168,7 +168,7 @@ const Navbar = () => {
       >
         {navbarContextData.user && (
           <p className="navbar-name-paragraph">
-            Hello, {navbarContextData.user.username}
+            {welcomeMsg}, {navbarContextData.user.username}
           </p>
         )}
         <i className="fas fa-user"/>
