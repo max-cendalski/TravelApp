@@ -6,6 +6,7 @@ const Home = () => {
   const [imagesCarousel, setImagesCarousel] = useState(null);
 
   useEffect(() => {
+
     fetch('/api/images', {
       method: 'GET',
       headers: {

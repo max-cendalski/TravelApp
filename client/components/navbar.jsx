@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import SignUpForm from '../components/sign-up-form';
 import SignInForm from '../components/sign-in-form';
 import { AppDataContext } from '../components/context';
@@ -8,6 +8,7 @@ const Navbar = () => {
   const [visible, setVisible] = useState('hidden');
   const [logoutInfo, setLogoutInfo] = useState('hidden');
   const [modal, setModal] = useState('hidden');
+  const [welcomeMsg, setWelcomeMsg] = useState('');
   const [signUpForm, setSignUpForm] = useState(false);
   const [signInForm, setSignInForm] = useState(false);
   const [searchedLocations, setSearchedLocations] = useState([]);
@@ -15,6 +16,20 @@ const Navbar = () => {
   const [searchListContainer, setSearchListContainer] = useState('hidden');
   const navbarContextData = useContext(AppDataContext);
 
+  useEffect(() => {
+    (function getTime() {
+      const hour = new Date().getHours();
+      if ((hour > 1) && (hour < 6)) {
+        setWelcomeMsg('Hello');
+      } else if (hour < 12) {
+        setWelcomeMsg('Good morning');
+      } else if (hour < 19) {
+        setWelcomeMsg('Good afternoon');
+      } else {
+        setWelcomeMsg('Good evening');
+      }
+    })();
+  });
   const handleChange = e => {
     e.preventDefault();
     setLocNotFoundMsg('hidden');
@@ -114,7 +129,7 @@ const Navbar = () => {
         <form onSubmit={handleSubmit}>
           <input
             type="search"
-            className='search-country-window'
+            className="search-country-window"
             value={searchBox}
             onChange={handleChange}
             autoComplete="off"
@@ -166,12 +181,18 @@ const Navbar = () => {
         onMouseEnter={handleOnMouseEnter}
         onClick={handleLoginIconClick}
       >
-        {navbarContextData.user && (
-          <p className="navbar-name-paragraph">
-            Hello, {navbarContextData.user.username}
-          </p>
-        )}
-        <i className="fas fa-user"/>
+        {navbarContextData.user
+          ? (
+          <section>
+            <p className="navbar-name-paragraph">
+              {welcomeMsg}, {navbarContextData.user.username}
+            </p>
+            <i className="fas fa-user" />
+          </section>
+            )
+          : (
+          <i className="fas fa-bars"></i>
+            )}
       </section>
 
       <section className={visible}>
