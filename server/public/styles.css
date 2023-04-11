@@ -839,7 +839,7 @@ input::-webkit-inner-spin-button {
 
   .navbar-search-box-container {
     flex-basis: 60%;
-    margin-inline-start: 0.2rem;
+    margin-inline-start: 0.4rem;
   }
 
   .navbar-login-icon-section {
