@@ -599,7 +599,6 @@ input::-webkit-inner-spin-button {
 }
 
 #review-trip-details {
-  margin-inline-start: 0.2rem;
   grid-column: 1/6;
   grid-row: 3/3;
 }
@@ -915,8 +914,8 @@ input::-webkit-inner-spin-button {
   }
 
   #trip-details-container {
-    margin-inline-start: 0.5rem;
-    margin-inline-end: 0.5rem;
+    margin-inline-start: 0.6rem;
+    margin-inline-end: 0.6rem;
     display: grid;
     grid-gap: 0.5rem;
     grid-template-columns: repeat(4, 1fr);
@@ -953,7 +952,7 @@ input::-webkit-inner-spin-button {
   }
 
   #review-edit-button-trip-details {
-    margin-inline-end: 0.2rem;
+    margin-inline-end: 0;
     grid-row: 5;
     grid-column: 3/5;
   }
@@ -976,8 +975,6 @@ input::-webkit-inner-spin-button {
   }
 
   #review-trip-details {
-    padding-inline-start: 0.2rem;
-    padding-inline-end: 0.2rem;
     grid-column: 1/5;
     grid-row: 4/5;
   }
