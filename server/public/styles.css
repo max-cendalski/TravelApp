@@ -537,7 +537,7 @@ input::-webkit-inner-spin-button {
   padding-block-end: 2rem;
   margin: 0 2rem;
   display: grid;
-  grid-gap: 1rem;
+  gap: 1rem;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: 20rem 20rem auto auto auto auto auto;
 }
@@ -917,7 +917,7 @@ input::-webkit-inner-spin-button {
     margin-inline-start: 0.6rem;
     margin-inline-end: 0.6rem;
     display: grid;
-    grid-gap: 0.5rem;
+    gap: 0.5rem;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: 16rem 20rem 16rem auto auto auto auto;
   }
