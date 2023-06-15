@@ -805,6 +805,12 @@ input::-webkit-inner-spin-button {
     border-bottom: 6px solid rgb(255, 137, 28);
   }
 
+  /* Homepage */
+  #highest-scored-review-container {
+    margin-block-start: 2rem;
+    margin-inline: 0.2rem;
+  }
+
   .list-flex {
     padding-top: 4rem;
     margin: 0 0.2rem;

@@ -7,7 +7,6 @@ const Home = () => {
   const [highestScoredReview, setHighestScoredReview] = useState(null);
 
   useEffect(() => {
-
     fetch('/api/images', {
       method: 'GET',
       headers: {
@@ -56,42 +55,66 @@ const Home = () => {
         swipeable={true}
       >
         <div className="image-home">
-          <p className="carousel-country-name" onClick={handleCountryParagraphClick}>
+          <p
+            className="carousel-country-name"
+            onClick={handleCountryParagraphClick}
+          >
             {imagesCarousel[0].country}
           </p>
           <img className="photo" src={imagesCarousel[0].mainPhotoUrl} />
         </div>
         <div className="image-home">
-          <p className="carousel-country-name" onClick={handleCountryParagraphClick}>
+          <p
+            className="carousel-country-name"
+            onClick={handleCountryParagraphClick}
+          >
             {imagesCarousel[1].country}
           </p>
           <img className="photo" src={imagesCarousel[1].mainPhotoUrl} />
         </div>
         <div className="image-home">
-          <p className="carousel-country-name" onClick={handleCountryParagraphClick}>
+          <p
+            className="carousel-country-name"
+            onClick={handleCountryParagraphClick}
+          >
             {imagesCarousel[2].country}
           </p>
           <img className="photo" src={imagesCarousel[2].mainPhotoUrl} />
         </div>
         <div className="image-home">
-          <p className="carousel-country-name" onClick={handleCountryParagraphClick}>
+          <p
+            className="carousel-country-name"
+            onClick={handleCountryParagraphClick}
+          >
             {imagesCarousel[3].country}
           </p>
           <img className="photo" src={imagesCarousel[3].mainPhotoUrl} />
         </div>
         <div className="image-home">
-          <p className="carousel-country-name" onClick={handleCountryParagraphClick}>
+          <p
+            className="carousel-country-name"
+            onClick={handleCountryParagraphClick}
+          >
             {imagesCarousel[4].country}
           </p>
           <img className="photo" src={imagesCarousel[4].mainPhotoUrl} />
         </div>
         <div className="image-home">
-          <p className="carousel-country-name" onClick={handleCountryParagraphClick}>
+          <p
+            className="carousel-country-name"
+            onClick={handleCountryParagraphClick}
+          >
             {imagesCarousel[5].country}
           </p>
           <img className="photo" src={imagesCarousel[5].mainPhotoUrl} />
         </div>
       </Carousel>
+      <article id="highest-scored-review-container">
+        <h2>Highest scored trip review</h2>
+        <h3 className="review-title">The Good, The Bad</h3>
+        <h5>Review by @arkelios</h5>
+        <p className="review-paragraph">Review</p>
+      </article>
     </article>
   );
 };
