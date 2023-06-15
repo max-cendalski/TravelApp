@@ -18,6 +18,13 @@ section {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* HOMEPAGE */
+
+#highest-scored-review-container {
+  margin-block-start: 2rem;
+  margin-inline: 2rem;
+}
+
 .image-home {
   padding-top: 4rem;
   height: 90vh;
@@ -807,8 +814,7 @@ input::-webkit-inner-spin-button {
 
   /* Homepage */
   #highest-scored-review-container {
-    margin-block-start: 2rem;
-    margin-inline: 0.2rem;
+    margin-inline: 0.4rem;
   }
 
   .list-flex {

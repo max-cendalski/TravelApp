@@ -111,9 +111,12 @@ const Home = () => {
       </Carousel>
       <article id="highest-scored-review-container">
         <h2>Highest scored trip review</h2>
-        <h3 className="review-title">The Good, The Bad</h3>
+        <h3>The Good, The Bad</h3>
         <h5>Review by @arkelios</h5>
         <p className="review-paragraph">Review</p>
+        <h2>
+          Review Score: 100 / 100
+        </h2>
       </article>
     </article>
   );
