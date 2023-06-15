@@ -4,6 +4,7 @@ import { Carousel } from 'react-responsive-carousel';
 
 const Home = () => {
   const [imagesCarousel, setImagesCarousel] = useState(null);
+  const [highestScoredReview, setHighestScoredReview] = useState(null);
 
   useEffect(() => {
 
