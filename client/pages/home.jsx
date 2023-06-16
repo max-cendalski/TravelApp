@@ -4,9 +4,10 @@ import { Carousel } from 'react-responsive-carousel';
 
 const Home = () => {
   const [imagesCarousel, setImagesCarousel] = useState(null);
-  const [highestScoredReview, setHighestScoredReview] = useState(null);
+  const [highestScoredReviews, setHighestScoredReviews] = useState([]);
+  const [reviewToRender, setReviewToRender] = useState(null);
 
-  useEffect(() => {
+  /*  useEffect(() => {
     fetch('/api/images', {
       method: 'GET',
       headers: {
@@ -32,7 +33,55 @@ const Home = () => {
         generateImages();
       })
       .catch(error => error(console.error('Error', error)));
+  }, []); */
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const imagesRes = fetch('/api/images');
+        const scoresRes = fetch('/api/highest-score');
+
+        const [imagesResponse, scoresResponse] = await Promise.all([
+          imagesRes,
+          scoresRes
+        ]);
+
+        const imagesResult = await imagesResponse.json();
+        const scoresResult = await scoresResponse.json();
+
+        generateImages(imagesResult);
+
+        getHighestReviewScore(scoresResult);
+      } catch (error) {
+        console.error('Error', error);
+      }
+    };
+
+    fetchData();
   }, []);
+
+  function generateImages(imagesResult) {
+    const indexes = [];
+    const imagesToRender = [];
+    while (indexes.length < 6) {
+      const counter = Math.floor(Math.random(6) * 6);
+      if (!indexes.includes(counter)) {
+        indexes.push(counter);
+      } else {
+        indexes.pop();
+      }
+    }
+    indexes.forEach(ele => imagesToRender.push(imagesResult[ele]));
+    setImagesCarousel(imagesToRender);
+  }
+
+  function getHighestReviewScore(reviews) {
+    const reviewIndex = Math.floor(Math.random() * 3);
+    setReviewToRender(reviews[reviewIndex]);
+  }
+
+  useEffect(() => {
+    console.log('hi', reviewToRender);
+  }, [reviewToRender]);
 
   const handleCountryParagraphClick = e => {
     const country = e.target.innerText.toLowerCase();
@@ -111,12 +160,10 @@ const Home = () => {
       </Carousel>
       <article id="highest-scored-review-container">
         <h2>Highest scored trip review</h2>
-        <h3>The Good, The Bad</h3>
-        <h5>Review by @arkelios</h5>
-        <p className="review-paragraph">Review</p>
-        <h2>
-          Review Score: 100 / 100
-        </h2>
+        <h3>{reviewToRender.title}</h3>
+        <h5>Review by @{reviewToRender.username}</h5>
+        <p className="review-paragraph">{reviewToRender.review}</p>
+        <h2>Review Score: {reviewToRender.score} / 100</h2>
       </article>
     </article>
   );
