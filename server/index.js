@@ -45,10 +45,12 @@ app.get('/api/locations', (req, res, next) => {
 
 app.get('/api/images', (req, res, next) => {
   const sql = `
-  select "mainPhotoUrl",
+  SELECT "mainPhotoUrl",
          "country",
          "city"
-    from "trips"
+    FROM "trips"
+    ORDER BY RANDOM()
+    LIMIT 6
          `;
   db.query(sql)
     .then(result => {
@@ -73,7 +75,6 @@ app.get('/api/highest-score', (req, res, next) => {
   `;
   db.query(sql)
     .then(result => {
-      console.log(result.rows);
       res.json(result.rows);
     })
     .catch(err => next(err));

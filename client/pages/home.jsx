@@ -48,8 +48,7 @@ const Home = () => {
         const imagesResult = await imagesResponse.json();
         const scoresResult = await scoresResponse.json();
 
-        generateImages(imagesResult);
-
+        setImagesCarousel(imagesResult);
         getHighestReviewScore(scoresResult);
       } catch (error) {
         console.error('Error', error);
@@ -58,21 +57,6 @@ const Home = () => {
 
     fetchData();
   }, []);
-
-  function generateImages(imagesResult) {
-    const indexes = [];
-    const imagesToRender = [];
-    while (indexes.length < 6) {
-      const counter = Math.floor(Math.random(6) * 6);
-      if (!indexes.includes(counter)) {
-        indexes.push(counter);
-      } else {
-        indexes.pop();
-      }
-    }
-    indexes.forEach(ele => imagesToRender.push(imagesResult[ele]));
-    setImagesCarousel(imagesToRender);
-  }
 
   function getHighestReviewScore(reviews) {
     const reviewIndex = Math.floor(Math.random() * 3);
