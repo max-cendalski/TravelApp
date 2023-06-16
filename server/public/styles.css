@@ -20,9 +20,13 @@ section {
 
 /* HOMEPAGE */
 
-#highest-scored-review-container {
+#highest-scored-reviews-container {
   margin-block-start: 2rem;
   margin-inline: 2rem;
+}
+
+#highest-scored-reviews-container :nth-child(2) {
+  margin-block-start: 1rem;
 }
 
 .image-home {

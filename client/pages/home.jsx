@@ -4,36 +4,8 @@ import { Carousel } from 'react-responsive-carousel';
 
 const Home = () => {
   const [imagesCarousel, setImagesCarousel] = useState(null);
-  const [highestScoredReviews, setHighestScoredReviews] = useState([]);
   const [reviewToRender, setReviewToRender] = useState(null);
 
-  /*  useEffect(() => {
-    fetch('/api/images', {
-      method: 'GET',
-      headers: {
-        'Content-type': 'application/json'
-      }
-    })
-      .then(response => response.json())
-      .then(result => {
-        function generateImages() {
-          const indexes = [];
-          const imagesToRender = [];
-          while (indexes.length < 6) {
-            const counter = Math.floor(Math.random(6) * 6);
-            if (!indexes.includes(counter)) {
-              indexes.push(counter);
-            } else {
-              indexes.pop();
-            }
-          }
-          indexes.forEach(ele => imagesToRender.push(result[ele]));
-          setImagesCarousel(imagesToRender);
-        }
-        generateImages();
-      })
-      .catch(error => error(console.error('Error', error)));
-  }, []); */
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -142,9 +114,9 @@ const Home = () => {
           <img className="photo" src={imagesCarousel[5].mainPhotoUrl} />
         </div>
       </Carousel>
-      <article id="highest-scored-review-container">
-        <h2>Highest scored trip review</h2>
-        <h3>{reviewToRender.title}</h3>
+      <article id="highest-scored-reviews-container">
+        <h2>One of Our Best Trip Reviews</h2>
+        <h3>Title: {reviewToRender.title}</h3>
         <h5>Review by @{reviewToRender.username}</h5>
         <p className="review-paragraph">{reviewToRender.review}</p>
         <h2>Review Score: {reviewToRender.score} / 100</h2>
