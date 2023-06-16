@@ -61,16 +61,21 @@ app.get('/api/images', (req, res, next) => {
 
 app.get('/api/highest-score', (req, res, next) => {
   const sql = `
-    SELECT "tripScores"."score",
-           "tripScores"."tripId",
-           "tripScores"."userId",
-           "users"."username",
-           "trips"."review",
-           "trips"."title"
-    FROM "tripScores"
-    LEFT JOIN "users" ON "tripScores"."userId" = "users"."userId"
-    LEFT JOIN "trips" ON "tripScores"."tripId" = "trips"."tripId"
-    ORDER BY "tripScores"."score" DESC
+    SELECT
+        "tripScores"."score",
+        "tripScores"."tripId",
+        "trips"."userId",
+        "users"."username",
+        "trips"."review",
+        "trips"."title"
+    FROM
+        "tripScores"
+    JOIN
+        "trips" ON "tripScores"."tripId" = "trips"."tripId"
+    JOIN
+        "users" ON "trips"."userId" = "users"."userId"
+    ORDER BY
+        "tripScores"."score" DESC
     LIMIT 3
   `;
   db.query(sql)

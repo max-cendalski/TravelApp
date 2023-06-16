@@ -5,6 +5,7 @@ import { Carousel } from 'react-responsive-carousel';
 const Home = () => {
   const [imagesCarousel, setImagesCarousel] = useState(null);
   const [reviewToRender, setReviewToRender] = useState(null);
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,7 +20,6 @@ const Home = () => {
 
         const imagesResult = await imagesResponse.json();
         const scoresResult = await scoresResponse.json();
-
         setImagesCarousel(imagesResult);
         getHighestReviewScore(scoresResult);
       } catch (error) {
@@ -30,14 +30,14 @@ const Home = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    console.log('reviews', reviewToRender);
+  }, [reviewToRender]);
+
   function getHighestReviewScore(reviews) {
     const reviewIndex = Math.floor(Math.random() * 3);
     setReviewToRender(reviews[reviewIndex]);
   }
-
-  useEffect(() => {
-    console.log('hi', reviewToRender);
-  }, [reviewToRender]);
 
   const handleCountryParagraphClick = e => {
     const country = e.target.innerText.toLowerCase();
@@ -116,10 +116,10 @@ const Home = () => {
       </Carousel>
       <article id="highest-scored-reviews-container">
         <h2>One of Our Best Trip Reviews</h2>
-        <h3>Title: {reviewToRender.title}</h3>
-        <h5>Review by @{reviewToRender.username}</h5>
+        <h2>Title: {reviewToRender.title}</h2>
+        <p>Review by @{reviewToRender.username}</p>
         <p className="review-paragraph">{reviewToRender.review}</p>
-        <h2>Review Score: {reviewToRender.score} / 100</h2>
+        <p>Review Score: {reviewToRender.score} / 100</p>
       </article>
     </article>
   );
