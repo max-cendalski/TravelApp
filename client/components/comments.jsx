@@ -36,7 +36,7 @@ export default function Comments(props) {
           onChange={props.handleCommentTextarea}
           value={props.commentValue}
         ></textarea>
-        <button className="app-button background-orange float-right">
+        <button className="app-button background-green float-right">
           Submit
         </button>
         <button

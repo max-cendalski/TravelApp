@@ -151,7 +151,7 @@ const EditTrip = props => {
         ></textarea>
         <button
           type="submit"
-          className="app-button background-orange float-right"
+          className="app-button background-green float-right"
         >
           Submit
         </button>

@@ -73,7 +73,7 @@ const SignInForm = props => {
             placeholder="password"
           />
         </p>
-        <button className="app-button background-orange float-right">
+        <button className="app-button background-green float-right">
           Confirm
         </button>
         <button

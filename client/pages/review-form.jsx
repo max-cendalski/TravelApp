@@ -1,74 +1,74 @@
-import React, { useState } from "react";
-import Navbar from "../components/navbar";
-import PlacesAutocomplete from "react-places-autocomplete";
+import React, { useState } from 'react';
+import Navbar from '../components/navbar';
+import PlacesAutocomplete from 'react-places-autocomplete';
 
 const ReviewForm = () => {
   const [form, setForm] = useState({
-    title: "",
-    review: "",
+    title: '',
+    review: '',
     thingsTodoScore: 0,
     foodScore: 0,
     peopleScore: 0,
     transportScore: 0,
-    safetyScore: 0,
+    safetyScore: 0
   });
   const [selectedImage, setSelectedImage] = useState({});
   const [location, setLocation] = useState({
-    country: "",
-    address: "",
-    city: "",
+    country: '',
+    address: '',
+    city: ''
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     const date = Date.now();
     const formData = new FormData();
-    const token = window.localStorage.getItem("TravelApp-token");
-    formData.append("country", location.country.toLowerCase());
-    formData.append("city", location.city);
-    formData.append("image", selectedImage);
-    formData.append("title", form.title);
-    formData.append("review", form.review);
-    formData.append("thingsTodoScore", form.thingsTodoScore);
-    formData.append("foodScore", form.foodScore);
-    formData.append("peopleScore", form.peopleScore);
-    formData.append("transportScore", form.transportScore);
-    formData.append("safetyScore", form.safetyScore);
-    formData.append("created", date);
+    const token = window.localStorage.getItem('TravelApp-token');
+    formData.append('country', location.country.toLowerCase());
+    formData.append('city', location.city);
+    formData.append('image', selectedImage);
+    formData.append('title', form.title);
+    formData.append('review', form.review);
+    formData.append('thingsTodoScore', form.thingsTodoScore);
+    formData.append('foodScore', form.foodScore);
+    formData.append('peopleScore', form.peopleScore);
+    formData.append('transportScore', form.transportScore);
+    formData.append('safetyScore', form.safetyScore);
+    formData.append('created', date);
 
-    fetch("/api/trips", {
-      method: "POST",
+    fetch('/api/trips', {
+      method: 'POST',
       headers: {
-        "x-access-token": token,
+        'x-access-token': token
       },
-      body: formData,
+      body: formData
     })
-      .then((response) => response.json())
-      .catch((error) => {
-        console.error("Error:", error);
+      .then(response => response.json())
+      .catch(error => {
+        console.error('Error:', error);
       });
-    window.location.hash = "my-reviews";
+    window.location.hash = 'my-reviews';
   };
 
-  const handleChange = (address) => {
+  const handleChange = address => {
     const locationString = address;
-    const locationArray = locationString.split(",");
+    const locationArray = locationString.split(',');
     const city = locationArray[0];
     const country = locationArray[locationArray.length - 1].trim();
     setLocation({
       country,
       city,
-      address,
+      address
     });
   };
 
-  const handleChangeFormData = (e) => {
+  const handleChangeFormData = e => {
     e.preventDefault();
     const name = e.target.name;
     const value = e.target.value;
-    setForm((prevData) => ({
+    setForm(prevData => ({
       ...prevData,
-      [name]: value,
+      [name]: value
     }));
   };
 
@@ -76,7 +76,7 @@ const ReviewForm = () => {
     window.location.hash = history.go(-1);
   };
 
-  const changeImage = (e) => {
+  const changeImage = e => {
     e.preventDefault();
     setSelectedImage(e.target.files[0]);
   };
@@ -95,7 +95,7 @@ const ReviewForm = () => {
                 getInputProps,
                 suggestions,
                 getSuggestionItemProps,
-                loading,
+                loading
               }) => (
                 <section id="places-autocomplete-section">
                   <h3>Your Location</h3>
@@ -105,8 +105,8 @@ const ReviewForm = () => {
                       name="location"
                       required
                       {...getInputProps({
-                        placeholder: "type city and country",
-                        className: "location-search-input",
+                        placeholder: 'type city and country',
+                        className: 'location-search-input'
                       })}
                     />
                   </p>
@@ -114,20 +114,20 @@ const ReviewForm = () => {
                     {loading && <div>Loading...</div>}
                     {suggestions.map((suggestion, index) => {
                       const className = suggestion.active
-                        ? "suggestion-item--active"
-                        : "suggestion-item";
+                        ? 'suggestion-item--active'
+                        : 'suggestion-item';
                       const style = suggestion.active
                         ? {
-                            backgroundColor: "#1c861c",
-                            cursor: "pointer",
-                            color: "#ffffff",
+                            backgroundColor: '#1c861c',
+                            cursor: 'pointer',
+                            color: '#ffffff'
                           }
-                        : { backgroundColor: "#ffffff", cursor: "pointer" };
+                        : { backgroundColor: '#ffffff', cursor: 'pointer' };
                       return (
                         <div
                           {...getSuggestionItemProps(suggestion, {
                             className,
-                            style,
+                            style
                           })}
                           key={index + 1}
                         >
@@ -230,7 +230,7 @@ const ReviewForm = () => {
               name="review"
               required
             ></textarea>
-            <button className="app-button background-orange float-right">
+            <button className="app-button background-green float-right">
               Confirm
             </button>
             <button

@@ -261,6 +261,7 @@ section {
   font-weight: 600;
   font-size: 1.3rem;
   font-style: italic;
+  color: var(--light-orange);
 }
 
 .input-form {
@@ -336,8 +337,8 @@ section {
   background-color: rgb(163, 39, 23);
 }
 
-.background-orange {
-  background-color: rgb(240, 131, 52);
+.background-green {
+  background-color: var(--dark-green);
 }
 
 .form-label {
