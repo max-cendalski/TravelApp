@@ -114,7 +114,7 @@ const Home = () => {
           <img className="photo" src={imagesCarousel[5].mainPhotoUrl} />
         </div>
       </Carousel>
-      <article id="highest-scored-reviews-container">
+      <article id="highest-scored-review-container">
         <h2>One of Our Best Trip Reviews</h2>
         <h2>Title: {reviewToRender.title}</h2>
         <p>Review by @{reviewToRender.username}</p>

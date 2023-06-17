@@ -18,32 +18,45 @@ section {
   -webkit-tap-highlight-color: transparent;
 }
 
+:root {
+  --light-blue: #7190c8;
+  --blue: #2f57a0;
+  --dark-blue: #0c2e6d;
+  --lightest-orange: #ffb884;
+  --light-orange: #ffa15b;
+  --orange: #f08434;
+  --dark-orange: #a44702;
+  --light-green: #85e376;
+  --green: #40c72b;
+  --dark-green: #148802;
+}
+
 /* HOMEPAGE */
 
-#highest-scored-reviews-container {
-  margin-block: 3rem;
+#highest-scored-review-container {
+  margin-block: 5rem;
   margin-inline: 2rem;
 }
 
-#highest-scored-reviews-container :nth-child(1) {
+#highest-scored-review-container :nth-child(1) {
   text-align: center;
   margin-block-start: 1rem;
   font-size: 1.8rem;
 }
 
-#highest-scored-reviews-container :nth-child(2) {
+#highest-scored-review-container :nth-child(2) {
   margin-block-start: 1rem;
   font-size: 1.6rem;
 }
 
-#highest-scored-reviews-container :nth-child(3) {
+#highest-scored-review-container :nth-child(3) {
   margin-block-end: 1rem;
   font-size: 1.2rem;
 }
 
-#highest-scored-reviews-container :nth-child(5) {
+#highest-scored-review-container :nth-child(5) {
   margin-block-start: 1rem;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   font-weight: 700;
 }
 
@@ -150,7 +163,7 @@ section {
 }
 
 .navbar-app-home a {
-  color: rgb(240, 131, 52);
+  color: #f08334;
   text-decoration: none;
   font-size: 2rem;
 }
@@ -836,7 +849,7 @@ input::-webkit-inner-spin-button {
 
   /* Homepage */
   #highest-scored-review-container {
-    margin-inline: 0.4rem;
+    margin-inline: 0.5rem;
   }
 
   .list-flex {
