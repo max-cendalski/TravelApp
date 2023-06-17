@@ -19,14 +19,16 @@ section {
 }
 
 :root {
-  --light-blue: #7190c8;
+  --lightest-blue: #7190c8;
+  --light-blue: #496dae;
   --blue: #2f57a0;
   --dark-blue: #0c2e6d;
   --lightest-orange: #ffb884;
   --light-orange: #ffa15b;
   --orange: #f08434;
   --dark-orange: #a44702;
-  --light-green: #85e376;
+  --lightest-green: #85e376;
+  --light-green: #5fd54c;
   --green: #40c72b;
   --dark-green: #148802;
 }
@@ -42,6 +44,7 @@ section {
   text-align: center;
   margin-block-start: 1rem;
   font-size: 1.8rem;
+  color: var(--orange);
 }
 
 #highest-scored-review-container :nth-child(2) {
@@ -52,6 +55,7 @@ section {
 #highest-scored-review-container :nth-child(3) {
   margin-block-end: 1rem;
   font-size: 1.2rem;
+  color: var(--dark-blue);
 }
 
 #highest-scored-review-container :nth-child(5) {
@@ -113,7 +117,7 @@ section {
 
 .submit-search-button {
   cursor: pointer;
-  background-color: rgb(28, 134, 28);
+  background-color: var(--dark-green);
   color: white;
   border: none;
   border-radius: 0 5px 5px 0;
@@ -163,7 +167,7 @@ section {
 }
 
 .navbar-app-home a {
-  color: #f08334;
+  color: var(--dark-orange);
   text-decoration: none;
   font-size: 2rem;
 }
@@ -181,6 +185,8 @@ section {
   text-align: end;
   padding-inline-end: 1rem;
   width: 85%;
+  color: var(--dark-blue);
+  font-weight: 600;
 }
 
 .photo {
@@ -213,7 +219,7 @@ section {
 }
 
 .text-container:hover {
-  color: rgb(240, 131, 52);
+  color: var(--dark-green);
 }
 
 .text-container:active {
@@ -516,6 +522,7 @@ input::-webkit-inner-spin-button {
 
 .comment-list-element > h4 {
   font-size: 1.2rem;
+  color: var(--blue);
 }
 
 .comment-list-element > p {
@@ -621,6 +628,7 @@ input::-webkit-inner-spin-button {
   font-size: 1.4rem;
   grid-column: 1/4;
   font-weight: 600;
+  color: var(--blue);
 }
 
 .score-text {
@@ -648,6 +656,7 @@ input::-webkit-inner-spin-button {
 .review-title {
   font-size: 1.4rem;
   margin-top: 1rem;
+  color: var(--dark-green);
 }
 
 .review-paragraph {
