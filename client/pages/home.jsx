@@ -5,7 +5,6 @@ import { Carousel } from 'react-responsive-carousel';
 const Home = () => {
   const [imagesCarousel, setImagesCarousel] = useState(null);
   const [reviewToRender, setReviewToRender] = useState(null);
-  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,10 +28,6 @@ const Home = () => {
 
     fetchData();
   }, []);
-
-  useEffect(() => {
-    console.log('reviews', reviewToRender);
-  }, [reviewToRender]);
 
   function getHighestReviewScore(reviews) {
     const reviewIndex = Math.floor(Math.random() * 3);

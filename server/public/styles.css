@@ -213,9 +213,11 @@ section {
 }
 
 .image-container {
+  position: relative;
   justify-content: center;
   align-items: center;
   height: 50vh;
+  transition: 200ms ease-out;
 }
 
 .text-container {
@@ -228,14 +230,11 @@ section {
   color: black;
   border-radius: 2px;
   text-decoration: none;
+  z-index: 3;
 }
 
-.text-container:hover {
-  color: var(--dark-green);
-}
-
-.text-container:active {
-  transform: scale(1.1);
+.image-container:hover {
+  transform: scale(1.005);
 }
 
 .trash-container {
