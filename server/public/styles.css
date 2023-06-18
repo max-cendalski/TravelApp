@@ -74,7 +74,7 @@ section {
 
 .image-home {
   padding-top: 4rem;
-  height: 90vh;
+  height: 95vh;
   max-width: 1920px;
 }
 
@@ -84,7 +84,7 @@ section {
   font-size: 1.2rem;
   font-weight: 600;
   background-color: white;
-  top: 15%;
+  top: 10%;
   left: 2.3rem;
   border-radius: 2px;
   text-transform: capitalize;
@@ -902,7 +902,7 @@ input::-webkit-inner-spin-button {
 
   .carousel-country-name {
     left: 0;
-    top: 17%;
+    top: 12%;
   }
 
   .image-item {
