@@ -69,6 +69,7 @@ section {
   margin-block-start: 1rem;
   font-size: 1.6rem;
   font-weight: 700;
+  color: var(--orange);
 }
 
 .image-home {
@@ -84,7 +85,7 @@ section {
   font-weight: 600;
   background-color: white;
   top: 15%;
-  left: 2rem;
+  left: 2.3rem;
   border-radius: 2px;
   text-transform: capitalize;
   cursor: pointer;
@@ -598,14 +599,16 @@ input::-webkit-inner-spin-button {
 }
 
 #trip-details-container {
+  position: relative;
+  padding-inline: 2rem;
   max-width: 1920px;
   padding-block-start: 4rem;
   padding-block-end: 2rem;
-  margin: 0 2rem;
+  margin: 0 auto;
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: 20rem 20rem auto auto auto auto auto;
+  grid-template-rows: 20rem 20rem repeat(5, auto);
 }
 
 #users-score-trip-details {
@@ -817,7 +820,7 @@ input::-webkit-inner-spin-button {
 
   #highest-scored-review-container {
     margin-block-start: 3rem;
-    margin-inline: 1rem;
+    padding-inline: 1rem;
   }
 
   #main-photo-trip-details {
@@ -827,6 +830,11 @@ input::-webkit-inner-spin-button {
 
   .overall-score {
     padding-block-start: 3rem;
+  }
+
+  .carousel-country-name {
+    top: 10%;
+    left: 1rem;
   }
 }
 
@@ -904,7 +912,7 @@ input::-webkit-inner-spin-button {
 
   /* Homepage */
   #highest-scored-review-container {
-    margin-inline: 0.5rem;
+    padding-inline: 0.5rem;
     margin-block-start: 2rem;
   }
 
@@ -1101,16 +1109,5 @@ input::-webkit-inner-spin-button {
   #comments-trip-details {
     grid-column: 1/6;
     grid-row: 7/auto;
-  }
-}
-
-@media screen and (min-width: 1920px) {
-  .container {
-    max-width: 3440px;
-  }
-
-  .carousel-country-name {
-    top: 12%;
-    left: 23%;
   }
 }

@@ -30,10 +30,8 @@ export function MapComponent(props) {
       containerStyle.right = '0';
       containerStyle.top = '23rem';
       containerStyle.height = '19rem';
-    } else if (screenWidth > 1024 && screenWidth <= 1920) {
+    } else if (screenWidth > 1024) {
       containerStyle.width = '38%';
-    } else {
-      containerStyle.width = '47rem';
     }
 
     return _ => {
@@ -41,25 +39,6 @@ export function MapComponent(props) {
     };
   });
 
-  // useLayoutEffect(() => {
-  //   function handleResize() {
-  //     setWidth(window.innerWidth);
-  //   }
-  //   window.addEventListener('resize', handleResize);
-  //   if (screenWidth < 660) {
-  //     containerStyle.width = '95%';
-  //     containerStyle.top = '20rem';
-  //     containerStyle.left = '0';
-  //     containerStyle.right = '0';
-  //     containerStyle.height = '20rem';
-  //   }
-  //   if (screenWidth > 660) {
-  //     containerStyle.width = '38%';
-  //   }
-  //   return _ => {
-  //     window.removeEventListener('resize', handleResize);
-  //   };
-  // });
   useEffect(() => {
     const address = `${props.country}, ${props.city}`;
     geocodeByAddress(address)
