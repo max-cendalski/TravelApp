@@ -217,7 +217,7 @@ section {
   justify-content: center;
   align-items: center;
   height: 50vh;
-  transition: 200ms ease-out;
+  transition: 100ms linear;
 }
 
 .text-container {
@@ -234,7 +234,7 @@ section {
 }
 
 .image-container:hover {
-  transform: scale(1.005);
+  transform: scale(1.004);
 }
 
 .trash-container {
@@ -1026,8 +1026,7 @@ input::-webkit-inner-spin-button {
   }
 
   #trip-details-container {
-    margin-inline-start: 0.6rem;
-    margin-inline-end: 0.6rem;
+    padding-inline: 0.5rem;
     display: grid;
     gap: 0.5rem;
     grid-template-columns: repeat(4, 1fr);
