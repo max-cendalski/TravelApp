@@ -110,7 +110,7 @@ section {
 
 .search-country-window {
   padding: 5px;
-  width: 13rem;
+  width: 50%;
   border: 1px solid rgb(130, 128, 128);
   border-radius: 5px 0 0 5px;
   outline: none;
@@ -791,6 +791,12 @@ input::-webkit-inner-spin-button {
   display: none;
 }
 
+@media screen and (min-width: 661px) and (max-width: 1024px) {
+  .search-country-window {
+    width: 70%;
+  }
+}
+
 @media screen and  (max-width: 660px) {
   .column-width50 {
     width: 100%;
@@ -878,7 +884,7 @@ input::-webkit-inner-spin-button {
   }
 
   .search-country-window {
-    width: 11rem;
+    width: 70%;
   }
 
   #search-result-list {
