@@ -46,7 +46,7 @@ const Home = () => {
 
   if (!imagesCarousel) return <Navbar />;
   return (
-    <article>
+    <article className="container">
       <Navbar />
       <Carousel
         autoPlay={true}

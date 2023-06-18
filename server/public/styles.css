@@ -35,9 +35,15 @@ section {
 
 /* HOMEPAGE */
 
+.carousel-root {
+  max-width: 1920px;
+}
+
 #highest-scored-review-container {
+  max-width: 1920px;
   margin-block: 5rem;
-  margin-inline: 2rem;
+  margin-inline: auto;
+  padding-inline: 2rem;
 }
 
 #highest-scored-review-container :nth-child(1) {
@@ -90,6 +96,9 @@ section {
 }
 
 .navbar-container {
+  max-width: 1920px;
+  margin: 0 auto;
+  padding-inline: 2rem;
   position: fixed;
   width: 100%;
   border-bottom: 1px solid black;
@@ -97,6 +106,8 @@ section {
   z-index: 2;
   align-items: center;
   height: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .list-flex {
@@ -152,7 +163,6 @@ section {
 }
 
 .navbar-search-box-container {
-  margin-left: 2rem;
   display: inline-block;
   flex-basis: 33%;
 }
@@ -176,7 +186,6 @@ section {
 .navbar-login-icon-section {
   cursor: pointer;
   flex-basis: 33%;
-  margin-inline-end: 2rem;
   text-align: end;
 }
 
@@ -589,6 +598,7 @@ input::-webkit-inner-spin-button {
 }
 
 #trip-details-container {
+  max-width: 1920px;
   padding-block-start: 4rem;
   padding-block-end: 2rem;
   margin: 0 2rem;
@@ -795,6 +805,29 @@ input::-webkit-inner-spin-button {
   .search-country-window {
     width: 70%;
   }
+
+  .navbar-container {
+    padding-inline: 1rem;
+  }
+
+  #trip-details-container {
+    margin-inline: 1rem;
+    grid-template-rows: 18rem 18rem repeat(5, auto);
+  }
+
+  #highest-scored-review-container {
+    margin-block-start: 3rem;
+    margin-inline: 1rem;
+  }
+
+  #main-photo-trip-details {
+    grid-column: 3/6;
+    grid-row: 1/2;
+  }
+
+  .overall-score {
+    padding-block-start: 3rem;
+  }
 }
 
 @media screen and  (max-width: 660px) {
@@ -872,6 +905,7 @@ input::-webkit-inner-spin-button {
   /* Homepage */
   #highest-scored-review-container {
     margin-inline: 0.5rem;
+    margin-block-start: 2rem;
   }
 
   .list-flex {
@@ -906,15 +940,17 @@ input::-webkit-inner-spin-button {
     font-size: 1.2rem;
   }
 
+  .navbar-container {
+    padding-inline: 0;
+  }
+
   .navbar-search-box-container {
     flex-basis: 60%;
-    margin-inline-start: 0.4rem;
   }
 
   .navbar-login-icon-section {
     flex-basis: 10%;
     text-align: end;
-    margin-inline-end: 0.5rem;
   }
 
   .drop-down-container {

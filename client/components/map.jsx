@@ -17,20 +17,49 @@ export function MapComponent(props) {
       setWidth(window.innerWidth);
     }
     window.addEventListener('resize', handleResize);
-    if (screenWidth < 660) {
+
+    if (screenWidth <= 660) {
       containerStyle.width = '95%';
       containerStyle.top = '20rem';
       containerStyle.left = '0';
       containerStyle.right = '0';
       containerStyle.height = '20rem';
-    }
-    if (screenWidth > 660) {
+    } else if (screenWidth > 660 && screenWidth <= 1024) {
+      containerStyle.width = '96%';
+      containerStyle.left = '0';
+      containerStyle.right = '0';
+      containerStyle.top = '23rem';
+      containerStyle.height = '19rem';
+    } else if (screenWidth > 1024 && screenWidth <= 1920) {
       containerStyle.width = '38%';
+    } else {
+      containerStyle.width = '47rem';
     }
+
     return _ => {
       window.removeEventListener('resize', handleResize);
     };
   });
+
+  // useLayoutEffect(() => {
+  //   function handleResize() {
+  //     setWidth(window.innerWidth);
+  //   }
+  //   window.addEventListener('resize', handleResize);
+  //   if (screenWidth < 660) {
+  //     containerStyle.width = '95%';
+  //     containerStyle.top = '20rem';
+  //     containerStyle.left = '0';
+  //     containerStyle.right = '0';
+  //     containerStyle.height = '20rem';
+  //   }
+  //   if (screenWidth > 660) {
+  //     containerStyle.width = '38%';
+  //   }
+  //   return _ => {
+  //     window.removeEventListener('resize', handleResize);
+  //   };
+  // });
   useEffect(() => {
     const address = `${props.country}, ${props.city}`;
     geocodeByAddress(address)
@@ -43,19 +72,19 @@ export function MapComponent(props) {
   return (
     <div>
       <Map
-          containerStyle={containerStyle}
-          google={props.google}
-          center={{
+        containerStyle={containerStyle}
+        google={props.google}
+        center={{
+          lat: latLng.lat,
+          lng: latLng.lng
+        }}
+      >
+        <Marker
+          position={{
             lat: latLng.lat,
             lng: latLng.lng
           }}
-          >
-            <Marker
-            position= {{
-              lat: latLng.lat,
-              lng: latLng.lng
-            }}
-          />
+        />
       </Map>
     </div>
   );
