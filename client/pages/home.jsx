@@ -110,7 +110,7 @@ const Home = () => {
         </div>
       </Carousel>
       <article id="highest-scored-review-container">
-        <h2>One of Our Best Trip Reviews</h2>
+        <h2>One of Our Best Reviews</h2>
         <h2>Title: {reviewToRender.title}</h2>
         <p>Review by @{reviewToRender.username}</p>
         <p className="review-paragraph">{reviewToRender.review}</p>

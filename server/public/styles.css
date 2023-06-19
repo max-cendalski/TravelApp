@@ -953,11 +953,13 @@ input::-webkit-inner-spin-button {
 
   .navbar-search-box-container {
     flex-basis: 60%;
+    margin-inline-start: 0.5rem;
   }
 
   .navbar-login-icon-section {
     flex-basis: 10%;
     text-align: end;
+    margin-inline-end: 0.5rem;
   }
 
   .drop-down-container {
