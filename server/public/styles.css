@@ -49,7 +49,7 @@ section {
 #highest-scored-review-container :nth-child(1) {
   text-align: center;
   margin-block-start: 1rem;
-  font-size: 1.8rem;
+  font-size: 2rem;
   color: var(--orange);
 }
 
@@ -70,6 +70,11 @@ section {
   font-size: 1.6rem;
   font-weight: 700;
   color: var(--orange);
+}
+
+#highest-scored-review-container :nth-child(3) span {
+  color: black;
+  font-size: 1.2rem;
 }
 
 .image-home {
@@ -230,7 +235,7 @@ section {
   color: black;
   border-radius: 2px;
   text-decoration: none;
-  z-index: 3;
+  z-index: 1;
 }
 
 .image-container:hover {
@@ -627,6 +632,10 @@ input::-webkit-inner-spin-button {
   grid-row: 1/2;
 }
 
+#name-location-container :nth-child(1) span {
+  color: black;
+}
+
 #scores-trip-details-container {
   margin-block-start: 2.3rem;
   list-style: none;
@@ -915,6 +924,25 @@ input::-webkit-inner-spin-button {
     margin-block-start: 2rem;
   }
 
+  #highest-scored-review-container :nth-child(1) {
+    font-size: 1.6rem;
+  }
+
+  #highest-scored-review-container :nth-child(2) {
+    font-size: 1.3rem;
+  }
+
+  #highest-scored-review-container :nth-child(3) {
+    margin-block-end: 1rem;
+    font-size: 1rem;
+    color: var(--blue);
+  }
+
+  #highest-scored-review-container :nth-child(3) span {
+    color: black;
+    font-size: 1rem;
+  }
+
   .list-flex {
     padding-top: 4rem;
     margin: 0 0.2rem;
@@ -942,7 +970,7 @@ input::-webkit-inner-spin-button {
   }
 
   .navbar-app-mobile a {
-    color: rgb(240, 131, 52);
+    color: var(--dark-orange);
     text-decoration: none;
     font-size: 1.2rem;
   }
