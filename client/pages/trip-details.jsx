@@ -152,7 +152,9 @@ const TripDetails = props => {
       <Navbar />
       <article className="container" id="trip-details-container">
         <section id="name-location-container">
-          <p className="name-location-element-user">Review by @{username}</p>
+          <p className="name-location-element-user">
+            <span>Review by</span> @{username}
+          </p>
           <p className="name-location-element">{trip.country}</p>
           <p className="name-location-element">{trip.city}</p>
 
