@@ -109,7 +109,7 @@ const SignUpForm = ({ handleSwitchingModal }) => {
           <p className="password-notification">
             password must be at least 6 characters long
           </p>
-          <button className="app-button background-orange float-right">
+          <button className="app-button background-green float-right">
             Confirm
           </button>
           <button

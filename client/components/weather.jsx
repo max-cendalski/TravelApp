@@ -20,7 +20,7 @@ const Weather = ({ location }) => {
     locationData && (
       <article id="weather-container">
         <h3 className="name-location-element">
-          Current temp: {locationData.current.temp}&deg; F
+          Temp: {locationData.current.temp}&deg; F
         </h3>
         <h3 className="name-location-element">
           {locationData.current.weather[0].description}

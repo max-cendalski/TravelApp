@@ -45,11 +45,39 @@ app.get('/api/locations', (req, res, next) => {
 
 app.get('/api/images', (req, res, next) => {
   const sql = `
-  select "mainPhotoUrl",
+  SELECT "mainPhotoUrl",
          "country",
          "city"
-    from "trips"
+    FROM "trips"
+    ORDER BY RANDOM()
+    LIMIT 6
          `;
+  db.query(sql)
+    .then(result => {
+      res.json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/highest-score', (req, res, next) => {
+  const sql = `
+    SELECT
+        "tripScores"."score",
+        "tripScores"."tripId",
+        "trips"."userId",
+        "users"."username",
+        "trips"."review",
+        "trips"."title"
+    FROM
+        "tripScores"
+    JOIN
+        "trips" ON "tripScores"."tripId" = "trips"."tripId"
+    JOIN
+        "users" ON "trips"."userId" = "users"."userId"
+    ORDER BY
+        "tripScores"."score" DESC
+    LIMIT 3
+  `;
   db.query(sql)
     .then(result => {
       res.json(result.rows);

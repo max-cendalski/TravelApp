@@ -250,7 +250,7 @@ const Navbar = () => {
           <h2 className="logout-info-text">Are you sure you want to logout?</h2>
           <button
             onClick={navbarContextData.handleConfirmLogout}
-            className="app-button background-orange float-right"
+            className="app-button background-green float-right"
           >
             Confirm
           </button>

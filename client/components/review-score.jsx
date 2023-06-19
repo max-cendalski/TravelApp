@@ -98,7 +98,7 @@ const ReviewScore = ({
             ></input>
           </p>
           <p className="review-score-form-element">
-            <button type="submit" className="app-button background-orange">
+            <button type="submit" className="app-button background-green">
               Add Score
             </button>
           </p>

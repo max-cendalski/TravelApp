@@ -15,7 +15,7 @@ const TripDetails = props => {
   const [overallScore, setOverallScore] = useState(0);
 
   const [commentsSection, setCommentsSection] = useState({
-    addCommentButton: 'app-button background-orange float-right',
+    addCommentButton: 'app-button background-green float-right',
     commentForm: 'hidden'
   });
 
@@ -78,7 +78,7 @@ const TripDetails = props => {
         newComments.unshift(result.comment);
         setComments(newComments);
         setCommentsSection({
-          addCommentButton: 'app-button background-orange float-right',
+          addCommentButton: 'app-button background-green float-right',
           commentForm: 'hidden'
         });
         setComment('');
@@ -103,7 +103,7 @@ const TripDetails = props => {
     e.preventDefault();
     setCommentsSection({
       commentForm: 'hidden',
-      addCommentButton: 'app-button background-orange float-right'
+      addCommentButton: 'app-button background-green float-right'
     });
   };
 
@@ -184,7 +184,7 @@ const TripDetails = props => {
           {tripDetailsContext.user.username === username && (
             <button
               onClick={handleEditButton}
-              className="app-button edit-review-button background-orange"
+              className="app-button edit-review-button background-green"
             >
               Edit
             </button>

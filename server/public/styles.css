@@ -18,9 +18,63 @@ section {
   -webkit-tap-highlight-color: transparent;
 }
 
+:root {
+  --lightest-blue: #7190c8;
+  --light-blue: #496dae;
+  --blue: #2f57a0;
+  --dark-blue: #0c2e6d;
+  --lightest-orange: #ffb884;
+  --light-orange: #ffa15b;
+  --orange: #f08434;
+  --dark-orange: #a44702;
+  --lightest-green: #85e376;
+  --light-green: #5fd54c;
+  --green: #40c72b;
+  --dark-green: #148802;
+}
+
+/* HOMEPAGE */
+
+.carousel-root {
+  max-width: 1920px;
+}
+
+#highest-scored-review-container {
+  max-width: 1920px;
+  margin-block: 5rem;
+  margin-inline: auto;
+  padding-inline: 2rem;
+}
+
+#highest-scored-review-container :nth-child(1) {
+  text-align: center;
+  margin-block-start: 1rem;
+  font-size: 1.8rem;
+  color: var(--orange);
+}
+
+#highest-scored-review-container :nth-child(2) {
+  margin-block-start: 1rem;
+  font-size: 1.6rem;
+  color: var(--dark-green);
+}
+
+#highest-scored-review-container :nth-child(3) {
+  margin-block-end: 1rem;
+  font-size: 1.2rem;
+  color: var(--blue);
+}
+
+#highest-scored-review-container :nth-child(5) {
+  margin-block-start: 1rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--orange);
+}
+
 .image-home {
   padding-top: 4rem;
-  height: 90vh;
+  height: 95vh;
   max-width: 1920px;
 }
 
@@ -30,8 +84,8 @@ section {
   font-size: 1.2rem;
   font-weight: 600;
   background-color: white;
-  top: 15%;
-  left: 2rem;
+  top: 10%;
+  left: 2.3rem;
   border-radius: 2px;
   text-transform: capitalize;
   cursor: pointer;
@@ -43,6 +97,9 @@ section {
 }
 
 .navbar-container {
+  max-width: 1920px;
+  margin: 0 auto;
+  padding-inline: 2rem;
   position: fixed;
   width: 100%;
   border-bottom: 1px solid black;
@@ -50,6 +107,8 @@ section {
   z-index: 2;
   align-items: center;
   height: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .list-flex {
@@ -63,7 +122,7 @@ section {
 
 .search-country-window {
   padding: 5px;
-  width: 13rem;
+  width: 50%;
   border: 1px solid rgb(130, 128, 128);
   border-radius: 5px 0 0 5px;
   outline: none;
@@ -71,7 +130,7 @@ section {
 
 .submit-search-button {
   cursor: pointer;
-  background-color: rgb(28, 134, 28);
+  background-color: var(--dark-green);
   color: white;
   border: none;
   border-radius: 0 5px 5px 0;
@@ -105,7 +164,6 @@ section {
 }
 
 .navbar-search-box-container {
-  margin-left: 2rem;
   display: inline-block;
   flex-basis: 33%;
 }
@@ -121,7 +179,7 @@ section {
 }
 
 .navbar-app-home a {
-  color: rgb(240, 131, 52);
+  color: var(--dark-orange);
   text-decoration: none;
   font-size: 2rem;
 }
@@ -129,7 +187,6 @@ section {
 .navbar-login-icon-section {
   cursor: pointer;
   flex-basis: 33%;
-  margin-inline-end: 2rem;
   text-align: end;
 }
 
@@ -139,10 +196,13 @@ section {
   text-align: end;
   padding-inline-end: 1rem;
   width: 85%;
+  color: var(--dark-blue);
+  font-weight: 600;
 }
 
 .photo {
   border-radius: 3px;
+  border: 1px solid var(--orange);
   width: 100%;
   height: 100%;
 }
@@ -153,9 +213,11 @@ section {
 }
 
 .image-container {
+  position: relative;
   justify-content: center;
   align-items: center;
   height: 50vh;
+  transition: 100ms linear;
 }
 
 .text-container {
@@ -168,14 +230,11 @@ section {
   color: black;
   border-radius: 2px;
   text-decoration: none;
+  z-index: 3;
 }
 
-.text-container:hover {
-  color: rgb(240, 131, 52);
-}
-
-.text-container:active {
-  transform: scale(1.1);
+.image-container:hover {
+  transform: scale(1.004);
 }
 
 .trash-container {
@@ -191,6 +250,10 @@ section {
 
 .trash-container:hover {
   color: rgb(225, 46, 46);
+}
+
+.review-score-header {
+  color: var(--orange);
 }
 
 .trash-container:active {
@@ -212,6 +275,7 @@ section {
   font-weight: 600;
   font-size: 1.3rem;
   font-style: italic;
+  color: var(--light-orange);
 }
 
 .input-form {
@@ -287,8 +351,8 @@ section {
   background-color: rgb(163, 39, 23);
 }
 
-.background-orange {
-  background-color: rgb(240, 131, 52);
+.background-green {
+  background-color: var(--dark-green);
 }
 
 .form-label {
@@ -474,6 +538,7 @@ input::-webkit-inner-spin-button {
 
 .comment-list-element > h4 {
   font-size: 1.2rem;
+  color: var(--blue);
 }
 
 .comment-list-element > p {
@@ -533,13 +598,16 @@ input::-webkit-inner-spin-button {
 }
 
 #trip-details-container {
+  position: relative;
+  padding-inline: 2rem;
+  max-width: 1920px;
   padding-block-start: 4rem;
   padding-block-end: 2rem;
-  margin: 0 2rem;
+  margin: 0 auto;
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: 20rem 20rem auto auto auto auto auto;
+  grid-template-rows: 20rem 20rem repeat(5, auto);
 }
 
 #users-score-trip-details {
@@ -579,6 +647,7 @@ input::-webkit-inner-spin-button {
   font-size: 1.4rem;
   grid-column: 1/4;
   font-weight: 600;
+  color: var(--blue);
 }
 
 .score-text {
@@ -604,8 +673,9 @@ input::-webkit-inner-spin-button {
 }
 
 .review-title {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   margin-top: 1rem;
+  color: var(--dark-green);
 }
 
 .review-paragraph {
@@ -733,6 +803,40 @@ input::-webkit-inner-spin-button {
   display: none;
 }
 
+@media screen and (min-width: 661px) and (max-width: 1024px) {
+  .search-country-window {
+    width: 70%;
+  }
+
+  .navbar-container {
+    padding-inline: 1rem;
+  }
+
+  #trip-details-container {
+    margin-inline: 1rem;
+    grid-template-rows: 18rem 18rem repeat(5, auto);
+  }
+
+  #highest-scored-review-container {
+    margin-block-start: 3rem;
+    padding-inline: 1rem;
+  }
+
+  #main-photo-trip-details {
+    grid-column: 3/6;
+    grid-row: 1/2;
+  }
+
+  .overall-score {
+    padding-block-start: 3rem;
+  }
+
+  .carousel-country-name {
+    top: 10%;
+    left: 1rem;
+  }
+}
+
 @media screen and  (max-width: 660px) {
   .column-width50 {
     width: 100%;
@@ -797,12 +901,18 @@ input::-webkit-inner-spin-button {
 
   .carousel-country-name {
     left: 0;
-    top: 17%;
+    top: 12%;
   }
 
   .image-item {
     padding: 0;
     border-bottom: 6px solid rgb(255, 137, 28);
+  }
+
+  /* Homepage */
+  #highest-scored-review-container {
+    padding-inline: 0.5rem;
+    margin-block-start: 2rem;
   }
 
   .list-flex {
@@ -815,7 +925,7 @@ input::-webkit-inner-spin-button {
   }
 
   .search-country-window {
-    width: 11rem;
+    width: 70%;
   }
 
   #search-result-list {
@@ -837,9 +947,13 @@ input::-webkit-inner-spin-button {
     font-size: 1.2rem;
   }
 
+  .navbar-container {
+    padding-inline: 0;
+  }
+
   .navbar-search-box-container {
     flex-basis: 60%;
-    margin-inline-start: 0.4rem;
+    margin-inline-start: 0.5rem;
   }
 
   .navbar-login-icon-section {
@@ -914,8 +1028,7 @@ input::-webkit-inner-spin-button {
   }
 
   #trip-details-container {
-    margin-inline-start: 0.6rem;
-    margin-inline-end: 0.6rem;
+    padding-inline: 0.8rem;
     display: grid;
     gap: 0.5rem;
     grid-template-columns: repeat(4, 1fr);
@@ -996,16 +1109,5 @@ input::-webkit-inner-spin-button {
   #comments-trip-details {
     grid-column: 1/6;
     grid-row: 7/auto;
-  }
-}
-
-@media screen and (min-width: 1920px) {
-  .container {
-    max-width: 3440px;
-  }
-
-  .carousel-country-name {
-    top: 12%;
-    left: 23%;
   }
 }
