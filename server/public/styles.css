@@ -820,6 +820,10 @@ input::-webkit-inner-spin-button {
     padding-inline: 1rem;
   }
 
+  .navbar-app-home {
+    flex-basis: 20%;
+  }
+
   #trip-details-container {
     margin-inline: 1rem;
     grid-template-rows: 18rem 18rem repeat(5, auto);
