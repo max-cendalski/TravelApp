@@ -1,3 +1,4 @@
+
 {
   "name": "final-project",
   "version": "1.0.0",
@@ -57,6 +58,9 @@
     "webpack": "^5.76.0",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.8.1"
+  },
+  "engines": {
+    "node": "14.16.0"
   },
   "resolutions": {
     "react-error-overlay": "6.0.9"
