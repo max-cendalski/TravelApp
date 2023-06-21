@@ -101,6 +101,7 @@ section {
 }
 
 .navbar-container {
+  display: flex;
   max-width: 1920px;
   margin: 0 auto;
   padding-inline: 2rem;
@@ -168,7 +169,6 @@ section {
 }
 
 .navbar-search-box-container {
-  display: inline-block;
   flex-basis: 33%;
 }
 
@@ -810,7 +810,19 @@ input::-webkit-inner-spin-button {
 
 @media screen and (min-width: 661px) and (max-width: 1024px) {
   .search-country-window {
-    width: 70%;
+    width: 75%;
+  }
+
+  #edit-trip form {
+    padding-top: 0;
+  }
+
+  .edit-form {
+    padding: 1rem;
+  }
+
+  .column-width50 {
+    width: auto;
   }
 
   .navbar-container {
@@ -818,7 +830,7 @@ input::-webkit-inner-spin-button {
   }
 
   .navbar-search-box-container {
-    margin-inline-start: 0;
+    margin-inline: 0;
   }
 
   .list-flex {
@@ -830,6 +842,7 @@ input::-webkit-inner-spin-button {
   }
 
   .navbar-name-paragraph {
+    width: 90%;
     padding-inline-end: 0.5rem;
   }
 
