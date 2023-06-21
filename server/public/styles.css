@@ -83,6 +83,10 @@ section {
   max-width: 1920px;
 }
 
+.text-container-username {
+  color: var(--blue);
+}
+
 .carousel-country-name {
   position: absolute;
   padding: 0.2rem 0.5rem;
@@ -170,6 +174,7 @@ section {
 
 .navbar-search-box-container {
   flex-basis: 33%;
+  margin-inline: 0;
 }
 
 .navbar-app-mobile {
@@ -224,6 +229,10 @@ section {
   cursor: pointer;
 }
 
+.image-container:hover {
+  transform: scale(1.004);
+}
+
 .text-container {
   position: absolute;
   background-color: white;
@@ -235,6 +244,10 @@ section {
   border-radius: 2px;
   text-decoration: none;
   z-index: 1;
+}
+
+.text-container:hover {
+  background-color: rgb(223, 220, 220);
 }
 
 .trash-container {
@@ -943,7 +956,8 @@ input::-webkit-inner-spin-button {
 
   .image-item {
     padding: 0;
-    border-bottom: 6px solid rgb(255, 137, 28);
+    border-bottom: 2px solid rgb(255, 137, 28);
+    border-top: 2px solid rgb(255, 137, 28);
   }
 
   /* Homepage */
@@ -1004,18 +1018,18 @@ input::-webkit-inner-spin-button {
   }
 
   .navbar-container {
-    padding-inline: 0;
+    padding-inline: 0.5rem;
   }
 
   .navbar-search-box-container {
     flex-basis: 60%;
-    margin-inline-start: 0.5rem;
   }
 
   .navbar-login-icon-section {
     flex-basis: 10%;
     text-align: end;
-    margin-inline-end: 0.5rem;
+    padding: 0;
+    margin: 0;
   }
 
   .drop-down-container {
@@ -1046,7 +1060,8 @@ input::-webkit-inner-spin-button {
   }
 
   .text-container {
-    left: 0;
+    top: 10px;
+    left: 10px;
     padding: 0.125rem;
   }
 

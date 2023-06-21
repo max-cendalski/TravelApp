@@ -34,7 +34,7 @@ const SearchResults = props => {
           <p className="country-name">
             {country}-<span className="city-name">{city}</span>
           </p>
-          <span className="city-name">@{username}</span>
+          <span className="text-container-username">@{username}</span>
           <Time date={created} />
         </section>
         <section className="image-container">

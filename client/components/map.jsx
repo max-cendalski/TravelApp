@@ -20,8 +20,8 @@ export function MapComponent(props) {
 
     if (screenWidth <= 660) {
       containerStyle.top = '20rem';
-      containerStyle.left = '0.5rem';
-      containerStyle.right = '0.5rem';
+      containerStyle.left = '0.8rem';
+      containerStyle.right = '0.8rem';
       containerStyle.height = '20rem';
     } else if (screenWidth > 660 && screenWidth <= 1024) {
       containerStyle.left = '1rem';
