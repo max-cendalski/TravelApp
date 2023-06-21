@@ -237,10 +237,6 @@ section {
   z-index: 1;
 }
 
-.image-container:hover {
-  transform: scale(1.004);
-}
-
 .trash-container {
   position: absolute;
   background-color: white;
@@ -250,6 +246,7 @@ section {
   color: black;
   padding: 0.5rem;
   border-radius: 2px;
+  z-index: 1;
 }
 
 .trash-container:hover {
@@ -824,16 +821,24 @@ input::-webkit-inner-spin-button {
     margin-inline-start: 0;
   }
 
+  .list-flex {
+    margin-inline: 1rem;
+  }
+
   .navbar-app-home {
     flex-basis: 20%;
   }
 
+  .navbar-name-paragraph {
+    padding-inline-end: 0.5rem;
+  }
+
   .navbar-login-icon-section {
-    margin-inline-end: 1rem;
+    margin-inline: 0;
   }
 
   #trip-details-container {
-    margin-inline: 1rem;
+    padding-inline: 1rem;
     grid-template-rows: 18rem 18rem repeat(5, auto);
   }
 
@@ -848,7 +853,7 @@ input::-webkit-inner-spin-button {
   }
 
   .overall-score {
-    padding-block-start: 3rem;
+    padding-block-start: 2rem;
   }
 
   .carousel-country-name {
