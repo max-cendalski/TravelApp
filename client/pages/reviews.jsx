@@ -91,7 +91,10 @@ function Trip(props) {
         <Time date={created} />
       </a>
       <section
-        onClick={() => props.handleDeleteReview(tripId, mainPhotoUrl)}
+        onClick={event => {
+          event.stopPropagation();
+          props.handleDeleteReview(tripId, mainPhotoUrl);
+        }}
         className="trash-container"
       >
         <i className="fa-solid fa-trash fa-xl"></i>
