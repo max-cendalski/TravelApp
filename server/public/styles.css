@@ -221,7 +221,7 @@ section {
   justify-content: center;
   align-items: center;
   height: 50vh;
-  transition: 100ms linear;
+  cursor: pointer;
 }
 
 .text-container {
