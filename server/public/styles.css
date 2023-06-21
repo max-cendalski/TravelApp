@@ -820,6 +820,18 @@ input::-webkit-inner-spin-button {
     padding-inline: 1rem;
   }
 
+  .navbar-search-box-container {
+    margin-inline-start: 0;
+  }
+
+  .navbar-app-home {
+    flex-basis: 20%;
+  }
+
+  .navbar-login-icon-section {
+    margin-inline-end: 1rem;
+  }
+
   #trip-details-container {
     margin-inline: 1rem;
     grid-template-rows: 18rem 18rem repeat(5, auto);
@@ -894,7 +906,6 @@ input::-webkit-inner-spin-button {
   }
 
   .image-home {
-    margin: 0 0.2rem;
     padding-top: 4rem;
     height: 50vh;
   }
