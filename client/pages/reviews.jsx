@@ -84,20 +84,23 @@ function Trip(props) {
   const { tripId, country, city, mainPhotoUrl, created } = props.trip;
   return (
     <article>
-      <a href={`#trips?tripId=${tripId}`} className="text-container">
-        <p className="country-name">
-          {country}-<span className="city-name">{city}</span>
-        </p>
-        <Time date={created} />
+      <a href={`#trips?tripId=${tripId}`}>
+        <section className="image-container">
+          <section className="text-container">
+            <p className="country-name">
+              {country}-<span className="city-name">{city}</span>
+            </p>
+            <Time date={created} />
+          </section>
+
+          <img className="photo" src={mainPhotoUrl}></img>
+        </section>
       </a>
       <section
         onClick={() => props.handleDeleteReview(tripId, mainPhotoUrl)}
         className="trash-container"
       >
         <i className="fa-solid fa-trash fa-xl"></i>
-      </section>
-      <section className="image-container">
-        <img className="photo" src={mainPhotoUrl}></img>
       </section>
     </article>
   );
