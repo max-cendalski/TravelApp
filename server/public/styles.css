@@ -125,8 +125,8 @@ section {
   display: flex;
   flex-wrap: wrap;
   padding-top: 4rem;
-  margin-right: 2rem;
-  margin-left: 2rem;
+  padding-inline: 2rem;
+  margin: 0 auto;
 }
 
 .search-country-window {
@@ -846,10 +846,6 @@ input::-webkit-inner-spin-button {
     margin-inline: 0;
   }
 
-  .list-flex {
-    margin-inline: 1rem;
-  }
-
   .navbar-app-home {
     flex-basis: 20%;
   }
@@ -987,7 +983,7 @@ input::-webkit-inner-spin-button {
 
   .list-flex {
     padding-top: 4rem;
-    margin: 0 0.2rem;
+    padding-inline: 0.5rem;
   }
 
   .navbar-name-paragraph {
