@@ -22,6 +22,8 @@ const SignUpForm = ({ handleSwitchingModal }) => {
     if (e.target.name === 'username') {
       checkLetters(e.target.value);
     }
+    setUserExistsMsg('hidden');
+    setIncorrectLoginMsg('hidden');
     const name = e.target.name;
     const value = e.target.value;
 
@@ -54,6 +56,7 @@ const SignUpForm = ({ handleSwitchingModal }) => {
             if (result.error) {
               setUserExistsMsg('incorrect-username-msg');
             } else {
+              setNewUser({ username: '', password: '' });
               window.location.hash = '';
               handleSwitchingModal();
             }

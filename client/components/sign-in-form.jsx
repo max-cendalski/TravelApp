@@ -7,7 +7,7 @@ const SignInForm = props => {
     username: '',
     password: ''
   });
-  const [errroMsg, setErrorMsg] = useState('hidden');
+  const [errorMsg, setErrorMsg] = useState('hidden');
 
   const handleChange = e => {
     const name = e.target.name;
@@ -17,6 +17,7 @@ const SignInForm = props => {
       ...prevData,
       [name]: value
     }));
+    setErrorMsg('hidden');
   };
 
   const handleSubmit = e => {
@@ -37,6 +38,7 @@ const SignInForm = props => {
         } else {
           SingInContextData.handleSignIn(result);
           props.handleSwitchingModal();
+          setUserInfo({ username: '', password: '' });
         }
       })
       .catch(error => {
@@ -46,7 +48,7 @@ const SignInForm = props => {
 
   return (
     <article>
-      <section className={errroMsg}>
+      <section className={errorMsg}>
         <p className="username-exists-msg">Incorrect username or password!</p>
       </section>
       <form className="sign-form" onSubmit={handleSubmit} name="signInForm">
