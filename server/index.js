@@ -86,11 +86,11 @@ app.get('/api/highest-score', (req, res, next) => {
 });
 
 app.post('/api/auth/sign-up', (req, res, next) => {
-  const { username, password } = req.body;
+  let { username, password } = req.body;
   if (!username || !password) {
     throw new ClientError(400, 'username and password are required fields');
   }
-
+  username = username.toLowerCase();
   argon2.hash(password).then(hashedPassword => {
     const sql = `
         insert into "users" ("username", "password")
@@ -109,10 +109,11 @@ app.post('/api/auth/sign-up', (req, res, next) => {
 });
 
 app.post('/api/auth/sign-in', (req, res, next) => {
-  const { username, password } = req.body;
+  let { username, password } = req.body;
   if (!username || !password) {
     throw new ClientError(401, 'invalid login');
   }
+  username = username.toLowerCase();
   const sql = `
     select "userId",
            "password"
